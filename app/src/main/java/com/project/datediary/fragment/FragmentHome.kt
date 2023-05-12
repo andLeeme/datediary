@@ -1,4 +1,4 @@
-package com.project.datediary.Fragment
+package com.project.datediary.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.project.datediary.Adapter.ArticleAdapter
-import com.project.datediary.Model.ArticleModel
+import com.project.datediary.adapter.ArticleAdapter
+import com.project.datediary.model.ArticleModel
 import com.project.datediary.databinding.FragmentHomeBinding
 
 class FragmentHome : Fragment() {

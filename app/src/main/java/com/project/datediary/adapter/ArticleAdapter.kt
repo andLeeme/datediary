@@ -1,4 +1,4 @@
-package com.project.datediary.Adapter
+package com.project.datediary.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.project.datediary.Model.ArticleModel
+import com.project.datediary.model.ArticleModel
 import com.project.datediary.databinding.ItemListBinding
 import java.text.SimpleDateFormat
 import java.util.*

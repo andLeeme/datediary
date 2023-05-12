@@ -2,11 +2,11 @@ package com.project.datediary
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.project.datediary.Fragment.FragmentCalendar
-import com.project.datediary.Fragment.FragmentGraph
-import com.project.datediary.Fragment.FragmentHome
-import com.project.datediary.Fragment.FragmentMyPage
-import com.project.datediary.Fragment.FragmentStory
+import com.project.datediary.fragment.FragmentCalendar
+import com.project.datediary.fragment.FragmentGraph
+import com.project.datediary.fragment.FragmentHome
+import com.project.datediary.fragment.FragmentMyPage
+import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

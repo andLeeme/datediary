@@ -1,4 +1,4 @@
-package com.project.datediary.API
+package com.project.datediary.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
