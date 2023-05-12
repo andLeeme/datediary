@@ -5,12 +5,18 @@
     android:layout_height="match_parent"
     tools:context=".FragmentStory">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button1"
+        android:text="버튼"/>
+
+
+    <androidx.fragment.app.FragmentContainerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="story fragment"
-        android:gravity="center"
-        android:textSize="20dp"/>
+        android:layout_height="500dp"
+        android:id="@+id/editContainer">
+
+    </androidx.fragment.app.FragmentContainerView>
 
 </FrameLayout>
