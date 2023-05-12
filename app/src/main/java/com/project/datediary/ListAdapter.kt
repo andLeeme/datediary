@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.databinding.ItemListBinding
 
-class ListAdapter: RecyclerView.Adapter<ListAdapter.MyView>() {
+class CoinListAdapter: RecyclerView.Adapter<CoinListAdapter.MyView>() {
     private var coinList = listOf<Coin>()
 
     inner class MyView(private val binding: ItemListBinding): RecyclerView.ViewHolder(binding.root) {

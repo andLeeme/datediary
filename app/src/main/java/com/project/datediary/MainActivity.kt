@@ -16,6 +16,8 @@ class MainActivity : AppCompatActivity() {
         initBottomNavigation()
     }
 
+
+
     private fun initBottomNavigation() {
 
         supportFragmentManager.beginTransaction()
