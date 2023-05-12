@@ -1,8 +1,9 @@
-package com.project.datediary
+package com.project.datediary.Adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.project.datediary.Model.Coin
 import com.project.datediary.databinding.ItemListBinding
 
 class CoinListAdapter: RecyclerView.Adapter<CoinListAdapter.MyView>() {

@@ -1,4 +1,4 @@
-package com.project.datediary
+package com.project.datediary.Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

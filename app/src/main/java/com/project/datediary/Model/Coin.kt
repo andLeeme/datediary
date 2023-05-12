@@ -1,4 +1,4 @@
-package com.project.datediary
+package com.project.datediary.Model
 
 data class Coin(
     val product_name: String,

@@ -1,4 +1,5 @@
-import com.project.datediary.UpbitAPI
+package com.project.datediary.API
+
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

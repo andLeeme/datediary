@@ -1,22 +1,21 @@
-package com.project.datediary
+package com.project.datediary.Fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.project.datediary.databinding.FragmentCalendarBinding
 
-import com.project.datediary.databinding.FragmentMyBinding
+class FragmentCalendar : Fragment() {
 
-class FragmentMyPage : Fragment() {
-
-    lateinit var binding: FragmentMyBinding
+    lateinit var binding: FragmentCalendarBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentMyBinding.inflate(inflater, container, false)
+        binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
         return binding.root
     }
