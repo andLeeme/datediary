@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/fragmentHome">
+    <fragment
+        android:id="@+id/fragmentHome"
+        android:name="com.project.datediary.FragmentHome"
+        android:label="FragmentHome"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentStory2"
+            app:destination="@id/fragmentStory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentStory"
+        android:name="com.project.datediary.FragmentStory"
+        android:label="fragment_story"
+        tools:layout="@layout/fragment_story" >
+        <action
+            android:id="@+id/action_fragmentStory_to_fragmentCalendar2"
+            app:destination="@id/fragmentCalendar" />
+        <action
+            android:id="@+id/action_fragmentStory_to_fragmentHome"
+            app:destination="@id/fragmentHome" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCalendar"
+        android:name="com.project.datediary.FragmentCalendar"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" >
+        <action
+            android:id="@+id/action_fragmentCalendar_to_fragmentGraph2"
+            app:destination="@id/fragmentGraph" />
+        <action
+            android:id="@+id/action_fragmentCalendar_to_fragmentStory"
+            app:destination="@id/fragmentStory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentGraph"
+        android:name="com.project.datediary.FragmentGraph"
+        android:label="fragment_graph"
+        tools:layout="@layout/fragment_graph" >
+        <action
+            android:id="@+id/action_fragmentGraph_to_fragmentMyPage"
+            app:destination="@id/fragmentMyPage" />
+        <action
+            android:id="@+id/action_fragmentGraph_to_fragmentCalendar"
+            app:destination="@id/fragmentCalendar" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMyPage"
+        android:name="com.project.datediary.FragmentMyPage"
+        android:label="fragment_my"
+        tools:layout="@layout/fragment_my" >
+        <action
+            android:id="@+id/action_fragmentMyPage_to_fragmentGraph"
+            app:destination="@id/fragmentGraph" />
+    </fragment>
+
+</navigation>
