@@ -3,7 +3,6 @@ package com.project.datediary.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.project.datediary.model.Coin
 import com.project.datediary.databinding.ItemListBinding
 import com.project.datediary.model.Schedule
 
