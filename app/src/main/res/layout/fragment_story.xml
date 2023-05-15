@@ -3,19 +3,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".fragment.FragmentStory">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/button1"
-        android:text="버튼"/>
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="버튼1" />
 
 
     <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/editContainer"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:id="@+id/editContainer">
+        android:layout_height="500dp">
 
     </androidx.fragment.app.FragmentContainerView>
 

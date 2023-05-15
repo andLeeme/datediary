@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.model.Coin
 import com.project.datediary.databinding.ItemListBinding
+import com.project.datediary.model.Schedule
 
 class ProductAdapter: RecyclerView.Adapter<ProductAdapter.MyView>() {
-    private var coinList = listOf<Coin>()
+    private var Schedule = listOf<Schedule>()
 
     inner class MyView(private val binding: ItemListBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(pos: Int) {
-            binding.text01.text = coinList[pos].product_name
-            binding.text02.text = coinList[pos].provider
-            binding.text03.text = coinList[pos].sub_category
+            binding.text01.text = Schedule[pos].couple_index
+            binding.text02.text = Schedule[pos].title
+            binding.text03.text = Schedule[pos].contents
         }
     }
 
@@ -27,10 +28,10 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.MyView>() {
     }
 
     override fun getItemCount(): Int {
-        return coinList.size
+        return Schedule.size
     }
 
-    fun setList(list: List<Coin>) {
-        coinList = list
+    fun setList(list: List<Schedule>) {
+        Schedule = list
     }
 }

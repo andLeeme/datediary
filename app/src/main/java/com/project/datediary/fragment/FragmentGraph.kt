@@ -11,6 +11,7 @@ import com.project.datediary.adapter.ProductAdapter
 import com.project.datediary.api.ApiObject
 import com.project.datediary.databinding.FragmentGraphBinding
 import com.project.datediary.model.Coin
+import com.project.datediary.model.Schedule
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,7 +20,7 @@ class FragmentGraph : Fragment() {
 
     lateinit var binding: FragmentGraphBinding
     lateinit var productAdapter: ProductAdapter
-    var coinList = listOf<Coin>()
+    var coinList = listOf<Schedule>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +47,8 @@ class FragmentGraph : Fragment() {
 
     private fun initList() {
         val call = ApiObject.getRetrofitService.getCoinAll()
-        call.enqueue(object : Callback<List<Coin>> {
-            override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
+        call.enqueue(object : Callback<List<Schedule>> {
+            override fun onResponse(call: Call<List<Schedule>>, response: Response<List<Schedule>>) {
                 Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
                 if (response.isSuccessful) {
                     coinList = response.body() ?: listOf()
@@ -55,7 +56,7 @@ class FragmentGraph : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Coin>>, t: Throwable) {
+            override fun onFailure(call: Call<List<Schedule>>, t: Throwable) {
                 Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
             }
         })

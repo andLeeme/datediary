@@ -22,11 +22,11 @@ class ArticleAdapter : ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diff
             binding.text01.text = articleModel.title
             binding.text02.text = format.format(date).toString()
             binding.text03.text = articleModel.price
-            if(articleModel.imageUrl.isNotEmpty()){
-                Glide.with(binding.thumbnailImageView)
-                    .load(articleModel.imageUrl)
-                    .into(binding.thumbnailImageView)
-            }
+//            if(articleModel.imageUrl.isNotEmpty()){
+//                Glide.with(binding.thumbnailImageView)
+//                    .load(articleModel.imageUrl)
+//                    .into(binding.thumbnailImageView)
+//            }
         }
     }
 
