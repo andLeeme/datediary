@@ -27,7 +27,23 @@ class FragmentHome : Fragment() {
         articleAdapter.submitList(mutableListOf<ArticleModel>().apply {
             add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
             add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+            add(ArticleModel("1","맥북 프로16인치",100000,"1,000,000",""))
+            add(ArticleModel("1","갤럭시S22",101010,"800,000",""))
+
         })
+
 
         return binding.root
     }
