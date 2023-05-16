@@ -18,16 +18,15 @@ class FragmentStory : Fragment() {
     ): View? {
         binding = FragmentStoryBinding.inflate(inflater, container, false)
 
-//        Glide.with(this)
-//            .load(R.drawable.icon_story)
-//            .into(binding.imageview)
-
-
-        binding.button1.setOnLongClickListener {
+        binding.button1.setOnClickListener {
             childFragmentManager.beginTransaction()
                 .replace(R.id.editContainer, FragmentStoryEdit())
                 .commit()
-            return@setOnLongClickListener(true)
+        }
+        binding.button2.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainer, FragmentAddSchedule())
+                .commit()
         }
 
 //        binding.button1.setOnClickListener {

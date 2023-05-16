@@ -63,24 +63,7 @@
         android:textColor="@color/white"
         android:textFontWeight="@integer/material_motion_duration_long_1"
         android:textSize="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:drawablePadding="16dp"
-        android:text="오늘의 일정이에요"
-        android:textColor="@color/white"
-        android:textFontWeight="@integer/material_motion_duration_long_1"
-        android:textSize="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="6dp"
-        android:drawablePadding="16dp"
-        android:text="오늘의 일정이에요"
-        android:textColor="@color/white"
-        android:textFontWeight="@integer/material_motion_duration_long_1"
-        android:textSize="20dp"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -101,6 +84,7 @@
         android:textSize="20dp"/>
 
     <Button
+        android:id="@+id/addByn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"

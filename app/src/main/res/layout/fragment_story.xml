@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".fragment.FragmentStory">
+    tools:context=".fragment.FragmentStory"
+    android:id="@+id/story_frm">
 
     <Button
         android:id="@+id/button1"
@@ -13,12 +14,27 @@
         android:clickable="true"
         android:text="버튼1" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="버튼2"
+        android:layout_marginTop="100dp"/>
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="버튼3"
+        android:layout_marginTop="200dp"/>
 
-    <androidx.fragment.app.FragmentContainerView
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/editContainer"
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="match_parent">
+        <include layout="@layout/fragment_bottom_sheet" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    </androidx.fragment.app.FragmentContainerView>
 
 </FrameLayout>
