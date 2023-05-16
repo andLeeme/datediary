@@ -25,36 +25,6 @@ class FragmentCalendar : Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
 
-        class MainActivity : AppCompatActivity() {
-
-            override fun onCreate(savedInstanceState: Bundle?) {
-                super.onCreate(savedInstanceState)
-                setContentView(R.layout.activity_main)
-
-                var todayList = binding.todayList
-                var todayLayout = binding.todayLayout
-                var calenderBody = binding.calenderBody
-
-                todayList.setOnClickListener {
-//            ObjectAnimator.ofFloat(todayLayout, "translationY", -500f).apply {
-//                duration = 300
-//                start()
-//            }
-
-                    val display = windowManager.defaultDisplay
-                    val size = Point()
-                    display.getSize(size)
-                    val customH2 = size.y * 6 / 12
-
-                    val params2 = calenderBody.getLayoutParams()
-                    params2.height = customH2
-                    calenderBody.setLayoutParams(params2)
-
-                }
-
-            }
-        }
-
         return binding.root
     }
 
