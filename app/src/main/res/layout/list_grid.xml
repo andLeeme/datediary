@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/layoutGridItem"
+    android:orientation="vertical"
+    android:layout_gravity="center">
+
+
+    <TextView
+        android:id="@+id/Date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:layout_margin="5dp"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:gravity="right"/>
+    <TextView
+        android:id="@+id/schedule1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="일정추가"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="left"
+        android:background="#00BCD4"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/schedule2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="짙은 배경"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="left"
+        android:background="#1B38DC"
+        android:textColor="@color/white"/>
+    <TextView
+        android:id="@+id/schedule3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="옅은 배경"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="left"
+        android:background="#EFECCE"
+        android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/schedule4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="글자넘쳐요와오오"
+        android:textStyle="bold"
+        android:textSize="14sp"
+        android:gravity="left"
+        android:background="#9C27B0"
+        android:textColor="@color/white"/>
+
+
+</LinearLayout>
