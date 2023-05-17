@@ -16,4 +16,6 @@ object ApiObject {
     }
 
     val getRetrofitService : UpbitAPI by lazy { getRetrofit.create(UpbitAPI::class.java) }
+    val AddScheduleAPI : AddScheduleAPI by lazy { getRetrofit.create(AddScheduleAPI::class.java) }
+
 }
