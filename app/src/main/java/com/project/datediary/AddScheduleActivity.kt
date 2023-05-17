@@ -3,59 +3,63 @@ package com.project.datediary
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.project.datediary.api.ApiObject
 import com.project.datediary.databinding.ActivityAddScheduleBinding
-import com.project.datediary.model.addScheduleRequest
-import com.project.datediary.model.addScheduleResponse
+import com.project.datediary.model.HTTP_GET_Model
+import com.project.datediary.model.PostModel
+import com.project.datediary.model.PostResult
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class AddScheduleActivity : AppCompatActivity() {
-
-    lateinit var binding: ActivityAddScheduleBinding
+    val binding by lazy { ActivityAddScheduleBinding.inflate(layoutInflater) }
+    val api = APIS.create();
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        addBtn()
-    }
+        binding.getbutton.setOnClickListener {
+            api.get_users().enqueue(object : Callback<HTTP_GET_Model> {
+                override fun onResponse(
+                    call: Call<HTTP_GET_Model>,
+                    response: Response<HTTP_GET_Model>
+                ) {
+                    Log.d("log", response.toString())
+                    Log.d("log", response.body().toString())
+                    if (!response.body().toString().isEmpty())
+                        binding.text.setText(response.body().toString());
+                }
 
-    private fun addBtn() {
-        binding.AddScheduleButton.setOnClickListener {
-            val edittext1 = binding.edittext1.text.toString()
-            val edittext2 = binding.edittext2.text.toString()
-            val edittext3 = binding.edittext3.text.toString()
-            val edittext4 = binding.edittext4.text.toString()
-            val edittext5 = binding.edittext5.text.toString()
-
-            val addScheduleRequest1 = addScheduleRequest(
-                edittext1 = edittext1,
-                edittext2 = edittext2,
-                edittext3 = edittext3,
-                edittext4 = edittext4,
-                edittext5 = edittext5,
-            )
-
-            ApiObject.AddScheduleAPI.addScheduleRequest(addScheduleRequest1)
-                .enqueue(object : Callback<addScheduleResponse> {
-                    override fun onResponse(
-                        call: Call<addScheduleResponse>,
-                        response: Response<addScheduleResponse>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.d("test", response.body().toString())
-                            var data = response.body() // GsonConverter를 사용해 데이터매핑
-                        }
-                    }
-
-                    override fun onFailure(call: Call<addScheduleResponse>, t: Throwable) {
-                        Log.d("test", "실패$t")
-                    }
-
-                })
+                override fun onFailure(call: Call<HTTP_GET_Model>, t: Throwable) {
+                    // 실패
+                    Log.d("log", t.message.toString())
+                    Log.d("log", "fail")
+                }
+            })
         }
+
+        binding.postbutton.setOnClickListener {
+            val data = PostModel(
+                binding.idedt.text.toString(),
+                binding.pwdedt.text.toString(),
+                binding.nickedt.text.toString()
+            )
+            api.post_users(data).enqueue(object : Callback<PostResult> {
+                override fun onResponse(call: Call<PostResult>, response: Response<PostResult>) {
+                    Log.d("log", response.toString())
+                    Log.d("log", response.body().toString())
+                    if (!response.body().toString().isEmpty())
+                        binding.text.setText(response.body().toString());
+                }
+
+                override fun onFailure(call: Call<PostResult>, t: Throwable) {
+                    // 실패
+                    Log.d("log", t.message.toString())
+                    Log.d("log", "fail")
+                }
+            })
+        }
+
     }
 }

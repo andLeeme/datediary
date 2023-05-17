@@ -30,14 +30,11 @@ class FragmentStory : Fragment() {
             startActivity(intent)
         }
         binding.button3.setOnClickListener {
-                val intent = Intent(requireActivity(), AddScheduleActivity::class.java)
-                startActivity(intent)
+            val intent = Intent(requireActivity(), AddScheduleActivity::class.java)
+            startActivity(intent)
         }
-
 
         return binding.root
     }
-
-
 
 }
