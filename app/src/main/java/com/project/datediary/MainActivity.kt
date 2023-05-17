@@ -1,5 +1,6 @@
 package com.project.datediary
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.fragment.FragmentCalendar
@@ -22,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     private fun initBottomNavigation() {
 
         supportFragmentManager.beginTransaction()
@@ -37,30 +37,35 @@ class MainActivity : AppCompatActivity() {
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.story -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, FragmentStory())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.calendar -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, FragmentCalendar())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.graph -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, FragmentGraph())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
+
                 R.id.myPage -> {
                     supportFragmentManager.beginTransaction()
                         .replace(R.id.main_frm, FragmentMyPage())
                         .commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
+
                 else -> {
                     return@setOnItemSelectedListener false
                 }

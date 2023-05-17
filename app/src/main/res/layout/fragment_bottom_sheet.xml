@@ -7,14 +7,14 @@
     android:background="#DFA2FF"
     android:orientation="vertical"
     app:behavior_hideable="false"
-    app:behavior_peekHeight="75dp"
+    app:behavior_peekHeight="150dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -84,11 +84,10 @@
         android:textSize="20dp"/>
 
     <Button
-        android:id="@+id/addByn"
+        android:id="@+id/addBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="일?정 추가하기?"
-        android:textColor="@android:color/white" />
+        android:text="일정추가"
+        android:layout_marginBottom="70dp"/>
 
 </LinearLayout>

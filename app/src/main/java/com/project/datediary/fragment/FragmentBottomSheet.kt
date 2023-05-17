@@ -1,11 +1,13 @@
 package com.project.datediary.fragment
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.project.datediary.R
+import androidx.fragment.app.Fragment
+import com.project.datediary.AddScheduleActivity
 import com.project.datediary.databinding.FragmentBottomSheetBinding
 
 class FragmentBottomSheet : Fragment() {
@@ -15,18 +17,15 @@ class FragmentBottomSheet : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
-        binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
 
-        binding.addByn.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.story_frm, FragmentStoryEdit())
-                .commit()
+
+        binding.addBtn.setOnClickListener {
+            startActivity(Intent(requireActivity(), AddScheduleActivity::class.java))
+
         }
-
-
         return binding.root
-
-
     }
+
 }

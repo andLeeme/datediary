@@ -1,10 +1,12 @@
 package com.project.datediary.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.project.datediary.AddScheduleActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.FragmentStoryBinding
 
@@ -28,14 +30,11 @@ class FragmentStory : Fragment() {
                 .replace(R.id.editContainer, FragmentAddSchedule())
                 .commit()
         }
+        binding.button3.setOnClickListener {
+                val intent = Intent(requireActivity(), AddScheduleActivity::class.java)
+                startActivity(intent)
+        }
 
-//        binding.button1.setOnClickListener {
-//
-//            Glide.with(this)
-//                .load(R.drawable.icon_story)
-//                .into(binding.imageview)
-//
-//        }
 
         return binding.root
     }

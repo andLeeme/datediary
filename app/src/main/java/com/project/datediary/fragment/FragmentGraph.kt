@@ -19,6 +19,7 @@ import retrofit2.Response
 class FragmentGraph : Fragment() {
 
     lateinit var binding: FragmentGraphBinding
+
     lateinit var productAdapter: ProductAdapter
     var coinList = listOf<Schedule>()
 
