@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_width="55dp"
+    android:layout_height="90dp"
     android:id="@+id/layoutGridItem"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:padding="4dp"
+    android:background="@drawable/day_background">
 
 
     <TextView
@@ -12,61 +14,60 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="1"
-        android:layout_margin="5dp"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:gravity="right"/>
     <TextView
         android:id="@+id/schedule1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="일정추가"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:gravity="left"
-        android:background="#00BCD4"
+        android:background="@drawable/schedule_background1"
         android:textColor="@color/white"/>
     <TextView
         android:id="@+id/schedule2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="짙은 배경"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:gravity="left"
-        android:background="#1B38DC"
+        android:background="@drawable/schedule_background2"
         android:textColor="@color/white"/>
     <TextView
         android:id="@+id/schedule3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="옅은 배경"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:gravity="left"
-        android:background="#EFECCE"
+        android:background="@drawable/schedule_background3"
         android:textColor="@color/black"/>
     <TextView
         android:id="@+id/schedule4"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_height="14dp"
+        android:layout_marginTop="2dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
         android:text="글자넘쳐요와오오"
         android:textStyle="bold"
-        android:textSize="14sp"
+        android:textSize="10sp"
         android:gravity="left"
-        android:background="#9C27B0"
+        android:background="@drawable/schedule_background4"
         android:textColor="@color/white"/>
 
 

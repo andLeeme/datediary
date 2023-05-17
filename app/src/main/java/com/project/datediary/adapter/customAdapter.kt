@@ -49,6 +49,22 @@ class customAdapter(private val context: Context, private val dataList: ArrayLis
                 sche13.text = data1.sche3
                 sche14.text = data1.sche4
 
+            if(data1.sche1 == "") {
+                sche11.visibility = View.GONE
+            }
+
+            if(data1.sche2 == "") {
+                sche12.visibility = View.GONE
+            }
+
+            if(data1.sche3 == "") {
+                sche13.visibility = View.GONE
+            }
+
+            if(data1.sche4 == "") {
+                sche14.visibility = View.GONE
+            }
+
         }
     }
 
