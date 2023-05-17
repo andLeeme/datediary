@@ -8,9 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.datediary.adapter.ProductAdapter
-import com.project.datediary.api.ApiObject
 import com.project.datediary.databinding.FragmentStoryEditBinding
-import com.project.datediary.model.Coin
 import com.project.datediary.model.Schedule
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,25 +41,25 @@ class FragmentStoryEdit : Fragment() {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
         }
-        initList()
+//        initList()
         return binding.root
     }
 
-    private fun initList() {
-        val call = ApiObject.getRetrofitService.getCoinAll()
-        call.enqueue(object : Callback<List<Schedule>> {
-            override fun onResponse(call: Call<List<Schedule>>, response: Response<List<Schedule>>) {
-                Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
-                if (response.isSuccessful) {
-                    coinList = response.body() ?: listOf()
-                    productAdapter.setList(coinList)
-                }
-            }
-
-            override fun onFailure(call: Call<List<Schedule>>, t: Throwable) {
-                Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
+//    private fun initList() {
+//        val call = ApiObject.getRetrofitService.getCoinAll()
+//        call.enqueue(object : Callback<List<Schedule>> {
+//            override fun onResponse(call: Call<List<Schedule>>, response: Response<List<Schedule>>) {
+//                Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
+//                if (response.isSuccessful) {
+//                    coinList = response.body() ?: listOf()
+//                    productAdapter.setList(coinList)
+//                }
+//            }
+//
+//            override fun onFailure(call: Call<List<Schedule>>, t: Throwable) {
+//                Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
+//            }
+//        })
+//    }
 
 }
