@@ -18,6 +18,10 @@ class FragmentBottomSheet : Fragment() {
 
     ): View? {
 
+        binding.sheetText1.setOnClickListener {
+            binding.sheetText1.text = "바뀐 일정"
+        }
+
         return binding.root
     }
 

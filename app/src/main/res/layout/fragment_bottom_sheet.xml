@@ -6,9 +6,7 @@
     android:layout_height="wrap_content"
     android:background="#DFA2FF"
     android:orientation="vertical"
-    app:behavior_hideable="false"
-    app:behavior_peekHeight="150dp"
-    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+
     >
 
     <LinearLayout
@@ -37,6 +35,7 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/sheetText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
