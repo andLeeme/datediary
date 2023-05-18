@@ -1,15 +1,16 @@
 package com.project.datediary.api
 
+import com.project.datediary.model.ScheduleRequestBody
+import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.SignUpRequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 import java.util.ArrayList
-import java.util.HashMap
 
-interface SignUpService {
+interface ScheduleService {
     @Headers("Content-Type: application/json")
-    @POST("/api/postTest")
-    fun addUserByEnqueue(@Body userInfo: SignUpRequestBody): Call<ArrayList<HashMap<String,Object>>>
+    @POST("/api/main2")
+    fun addUserByEnqueue2(@Body ScheduleInfo: ScheduleRequestBody): Call<ArrayList<ScheduleResponseBody>>
 }

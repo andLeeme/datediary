@@ -1,3 +1,4 @@
+import com.project.datediary.api.ScheduleService
 import com.project.datediary.api.SignUpService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -25,5 +26,9 @@ object RetrofitAPI {
 
     val emgMedService: SignUpService by lazy {
         retrofit.create(SignUpService::class.java)
+    }
+
+    val emgMedService2: ScheduleService by lazy {
+        retrofit.create(ScheduleService::class.java)
     }
 }

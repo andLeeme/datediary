@@ -43,7 +43,7 @@ class customAdapter(private val context: Context, private val dataList: ArrayLis
         private val sche14 = itemView.findViewById<TextView>(R.id.schedule4)
 
         fun bind(data1: dataVO, context: Context) {
-                Toast.makeText(context, "데이터 들어는간다", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "데이터 들어는간다", Toast.LENGTH_SHORT).show()
                 sche11.text = data1.sche1
                 sche12.text = data1.sche2
                 sche13.text = data1.sche3
