@@ -73,10 +73,7 @@ class FragmentCalendar : Fragment() {
             dataVO("", "", "", ""),
             dataVO("", "", "", ""),
             dataVO("", "", "", ""),
-            dataVO("", "", "", ""),
-            dataVO("", "", "", ""),
-            dataVO("", "", "", ""),
-            dataVO("", "", "", "")
+
 
         )
         Log.d("dataVO", "${data1.get(0).sche2}")
