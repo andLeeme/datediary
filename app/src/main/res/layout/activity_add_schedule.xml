@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/idedt"
+        android:id="@+id/editText1"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -17,18 +17,7 @@
         tools:layout_editor_absoluteY="55dp" />
 
     <EditText
-        android:id="@+id/nickedt"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="닉네임입력"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="134dp" />
-
-    <EditText
-        android:id="@+id/pwdedt"
+        android:id="@+id/editText2"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -61,7 +50,7 @@
 
     <TextView
         android:layout_gravity="center"
-        android:id="@+id/text"
+        android:id="@+id/text1234"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAlignment="center"

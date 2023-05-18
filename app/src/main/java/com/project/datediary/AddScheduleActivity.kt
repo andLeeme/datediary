@@ -1,65 +1,51 @@
 package com.project.datediary
 
-import androidx.appcompat.app.AppCompatActivity
+import RetrofitAPI
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.databinding.ActivityAddScheduleBinding
-import com.project.datediary.model.HTTP_GET_Model
-import com.project.datediary.model.PostModel
-import com.project.datediary.model.PostResult
+import com.project.datediary.model.SignUpRequestBody
 import retrofit2.Call
-import retrofit2.Callback
 import retrofit2.Response
 
 class AddScheduleActivity : AppCompatActivity() {
-    val binding by lazy { ActivityAddScheduleBinding.inflate(layoutInflater) }
-    val api = APIS.create();
+    lateinit var binding: ActivityAddScheduleBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityAddScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.getbutton.setOnClickListener {
-            api.get_users().enqueue(object : Callback<HTTP_GET_Model> {
-                override fun onResponse(
-                    call: Call<HTTP_GET_Model>,
-                    response: Response<HTTP_GET_Model>
-                ) {
-                    Log.d("log", response.toString())
-                    Log.d("log", response.body().toString())
-                    if (!response.body().toString().isEmpty())
-                        binding.text.setText(response.body().toString());
-                }
-
-                override fun onFailure(call: Call<HTTP_GET_Model>, t: Throwable) {
-                    // 실패
-                    Log.d("log", t.message.toString())
-                    Log.d("log", "fail")
-                }
-            })
-        }
 
         binding.postbutton.setOnClickListener {
-            val data = PostModel(
-                binding.idedt.text.toString(),
-                binding.pwdedt.text.toString(),
-                binding.nickedt.text.toString()
+            val userData = SignUpRequestBody(
+                id = binding.editText1.text.toString(), password = binding.editText2.text.toString()
             )
-            api.post_users(data).enqueue(object : Callback<PostResult> {
-                override fun onResponse(call: Call<PostResult>, response: Response<PostResult>) {
-                    Log.d("log", response.toString())
-                    Log.d("log", response.body().toString())
-                    if (!response.body().toString().isEmpty())
-                        binding.text.setText(response.body().toString());
-                }
 
-                override fun onFailure(call: Call<PostResult>, t: Throwable) {
-                    // 실패
-                    Log.d("log", t.message.toString())
-                    Log.d("log", "fail")
-                }
-            })
+            RetrofitAPI.emgMedService.addUserByEnqueue(userData)
+                .enqueue(object : retrofit2.Callback<ArrayList<HashMap<String, Object>>> {
+                    override fun onResponse(
+                        call: Call<ArrayList<HashMap<String, Object>>>,
+                        response: Response<ArrayList<HashMap<String, Object>>>
+                    ) {
+                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                            .show()
+
+                        if (response.isSuccessful) {
+
+                            binding.text1234.text = "${response.body().toString()}"
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<ArrayList<HashMap<String, Object>>>,
+                        t: Throwable
+                    ) {
+
+                    }
+                })
         }
-
     }
 }
+
