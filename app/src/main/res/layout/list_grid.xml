@@ -10,7 +10,7 @@
 
 
     <TextView
-        android:id="@+id/Date"
+        android:id="@+id/dayText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="1"
