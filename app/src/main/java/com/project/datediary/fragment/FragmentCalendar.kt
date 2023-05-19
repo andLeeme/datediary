@@ -60,7 +60,6 @@ class FragmentCalendar : Fragment() {
     }
 
     //날짜 화면에 보여주기
-//날짜 화면에 보여주기
     private fun setMonthView() {
         //년월 텍스트뷰 셋팅
         binding.monthYearText.text = monthYearFromDate(selectedDate)
@@ -81,7 +80,7 @@ class FragmentCalendar : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
-    //날짜 타입 설정
+    //날짜 타입 설정(00월 0000년)
     private fun monthYearFromDate(date: LocalDate): String{
 
         var formatter = DateTimeFormatter.ofPattern("MM월 yyyy")
@@ -92,9 +91,9 @@ class FragmentCalendar : Fragment() {
 
 
     //날짜 생성
-    private fun dayInMonthArray(date: LocalDate): ArrayList<String>{
+    private fun dayInMonthArray(date: LocalDate): ArrayList<LocalDate?>{
 
-        var dayList = ArrayList<String>()
+        var dayList = ArrayList<LocalDate?>()
 
         var yearMonth = YearMonth.from(date)
 
@@ -109,9 +108,11 @@ class FragmentCalendar : Fragment() {
 
         for(i in 1..41){
             if(i <= dayOfWeek || i > (lastDay + dayOfWeek)){
-                dayList.add("")
+                dayList.add(null)
             }else{
-                dayList.add((i - dayOfWeek).toString())
+                //dayList.add((i - dayOfWeek).toString()) <-이전 코드 ArrayList<String>이었을 때
+                dayList.add(LocalDate.of(selectedDate.year,
+                    selectedDate.monthValue, i - dayOfWeek))
             }
         }
 
