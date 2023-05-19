@@ -31,7 +31,7 @@ class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
 
-    lateinit var calendar: Calendar
+    //lateinit var calendar: Calendar
 
     //년월 변수
     //lateinit var selectedDate: LocalDate
@@ -43,10 +43,10 @@ class FragmentCalendar : Fragment() {
 
         //현재 날짜
         //selectedDate  = LocalDate.now()
-        CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀
+        //CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀
 
         //초기화
-        calendar = Calendar.getInstance()
+        //calendar = Calendar.getInstance()
 
         //화면 설정
         setMonthView()
@@ -54,22 +54,15 @@ class FragmentCalendar : Fragment() {
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
             //현재 월 -1 변수에 담기
-//            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
-//            setMonthView()
-            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
-            calendar.add(Calendar.MONTH, -1)// 현재 달 -1
+            CalendarUtil.selectedDate.add(Calendar.MONTH, -1)// 현재 달 -1
             setMonthView()
         }
 
         //다음달 버튼 이벤트
         binding.nextBtn.setOnClickListener {
-//            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
-//            setMonthView()
-            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
-            calendar.add(Calendar.MONTH, 1) //현재 달 +1
+            CalendarUtil.selectedDate.add(Calendar.MONTH, 1) //현재 달 +1
             setMonthView()
         }
-
 
         return binding.root
     }
@@ -96,12 +89,12 @@ class FragmentCalendar : Fragment() {
     }
 
     //날짜 타입 설정(00월 0000년)
-    private fun monthYearFromDate(date: LocalDate): String{
+    private fun monthYearFromDate(calendar: Calendar): String {
 
-        var formatter = DateTimeFormatter.ofPattern("MM월 yyyy")
+        var year = calendar.get(Calendar.YEAR)
+        var month = calendar.get(Calendar.MONTH) + 1
 
-        // 받아온 날짜를 해당 포맷으로 변경
-        return date.format(formatter)
+        return "$month 월 $year"
     }
 
 
@@ -110,7 +103,7 @@ class FragmentCalendar : Fragment() {
 
         var dayList = ArrayList<Date>()
 
-        var monthCalendar = calendar.clone() as Calendar
+        var monthCalendar = CalendarUtil.selectedDate.clone() as Calendar
 
         //1일로 셋팅
         monthCalendar[Calendar.DAY_OF_MONTH] = 1

@@ -2,6 +2,7 @@ package com.project.datediary.adapter
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,38 +49,67 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
 
         holder.dayText.text = dayNo.toString()
         holder.dayText.setTypeface(null, Typeface.NORMAL)
-        holder.dayText.setTextColor(Color.GRAY)  //대충 회색
 
-        //현재 날짜 배경색상 변경
-        if(CalendarUtil.selectedDate.dayOfMonth == dayNo){
+        //넘어온 날짜
+        var iYear = dateCalendar.get(Calendar.YEAR) //년
+        var iMonth = dateCalendar.get(Calendar.MONTH) + 1 //월
+        var iDay = dateCalendar.get(Calendar.DAY_OF_MONTH)//일
 
-            holder.dayText.setTextColor(Color.rgb(241, 158, 194)) //지현이가 정해준 예쁜 분홍색
-            holder.dayText.setTypeface(null, Typeface.BOLD)
-        }
 
-        //텍스트 색상 지정(토,일)
-        if ((position + 1) % 7 == 0) { //토요일은 파랑
-            holder.dayText.setTextColor(Color.rgb(130  , 130, 200)) //대충 빨간색
+        //현재 날짜
+        var selectYear = CalendarUtil.selectedDate.get(Calendar.YEAR) //년
+        var selectMonth = CalendarUtil.selectedDate.get(Calendar.MONTH) + 1 //월
+        var selectDay = CalendarUtil.selectedDate.get(Calendar.DAY_OF_MONTH) //일
 
-        } else if (position == 0 || position % 7 == 0) { //일요일은 빨강
-            holder.dayText.setTextColor(Color.rgb(200, 92, 115))  //대충 파란색
+
+        val selectMonth2 = CalendarUtil.selectedDate.get(Calendar.MONTH) +1
+        //넘어온 날짜와 현재 날짜 비교
+        if (iYear == selectYear && iMonth == selectMonth) { //같다면 진한 색상상
+            holder.dayText.setTextColor(Color.parseColor("#000000"))
+
+            Log.d("넘어온날짜", "iYear: $iYear, iMonth: $iMonth, iDay: $iDay")
+            Log.d("비교", "selectDay: $selectDay, dayNo: $dayNo iMonth: $iMonth selectMonth $selectMonth")
+            Log.d("현재날짜", "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay")
+
+            //현재 날짜 비교해서 같다면 배경색상 변경
+            if (iYear == selectYear && iMonth == selectMonth2 && selectDay == dayNo) {
+                holder.itemView.setBackgroundColor(Color.RED)
+            }
+//            else if (selectDay != dayNo) {
+//                holder.itemView.setBackgroundColor(Color.WHITE)
+//            }
+            //텍스트 색상 지정(토,일)
+            if ((position + 1) % 7 == 0) { //토요일은 파랑
+                holder.dayText.setTextColor(Color.BLUE)
+
+            } else if (position == 0 || position % 7 == 0) { //일요일은 빨강
+                holder.dayText.setTextColor(Color.RED)
+            }
+        } else { //다르다면 연한 색상
+
+            holder.dayText.setTextColor(Color.parseColor("#B4B4B4"))
+            holder.itemView.setBackgroundColor(Color.WHITE)
+
+            //텍스트 색상 지정(토,일)
+            if ((position + 1) % 7 == 0) { //토요일은 파랑
+                holder.dayText.setTextColor(Color.parseColor("#B4FFFF"))
+
+            } else if (position == 0 || position % 7 == 0) { //일요일은 빨강
+                holder.dayText.setTextColor(Color.parseColor("#FFB4B4"))
+            }
         }
 
         //날짜 클릭 이벤트
         holder.itemView.setOnClickListener {
-            //인터페이스를 통해 날짜를 넘겨준다.
-            var iYear   = dateCalendar.get(Calendar.YEAR)
-            var iMonth  = dateCalendar.get(Calendar.MONTH) + 1
-            var iDay    = dateCalendar.get(Calendar.DAY_OF_MONTH)
 
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     override fun getItemCount(): Int {
         return dayList.size
     }
 }
+

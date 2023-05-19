@@ -1,9 +1,10 @@
 package com.project.datediary.util
 
 import java.time.LocalDate
+import java.util.Calendar
 
 interface CalendarUtil {
     companion object {
-        var selectedDate: LocalDate = LocalDate.now()
+        var selectedDate: Calendar = Calendar.getInstance()
     }
 }
