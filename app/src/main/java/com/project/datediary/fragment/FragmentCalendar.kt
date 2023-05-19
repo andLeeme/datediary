@@ -23,11 +23,15 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.YearMonth
 import java.time.format.DateTimeFormatter
+import java.util.Calendar
+import java.util.Date
 
 
 class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
+
+    lateinit var calendar: Calendar
 
     //년월 변수
     //lateinit var selectedDate: LocalDate
@@ -39,9 +43,10 @@ class FragmentCalendar : Fragment() {
 
         //현재 날짜
         //selectedDate  = LocalDate.now()
-
         CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀
 
+        //초기화
+        calendar = Calendar.getInstance()
 
         //화면 설정
         setMonthView()
@@ -49,13 +54,19 @@ class FragmentCalendar : Fragment() {
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
             //현재 월 -1 변수에 담기
+//            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
+//            setMonthView()
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
+            calendar.add(Calendar.MONTH, -1)// 현재 달 -1
             setMonthView()
         }
 
         //다음달 버튼 이벤트
         binding.nextBtn.setOnClickListener {
+//            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
+//            setMonthView()
             CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
+            calendar.add(Calendar.MONTH, 1) //현재 달 +1
             setMonthView()
         }
 
@@ -69,7 +80,7 @@ class FragmentCalendar : Fragment() {
         binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
 
         //날짜 생성해서 리스트에 담기
-        val dayList = dayInMonthArray(CalendarUtil.selectedDate)
+        val dayList = dayInMonthArray()
 
         //어댑터 초기화
         val adapter = CalendarAdapter(dayList)
@@ -95,29 +106,28 @@ class FragmentCalendar : Fragment() {
 
 
     //날짜 생성
-    private fun dayInMonthArray(date: LocalDate): ArrayList<LocalDate?>{
+    private fun dayInMonthArray(): ArrayList<Date>{
 
-        var dayList = ArrayList<LocalDate?>()
+        var dayList = ArrayList<Date>()
 
-        var yearMonth = YearMonth.from(date)
+        var monthCalendar = calendar.clone() as Calendar
 
-        //해당 월 마지막 날짜 가져오기(예: 28, 30, 31)
-        var lastDay = yearMonth.lengthOfMonth()
+        //1일로 셋팅
+        monthCalendar[Calendar.DAY_OF_MONTH] = 1
 
-        //해당 월의 첫 번째 날 가져오기(예: 4월 1일)
-        var firstDay = CalendarUtil.selectedDate.withDayOfMonth(1)
+        //해당 달의 1일의 요일[1:일요일, 2: 월요일.... 7일: 토요일]
+        val firstDayOfMonth = monthCalendar[Calendar.DAY_OF_WEEK]-1
 
-        //첫 번째날 요일 가져오기(월:1, 일: 7)
-        var dayOfWeek = firstDay.dayOfWeek.value
+        //요일 숫자만큼 이전 날짜로 설정
+        //예: 6월1일이 수요일이면 3만큼 이전날짜 셋팅
+        monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
 
-        for(i in 1..41){
-            if(i <= dayOfWeek || i > (lastDay + dayOfWeek)){
-                dayList.add(null)
-            }else{
-                //dayList.add((i - dayOfWeek).toString()) <-이전 코드 ArrayList<String>이었을 때
-                dayList.add(LocalDate.of(CalendarUtil.selectedDate.year,
-                    CalendarUtil.selectedDate.monthValue, i - dayOfWeek))
-            }
+        while(dayList.size < 42){
+
+            dayList.add(monthCalendar.time)
+
+            //1일씩 늘린다. 1일 -> 2일 -> 3일
+            monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
         }
 
         return dayList
