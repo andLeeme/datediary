@@ -17,6 +17,7 @@ import com.project.datediary.adapter.customAdapter
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.dataVO
+import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
 import retrofit2.Response
 import java.time.LocalDate
@@ -29,7 +30,7 @@ class FragmentCalendar : Fragment() {
     lateinit var binding: FragmentCalendarBinding
 
     //년월 변수
-    lateinit var selectedDate: LocalDate
+    //lateinit var selectedDate: LocalDate
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -37,7 +38,10 @@ class FragmentCalendar : Fragment() {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
 
         //현재 날짜
-        selectedDate  = LocalDate.now()
+        //selectedDate  = LocalDate.now()
+
+        CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀
+
 
         //화면 설정
         setMonthView()
@@ -45,13 +49,13 @@ class FragmentCalendar : Fragment() {
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
             //현재 월 -1 변수에 담기
-            selectedDate = selectedDate.minusMonths(1)
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.minusMonths(1)
             setMonthView()
         }
 
         //다음달 버튼 이벤트
         binding.nextBtn.setOnClickListener {
-            selectedDate = selectedDate.plusMonths(1)
+            CalendarUtil.selectedDate = CalendarUtil.selectedDate.plusMonths(1)
             setMonthView()
         }
 
@@ -62,10 +66,10 @@ class FragmentCalendar : Fragment() {
     //날짜 화면에 보여주기
     private fun setMonthView() {
         //년월 텍스트뷰 셋팅
-        binding.monthYearText.text = monthYearFromDate(selectedDate)
+        binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
 
         //날짜 생성해서 리스트에 담기
-        val dayList = dayInMonthArray(selectedDate)
+        val dayList = dayInMonthArray(CalendarUtil.selectedDate)
 
         //어댑터 초기화
         val adapter = CalendarAdapter(dayList)
@@ -101,7 +105,7 @@ class FragmentCalendar : Fragment() {
         var lastDay = yearMonth.lengthOfMonth()
 
         //해당 월의 첫 번째 날 가져오기(예: 4월 1일)
-        var firstDay = selectedDate.withDayOfMonth(1)
+        var firstDay = CalendarUtil.selectedDate.withDayOfMonth(1)
 
         //첫 번째날 요일 가져오기(월:1, 일: 7)
         var dayOfWeek = firstDay.dayOfWeek.value
@@ -111,8 +115,8 @@ class FragmentCalendar : Fragment() {
                 dayList.add(null)
             }else{
                 //dayList.add((i - dayOfWeek).toString()) <-이전 코드 ArrayList<String>이었을 때
-                dayList.add(LocalDate.of(selectedDate.year,
-                    selectedDate.monthValue, i - dayOfWeek))
+                dayList.add(LocalDate.of(CalendarUtil.selectedDate.year,
+                    CalendarUtil.selectedDate.monthValue, i - dayOfWeek))
             }
         }
 

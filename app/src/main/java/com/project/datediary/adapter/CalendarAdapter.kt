@@ -1,6 +1,7 @@
 package com.project.datediary.adapter
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
+import com.project.datediary.util.CalendarUtil
 import java.time.LocalDate
 
 class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
@@ -34,9 +36,18 @@ class CalendarAdapter(private val dayList: ArrayList<LocalDate?>):
 
         if(day == null){
             holder.dayText.text = ""
-        }else{
+        }else {
             //해당 일자를 넣는다.
             holder.dayText.text = day.dayOfMonth.toString()
+            holder.dayText.setTypeface(null, Typeface.NORMAL)
+
+            //현재 날짜 색상 칠하기
+            if (day == CalendarUtil.selectedDate) {
+                //holder.itemView.setBackgroundColor(Color.LTGRAY)
+                //holder.dayText.setBackgroundResource(R.drawable.day_circle)
+                holder.dayText.setTextColor(Color.rgb(241, 158, 194))
+                holder.dayText.setTypeface(null, Typeface.BOLD)
+            }
         }
 
         //텍스트 색상 지정(토,일)
