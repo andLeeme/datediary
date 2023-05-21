@@ -28,6 +28,24 @@
         android:text="버튼3"
         android:layout_marginTop="200dp"/>
 
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="버튼4"
+        android:layout_marginTop="300dp"/>
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="버튼5"
+        android:layout_marginTop="400dp"/>
+
+
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/editContainer"
         android:layout_width="match_parent"

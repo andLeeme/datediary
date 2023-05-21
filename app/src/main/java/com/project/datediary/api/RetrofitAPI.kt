@@ -6,7 +6,15 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitAPI {
-    private const val BASE_URL = "http://192.168.150.120:8080"
+    //학원
+    //    private const val BASE_URL = "http://192.168.150.120:8080"
+
+    //집
+    //    private const val BASE_URL = "http://112.173.111.193:8080"
+
+    //서버
+    private const val BASE_URL = "http://andLeeme.iptime.org:60722"
+
 
     private val okHttpClient: OkHttpClient by lazy {
         OkHttpClient.Builder()
@@ -20,7 +28,7 @@ object RetrofitAPI {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient) // 로그캣에서 패킷 내용을 모니터링 할 수 있음 (인터셉터)
+            .client(okHttpClient) //
             .build()
     }
 

@@ -8,9 +8,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.project.datediary.ItemTouchHelperCallback
-import com.project.datediary.LinearListViewAdapter
-import com.project.datediary.R
+import com.project.datediary.util.ItemTouchHelperCallback
+import com.project.datediary.adapter.LinearListViewAdapter
 
 import com.project.datediary.databinding.FragmentMyBinding
 
