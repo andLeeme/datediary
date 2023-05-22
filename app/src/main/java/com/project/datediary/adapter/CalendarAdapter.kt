@@ -10,18 +10,26 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
+import com.project.datediary.model.dataVO
+import com.project.datediary.model.titleTest
 import com.project.datediary.util.CalendarUtil
 import java.time.LocalDate
 import java.util.Calendar
 import java.util.Date
+import java.util.Objects
 
-class CalendarAdapter(private val dayList: ArrayList<Date>):
+class CalendarAdapter(private val dayList: ArrayList<Date>) :
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
 
 
-    class ItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+    class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val dayText: TextView = itemView.findViewById(R.id.dayText)
+        val schedule1: TextView = itemView.findViewById(R.id.schedule1)
+        val schedule2: TextView = itemView.findViewById(R.id.schedule2)
+        val schedule3: TextView = itemView.findViewById(R.id.schedule3)
+        val schedule4: TextView = itemView.findViewById(R.id.schedule4)
+
     }
 
     //화면 설정
@@ -69,12 +77,18 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
             holder.dayText.setTextColor(Color.parseColor("#000000"))
 
             Log.d("넘어온날짜", "iYear: $iYear, iMonth: $iMonth, iDay: $iDay")
-            Log.d("비교", "selectDay: $selectDay, dayNo: $dayNo iMonth: $iMonth selectMonth $selectMonth")
-            Log.d("현재날짜", "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay")
+            Log.d(
+                "비교",
+                "selectDay: $selectDay, dayNo: $dayNo iMonth: $iMonth selectMonth $selectMonth"
+            )
+            Log.d(
+                "현재날짜",
+                "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay"
+            )
 
             //현재 날짜 비교해서 같다면 배경색상 변경
             if (iYear == selectYear && iMonth2 == selectMonth && selectDay == dayNo) {
-                holder.dayText.setTextColor(Color.rgb(154,132,188))
+                holder.dayText.setTextColor(Color.rgb(154, 132, 188))
                 holder.dayText.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
             }
 //            else if (selectDay != dayNo) {
@@ -106,7 +120,51 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
         }
+
+
+        //날짜별 일정 추가
+        //가져온 날짜랑 비교하기, 맞으면 텍스트 가져온 텍스트로 바꾸기, visible 처리
+
+
+        var title = arrayListOf<titleTest>(
+            titleTest("2023", "05", "14", "2023", "05", "14", true, "단일일정1"),
+            titleTest("2023", "05", "14", "2023", "05", "14", true, "단일일정2"),
+            titleTest("2023", "05", "05", "2023", "05", "20", true, ""),
+            titleTest("2023", "05", "02", "2023", "05", "02", true, "")
+        )
+
+        val startYear = title[0].start_year.toInt()
+        val startMonth = title[0].start_month.toInt()
+        val startDay = title[0].start_day.toInt()
+
+        if(selectYear == startYear && selectMonth == startMonth && dayNo == startDay) {
+
+            for (i in 0 until title.size) {
+                holder.schedule1.text = title[0].title
+                holder.schedule2.text = title[1].title
+                holder.schedule3.text = title[2].title
+                holder.schedule4.text = title[3].title
+            }
+        }
+
+
+        //일정 visible 처리
+        if (holder.schedule1.text == "") {
+            holder.schedule1.visibility = View.GONE
+        }
+
+        if (holder.schedule2.text == "") {
+            holder.schedule2.visibility = View.GONE
+        }
+        if (holder.schedule3.text == "") {
+            holder.schedule3.visibility = View.GONE
+        }
+        if (holder.schedule4.text == "") {
+            holder.schedule4.visibility = View.GONE
+        }
+
     }
+
 
     override fun getItemCount(): Int {
         return dayList.size
