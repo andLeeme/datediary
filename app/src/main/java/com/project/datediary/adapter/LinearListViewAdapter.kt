@@ -33,7 +33,7 @@ class LinearListViewAdapter(private val list: MutableList<String>) :
         list[position].let {
             with(holder) {
                 tvTitle.text = it
-                ivMenu.setOnTouchListener { view, event ->
+                ivMenu.setOnTouchListener { _, event ->
                     if (event.action == MotionEvent.ACTION_DOWN) {
                         dragListener.onStartDrag(this)
                     }

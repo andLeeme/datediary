@@ -35,7 +35,6 @@
                         <TextView
                             android:layout_width="30dp"
                             android:layout_height="30dp"
-                            android:text="ㅡㅡ"
                             android:textSize="20dp" />
 
                     </LinearLayout>
@@ -126,22 +125,29 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                    <!--                    <TextView-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content"-->
-                    <!--                        android:fontFamily="@font/lottemartd_bold"-->
-                    <!--                        android:text="제목"-->
-                    <!--                        android:textColor="#BCBCBC"-->
-                    <!--                        android:textSize="16dp" />-->
-
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/add_schedule_text"
+                        android:fontFamily="@font/lottemartd_medium"
                         android:hint="제목"
-                        android:paddingLeft="10dp"
-                        android:textColorHint="#BCBCBC"
-                        android:textSize="18dp" />
+                        app:boxBackgroundColor="#FAFAFA"
+                        app:boxCornerRadiusBottomEnd="5dp"
+                        app:boxCornerRadiusBottomStart="5dp"
+                        app:boxCornerRadiusTopEnd="5dp"
+                        app:boxCornerRadiusTopStart="5dp"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidth="0dp"
+                        app:counterTextColor="@color/black"
+                        app:hintTextColor="#BCBCBC">
+
+                        <EditText
+                            android:id="@+id/email_edittext1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/lottemartd_medium"
+                            android:textColor="@android:color/black"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -152,14 +158,29 @@
                     android:orientation="vertical">
 
 
-                    <EditText
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/add_schedule_text"
+                        android:fontFamily="@font/lottemartd_medium"
                         android:hint="내용"
-                        android:paddingLeft="10dp"
-                        android:textColorHint="#BCBCBC"
-                        android:textSize="18dp" />
+                        app:boxBackgroundColor="#FAFAFA"
+                        app:boxCornerRadiusBottomEnd="5dp"
+                        app:boxCornerRadiusBottomStart="5dp"
+                        app:boxCornerRadiusTopEnd="5dp"
+                        app:boxCornerRadiusTopStart="5dp"
+                        app:boxStrokeColor="@color/white"
+                        app:boxStrokeWidth="0dp"
+                        app:counterTextColor="@color/black"
+                        app:hintTextColor="#BCBCBC">
+
+                        <EditText
+                            android:id="@+id/email_edittext2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:fontFamily="@font/lottemartd_medium"
+                            android:textColor="@android:color/black"
+                            android:textCursorDrawable="@null" />
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -173,8 +194,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
-
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
 
                     </LinearLayout>
@@ -186,9 +207,8 @@
                         android:orientation="vertical">
 
 
-
-
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -196,31 +216,44 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-
-
-
                     </LinearLayout>
+
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_weight="1.05"
+                        android:orientation="horizontal">
 
-
-                        <com.google.android.material.checkbox.MaterialCheckBox
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:text="종일"
-                            android:layout_marginLeft="10dp"
-                            />
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+
+                                <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="종일" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
 
 
                     </LinearLayout>
 
 
                 </LinearLayout>
-
 
 
                 <LinearLayout
@@ -290,7 +323,7 @@
                                 android:textColor="#595959"
                                 android:textSize="12dp"
                                 app:cornerRadius="10dp"
-                                app:rippleColor="#E1E1E1" />
+                                app:rippleColor="#EBEBEB" />
 
                         </LinearLayout>
 
@@ -308,7 +341,7 @@
                                 android:textColor="#595959"
                                 android:textSize="12dp"
                                 app:cornerRadius="10dp"
-                                app:rippleColor="#E1E1E1"
+                                app:rippleColor="#EBEBEB"
                                 app:strokeColor="@color/white" />
 
                         </LinearLayout>
@@ -337,7 +370,7 @@
                                 android:textColor="#595959"
                                 android:textSize="12dp"
                                 app:cornerRadius="10dp"
-                                app:rippleColor="#E1E1E1"
+                                app:rippleColor="#FAFAFA"
                                 app:strokeColor="@color/white" />
 
                         </LinearLayout>
@@ -357,7 +390,7 @@
                                 android:textSize="12dp"
                                 app:cornerRadius="10dp"
                                 app:elevation="0dp"
-                                app:rippleColor="#E1E1E1"
+                                app:rippleColor="#EBEBEB"
                                 app:strokeColor="@color/white" />
 
                         </LinearLayout>
@@ -371,28 +404,51 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.1"
                     android:orientation="vertical">
 
-                    <com.google.android.material.textfield.TextInputLayout
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.02"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:boxBackgroundColor="#F6F6F6"
-                        app:boxStrokeColor="@color/white"
-                        app:boxStrokeWidth="0dp"
-                        app:boxCornerRadiusTopStart="5dp"
-                        app:boxCornerRadiusTopEnd="5dp"
-                        app:boxCornerRadiusBottomStart="5dp"
-                        app:boxCornerRadiusBottomEnd="5dp"
-                        app:counterTextColor="@color/black">
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#ffffff"
+                        android:text="방문 장소"
+                        android:textColor="#595959"
+                        android:textSize="16dp"
+                        android:fontFamily="@font/lottemartd_medium"
+                        app:cornerRadius="20dp"
+                        app:rippleColor="#EBEBEB"
+                        app:strokeWidth="0.5dp"
+                        app:strokeColor="#03A9F4"/>
 
-                        <EditText
-                            android:id="@+id/email_edittext"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:hint="email"
-                            android:inputType="textEmailAddress" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.02"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#ffffff"
+                        android:text="데이트 미션!"
+                        android:textColor="#595959"
+                        android:textSize="16dp"
+                        app:cornerRadius="20dp"
+                        android:fontFamily="@font/lottemartd_medium"
+                        app:rippleColor="#EBEBEB"
+                        app:strokeWidth="0.5dp"
+                        app:strokeColor="#03A9F4"/>
 
 
                 </LinearLayout>
@@ -403,21 +459,42 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text='"5월 27일 일정에 추가돼요!"'
+                        android:textColor="#04A3F8" />
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.1"
                     android:orientation="vertical">
 
+
+
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="1.02"
                     android:orientation="vertical">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="#99F3FF"
+                        android:text="일정 등록하기"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp"
+                        app:cornerRadius="30dp"
+                        app:rippleColor="#EBEBEB"
+                        android:fontFamily="@font/lottemartd_bold"/>
+
 
                 </LinearLayout>
 

@@ -17,17 +17,15 @@ class FragmentStory : Fragment() {
     lateinit var bindingMain: ActivityMainBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
         binding = FragmentStoryBinding.inflate(inflater, container, false)
 
-        bindingMain  = ActivityMainBinding.inflate(inflater, container, false)
+        bindingMain = ActivityMainBinding.inflate(inflater, container, false)
 
         binding.button1.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, FragmentStoryEdit())
+            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentStoryEdit())
                 .commit()
         }
         binding.button2.setOnClickListener {
@@ -39,9 +37,20 @@ class FragmentStory : Fragment() {
             startActivity(intent)
         }
         binding.button4.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, TestFragment())
+            childFragmentManager.beginTransaction().replace(R.id.editContainer, TestFragment())
                 .commit()
+        }
+        binding.button5.setOnClickListener {
+            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentWz())
+                .commit()
+            binding.fragmentStory.visibility = View.INVISIBLE
+
+        }
+        binding.button6.setOnClickListener {
+            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentStaggeredGrid())
+                .commit()
+            binding.fragmentStory.visibility = View.INVISIBLE
+
         }
 
         return binding.root

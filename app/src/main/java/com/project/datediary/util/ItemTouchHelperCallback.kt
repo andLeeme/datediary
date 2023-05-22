@@ -3,9 +3,10 @@ package com.project.datediary.util
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.project.datediary.adapter.LinearListViewAdapter
 
 class ItemTouchHelperCallback(
-    private val itemMoveListener: OnItemMoveListener
+    private val itemMoveListener: LinearListViewAdapter
 ) : ItemTouchHelper.Callback() {
 
     interface OnItemMoveListener {
