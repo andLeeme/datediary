@@ -53,18 +53,19 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
         //넘어온 날짜
         var iYear = dateCalendar.get(Calendar.YEAR) //년
         var iMonth = dateCalendar.get(Calendar.MONTH) + 1 //월
+        var iMonth2 = Calendar.getInstance().get(Calendar.MONTH) + 1 //월
         var iDay = dateCalendar.get(Calendar.DAY_OF_MONTH)//일
 
 
-        //현재 날짜
+        //현재 날짜 (현재 달력 다음달로 넘기면 달이 바뀜) Calendar.getInstance()
         var selectYear = CalendarUtil.selectedDate.get(Calendar.YEAR) //년
         var selectMonth = CalendarUtil.selectedDate.get(Calendar.MONTH) + 1 //월
         var selectDay = CalendarUtil.selectedDate.get(Calendar.DAY_OF_MONTH) //일
 
 
-        val selectMonth2 = CalendarUtil.selectedDate.get(Calendar.MONTH) +1
+        //val selectMonth2 = CalendarUtil.selectedDate.get(Calendar.MONTH) +1
         //넘어온 날짜와 현재 날짜 비교
-        if (iYear == selectYear && iMonth == selectMonth) { //같다면 진한 색상상
+        if (iYear == selectYear && iMonth == selectMonth) { //같다면 진한 색상
             holder.dayText.setTextColor(Color.parseColor("#000000"))
 
             Log.d("넘어온날짜", "iYear: $iYear, iMonth: $iMonth, iDay: $iDay")
@@ -72,8 +73,9 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
             Log.d("현재날짜", "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay")
 
             //현재 날짜 비교해서 같다면 배경색상 변경
-            if (iYear == selectYear && iMonth == selectMonth2 && selectDay == dayNo) {
-                holder.itemView.setBackgroundColor(Color.RED)
+            if (iYear == selectYear && iMonth2 == selectMonth && selectDay == dayNo) {
+                holder.dayText.setTextColor(Color.rgb(154,132,188))
+                holder.dayText.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
             }
 //            else if (selectDay != dayNo) {
 //                holder.itemView.setBackgroundColor(Color.WHITE)
@@ -86,9 +88,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>):
                 holder.dayText.setTextColor(Color.RED)
             }
         } else { //다르다면 연한 색상
-
             holder.dayText.setTextColor(Color.parseColor("#B4B4B4"))
-            holder.itemView.setBackgroundColor(Color.WHITE)
 
             //텍스트 색상 지정(토,일)
             if ((position + 1) % 7 == 0) { //토요일은 파랑

@@ -30,6 +30,7 @@ import java.util.Date
 class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
+    var month_view = Int
 
     //lateinit var calendar: Calendar
 
