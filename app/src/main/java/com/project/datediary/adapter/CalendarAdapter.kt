@@ -76,15 +76,15 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         if (iYear == selectYear && iMonth == selectMonth) { //같다면 진한 색상
             holder.dayText.setTextColor(Color.parseColor("#000000"))
 
-            Log.d("넘어온날짜", "iYear: $iYear, iMonth: $iMonth, iDay: $iDay")
-            Log.d(
-                "비교",
-                "selectDay: $selectDay, dayNo: $dayNo iMonth: $iMonth selectMonth $selectMonth"
-            )
-            Log.d(
-                "현재날짜",
-                "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay"
-            )
+//            Log.d("넘어온날짜", "iYear: $iYear, iMonth: $iMonth, iDay: $iDay")
+//            Log.d(
+//                "비교",
+//                "selectDay: $selectDay, dayNo: $dayNo iMonth: $iMonth selectMonth $selectMonth"
+//            )
+//            Log.d(
+//                "현재날짜",
+//                "selectYear: $selectYear, selectMonth: $selectMonth, selectDay: $selectDay"
+//            )
 
             //현재 날짜 비교해서 같다면 배경색상 변경
             if (iYear == selectYear && iMonth2 == selectMonth && selectDay == dayNo) {
@@ -118,8 +118,14 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
 
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
+            //클릭 풀리면 배경 돌리기
+            holder.itemView.setBackgroundColor(Color.LTGRAY)
+
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
         }
+
+
+
 
 
         //날짜별 일정 추가
@@ -127,25 +133,74 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
 
 
         var title = arrayListOf<titleTest>(
-            titleTest("2023", "05", "14", "2023", "05", "14", true, "단일일정1"),
-            titleTest("2023", "05", "14", "2023", "05", "14", true, "단일일정2"),
+            titleTest("2023", "05", "14", "2023", "05", "16", true, "연일일정"),
+            titleTest("2023", "05", "14", "2023", "05", "14", true, "단일일정"),
             titleTest("2023", "05", "05", "2023", "05", "20", true, ""),
             titleTest("2023", "05", "02", "2023", "05", "02", true, "")
         )
 
-        val startYear = title[0].start_year.toInt()
-        val startMonth = title[0].start_month.toInt()
-        val startDay = title[0].start_day.toInt()
+        val startYear1 = title[0].start_year.toInt()
+        val startMonth1 = title[0].start_month.toInt()
+        val startDay1 = title[0].start_day.toInt()
+        val endDay1 = title[0].end_day.toInt()
 
-        if(selectYear == startYear && selectMonth == startMonth && dayNo == startDay) {
+        val startYear2 = title[1].start_year.toInt()
+        val startMonth2 = title[1].start_month.toInt()
+        val startDay2 = title[1].start_day.toInt()
+        val endDay2 = title[1].end_day.toInt()
 
-            for (i in 0 until title.size) {
+        if(selectYear == startYear1 && selectMonth == startMonth1 && dayNo > startDay1-1 && dayNo < endDay1+1) {
+        //if(selectYear == startYear && selectMonth == startMonth && dayNo == startDay) {
+
+//            for (i in 0 until title.size) {
+//                holder.itemView.setBackgroundColor(Color.BLUE)
+//            }
+
+            holder.schedule1.setBackgroundResource(R.drawable.schedule_background)
+//            if(dayNo == startDay1) {
+//                holder.schedule1.setBackgroundResource(R.drawable.schedule_background_start)
+//            } else if(dayNo == endDay1) {
+//                holder.schedule1.setBackgroundResource(R.drawable.schedule_background_end)
+//            } else {
+//                holder.schedule1.setBackgroundResource(R.drawable.schedule_background)
+//            }
+
+            if(dayNo == (startDay1+endDay1)/2){
                 holder.schedule1.text = title[0].title
-                holder.schedule2.text = title[1].title
-                holder.schedule3.text = title[2].title
-                holder.schedule4.text = title[3].title
+            } else {
+                holder.schedule1.text = " "
+                //holder.schedule1.visibility = View.INVISIBLE
             }
         }
+
+        if(selectYear == startYear2 && selectMonth == startMonth2 && dayNo > startDay2-1 && dayNo < endDay2+1) {
+            //if(selectYear == startYear && selectMonth == startMonth && dayNo == startDay) {
+
+            for (i in 0 until title.size) {
+                holder.schedule2.text = title[1].title
+            }
+        }
+
+
+//        else {
+//            for (dayNo in startDay..endDay) {
+//                if(selectYear == startYear && selectMonth == startMonth && dayNo == startDay) {
+//                        holder.itemView.setBackgroundColor(Color.RED)
+//                        Log.d("starend", "startDay: $startDay, endDay: $endDay, dayNo: $dayNo")
+//                    }
+//            }
+//        }
+
+//        else {
+//            for(dayNo in startDay..endDay) {
+//                holder.itemView.setBackgroundColor(Color.RED)
+//            }
+//        }
+
+
+
+
+
 
 
         //일정 visible 처리
