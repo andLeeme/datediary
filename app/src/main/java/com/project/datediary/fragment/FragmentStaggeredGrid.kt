@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -34,7 +33,7 @@ class FragmentStaggeredGrid : Fragment() {
 
 
         val layoutManager = StaggeredGridLayoutManager(
-            5, // 열의 수
+            6, // 열의 수
             StaggeredGridLayoutManager.VERTICAL // 방향
         )
         recyclerView.layoutManager = layoutManager
@@ -45,8 +44,10 @@ class FragmentStaggeredGrid : Fragment() {
         recyclerView.adapter = adapter
 
         binding.addBtn1.setOnClickListener {
-            val newItem = Item("New Item", R.drawable.icon_story) // 이미지 리소스의 식별자를 전달
-            adapter.addItem(newItem)
+            adapter.addItem(Item(R.drawable.heart1))
+            for (i in 0..30){
+                adapter.addItem(Item(R.drawable.text_img_50))
+            }
         }
 
 

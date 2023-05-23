@@ -3,7 +3,7 @@
     <!--    체크시 검은색으로 -->
     <item
         android:layout_marginTop="20dp"
-        android:color="#68C4ED"
+        android:color="#3F3F3F"
         android:textColor="@color/black"
         android:state_checked="true"
         />
