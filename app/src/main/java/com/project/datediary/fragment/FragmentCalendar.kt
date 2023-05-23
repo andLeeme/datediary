@@ -16,6 +16,9 @@ import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.customAdapter
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.model.ScheduleResponseBody
+import com.project.datediary.model.SignUpRequestBody
+import com.project.datediary.model.TitleRequestBody
+import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.model.dataVO
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
@@ -70,6 +73,8 @@ class FragmentCalendar : Fragment() {
 
     //날짜 화면에 보여주기
     private fun setMonthView() {
+
+
         //년월 텍스트뷰 셋팅
         binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
 
@@ -87,6 +92,36 @@ class FragmentCalendar : Fragment() {
 
         //어댑터 적용
         binding.recyclerView.adapter = adapter
+
+
+        //보내보자 리퀘스트 받아보자 리스폰스
+        val userDataCal = TitleRequestBody(
+            couple_index = "1", selected_month = (Calendar.getInstance().get(Calendar.MONTH) + 1).toString()
+        )
+        Log.d("유저데이터", "userDataCal: $userDataCal")
+
+        RetrofitAPI.emgMedService3.addUserByEnqueue(userDataCal)
+            .enqueue(object : retrofit2.Callback<ArrayList<TitleResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<TitleResponseBody>>,
+                    response: Response<ArrayList<TitleResponseBody>>
+                ) {
+                    Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT)
+                        .show()
+
+                    if (response.isSuccessful) {
+                        Log.d("리턴", "onResponse: ${response.body()}")
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<TitleResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
+
     }
 
     //날짜 타입 설정(00월 0000년)
