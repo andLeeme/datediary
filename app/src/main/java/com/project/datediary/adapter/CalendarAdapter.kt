@@ -55,7 +55,6 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         var dayNo = dateCalendar.get(Calendar.DAY_OF_MONTH)
 
         holder.dayText.text = dayNo.toString()
-        holder.dayText.setTypeface(null, Typeface.NORMAL)
 
 
         //넘어온 날짜
@@ -74,30 +73,36 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         //val selectMonth2 = CalendarUtil.selectedDate.get(Calendar.MONTH) +1
         //넘어온 날짜와 현재 날짜 비교
         if (iYear == selectYear && iMonth == selectMonth) { //같다면 진한 색상
-            holder.dayText.setTextColor(Color.parseColor("#000000"))
+            holder.dayText.setTextColor(Color.parseColor("#606060"))
 
             //현재 날짜 비교해서 같다면 배경색상 변경
             if (iYear == selectYear && iMonth2 == selectMonth && selectDay == dayNo) {
-                holder.dayText.setTextColor(Color.rgb(154, 132, 188))
-                holder.dayText.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
+                holder.dayText.setTextColor(Color.WHITE)
+                holder.dayText.setBackgroundResource(R.drawable.day_circle)
+                //holder.dayText.setTypeface(Typeface.DEFAULT, Typeface.BOLD)
             }
 
             //텍스트 색상 지정(토,일)
             if ((position + 1) % 7 == 0) { //토요일은 파랑
-                holder.dayText.setTextColor(Color.BLUE)
+                holder.dayText.setTextColor(Color.parseColor("#b6d3e6"))
 
             } else if (position == 0 || position % 7 == 0) { //일요일은 빨강
-                holder.dayText.setTextColor(Color.RED)
+                holder.dayText.setTextColor(Color.parseColor("#FFa4a4"))
             }
         } else { //다르다면 연한 색상
             holder.dayText.setTextColor(Color.parseColor("#B4B4B4"))
 
+            holder.schedule1.visibility = View.INVISIBLE
+            holder.schedule2.visibility = View.INVISIBLE
+            holder.schedule3.visibility = View.INVISIBLE
+            holder.schedule4.visibility = View.INVISIBLE
+
             //텍스트 색상 지정(토,일)
             if ((position + 1) % 7 == 0) { //토요일은 파랑
-                holder.dayText.setTextColor(Color.parseColor("#B4FFFF"))
+                holder.dayText.setTextColor(Color.parseColor("#D3ECFB"))
 
             } else if (position == 0 || position % 7 == 0) { //일요일은 빨강
-                holder.dayText.setTextColor(Color.parseColor("#FFB4B4"))
+                holder.dayText.setTextColor(Color.parseColor("#FAd1d1"))
             }
         }
 
@@ -365,6 +370,13 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                 }
             }
         }
+
+//        if(iMonth2 != selectMonth) {
+//            holder.schedule1.visibility = View.GONE
+//            holder.schedule2.visibility = View.GONE
+//            holder.schedule3.visibility = View.GONE
+//            holder.schedule4.visibility = View.GONE
+//        }
 
 
         //일정 visible 처리
