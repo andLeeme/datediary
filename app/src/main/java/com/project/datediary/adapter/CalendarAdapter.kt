@@ -57,6 +57,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         holder.dayText.text = dayNo.toString()
         holder.dayText.setTypeface(null, Typeface.NORMAL)
 
+
         //넘어온 날짜
         var iYear = dateCalendar.get(Calendar.YEAR) //년
         var iMonth = dateCalendar.get(Calendar.MONTH) + 1 //월
