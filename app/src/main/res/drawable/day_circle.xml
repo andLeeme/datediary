@@ -2,19 +2,19 @@
 
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:width="50dp">
+    <item >
         <shape android:shape="rectangle">
 
         </shape>
     </item>
 
-    <item android:left="29dp" android:top="2dp" android:right="3dp" android:bottom="0dp">
+    <item android:top="2dp" android:right="2dp" android:bottom="0dp">
         <shape android:shape="rectangle">
             <solid android:color="#87B1C8" />
             <corners android:radius="20dp"></corners>
             <size
                 android:width="15dp"
-                android:height="16dp" />
+                android:height="12dp" />
         </shape>
     </item>
 </layer-list>
