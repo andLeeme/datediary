@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="52dp"
-    android:layout_height="105dp"
+    android:layout_width="50dp"
+    android:layout_height="100dp"
     android:id="@+id/layoutGridItem"
     android:orientation="vertical"
     android:layout_gravity="center"
@@ -29,7 +29,7 @@
         android:textSize="10sp"
         android:gravity="left"
         android:background="@drawable/schedule_background1"
-        android:textColor="@color/white"/>
+        android:textColor="#434343"/>
     <TextView
         android:id="@+id/schedule2"
         android:layout_width="match_parent"
@@ -41,7 +41,7 @@
         android:textSize="10sp"
         android:gravity="left"
         android:background="@drawable/schedule_background2"
-        android:textColor="@color/white"/>
+        android:textColor="#434343"/>
     <TextView
         android:id="@+id/schedule3"
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         android:textSize="10sp"
         android:gravity="left"
         android:background="@drawable/schedule_background3"
-        android:textColor="@color/black"/>
+        android:textColor="#434343"/>
     <TextView
         android:id="@+id/schedule4"
         android:layout_width="match_parent"
@@ -61,12 +61,11 @@
         android:layout_marginTop="2dp"
         android:paddingLeft="4dp"
         android:paddingRight="4dp"
-
         android:textStyle="bold"
         android:textSize="10sp"
         android:gravity="left"
         android:background="@drawable/schedule_background4"
-        android:textColor="@color/white"/>
+        android:textColor="#434343"/>
 
 
 </LinearLayout>

@@ -7,10 +7,8 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
 import com.project.datediary.model.titleTest
@@ -122,9 +120,9 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
             titleTest("2023", "05", "02", "2023", "05", "02", true, "222"),
             titleTest("2023", "05", "12", "2023", "05", "15", true, "333"),
             titleTest("2023", "05", "14", "2023", "05", "14", true, "444"),
-            titleTest("2023", "05", "15", "2023", "05", "14", true, "555"),
-            titleTest("2023", "05", "15", "2023", "05", "15", true, "666"),
-            titleTest("2023", "05", "15", "2023", "05", "15", true, "555"),
+            titleTest("2023", "05", "14", "2023", "05", "14", true, "555"),
+            titleTest("2023", "05", "15", "2023", "05", "15", false, "666"),
+            titleTest("2023", "05", "15", "2023", "05", "15", false, "104"),
             titleTest("2023", "05", "15", "2023", "05", "15", true, "777"),
             titleTest("2023", "05", "16", "2023", "05", "17", true, "888"),
             titleTest("2023", "05", "18", "2023", "05", "18", true, "999"),
@@ -132,7 +130,10 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
             titleTest("2023", "05", "22", "2023", "05", "25", true, "101"),
             titleTest("2023", "05", "22", "2023", "05", "22", true, "102"),
             titleTest("2023", "05", "22", "2023", "05", "22", true, "103"),
-
+            titleTest("2023", "05", "20", "2023", "05", "20", false, "105"),
+            titleTest("2023", "05", "20", "2023", "05", "20", false, "106"),
+            titleTest("2023", "05", "20", "2023", "05", "20", false, "107"),
+            titleTest("2023", "05", "20", "2023", "05", "20", false, "108"),
             )
 
 
@@ -173,19 +174,16 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                     //1~4번칸 순차적으로 지정
                     if (holder.schedule1.text == "") {
 
-                        //1번칸 기본 배경
-                        holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
-
                         //하루 일정이 아니면(연일 일정이면)
                         if (startDay - endDay != 0) {
 
                             //시작일 종료일 배경 설정
                             if (dayNo == startDay) {
-                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background_start)
+                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_start)
                             } else if (dayNo == endDay) {
-                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background_end)
+                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_end)
                             } else {
-                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background)
+                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_middle)
                             }
 
                             //텍스트 중앙에 위치시키기
@@ -210,131 +208,162 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                             }
                         }
                             //하루일정이고 allDayCheck가 false일 때
-                            else if (!title[i].allDayCheck) {
-                            holder.schedule1.setBackgroundResource(R.drawable.schedule_background_simple)
+                            else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                            holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_simple)
                             holder.schedule1.setTextColor(Color.BLACK)
                             holder.schedule1.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
                             holder.schedule1.text = title[i].title
                         }
+                            //기본형
+                            else holder.schedule1.text = title[i].title
 
-
+                    ////////////////////////////2번칸/////////////////////////////////////
                     } else if (holder.schedule2.text == "") {
-                        holder.schedule2.setBackgroundResource(R.drawable.schedule_background2)
-                        if (dayNo == (startDay + endDay) / 2) {
+                        //2번칸 기본 배경
+                        //holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
+
+                        //하루 일정이 아니면(연일 일정이면)
+                        if (startDay - endDay != 0) {
+
+                            //시작일 종료일 배경 설정
+                            if (dayNo == startDay) {
+                                holder.schedule2.setBackgroundResource(R.drawable.schedule_background2_start)
+                            } else if (dayNo == endDay) {
+                                holder.schedule2.setBackgroundResource(R.drawable.schedule_background2_end)
+                            } else {
+                                holder.schedule2.setBackgroundResource(R.drawable.schedule_background2_middle)
+                            }
+
+                            //텍스트 중앙에 위치시키기
+                            if (dayNo == (startDay + endDay) / 2) {
+                                holder.schedule2.text = title[i].title
+                                holder.schedule2.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
+
+                                //짝수연일 일정(4일짜리)는 중앙에서(2번째 날)에서 오른쪽 정렬
+                                if ((endDay - startDay) % 2 == 1) {
+                                    holder.schedule2.setGravity(Gravity.RIGHT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                                //짝수연일 일정(2일짜리)는 그냥 왼쪽 정렬
+                                if ((endDay - startDay) == 1) {
+                                    holder.schedule2.setGravity(Gravity.LEFT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                            }
+                            //텍스트 중앙에 위치시키면서 다른 칸들은 공백처리, ""은 안됨 " "이어야 됨
+                            else {
+                                holder.schedule2.text = " "
+                            }
+                        }
+                        //하루일정이고 allDayCheck가 false일 때
+                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                            holder.schedule2.setBackgroundResource(R.drawable.schedule_background2_simple)
+                            holder.schedule2.setTextColor(Color.BLACK)
+                            holder.schedule2.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
                             holder.schedule2.text = title[i].title
-                        } else {
-                            holder.schedule2.text = " "
                         }
+                        //기본형
+                        else holder.schedule2.text = title[i].title
+
+                    ////////////////////////////3번칸/////////////////////////////////////
                     } else if (holder.schedule3.text == "") {
-                        holder.schedule3.setBackgroundResource(R.drawable.schedule_background3)
-                        if (dayNo == (startDay + endDay) / 2) {
+                        //3번칸 기본 배경
+                        //holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
+
+                        //하루 일정이 아니면(연일 일정이면)
+                        if (startDay - endDay != 0) {
+
+                            //시작일 종료일 배경 설정
+                            if (dayNo == startDay) {
+                                holder.schedule3.setBackgroundResource(R.drawable.schedule_background3_start)
+                            } else if (dayNo == endDay) {
+                                holder.schedule3.setBackgroundResource(R.drawable.schedule_background3_end)
+                            } else {
+                                holder.schedule3.setBackgroundResource(R.drawable.schedule_background3_middle)
+                            }
+
+                            //텍스트 중앙에 위치시키기
+                            if (dayNo == (startDay + endDay) / 2) {
+                                holder.schedule3.text = title[i].title
+                                holder.schedule3.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
+
+                                //짝수연일 일정(4일짜리)는 중앙에서(2번째 날)에서 오른쪽 정렬
+                                if ((endDay - startDay) % 2 == 1) {
+                                    holder.schedule3.setGravity(Gravity.RIGHT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                                //짝수연일 일정(2일짜리)는 그냥 왼쪽 정렬
+                                if ((endDay - startDay) == 1) {
+                                    holder.schedule3.setGravity(Gravity.LEFT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                            }
+                            //텍스트 중앙에 위치시키면서 다른 칸들은 공백처리, ""은 안됨 " "이어야 됨
+                            else {
+                                holder.schedule3.text = " "
+                            }
+                        }
+                        //하루일정이고 allDayCheck가 false일 때
+                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                            holder.schedule3.setBackgroundResource(R.drawable.schedule_background3_simple)
+                            holder.schedule3.setTextColor(Color.BLACK)
+                            holder.schedule3.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
                             holder.schedule3.text = title[i].title
-                        } else {
-                            holder.schedule3.text = " "
                         }
+                        //기본형
+                        else holder.schedule3.text = title[i].title
+
+                        ////////////////////////////4번칸/////////////////////////////////////
                     } else if (holder.schedule4.text == "") {
-                        holder.schedule4.setBackgroundResource(R.drawable.schedule_background1)
-                        if (dayNo == (startDay + endDay) / 2) {
-                            holder.schedule4.text = title[i].title
-                        } else {
-                            holder.schedule4.text = " "
+                        //4번칸 기본 배경
+                        //holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
+
+                        //하루 일정이 아니면(연일 일정이면)
+                        if (startDay - endDay != 0) {
+
+                            //시작일 종료일 배경 설정
+                            if (dayNo == startDay) {
+                                holder.schedule4.setBackgroundResource(R.drawable.schedule_background4_start)
+                            } else if (dayNo == endDay) {
+                                holder.schedule4.setBackgroundResource(R.drawable.schedule_background4_end)
+                            } else {
+                                holder.schedule4.setBackgroundResource(R.drawable.schedule_background4_middle)
+                            }
+
+                            //텍스트 중앙에 위치시키기
+                            if (dayNo == (startDay + endDay) / 2) {
+                                holder.schedule4.text = title[i].title
+                                holder.schedule4.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
+
+                                //짝수연일 일정(4일짜리)는 중앙에서(2번째 날)에서 오른쪽 정렬
+                                if ((endDay - startDay) % 2 == 1) {
+                                    holder.schedule4.setGravity(Gravity.RIGHT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                                //짝수연일 일정(2일짜리)는 그냥 왼쪽 정렬
+                                if ((endDay - startDay) == 1) {
+                                    holder.schedule4.setGravity(Gravity.LEFT or Gravity.CENTER_HORIZONTAL)
+                                }
+
+                            }
+                            //텍스트 중앙에 위치시키면서 다른 칸들은 공백처리, ""은 안됨 " "이어야 됨
+                            else {
+                                holder.schedule4.text = " "
+                            }
                         }
+                        //하루일정이고 allDayCheck가 false일 때
+                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                            holder.schedule4.setBackgroundResource(R.drawable.schedule_background4_simple)
+                            holder.schedule4.setTextColor(Color.BLACK)
+                            holder.schedule4.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
+                            holder.schedule4.text = title[i].title
+                        }
+                        //기본형
+                        else holder.schedule4.text = title[i].title
                     }
-
-
                 }
             }
         }
-
-
-//        if (title[0].start_year != "") {
-//            //1번 스케쥴칸
-//            val startYear1 = title[0].start_year.toInt()
-//            val startMonth1 = title[0].start_month.toInt()
-//            val startDay1 = title[0].start_day.toInt()
-//            val endDay1 = title[0].end_day.toInt()
-//
-//            Log.d("테스트", "startMonth1: $startMonth1")
-//
-//
-//            if (selectYear == startYear1 && selectMonth == startMonth1 && dayNo > startDay1 - 1 && dayNo < endDay1 + 1) {
-//
-//                holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
-//
-//                if (dayNo == (startDay1 + endDay1) / 2) {
-//                    holder.schedule1.text = title[0].title
-//                } else {
-//                    holder.schedule1.text = " "
-//
-//                }
-//            }
-//
-//            if (title[1].start_year != "") {
-//                //2번 스케쥴칸
-//                val startYear2 = title[1].start_year.toInt()
-//                val startMonth2 = title[1].start_month.toInt()
-//                val startDay2 = title[1].start_day.toInt()
-//                val endDay2 = title[1].end_day.toInt()
-//
-//                Log.d("테스트", "startMonth1: $startMonth2")
-//
-//
-//                if (selectYear == startYear2 && selectMonth == startMonth2 && dayNo > startDay2 - 1 && dayNo < endDay2 + 1) {
-//
-//                    holder.schedule2.setBackgroundResource(R.drawable.schedule_background2)
-//
-//                    if (dayNo == (startDay2 + endDay2) / 2) {
-//                        holder.schedule2.text = title[1].title
-//                    } else {
-//                        holder.schedule2.text = " "
-//
-//                    }
-//                }
-//
-//
-//                //3번 스케쥴칸
-//
-//                if (title[2].start_year != "") {
-//                    val startYear3 = title[2].start_year.toInt()
-//                    val startMonth3 = title[2].start_month.toInt()
-//                    val startDay3 = title[2].start_day.toInt()
-//                    val endDay3 = title[2].end_day.toInt()
-//
-//                    Log.d("테스트", "startMonth3: $startMonth3")
-//
-//
-//                    if (selectYear == startYear3 && selectMonth == startMonth3 && dayNo > startDay3 - 1 && dayNo < endDay3 + 1) {
-//
-//                        holder.schedule3.setBackgroundResource(R.drawable.schedule_background3)
-//
-//                        if (dayNo == (startDay3 + endDay3) / 2) {
-//                            holder.schedule3.text = title[2].title
-//                        } else {
-//                            holder.schedule3.text = " "
-//
-//                        }
-//                    }
-//
-//                    if (title[3].start_year != "") {
-//                        //4번 스케쥴칸
-//                        val startYear4 = title[3].start_year.toInt()
-//                        val startMonth4 = title[3].start_month.toInt()
-//                        val startDay4 = title[3].start_day.toInt()
-//                        val endDay4 = title[3].end_day.toInt()
-//
-//
-//                        if (selectYear == startYear4 && selectMonth == startMonth4 && dayNo > startDay4 - 1 && dayNo < endDay4 + 1) {
-//
-//                            holder.schedule3.setBackgroundResource(R.drawable.schedule_background4)
-//
-//                            for (i in 0 until title.size) {
-//                                holder.schedule4.text = title[3].title
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
 
 
         //일정 visible 처리
