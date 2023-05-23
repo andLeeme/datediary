@@ -141,15 +141,13 @@
         android:paddingTop="10dp"
         app:itemIconTint="@drawable/select_nav_color"
         app:itemRippleColor="@null"
+        app:itemTextAppearanceActive="@style/MyTextSize"
+        app:itemTextAppearanceInactive="@style/MyTextSize2"
         app:itemTextColor="@drawable/select_nav_color"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"
-        app:itemTextAppearanceActive="@style/MyTextSize"
-        app:itemTextAppearanceInactive="@style/MyTextSize2"
-        />/>
-
+        app:menu="@menu/bottom_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
