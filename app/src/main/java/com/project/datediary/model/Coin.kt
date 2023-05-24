@@ -1,7 +1,7 @@
 package com.project.datediary.model
 
 data class Coin(
-    val product_name: String,
-    val provider: String,
-    val sub_category: String
+    val market: String,
+    val korean_name: String,
+    val english_name: String
 )

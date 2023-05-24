@@ -31,7 +31,6 @@ class FragmentStaggeredGrid : Fragment() {
 
         val recyclerView = binding.recyclerView
 
-
         val layoutManager = StaggeredGridLayoutManager(
             6, // 열의 수
             StaggeredGridLayoutManager.VERTICAL // 방향
@@ -45,7 +44,7 @@ class FragmentStaggeredGrid : Fragment() {
 
         binding.addBtn1.setOnClickListener {
             adapter.addItem(Item(R.drawable.heart1))
-            for (i in 0..30){
+            for (i in 0..30) {
                 adapter.addItem(Item(R.drawable.text_img_50))
             }
         }
