@@ -1,6 +1,7 @@
 package com.project.datediary.adapter
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -33,5 +34,6 @@ class ListAdapter: RecyclerView.Adapter<ListAdapter.MyView>() {
 
     fun setList(list: List<Coin>) {
         coinList = list
+        Log.d("titleResponse", "titleResponse: $coinList")
     }
 }

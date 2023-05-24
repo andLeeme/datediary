@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
+import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.model.titleTest
 import com.project.datediary.util.CalendarUtil
 import java.util.Calendar
@@ -19,6 +20,8 @@ import java.util.Date
 
 class CalendarAdapter(private val dayList: ArrayList<Date>) :
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
+
+    var titleResponse = listOf<TitleResponseBody>()
 
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -121,26 +124,36 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         //날짜별 일정 추가
         //가져온 날짜랑 비교하기, 맞으면 텍스트 가져온 텍스트로 바꾸기, visible 처리
 
+
+
+
         var title = arrayListOf<titleTest>(
-            titleTest("2023", "05", "02", "2023", "05", "04", true, "111"),
-            titleTest("2023", "05", "02", "2023", "05", "02", true, "222"),
-            titleTest("2023", "05", "12", "2023", "05", "15", true, "333"),
-            titleTest("2023", "05", "14", "2023", "05", "14", true, "444"),
-            titleTest("2023", "05", "14", "2023", "05", "14", true, "555"),
-            titleTest("2023", "05", "15", "2023", "05", "15", false, "666"),
-            titleTest("2023", "05", "15", "2023", "05", "15", false, "104"),
-            titleTest("2023", "05", "15", "2023", "05", "15", true, "777"),
-            titleTest("2023", "05", "16", "2023", "05", "17", true, "888"),
-            titleTest("2023", "05", "18", "2023", "05", "18", true, "999"),
-            titleTest("2023", "05", "19", "2023", "05", "19", false, "000"),
-            titleTest("2023", "05", "22", "2023", "05", "25", true, "101"),
-            titleTest("2023", "05", "22", "2023", "05", "22", true, "102"),
-            titleTest("2023", "05", "22", "2023", "05", "22", true, "103"),
-            titleTest("2023", "05", "20", "2023", "05", "20", false, "105"),
-            titleTest("2023", "05", "20", "2023", "05", "20", false, "106"),
-            titleTest("2023", "05", "20", "2023", "05", "20", false, "107"),
-            titleTest("2023", "05", "20", "2023", "05", "20", false, "108"),
+            titleTest("2023", "05", "02", "2023", "05", "04", "true", "111"),
+            titleTest("2023", "05", "02", "2023", "05", "02", "true", "222"),
+            titleTest("2023", "05", "12", "2023", "05", "15", "true", "333"),
+            titleTest("2023", "05", "14", "2023", "05", "14", "true", "444"),
+            titleTest("2023", "05", "14", "2023", "05", "14", "true", "555"),
+            titleTest("2023", "05", "15", "2023", "05", "15", "false", "666"),
+            titleTest("2023", "05", "15", "2023", "05", "15", "false", "104"),
+            titleTest("2023", "05", "15", "2023", "05", "15", "true", "777"),
+            titleTest("2023", "05", "16", "2023", "05", "17", "true", "888"),
+            titleTest("2023", "05", "18", "2023", "05", "18", "true", "999"),
+            titleTest("2023", "05", "19", "2023", "05", "19", "false", "000"),
+            titleTest("2023", "05", "22", "2023", "05", "25", "true", "101"),
+            titleTest("2023", "05", "22", "2023", "05", "22", "true", "102"),
+            titleTest("2023", "05", "22", "2023", "05", "22", "true", "103"),
+            titleTest("2023", "05", "20", "2023", "05", "20", "false", "105"),
+            titleTest("2023", "05", "20", "2023", "05", "20", "false", "106"),
+            titleTest("2023", "05", "20", "2023", "05", "20", "false", "107"),
+            titleTest("2023", "05", "20", "2023", "05", "20", "false", "108"),
             )
+
+
+        Log.d("titleResponse", "titleResponse: $titleResponse")
+//        var titleList = ArrayList<titleResponse>()
+//        for(i in titleResponse.indices) {
+//            titleList.add(titleResponse)
+//        }
 
 
         for (i in 0 until title.size) {
@@ -148,34 +161,34 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         }
         //없으면 빈 배열 add해주기
         if (title.size == 0) {
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
         } else if (title.size == 1) {
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
         } else if (title.size == 2) {
-            title.add(titleTest("", "", "", "", "", "", true, ""))
-            title.add(titleTest("", "", "", "", "", "", true, ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
         } else if (title.size == 3) {
-            title.add(titleTest("", "", "", "", "", "", true, ""))
+            title.add(titleTest("", "", "", "", "", "", "true", ""))
         }
 
 
         for (i in 0 until title.size) {
-            if (title[i].start_year != "") {
-                val startYear = title[i].start_year.toInt()
-                val startMonth = title[i].start_month.toInt()
-                val startDay = title[i].start_day.toInt()
-                val endDay = title[i].end_day.toInt()
+            if (title[i].start_year != "" && title[i].start_month != "" && title[i].start_day != "" && title[i].end_day != "") {
+                val startYear = title[i].start_year?.toInt()
+                val startMonth = title[i].start_month?.toInt()
+                val startDay = title[i].start_day?.toInt()
+                val endDay = title[i].end_day?.toInt()
 
                 Log.d("테스트", "startMonth1: $startMonth")
 
 
                 //event가 들어갈 날짜 계산
-                if (selectYear == startYear && selectMonth == startMonth && dayNo > startDay - 1 && dayNo < endDay + 1) {
+                if (selectYear == startYear && selectMonth == startMonth && dayNo > startDay!! - 1 && dayNo < endDay!! + 1) {
 
                     //1~4번칸 순차적으로 지정
                     if (holder.schedule1.text == "") {
@@ -214,7 +227,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                             }
                         }
                             //하루일정이고 allDayCheck가 false일 때
-                            else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                            else if (startDay - endDay == 0 && title[i].allDayCheck=="false") {
                             holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_simple)
                             holder.schedule1.setTextColor(Color.BLACK)
                             holder.schedule1.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
@@ -262,7 +275,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                             }
                         }
                         //하루일정이고 allDayCheck가 false일 때
-                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                        else if (startDay - endDay == 0 && title[i].allDayCheck=="false") {
                             holder.schedule2.setBackgroundResource(R.drawable.schedule_background2_simple)
                             holder.schedule2.setTextColor(Color.BLACK)
                             holder.schedule2.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
@@ -310,7 +323,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                             }
                         }
                         //하루일정이고 allDayCheck가 false일 때
-                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                        else if (startDay - endDay == 0 && title[i].allDayCheck=="false") {
                             holder.schedule3.setBackgroundResource(R.drawable.schedule_background3_simple)
                             holder.schedule3.setTextColor(Color.BLACK)
                             holder.schedule3.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
@@ -358,7 +371,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
                             }
                         }
                         //하루일정이고 allDayCheck가 false일 때
-                        else if (startDay - endDay == 0 && !title[i].allDayCheck) {
+                        else if (startDay - endDay == 0 && title[i].allDayCheck=="false") {
                             holder.schedule4.setBackgroundResource(R.drawable.schedule_background4_simple)
                             holder.schedule4.setTextColor(Color.BLACK)
                             holder.schedule4.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
@@ -399,6 +412,11 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
 
     override fun getItemCount(): Int {
         return dayList.size
+    }
+
+    fun setList(list: List<TitleResponseBody>) {
+        titleResponse = list
+        Log.d("titleResponse", "titleResponse: $titleResponse")
     }
 }
 

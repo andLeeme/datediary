@@ -55,6 +55,7 @@ class FragmentCalendar : Fragment() {
         //화면 설정
         setMonthView()
 
+
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
             //현재 월 -1 변수에 담기
@@ -73,8 +74,6 @@ class FragmentCalendar : Fragment() {
 
     //날짜 화면에 보여주기
     private fun setMonthView() {
-
-
         //년월 텍스트뷰 셋팅
         binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
 
@@ -94,11 +93,23 @@ class FragmentCalendar : Fragment() {
         binding.recyclerView.adapter = adapter
 
 
+        var monthText = monthYearFromDate(CalendarUtil.selectedDate).split(" 월")
+        Log.d("monthText", "monthText: $monthText")
+        var monthData: String = ""
+
+        if(monthText[0].toInt()<10){
+            monthData = "0" + monthText[0]
+        } else {monthData = monthText[0]}
+
+
         //보내보자 리퀘스트 받아보자 리스폰스
         val userDataCal = TitleRequestBody(
-            couple_index = "1", selected_month = (Calendar.getInstance().get(Calendar.MONTH) + 1).toString()
+            couple_index = "1",
+            selected_month = monthData
         )
         Log.d("유저데이터", "userDataCal: $userDataCal")
+
+        var TitleResponseBody = listOf<TitleResponseBody>()
 
         RetrofitAPI.emgMedService3.addUserByEnqueue(userDataCal)
             .enqueue(object : retrofit2.Callback<ArrayList<TitleResponseBody>> {
@@ -111,8 +122,16 @@ class FragmentCalendar : Fragment() {
 
                     if (response.isSuccessful) {
                         Log.d("리턴", "onResponse: ${response.body()}")
+
+                        TitleResponseBody = response.body()?: listOf()
+                        adapter.setList(TitleResponseBody)
+                        Log.d("리턴1", "onResponse: ${TitleResponseBody}")
                     }
                 }
+
+
+
+
 
                 override fun onFailure(
                     call: Call<ArrayList<TitleResponseBody>>,
@@ -121,8 +140,8 @@ class FragmentCalendar : Fragment() {
 
                 }
             })
-
     }
+
 
     //날짜 타입 설정(00월 0000년)
     private fun monthYearFromDate(calendar: Calendar): String {

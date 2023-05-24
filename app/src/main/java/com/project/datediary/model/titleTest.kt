@@ -7,7 +7,7 @@ class titleTest(
     val end_year: String,
     val end_month: String,
     val end_day: String,
-    val allDayCheck: Boolean,
+    val allDayCheck: String,
     val title: String
     ) {
 }
