@@ -45,7 +45,7 @@ class FragmentGraph : Fragment() {
     }
 
     private fun initList() {
-        val call = RetrofitAPI.getRetrofitService.getCoinAll()
+        val call = CoinAPI.getRetrofitService.getCoinAll()
         call.enqueue(object : Callback<List<Coin>> {
             override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
                 Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
