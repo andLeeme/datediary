@@ -81,16 +81,6 @@ class FragmentCalendar : Fragment() {
         val dayList = dayInMonthArray()
 
         //어댑터 초기화
-        val adapter = CalendarAdapter(dayList)
-
-        //레이아웃 설정(열 7개)
-        var manager: RecyclerView.LayoutManager = GridLayoutManager(context, 7)
-
-        //레이아웃 적용
-        binding.recyclerView.layoutManager = manager
-
-        //어댑터 적용
-        binding.recyclerView.adapter = adapter
 
 
         var monthText = monthYearFromDate(CalendarUtil.selectedDate).split(" 월")
@@ -124,14 +114,21 @@ class FragmentCalendar : Fragment() {
                         Log.d("리턴", "onResponse: ${response.body()}")
 
                         TitleResponseBody = response.body()?: listOf()
-                        adapter.setList(TitleResponseBody)
-                        Log.d("리턴1", "onResponse: ${TitleResponseBody}")
+
+                        val adapter = CalendarAdapter(dayList, TitleResponseBody)
+                        //adapter.setList(TitleResponseBody)
+                        Log.d("리턴1", "onResponse: $TitleResponseBody")
+
+                        //레이아웃 설정(열 7개)
+                        var manager: RecyclerView.LayoutManager = GridLayoutManager(context, 7)
+
+                        //레이아웃 적용
+                        binding.recyclerView.layoutManager = manager
+
+                        //어댑터 적용
+                        binding.recyclerView.adapter = adapter
                     }
                 }
-
-
-
-
 
                 override fun onFailure(
                     call: Call<ArrayList<TitleResponseBody>>,
@@ -140,6 +137,7 @@ class FragmentCalendar : Fragment() {
 
                 }
             })
+
     }
 
 

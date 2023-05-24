@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitAPI {
     //학원
-        private const val BASE_URL = "http://192.168.150.120:8080"
+        //private const val BASE_URL = "http://192.168.150.120:8080"
 
     //학원(현하)
     //private const val BASE_URL = "http://192.168.250.44:8080"
@@ -17,7 +17,7 @@ object RetrofitAPI {
     //    private const val BASE_URL = "http://112.173.111.193:8080"
 
     //서버
-    //private const val BASE_URL = "http://andLeeme.iptime.org:60722"
+    private const val BASE_URL = "http://andLeeme.iptime.org:60722"
 
 
     private val okHttpClient: OkHttpClient by lazy {

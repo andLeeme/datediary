@@ -18,10 +18,10 @@ import java.util.Calendar
 import java.util.Date
 
 
-class CalendarAdapter(private val dayList: ArrayList<Date>) :
+class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData: List<TitleResponseBody>) :
     RecyclerView.Adapter<CalendarAdapter.ItemViewHolder>() {
 
-    var titleResponse = listOf<TitleResponseBody>()
+    var titleResponse = TmpData
 
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -45,6 +45,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
     //데이터 설정
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
+        Log.d("titleResponse", "onBindViewHolder: $titleResponse")
         //날짜 변수에 담기
         var monthDate = dayList[holder.adapterPosition]
 
@@ -148,12 +149,8 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
             titleTest("2023", "05", "20", "2023", "05", "20", "false", "108"),
             )
 
+        //titleResponse은 List<TitleResponseBody>형태
 
-        Log.d("titleResponse", "titleResponse: $titleResponse")
-//        var titleList = ArrayList<titleResponse>()
-//        for(i in titleResponse.indices) {
-//            titleList.add(titleResponse)
-//        }
 
 
         for (i in 0 until title.size) {
@@ -414,9 +411,5 @@ class CalendarAdapter(private val dayList: ArrayList<Date>) :
         return dayList.size
     }
 
-    fun setList(list: List<TitleResponseBody>) {
-        titleResponse = list
-        Log.d("titleResponse", "titleResponse: $titleResponse")
-    }
 }
 
