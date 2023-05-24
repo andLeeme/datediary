@@ -2,6 +2,7 @@ package com.project.datediary.adapter
 
 import android.graphics.Color
 import android.graphics.Typeface
+import android.icu.text.CaseMap.Title
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -125,61 +126,36 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
         //날짜별 일정 추가
         //가져온 날짜랑 비교하기, 맞으면 텍스트 가져온 텍스트로 바꾸기, visible 처리
 
-
-
-
-        var title = arrayListOf<titleTest>(
-            titleTest("2023", "05", "02", "2023", "05", "04", "true", "111"),
-            titleTest("2023", "05", "02", "2023", "05", "02", "true", "222"),
-            titleTest("2023", "05", "12", "2023", "05", "15", "true", "333"),
-            titleTest("2023", "05", "14", "2023", "05", "14", "true", "444"),
-            titleTest("2023", "05", "14", "2023", "05", "14", "true", "555"),
-            titleTest("2023", "05", "15", "2023", "05", "15", "false", "666"),
-            titleTest("2023", "05", "15", "2023", "05", "15", "false", "104"),
-            titleTest("2023", "05", "15", "2023", "05", "15", "true", "777"),
-            titleTest("2023", "05", "16", "2023", "05", "17", "true", "888"),
-            titleTest("2023", "05", "18", "2023", "05", "18", "true", "999"),
-            titleTest("2023", "05", "19", "2023", "05", "19", "false", "000"),
-            titleTest("2023", "05", "22", "2023", "05", "25", "true", "101"),
-            titleTest("2023", "05", "22", "2023", "05", "22", "true", "102"),
-            titleTest("2023", "05", "22", "2023", "05", "22", "true", "103"),
-            titleTest("2023", "05", "20", "2023", "05", "20", "false", "105"),
-            titleTest("2023", "05", "20", "2023", "05", "20", "false", "106"),
-            titleTest("2023", "05", "20", "2023", "05", "20", "false", "107"),
-            titleTest("2023", "05", "20", "2023", "05", "20", "false", "108"),
-            )
+        var title = ArrayList<TitleResponseBody>()
 
         //titleResponse은 List<TitleResponseBody>형태
+        for(i in titleResponse.indices) {
+            title.add(titleResponse[i])
+        }
 
+        Log.d("title2", "onBindViewHolder: $title")
 
 
         for (i in 0 until title.size) {
             //타이틀 add 해주기
         }
+
         //없으면 빈 배열 add해주기
-        if (title.size == 0) {
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-        } else if (title.size == 1) {
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-        } else if (title.size == 2) {
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
-        } else if (title.size == 3) {
-            title.add(titleTest("", "", "", "", "", "", "true", ""))
+        if(title.size<4) {
+            for( i in 1..(4-title.size)) {
+                title.add(TitleResponseBody("", "", "", "", "", "", "true", ""))
+            }
         }
 
 
+        //title의 크기만큼 달력에 그려주기
         for (i in 0 until title.size) {
-            if (title[i].start_year != "" && title[i].start_month != "" && title[i].start_day != "" && title[i].end_day != "") {
-                val startYear = title[i].start_year?.toInt()
-                val startMonth = title[i].start_month?.toInt()
-                val startDay = title[i].start_day?.toInt()
-                val endDay = title[i].end_day?.toInt()
+            //if (title[i].startYear != ""&& title[i].startMonth != "" && title[i].startDay != "" && title[i].endDay != "") {
+            if (title[i].startYear != "") {
+                val startYear = title[i].startYear?.toInt()
+                val startMonth = title[i].startMonth?.toInt()
+                val startDay = title[i].startDay?.toInt()
+                val endDay = title[i].endDay?.toInt()
 
                 Log.d("테스트", "startMonth1: $startMonth")
 
@@ -190,8 +166,9 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
                     //1~4번칸 순차적으로 지정
                     if (holder.schedule1.text == "") {
 
+
                         //하루 일정이 아니면(연일 일정이면)
-                        if (startDay - endDay != 0) {
+                        if (startDay !=  endDay) {
 
                             //시작일 종료일 배경 설정
                             if (dayNo == startDay) {
@@ -224,14 +201,18 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
                             }
                         }
                             //하루일정이고 allDayCheck가 false일 때
-                            else if (startDay - endDay == 0 && title[i].allDayCheck=="false") {
+                            else if (startDay  == endDay && title[i].allDayCheck=="false") {
                             holder.schedule1.setBackgroundResource(R.drawable.schedule_background1_simple)
                             holder.schedule1.setTextColor(Color.BLACK)
                             holder.schedule1.setGravity(Gravity.CENTER_VERTICAL or Gravity.CENTER_HORIZONTAL)
                             holder.schedule1.text = title[i].title
                         }
                             //기본형
-                            else holder.schedule1.text = title[i].title
+                            else if(startDay  == endDay && title[i].allDayCheck=="true") {
+                                holder.schedule1.text = title[i].title
+                                holder.schedule1.setBackgroundResource(R.drawable.schedule_background1)
+                        }
+
 
                     ////////////////////////////2번칸/////////////////////////////////////
                     } else if (holder.schedule2.text == "") {
@@ -380,13 +361,6 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
                 }
             }
         }
-
-//        if(iMonth2 != selectMonth) {
-//            holder.schedule1.visibility = View.GONE
-//            holder.schedule2.visibility = View.GONE
-//            holder.schedule3.visibility = View.GONE
-//            holder.schedule4.visibility = View.GONE
-//        }
 
 
         //일정 visible 처리
