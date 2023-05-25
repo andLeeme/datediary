@@ -3,15 +3,19 @@ package com.project.datediary.activity
 import RetrofitAPI
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
-import android.app.TimePickerDialog.OnTimeSetListener
 import android.os.Bundle
 import android.util.Log
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
+import com.project.datediary.adapter.PlaceAdapter
 import com.project.datediary.databinding.ActivityAddScheduleBinding
+import com.project.datediary.databinding.FragmentPlaceBinding
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.model.ScheduleResponseBody
 import retrofit2.Call
@@ -22,6 +26,7 @@ import java.util.Calendar
 class AddScheduleActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityAddScheduleBinding
+    lateinit var binding2: FragmentPlaceBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +34,7 @@ class AddScheduleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add_schedule)
 
         binding = ActivityAddScheduleBinding.inflate(layoutInflater)
+        binding2 = FragmentPlaceBinding.inflate(layoutInflater)
 
         var titleText = binding.emailEdittext1
         var contentText = binding.emailEdittext2
@@ -123,6 +129,9 @@ class AddScheduleActivity : AppCompatActivity() {
 
         //2. 스피너?리스트뷰?(방문장소)
 
+        binding.selectPlace.setOnClickListener {
+            showAlertDialogTopic()
+        }
         //3. 스피너?리스트뷰?(데이트미션)
 
         //4. 일정 등록하기 누르면 정보 주기
@@ -167,6 +176,30 @@ class AddScheduleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
     }
+
+
+    private fun showAlertDialogTopic() {
+        var dialog = Dialog(this)
+
+        //dialog에 layout 적용
+        dialog.setContentView(layoutInflater.inflate(R.layout.fragment_place, null))
+        //외부 터치 시 dialog 종료
+        dialog.setCanceledOnTouchOutside(true)
+        //recyclerView에 들어갈 Array
+
+        val text = arrayOf("A Topic", "B Topic", "C Topic", "D Topic", "E Topic", "카테고리 없음")
+        val placeList : ArrayList<Array<String>> = arrayListOf(text)
+        Log.d("text", "showAlertDialogTopic: $text, placeList: $placeList")
+
+        //binding2.placeList.layoutManager = adapter
+        //레이아웃 적용
+        binding2.placeList.layoutManager = LinearLayoutManager(applicationContext)
+
+        //어댑터 적용
+        binding2.placeList.adapter = PlaceAdapter()
+        dialog.show()
+    }
+
 
     fun ClearView() {
 
