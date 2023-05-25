@@ -20,9 +20,6 @@
             android:name=".activity.AddScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".BottomSheetActivity"
-            android:exported="false" />
-        <activity
             android:name=".activity.AddScheduleActivity2"
             android:exported="false" />
         <activity

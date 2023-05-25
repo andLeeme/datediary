@@ -12,6 +12,8 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+<!--        캘린더 상단탭 색상-->
+        <item name="colorAccent">#D0E8F6</item>
     </style>
 
     <style name="MyTextSize" parent="TextAppearance.AppCompat">
