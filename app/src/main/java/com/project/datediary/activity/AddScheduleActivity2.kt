@@ -1,4 +1,4 @@
-package com.project.datediary.Activity
+package com.project.datediary.activity
 
 import RetrofitAPI
 import android.os.Bundle

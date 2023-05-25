@@ -240,6 +240,7 @@
 
 
                                 <com.google.android.material.checkbox.MaterialCheckBox
+                                    android:id="@+id/allDayCheckBox"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="종일" />
@@ -316,6 +317,7 @@
 
                             <com.google.android.material.button.MaterialButton
                                 style="?android:attr/borderlessButtonStyle"
+                                android:id="@+id/datepickerStart"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#ffffff"
@@ -334,6 +336,7 @@
 
                             <com.google.android.material.button.MaterialButton
                                 style="?android:attr/borderlessButtonStyle"
+                                android:id="@+id/datepickerEnd"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#ffffff"
@@ -363,6 +366,7 @@
 
                             <com.google.android.material.button.MaterialButton
                                 style="?android:attr/borderlessButtonStyle"
+                                android:id="@+id/timepickerStart"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#ffffff"
@@ -382,6 +386,7 @@
 
                             <com.google.android.material.button.MaterialButton
                                 style="?android:attr/borderlessButtonStyle"
+                                android:id="@+id/timepickerEnd"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#ffffff"
@@ -485,6 +490,7 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/submitBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="#99F3FF"

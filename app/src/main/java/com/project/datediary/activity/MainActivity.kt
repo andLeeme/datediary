@@ -1,12 +1,10 @@
-package com.project.datediary.Activity
+package com.project.datediary.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
 import com.project.datediary.R
 import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.fragment.FragmentGraph
@@ -14,7 +12,6 @@ import com.project.datediary.fragment.FragmentHome
 import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
-import com.project.datediary.fragment.TestFragment
 
 class MainActivity : AppCompatActivity() {
 
