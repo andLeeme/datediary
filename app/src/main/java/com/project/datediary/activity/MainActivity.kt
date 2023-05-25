@@ -1,10 +1,17 @@
 package com.project.datediary.activity
 
+import android.animation.ObjectAnimator
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.animation.AnticipateInterpolator
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.animation.doOnEnd
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.ui.AppBarConfiguration
 import com.project.datediary.R
 import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.fragment.FragmentGraph
@@ -15,11 +22,54 @@ import com.project.datediary.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var binding: ActivityMainBinding
+
+    @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen()
+
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        splashScreen.setOnExitAnimationListener { splashScreenView ->
+            // Create your custom animation.
+            val slideUp = ObjectAnimator.ofFloat(
+                splashScreenView,
+                View.TRANSLATION_X,
+                0f,
+                -splashScreenView.height.toFloat()
+            )
+            slideUp.interpolator = AnticipateInterpolator()
+            slideUp.duration = 500L
+
+            // Call SplashScreenView.remove at the end of your custom animation.
+            slideUp.doOnEnd { splashScreenView.remove() }
+
+            // Run your animation.
+            slideUp.start()
+        }
+
+
+        // 스플래쉬화면을 더 오래 실행하는법.
+//        val content: View = findViewById(android.R.id.content)
+//        content.viewTreeObserver.addOnPreDrawListener(
+//            object : ViewTreeObserver.OnPreDrawListener {
+//                override fun onPreDraw(): Boolean {
+//                    // Check if the initial data is ready.
+//                    return if (true) {
+//                        // The content is ready; start drawing.
+//                        content.viewTreeObserver.removeOnPreDrawListener(this)
+//                        true
+//                    } else {
+//                        // The content is not ready; suspend.
+//                        false
+//                    }
+//                }
+//            }
+//        )
 
         setContentView(binding.root)
 
@@ -27,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         binding.addBtn.setOnClickListener {
             val intent = Intent(applicationContext, AddScheduleActivity::class.java)
             startActivity(intent)
-            }
+        }
 
 
         binding.sheetText1.setOnClickListener {
