@@ -24,30 +24,20 @@ class FragmentStory : Fragment() {
 
         bindingMain = ActivityMainBinding.inflate(inflater, container, false)
 
+
         binding.button1.setOnClickListener {
-            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentStoryEdit())
-                .commit()
+            val intent = Intent(requireActivity(), AddScheduleActivity2::class.java)
+            startActivity(intent)
         }
         binding.button2.setOnClickListener {
-            val intent = Intent(requireActivity(), AddScheduleActivity2::class.java)
-            startActivity(intent)
-        }
-        binding.button3.setOnClickListener {
-            val intent = Intent(requireActivity(), AddScheduleActivity2::class.java)
-            startActivity(intent)
-        }
-        binding.button4.setOnClickListener {
-            childFragmentManager.beginTransaction().replace(R.id.editContainer, TestFragment())
-                .commit()
-        }
-        binding.button5.setOnClickListener {
             childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentWz())
                 .commit()
             binding.fragmentStory.visibility = View.INVISIBLE
 
         }
-        binding.button6.setOnClickListener {
-            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentStaggeredGrid())
+        binding.button3.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainer, FragmentStaggeredGrid())
                 .commit()
             binding.fragmentStory.visibility = View.INVISIBLE
 
