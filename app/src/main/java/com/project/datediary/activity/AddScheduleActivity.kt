@@ -54,6 +54,7 @@ class AddScheduleActivity : AppCompatActivity() {
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     startDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
                     binding.datepickerStart.text = startDate
+                    binding.scheduleAlert.text = "${month + 1}월 ${dayOfMonth}일 일정에 추가돼요!"
                 }
             DatePickerDialog(
                 this,
@@ -85,6 +86,7 @@ class AddScheduleActivity : AppCompatActivity() {
                 false
             ).show()
         }
+
 
         binding.datepickerEnd.setOnClickListener {
             val cal = Calendar.getInstance()    //캘린더뷰 만들기
@@ -126,12 +128,17 @@ class AddScheduleActivity : AppCompatActivity() {
         //2. 스피너?리스트뷰?(방문장소)
 
         binding.selectPlace.setOnClickListener {
-            placeListDialog()
+            showDialog()
+            clearMissionDialog()
+            //placeListDialog()
         }
         //3. 스피너?리스트뷰?(데이트미션)
+        binding.selectMission.setOnClickListener {
+            showMissionDialog()
+        }
+
 
         //4. 일정 등록하기 누르면 정보 주기
-
 
         binding.submitBtn.setOnClickListener {
             val scheduleData = ScheduleRequestBody(couple_index = "1")
@@ -188,6 +195,76 @@ class AddScheduleActivity : AppCompatActivity() {
         val listDialog = object : DialogList(this@AddScheduleActivity, placeList) {}
         // Show the dialog
         listDialog.show()
+    }
+
+    //다이얼로그 호출
+    private fun showDialog(){
+
+        //데이터 담기
+        val places: Array<String> = resources.getStringArray(R.array.places)
+
+        //AlertDialog 초기화
+        val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+
+        //제목 설정
+        builder.setTitle("데이트 장소를 선택해주세요")
+
+        //아이템 선택 이벤트
+        builder.setItems(places){
+                p0, p1 ->
+            binding.selectPlace.text = places[p1]
+//            Toast.makeText(this, "선택된 색깔은 ${places[p1]}",
+//                Toast.LENGTH_SHORT).show()
+        }
+
+        val alertDialog: AlertDialog = builder.create()
+        alertDialog.show()
+    }
+
+    private fun clearMissionDialog(){
+        binding.selectMission.text = "데이트 미션!"
+    }
+    private fun showMissionDialog(){
+        //데이터 담기
+        var missions: Array<String> = resources.getStringArray(R.array.방문장소)
+        when(binding.selectPlace.text){
+            "방문 장소" -> missions = resources.getStringArray(R.array.방문장소)
+            "영화관" -> missions = resources.getStringArray(R.array.영화관)
+            "바/주점" -> missions = resources.getStringArray(R.array.바주점)
+            "여행" -> missions = resources.getStringArray(R.array.여행)
+            "식당" -> missions = resources.getStringArray(R.array.식당)
+            "보드게임" -> missions = resources.getStringArray(R.array.보드게임)
+            "도서관" -> missions = resources.getStringArray(R.array.도서관)
+            "전시관" -> missions = resources.getStringArray(R.array.전시관)
+            "놀이공원" -> missions = resources.getStringArray(R.array.놀이공원)
+            "카페" -> missions = resources.getStringArray(R.array.카페)
+            "관람" -> missions = resources.getStringArray(R.array.관람)
+            "스포츠" -> missions = resources.getStringArray(R.array.스포츠)
+            "당구장" -> missions = resources.getStringArray(R.array.당구장)
+            "익스트랙션" -> missions = resources.getStringArray(R.array.익스트랙션)
+            "공방" -> missions = resources.getStringArray(R.array.공방)
+            "드라이브" -> missions = resources.getStringArray(R.array.드라이브)
+            "식물원" -> missions = resources.getStringArray(R.array.식물원)
+            "기타" -> missions = resources.getStringArray(R.array.기타)
+        }
+
+
+        //AlertDialog 초기화
+        val builder2: AlertDialog.Builder = AlertDialog.Builder(this)
+
+        //제목 설정
+        builder2.setTitle("미션을 선택해주세요")
+
+        //아이템 선택 이벤트
+        builder2.setItems(missions){
+                p0, p1 ->
+            binding.selectMission.text = missions[p1]
+//            Toast.makeText(this, "선택된 색깔은 ${missions[p1]}",
+//                Toast.LENGTH_SHORT).show()
+        }
+
+        val alertDialog2: AlertDialog = builder2.create()
+        alertDialog2.show()
     }
 
 }

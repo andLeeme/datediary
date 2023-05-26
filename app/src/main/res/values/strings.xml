@@ -2,4 +2,119 @@
     <string name="app_name">dateDiary</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="places">
+        <item>영화관</item>
+        <item>바/주점</item>
+        <item>보드게임</item>
+        <item>여행</item>
+        <item>식당</item>
+        <item>도서관</item>
+        <item>전시관</item>
+        <item>놀이공원</item>
+        <item>카페</item>
+        <item>관람</item>
+        <item>스포츠</item>
+        <item>당구장</item>
+        <item>익스트랙션</item>
+        <item>공방</item>
+        <item>드라이브</item>
+        <item>식물원</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="방문장소">
+        <item>데이트 미션!</item>
+    </string-array>
+
+    <string-array name="영화관">
+        <item>팝콘 받아 먹은 사람이 사랑한다고 말해주기</item>
+        <item>바/영화 보는 동안 팔짱 끼기</item>
+    </string-array>
+
+    <string-array name="바주점">
+        <item>서로 마실 술 골라주기</item>
+        <item>러브샷</item>
+    </string-array>
+
+    <string-array name="보드게임">
+        <item>보드게임 쿼리도 해보기</item>
+        <item>보드게임 고스트 해보기</item>
+    </string-array>
+
+    <string-array name="여행">
+        <item>가위바위보해서 진 사람이 밥 사주기</item>
+        <item>여행지를 배경으로 손잡은 사진 찍기</item>
+    </string-array>
+
+    <string-array name="식당">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="도서관">
+        <item>서로 공유하고 싶은 책 골라주기</item>
+        <item>책장 사이에서 몰래 뽀뽀</item>
+    </string-array>
+
+    <string-array name="전시관">
+        <item>관람 끝난 후 감상 나누기</item>
+        <item>다음에 보러갈 전시 고르기</item>
+    </string-array>
+
+    <string-array name="동물원">
+        <item>동물 옆에서 동물 따라하는 사진 찍기(ex. 원숭이 흉내~)</item>
+        <item>가위바위보해서 진 사람이 간식 사주기</item>
+    </string-array>
+
+    <string-array name="놀이공원">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="카페">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="관람">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="스포츠">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="당구장">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="익스트랙션">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="공방">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="드라이브">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="식물원">
+        <item></item>
+        <item></item>
+    </string-array>
+
+    <string-array name="기타">
+        <item></item>
+        <item></item>
+    </string-array>
+
 </resources>
