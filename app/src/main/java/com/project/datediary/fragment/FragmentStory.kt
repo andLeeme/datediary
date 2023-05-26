@@ -10,9 +10,6 @@ import com.project.datediary.activity.AddScheduleActivity2
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentStoryBinding
-import com.project.datediary.model.Constants
-import com.project.datediary.model.Employee
-import com.project.datediary.util.DialogList
 
 class FragmentStory : Fragment() {
 

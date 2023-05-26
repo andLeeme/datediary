@@ -7,17 +7,17 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
-import com.project.datediary.activity.AddScheduleActivity2
-import com.project.datediary.adapter.EmployeeAdapter
-import com.project.datediary.model.Employee
+import com.project.datediary.activity.AddScheduleActivity
+import com.project.datediary.adapter.PlaceAdapter
+import com.project.datediary.model.Place
 
 // Define a DialogList class that extends Dialog
 abstract class DialogList(
-    context: AddScheduleActivity2,
-    private var list: ArrayList<Employee>,
+    context: AddScheduleActivity,
+    private var list: ArrayList<Place>,
 ) : Dialog(context) {
 
-    private var adapter: EmployeeAdapter? = null
+    private var adapter: PlaceAdapter? = null
 
     // This method is called when the Dialog is created
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +49,7 @@ abstract class DialogList(
         view.findViewById<RecyclerView>(R.id.rvList).layoutManager = LinearLayoutManager(context)
         // Create a new instance of the EmployeeAdapter
         // and set it as the RecyclerView's adapter
-        adapter = EmployeeAdapter(context, list)
+        adapter = PlaceAdapter(context, list)
         view.findViewById<RecyclerView>(R.id.rvList).adapter = adapter
     }
 }

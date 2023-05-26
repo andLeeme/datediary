@@ -1,30 +1,30 @@
 package com.project.datediary.model
 
 object Constants {
-    fun getEmployeeData():ArrayList<Employee>{
+    fun getPlaceData():ArrayList<Place>{
         // create an arraylist of type employee class
-        val employeeList=ArrayList<Employee>()
-        val emp1=Employee("유정","")
-        employeeList.add(emp1)
-        val emp2=Employee("Ram prakash","ramp@gmail.com")
-        employeeList.add(emp2)
-        val emp3=Employee("OMM Meheta","mehetaom@gmail.com")
-        employeeList.add(emp3)
-        val emp4=Employee("Hari Mohapatra","harim@gmail.com")
-        employeeList.add(emp4)
-        val emp5=Employee("Abhisek Mishra","mishraabhi@gmail.com")
-        employeeList.add(emp5)
-        val emp6=Employee("Sindhu Malhotra","sindhu@gmail.com")
-        employeeList.add(emp6)
-        val emp7=Employee("Anil sidhu","sidhuanil@gmail.com")
-        employeeList.add(emp7)
-        val emp8=Employee("Sachin sinha","sinhas@gmail.com")
-        employeeList.add(emp8)
-        val emp9=Employee("Amit sahoo","sahooamit@gmail.com")
-        employeeList.add(emp9)
-        val emp10=Employee("Raj kumar","kumarraj@gmail.com")
-        employeeList.add(emp10)
+        val placeList=ArrayList<Place>()
+        val emp1=Place("유정","")
+        placeList.add(emp1)
+        val emp2=Place("Ram prakash","ramp@gmail.com")
+        placeList.add(emp2)
+        val emp3=Place("OMM Meheta","mehetaom@gmail.com")
+        placeList.add(emp3)
+        val emp4=Place("Hari Mohapatra","harim@gmail.com")
+        placeList.add(emp4)
+        val emp5=Place("Abhisek Mishra","mishraabhi@gmail.com")
+        placeList.add(emp5)
+        val emp6=Place("Sindhu Malhotra","sindhu@gmail.com")
+        placeList.add(emp6)
+        val emp7=Place("Anil sidhu","sidhuanil@gmail.com")
+        placeList.add(emp7)
+        val emp8=Place("Sachin sinha","sinhas@gmail.com")
+        placeList.add(emp8)
+        val emp9=Place("Amit sahoo","sahooamit@gmail.com")
+        placeList.add(emp9)
+        val emp10=Place("Raj kumar","kumarraj@gmail.com")
+        placeList.add(emp10)
 
-        return employeeList
+        return placeList
     }
 }

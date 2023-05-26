@@ -1,61 +1,58 @@
 package com.project.datediary.adapter
 
-
-import android.util.Log
+import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
-import com.project.datediary.databinding.ItemListBinding
-import com.project.datediary.databinding.ItemPlaceBinding
-import com.project.datediary.model.Coin
+import com.project.datediary.R
+import com.project.datediary.model.Place
+import java.util.ArrayList
 
-class PlaceAdapter: RecyclerView.Adapter<PlaceAdapter.MyView>() {
-    private var coinList = listOf<Coin>()
+// Define a class for the adapter,
+// which extends RecyclerView.Adapter
+class PlaceAdapter(
+    private val context: Context,
+    // The adapter needs a list of data to display
+    private var list: ArrayList<Place>,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    val text = arrayOf("A Topic", "B Topic", "C Topic", "D Topic", "E Topic", "카테고리 없음")
-    val placeList : ArrayList<Array<String>> = arrayListOf(text)
+    // This method is called when the RecyclerView needs a new ViewHolder to display an item
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        // Use the LayoutInflater to
+        // create a new view from the
+        // item_employee layout file
+        val view = LayoutInflater.from(context).inflate(R.layout.item_employee, parent, false)
+        // Return a new ViewHolder that
+        // holds the newly created view
+        return MyViewHolder(view)
+    }
 
-    inner class MyView(private val binding: ItemPlaceBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(pos: Int) {
-            //기본값일 때랑 값 지정했을 때 색깔 다르게 지정하기
-            binding.placeList1.text = placeList[pos][0]
-            Log.d("placeList", "bind: $placeList")
+    // This method is called when the RecyclerView needs
+    // to display the data at a certain position
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        // Get the item at the specified position from the list
+        val item = list[position]
 
-            //item클릭하면 dialog 종료되게 설정
-//            binding.placeList.setOnClickListener {
-//                @Override
-//                public void onClick(View v) {
-//                    String topic = mData.get(getAdapterPosition());
-//                    PostingActivity.textViewPostingTopic.setText(topic);
-//                    if (topic.equals("카테고리 없음")) { // 카테고리 없음 선택 시
-//                        PostingActivity.textViewPostingTopic.setTextColor(Color.LTGRAY);
-//                        // 회색 처리
-//                    } else {
-//                        PostingActivity.textViewPostingTopic.setTextColor(Color.BLACK);
-//                        // 그 이외엔 검은색
-//                    }
-//                    PostingActivity.dialog.dismiss(); // dialog 종료
-//                }
-//        }
+        // Check if the ViewHolder is of type MyViewHolder
+        if (holder is MyViewHolder) {
+            // If it is, set the name and email TextViews
+            // to the corresponding values in the item
+            holder.btn.text = item.place_name
 
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyView {
-        val view = ItemPlaceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return MyView(view)
-    }
-
-    override fun onBindViewHolder(holder: MyView, position: Int) {
-        holder.bind(position)
-    }
-
+    // This method returns the total
+    // number of items in the list
     override fun getItemCount(): Int {
-        return placeList.size
+        return list.size
     }
 
-    fun setList(list: List<Coin>) {
-        coinList = list
-        Log.d("titleResponse", "titleResponse: $coinList")
+    // Define a ViewHolder class that holds references
+    // to the TextViews in the item_employee layout file
+    private class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val btn = view.findViewById<Button>(R.id.selectBtn)
     }
 }
