@@ -36,6 +36,10 @@ object RetrofitAPI {
             .build()
     }
 
+    fun getInstance(): Retrofit{
+        return retrofit
+    }
+
     val emgMedService: SignUpService by lazy {
         retrofit.create(SignUpService::class.java)
     }

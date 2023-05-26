@@ -43,6 +43,14 @@ class FragmentStory : Fragment() {
 
         }
 
+        binding.button4.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainer, FragmentPhoto())
+                .commit()
+            binding.fragmentStory.visibility = View.INVISIBLE
+
+        }
+
 
         return binding.root
     }
