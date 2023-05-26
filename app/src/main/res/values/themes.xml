@@ -24,6 +24,8 @@
     </style>
 
 
+
+
     <style name="MyTextSize" parent="TextAppearance.AppCompat">
         <item name="android:textSize">11dp</item>
         <item name="android:fontFamily">@font/lottemartd_bold</item>
