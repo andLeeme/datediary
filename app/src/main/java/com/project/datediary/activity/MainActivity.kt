@@ -22,8 +22,6 @@ import com.project.datediary.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.S)
