@@ -51,6 +51,14 @@ class FragmentStory : Fragment() {
 
         }
 
+        binding.button5.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainer, UploadFragment())
+                .commit()
+            binding.fragmentStory.visibility = View.INVISIBLE
+
+        }
+
 
         return binding.root
     }
