@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.project.datediary.R
+import com.project.datediary.api.ImageUploadService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -121,11 +122,3 @@ class UploadFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 }
-
-interface ImageUploadService {
-    @Multipart
-    @POST("api/image")
-    fun uploadImage(@Part file: MultipartBody.Part): Call<ApiResponse>
-}
-
-data class ApiResponse(val success: Boolean, val message: String)
