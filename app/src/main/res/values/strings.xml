@@ -48,8 +48,9 @@
     </string-array>
 
     <string-array name="식당">
-        <item></item>
-        <item></item>
+        <item>정성을 다한 한 숟갈 먹여주기</item>
+        <item>매운 음식 먹으러 가기~</item>
+        <item>옆자리에서 먹기</item>
     </string-array>
 
     <string-array name="도서관">
@@ -68,53 +69,51 @@
     </string-array>
 
     <string-array name="놀이공원">
-        <item></item>
-        <item></item>
+        <item>안 타본 놀이기구 타보기</item>
+        <item>놀이기구 타기 전에 같이 사진 찍기</item>
+        <item>대관람차 꼭대기에서 사진찍기</item>
     </string-array>
 
     <string-array name="카페">
-        <item></item>
-        <item></item>
+        <item>상대방이 좋아하는 메뉴 맞추기</item>
+        <item>서로 메뉴 골라주기</item>
     </string-array>
 
     <string-array name="공연">
-        <item></item>
-        <item></item>
+        <item>다음에 보러갈 공연 고르기</item>
+        <item>공연 후 기념 사진 찍기</item>
     </string-array>
 
     <string-array name="스포츠">
-        <item></item>
-        <item></item>
+        <item>점수 내기!</item>
+        <item>멋진 모습 보여주기</item>
     </string-array>
 
-    <string-array name="당구장">
-        <item></item>
-        <item></item>
-    </string-array>
-
-    <string-array name="익스트랙션">
-        <item></item>
-        <item></item>
-    </string-array>
 
     <string-array name="공방">
-        <item></item>
-        <item></item>
+        <item>서로를 닮은 물건 만들기</item>
+        <item>그날 만든 물건을 서로에게 선물하기</item>
     </string-array>
 
     <string-array name="드라이브">
-        <item></item>
-        <item></item>
+        <item>조수석에 앉은 사람이 좋아하는 노래 틀기</item>
+        <item>조수석에서 노래 불러주기</item>
     </string-array>
 
     <string-array name="식물원">
-        <item></item>
-        <item></item>
+        <item>서로에게 어울리는 식물 고르고 이유 말해주기</item>
+        <item>식물 이름 많이 맞추기</item>
+        <item>마음에 드는 꽃의 꽃말 찾아보기</item>
     </string-array>
 
     <string-array name="기타">
         <item>서로 바라보고 웃어주기</item>
         <item>서로에게 편지 써주기</item>
+        <item>지역 축제 함께 참가하기</item>
+        <item>함께 악기 배우러 가기</item>
+        <item>1분 동안 손 잡고 있기</item>
+        <item>사랑한다고 다섯 번 말하기</item>
+        <item>30초동안 눈 마주치기</item>
     </string-array>
 
 </resources>

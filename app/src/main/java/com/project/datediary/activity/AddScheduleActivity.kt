@@ -366,12 +366,10 @@ class AddScheduleActivity : AppCompatActivity() {
             "카페" -> Pcode = "10"
             "관람" -> Pcode = "11"
             "스포츠" -> Pcode = "12"
-            "당구장" -> Pcode = "13"
-            "익스트랙션" -> Pcode = "14"
-            "공방" -> Pcode = "15"
-            "드라이브" -> Pcode = "16"
-            "식물원" -> Pcode = "17"
-            "기타" -> Pcode = "18"
+            "공방" -> Pcode = "13"
+            "드라이브" -> Pcode = "14"
+            "식물원" -> Pcode = "15"
+            "기타" -> Pcode = "16"
         }
         return Pcode
     }
@@ -397,8 +395,6 @@ class AddScheduleActivity : AppCompatActivity() {
             "카페" -> missions = resources.getStringArray(R.array.카페)
             "공연" -> missions = resources.getStringArray(R.array.공연)
             "스포츠" -> missions = resources.getStringArray(R.array.스포츠)
-            "당구장" -> missions = resources.getStringArray(R.array.당구장)
-            "익스트랙션" -> missions = resources.getStringArray(R.array.익스트랙션)
             "공방" -> missions = resources.getStringArray(R.array.공방)
             "드라이브" -> missions = resources.getStringArray(R.array.드라이브)
             "식물원" -> missions = resources.getStringArray(R.array.식물원)
@@ -428,23 +424,44 @@ class AddScheduleActivity : AppCompatActivity() {
         var Mcode = ""
         when(binding.selectMission.text.toString()) {
             "팝콘 받아 먹은 사람이 사랑한다고 말해주기" -> Mcode = "1"
-            "바/주점" -> Mcode = "2"
-            "보드게임" -> Mcode = "3"
-            "보드게임" -> Mcode = "4"
-            "전시관" -> Mcode = "5"
-            "도서관" -> Mcode = "6"
-            "전시관" -> Mcode = "7"
-            "동물원" -> Mcode = "8"
-            "놀이공원" -> Mcode = "9"
-            "카페" -> Mcode = "10"
-            "공연" -> Mcode = "11"
-            "스포츠" -> Mcode = "12"
-            "당구장" -> Mcode = "13"
-            "익스트랙션" -> Mcode = "14"
-            "공방" -> Mcode = "15"
-            "드라이브" -> Mcode = "16"
-            "식물원" -> Mcode = "17"
-            "기타" -> Mcode = "18"
+            "바/영화 보는 동안 팔짱 끼기" -> Mcode = "2"
+            "서로 마실 술 골라주기" -> Mcode = "3"
+            "러브샷" -> Mcode = "4"
+            "보드게임 쿼리도 해보기" -> Mcode = "5"
+            "보드게임 고스트 해보기" -> Mcode = "6"
+            "가위바위보해서 진 사람이 밥 사주기" -> Mcode = "7"
+            "여행지를 배경으로 손잡은 사진 찍기" -> Mcode = "8"
+            "정성을 다한 한 숟갈 먹여주기" -> Mcode = "9"
+            "매운 음식 먹으러 가기~" -> Mcode = "10"
+            "옆자리에서 먹기" -> Mcode = "11"
+            "서로 공유하고 싶은 책 골라주기" -> Mcode = "12"
+            "책장 사이에서 몰래 뽀뽀" -> Mcode = "13"
+            "관람 끝난 후 감상 나누기" -> Mcode = "14"
+            "다음에 보러갈 전시 고르기" -> Mcode = "15"
+            "동물 옆에서 동물 따라하는 사진 찍기(ex. 원숭이 흉내~)" -> Mcode = "16"
+            "안 타본 놀이기구 타보기" -> Mcode = "18"
+            "놀이기구 타기 전에 같이 사진 찍기" -> Mcode = "19"
+            "대관람차 꼭대기에서 사진찍기" -> Mcode = "20"
+            "상대방이 좋아하는 메뉴 맞추기" -> Mcode = "21"
+            "서로 메뉴 골라주기" -> Mcode = "22"
+            "다음에 보러갈 공연 고르기" -> Mcode = "23"
+            "공연 후 기념 사진 찍기" -> Mcode = "24"
+            "점수 내기!" -> Mcode = "25"
+            "멋진 모습 보여주기" -> Mcode = "26"
+            "서로를 닮은 물건 만들기" -> Mcode = "27"
+            "그날 만든 물건을 서로에게 선물하기" -> Mcode = "28"
+            "조수석에 앉은 사람이 좋아하는 노래 틀기" -> Mcode = "29"
+            "조수석에서 노래 불러주기" -> Mcode = "30"
+            "서로에게 어울리는 식물 고르고 이유 말해주기" -> Mcode = "31"
+            "식물 이름 많이 맞추기" -> Mcode = "32"
+            "마음에 드는 꽃의 꽃말 찾아보기" -> Mcode = "33"
+            "서로 바라보고 웃어주기" -> Mcode = "34"
+            "서로에게 편지 써주기" -> Mcode = "35"
+            "지역 축제 함께 참가하기" -> Mcode = "36"
+            "함께 악기 배우러 가기" -> Mcode = "37"
+            "1분 동안 손 잡고 있기" -> Mcode = "38"
+            "사랑한다고 다섯 번 말하기" -> Mcode = "39"
+            "30초동안 눈 마주치기" -> Mcode = "40"
         }
         return Mcode
     }
