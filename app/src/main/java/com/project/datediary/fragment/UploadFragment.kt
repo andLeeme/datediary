@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -86,7 +87,7 @@ class UploadFragment : Fragment() {
     private fun uploadImage(imageUri: Uri) {
         val file = File(getRealPathFromURI(imageUri))
 
-        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
         val filePart = MultipartBody.Part.createFormData("file", file.name, requestBody)
 
         lifecycleScope.launch(Dispatchers.IO) {

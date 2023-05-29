@@ -6,6 +6,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
@@ -17,7 +18,11 @@ import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.util.DialogList
 import retrofit2.Call
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
+import java.util.Locale
 
 
 class AddScheduleActivity : AppCompatActivity() {
@@ -40,19 +45,29 @@ class AddScheduleActivity : AppCompatActivity() {
 /////////////////////////////////기본 기능 설정///////////////////////////////////////
 
         //0. 기본 시간(현재 시간 넣어주기)
-        binding.datepickerStart.text = ""
-        binding.scheduleAlert.text = ""
-        binding.datepickerStart.text = ""
-        binding.scheduleAlert.text = ""
+        //변수 초기화, 처음 켰을 때는 현재 시간 보여주기
+        val current = LocalDateTime.now()
+        val formatterDate = DateTimeFormatter.ofPattern("yyyy년 M월 d일")
+        val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
+        val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
+
+        var startDate = current.format(formatterDate)
+        var startTime = current.format(formatterTime)
+        var endDate = current.format(formatterDate)
+        var endTime = current.format(formatterTime)
+        var alertDate = current.format(formatterAlert)
+
+        binding.datepickerStart.text = startDate
+        binding.timepickerStart.text = startTime
+        binding.datepickerEnd.text = endDate
+        binding.timepickerEnd.text = endTime
+
+
+        //안내 문구 초기화
+        binding.scheduleAlert.text = "$alertDate 일정에 추가돼요!"
 
 
         //1. Date&Time Picker
-        //변수 초기화
-        var startDate = ""
-        var startTime = ""
-        var endDate = ""
-        var endTime = ""
-
 
         //datepicker 및 timepicker에서 선택한 날짜/시간 등을 버튼 텍스트에 셋팅
         binding.datepickerStart.setOnClickListener {
@@ -76,13 +91,25 @@ class AddScheduleActivity : AppCompatActivity() {
         binding.timepickerStart.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+
+                ///////시간 설정/////
+                var AorP = "오전"     //오전/오후
+                var startHour  = hourOfDay
+                var startMinute : String = minute.toString()
+
+                //시간 24시간 표기 -> 12시간 표기로 바꾸기
                 if (hourOfDay > 12) {
-                    startTime = "오후 ${hourOfDay - 12}:${minute}분"
-                } else {
-                    startTime = "오전 ${hourOfDay}:${minute}분"
+                    AorP = "오후"
+                    startHour = hourOfDay - 12
                 }
+
+                //10분 미만일 때 0 붙여주기
+                if(minute<10) {
+                    startMinute = "0${minute}"
+                }
+
+                startTime = "$AorP ${startHour}:${startMinute}분"
                 binding.timepickerStart.text = startTime
-                Log.d("hourOfDay", "onCreate: $hourOfDay")
             }
             TimePickerDialog(
                 this,
@@ -99,8 +126,8 @@ class AddScheduleActivity : AppCompatActivity() {
             val cal = Calendar.getInstance()    //캘린더뷰 만들기
             val dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                    startDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
-                    binding.datepickerEnd.text = startDate
+                    endDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
+                    binding.datepickerEnd.text = endDate
                 }
             DatePickerDialog(
                 this,
@@ -114,13 +141,37 @@ class AddScheduleActivity : AppCompatActivity() {
         binding.timepickerEnd.setOnClickListener {
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+
+                ///////시간 설정/////
+                var AorP = "오전"     //오전/오후
+                var endHour  = hourOfDay
+                var endMinute : String = minute.toString()
+
+                //시간 24시간 표기 -> 12시간 표기로 바꾸기
                 if (hourOfDay > 12) {
-                    startTime = "오후 ${hourOfDay - 12}:${minute}분"
-                } else {
-                    startTime = "오전 ${hourOfDay}:${minute}분"
+                    AorP = "오후"
+                    endHour = hourOfDay - 12
                 }
-                binding.timepickerEnd.text = startTime
-                Log.d("hourOfDay", "onCreate: $hourOfDay")
+
+                //10분 미만일 때 0 붙여주기
+                if(minute<10) {
+                    endMinute = "0${minute}"
+                }
+
+                endTime = "$AorP ${endHour}:${endMinute}분"
+                binding.timepickerEnd.text = endTime
+
+
+//                if (hourOfDay > 12) {
+//                    endTime = "오후 ${hourOfDay - 12}:${minute}분"
+//                } else {
+//                    endTime = "오전 ${hourOfDay}:${minute}분"
+//                }
+//                binding.timepickerEnd.text = endTime
+//                Log.d("hourOfDay", "onCreate: $hourOfDay")
+
+
+
             }
             TimePickerDialog(
                 this,
@@ -132,6 +183,24 @@ class AddScheduleActivity : AppCompatActivity() {
             ).show()
         }
 
+
+        //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
+        ADChkBox.setOnCheckedChangeListener{ buttonView, isChecked ->
+            if (isChecked) {
+                binding.timepickerStart.text = "-"
+                binding.timepickerEnd.text = "-"
+                binding.timepickerStart.isClickable = false
+                binding.timepickerEnd.isClickable = false
+            }
+            else {
+                binding.timepickerStart.text = startTime
+                binding.timepickerEnd.text = endTime
+                binding.timepickerStart.isClickable = true
+                binding.timepickerEnd.isClickable = true
+            }
+        }
+
+
         //2. 스피너?리스트뷰?(방문장소)
 
         binding.selectPlace.setOnClickListener {
@@ -139,6 +208,7 @@ class AddScheduleActivity : AppCompatActivity() {
             clearMissionDialog()
             //placeListDialog()
         }
+
         //3. 스피너?리스트뷰?(데이트미션)
         binding.selectMission.setOnClickListener {
             showMissionDialog()
