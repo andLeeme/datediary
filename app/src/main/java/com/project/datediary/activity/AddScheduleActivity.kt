@@ -6,7 +6,6 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
@@ -18,7 +17,6 @@ import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.util.DialogList
 import retrofit2.Call
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Calendar
@@ -250,11 +248,7 @@ class AddScheduleActivity : AppCompatActivity() {
         //이미 있는 일정 꾹 눌러서 들어오면 내용 다 넣어주기(리퀘스트해서 넣어주기)
 
 
-
-
-
         setContentView(binding.root)
-
     }
 
 
