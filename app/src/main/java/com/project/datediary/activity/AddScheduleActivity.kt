@@ -39,6 +39,13 @@ class AddScheduleActivity : AppCompatActivity() {
 
 /////////////////////////////////기본 기능 설정///////////////////////////////////////
 
+        //0. 기본 시간(현재 시간 넣어주기)
+        binding.datepickerStart.text = ""
+        binding.scheduleAlert.text = ""
+        binding.datepickerStart.text = ""
+        binding.scheduleAlert.text = ""
+
+
         //1. Date&Time Picker
         //변수 초기화
         var startDate = ""
