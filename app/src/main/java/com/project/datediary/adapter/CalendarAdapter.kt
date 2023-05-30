@@ -11,7 +11,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.project.datediary.R
+import com.project.datediary.activity.MainActivity
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.model.titleTest
 import com.project.datediary.util.CalendarUtil
@@ -112,15 +114,56 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
         }
 
         //날짜 클릭 이벤트
+//        holder.itemView.setOnClickListener {
+//
+//            var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
+//
+//            //클릭 풀리면 배경 돌리기
+//            holder.itemView.setBackgroundColor(Color.LTGRAY)
+//
+//            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+//        }
+//
+//        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
+//            if(hasFocus) {
+//                holder.itemView.setBackgroundColor(Color.RED)
+//            }
+//        }
+
+        //날짜 클릭하면 오늘의 일정 나오게 함
         holder.itemView.setOnClickListener {
+            BottomSheetBehavior.from(MainActivity.bottomSheet)?.apply {
+                addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+                        when (newState) {
 
-            var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
+                            //하단
+                            BottomSheetBehavior.STATE_COLLAPSED -&gt; {
 
-            //클릭 풀리면 배경 돌리기
-            holder.itemView.setBackgroundColor(Color.LTGRAY)
+                            }
 
-            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+                            //중간
+                            BottomSheetBehavior.STATE_HALF_EXPANDED -&gt; {
+
+                            }
+
+                            //다펼처짐
+                            BottomSheetBehavior.STATE_EXPANDED -&gt; {
+
+                            }
+                        }
+                    }
+
+                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+                    }
+                })
+            }
         }
+
+
+
+
 
 
         //날짜별 일정 추가

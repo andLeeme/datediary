@@ -63,6 +63,7 @@ class EditScheduleActivity : AppCompatActivity() {
                     if (response.isSuccessful) {
 
                         ScheduleShowResponseBody = response.body()?: listOf()
+
                         Log.d("리턴123", "${response.body().toString()}")
                     }
                 }
