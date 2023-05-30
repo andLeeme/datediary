@@ -1,5 +1,6 @@
 package com.project.datediary.fragment
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.JsonObject
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.customAdapter
+import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.SignUpRequestBody
@@ -33,6 +35,7 @@ import java.util.Date
 class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
+    lateinit var binding2: ActivityMainBinding
     var month_view = Int
 
     //lateinit var calendar: Calendar
@@ -44,7 +47,7 @@ class FragmentCalendar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
-
+        binding2 = ActivityMainBinding.inflate(inflater, container, false)
         //현재 날짜
         //selectedDate  = LocalDate.now()
         //CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀

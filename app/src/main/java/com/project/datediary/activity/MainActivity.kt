@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.project.datediary.R
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.fragment.FragmentCalendar
@@ -33,7 +35,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     lateinit var DayScheduleAdapter: DayScheduleAdapter
-
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,7 +81,19 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+
         setContentView(binding.root)
+
+        binding.image1.setOnClickListener {
+
+            //BottomSheetBehavior.from(bottomSheetBehavior의 자식 요소 넣어주기)
+            val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+            if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            } else {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)}
+        }
 
         DayScheduleAdapter = DayScheduleAdapter()
 
