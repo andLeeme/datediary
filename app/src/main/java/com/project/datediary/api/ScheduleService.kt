@@ -11,6 +11,6 @@ import java.util.ArrayList
 
 interface ScheduleService {
     @Headers("Content-Type: application/json")
-    @POST("/api/main2")
-    fun addUserByEnqueue2(@Body ScheduleInfo: ScheduleRequestBody): Call<ArrayList<ScheduleResponseBody>>
+    @POST("/api/scheduleReg")
+    fun addUserByEnqueue2(@Body ScheduleInfo: ScheduleRequestBody): Call<Int>
 }

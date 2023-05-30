@@ -85,11 +85,11 @@ class FragmentCalendar : Fragment() {
 
         var monthText = monthYearFromDate(CalendarUtil.selectedDate).split(" 월")
         Log.d("monthText", "monthText: $monthText")
-        var monthData: String = ""
+        var monthData: String = monthText[0]
 
-        if(monthText[0].toInt()<10){
-            monthData = "0" + monthText[0]
-        } else {monthData = monthText[0]}
+//        if(monthText[0].toInt()<10){
+//            monthData = "0" + monthText[0]
+//        } else {monthData = monthText[0]}
 
 
         //보내보자 리퀘스트 받아보자 리스폰스

@@ -274,13 +274,14 @@ class AddScheduleActivity : AppCompatActivity() {
                 //place_code = binding.selectPlace.text.toString(),
                 //mission_code = binding.selectMission.text.toString()
             )
+            Log.d("scheduleData", "onCreate: $scheduleData")
 
 
             RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
-                .enqueue(object : retrofit2.Callback<java.util.ArrayList<ScheduleResponseBody>> {
+                .enqueue(object : retrofit2.Callback<Int> {
                     override fun onResponse(
-                        call: Call<ArrayList<ScheduleResponseBody>>,
-                        response: Response<ArrayList<ScheduleResponseBody>>
+                        call: Call<Int>,
+                        response: Response<Int>
                     ) {
                         Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
                             .show()
@@ -292,7 +293,7 @@ class AddScheduleActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(
-                        call: Call<ArrayList<ScheduleResponseBody>>,
+                        call: Call<Int>,
                         t: Throwable
                     ) {
 

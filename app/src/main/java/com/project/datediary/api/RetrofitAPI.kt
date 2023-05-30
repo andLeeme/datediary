@@ -40,14 +40,17 @@ object RetrofitAPI {
         return retrofit
     }
 
+    //로그인 테스트
     val emgMedService: SignUpService by lazy {
         retrofit.create(SignUpService::class.java)
     }
 
+    //스케줄 등록
     val emgMedService2: ScheduleService by lazy {
         retrofit.create(ScheduleService::class.java)
     }
 
+    //달력용
     val emgMedService3: TitleService by lazy {
         retrofit.create(TitleService::class.java)
     }
