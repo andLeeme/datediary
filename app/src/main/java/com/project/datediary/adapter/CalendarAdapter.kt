@@ -130,37 +130,37 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
 //            }
 //        }
 
-        //날짜 클릭하면 오늘의 일정 나오게 함
-        holder.itemView.setOnClickListener {
-            BottomSheetBehavior.from(MainActivity.bottomSheet)?.apply {
-                addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-                    override fun onStateChanged(bottomSheet: View, newState: Int) {
-                        when (newState) {
-
-                            //하단
-                            BottomSheetBehavior.STATE_COLLAPSED -&gt; {
-
-                            }
-
-                            //중간
-                            BottomSheetBehavior.STATE_HALF_EXPANDED -&gt; {
-
-                            }
-
-                            //다펼처짐
-                            BottomSheetBehavior.STATE_EXPANDED -&gt; {
-
-                            }
-                        }
-                    }
-
-                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-                    }
-                })
-            }
-        }
-
+//        //날짜 클릭하면 오늘의 일정 나오게 함
+//        holder.itemView.setOnClickListener {
+//            BottomSheetBehavior.from(MainActivity.bottomSheet)?.apply {
+//                addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+//                    override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                        when (newState) {
+//
+//                            //하단
+//                            BottomSheetBehavior.STATE_COLLAPSED -&gt; {
+//
+//                            }
+//
+//                            //중간
+//                            BottomSheetBehavior.STATE_HALF_EXPANDED -&gt; {
+//
+//                            }
+//
+//                            //다펼처짐
+//                            BottomSheetBehavior.STATE_EXPANDED -&gt; {
+//
+//                            }
+//                        }
+//                    }
+//
+//                    override fun onSlide(bottomSheet: View, slideOffset: Float) {
+//
+//                    }
+//                })
+//            }
+//        }
+//
 
 
 

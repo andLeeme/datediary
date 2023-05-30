@@ -51,10 +51,10 @@
                     android:layout_height="680dp"
                     android:background="@drawable/sign_up"
                     android:orientation="vertical"
+                    android:paddingHorizontal="20dp"
                     app:behavior_hideable="false"
-                    app:behavior_peekHeight="135dp"
-                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
-
+                    app:behavior_peekHeight="135dp">
+<!--                    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">-->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
@@ -147,7 +147,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="15dp"
                                     android:fontFamily="@font/lottemartd_bold"
-                                    android:text="오늘의 일정!"
+                                    android:text="일정 확인하기!"
                                     android:textColor="#000000"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -159,69 +159,111 @@
 
                     </LinearLayout>
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_margin="6dp"
-                        android:textColor="#B6D3E6"
-                        android:textSize="20dp" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.5"></LinearLayout>
 
-                    <TextView
-                        android:id="@+id/sheetText1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:text="오늘의 일정이에요"
-                        android:textColor="#B6D3E6"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:drawablePadding="16dp"
-                        android:text="오늘의 일정이에요"
-                        android:textColor="#B6D3E6"
-                        android:textFontWeight="@integer/material_motion_duration_long_1"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:drawablePadding="16dp"
-                        android:text="오늘의 일정이에요"
-                        android:textColor="#B6D3E6"
-                        android:textFontWeight="@integer/material_motion_duration_long_1"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:drawablePadding="16dp"
-                        android:text="오늘의 일정이에요"
-                        android:textColor="#B6D3E6"
-                        android:textFontWeight="@integer/material_motion_duration_long_1"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="6dp"
-                        android:drawablePadding="16dp"
-                        android:text="오늘의 일정이에요"
-                        android:textColor="#B6D3E6"
-                        android:textFontWeight="@integer/material_motion_duration_long_1"
-                        android:textSize="20dp" />
-
-                    <Button
-                        android:id="@+id/addBtn"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="70dp"
-                        android:backgroundTint="#68C4ED"
-                        android:text="일정추가" />
+                        android:layout_height="match_parent"
+                        android:layout_weight="2.3"
+                        android:orientation="horizontal">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:background="@drawable/text_img_100"
+                            android:backgroundTint="#3F51B5"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.2">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/lottemartd_bold"
+                                    android:gravity="center"
+                                    android:text="30"
+                                    android:textColor="@color/white"
+                                    android:textSize="30dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/lottemartd_bold"
+                                    android:gravity="center"
+                                    android:text="화요일"
+                                    android:textColor="@color/white"
+                                    android:textSize="20dp" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler10"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/addBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="70dp"
+                            android:backgroundTint="#8DC0E8"
+                            android:fontFamily="@font/lottemartd_bold"
+                            android:text="추가하기!"
+                            android:textColor="@color/white"
+                            android:textSize="20dp"
+                            app:cornerRadius="20dp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -230,6 +272,7 @@
 
 
     </LinearLayout>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_bnv"
         android:layout_width="0dp"

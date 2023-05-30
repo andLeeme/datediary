@@ -6,28 +6,33 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewTreeObserver
-import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnticipateInterpolator
-import android.view.animation.AnticipateOvershootInterpolator
-import android.view.animation.CycleInterpolator
-import android.view.animation.OvershootInterpolator
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.ui.AppBarConfiguration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.project.datediary.R
+import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.fragment.FragmentGraph
 import com.project.datediary.fragment.FragmentHome
 import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
+import com.project.datediary.model.Coin
+import com.project.datediary.model.ScheduleResponseBody
+import com.project.datediary.model.ScheduleShowResponseBody
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
+    lateinit var DayScheduleAdapter: DayScheduleAdapter
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,12 +61,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-         //스플래쉬화면을 더 오래 실행하는법.
+        //스플래쉬화면을 더 오래 실행하는법.
         val content: View = findViewById(android.R.id.content)
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
                 override fun onPreDraw(): Boolean {
-  
+
                     //조건이 true일때 화면 전환
                     return if (true) {
                         // The content is ready; start drawing.
@@ -77,6 +82,31 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        DayScheduleAdapter = DayScheduleAdapter()
+
+        binding.recycler10.apply {
+            adapter = DayScheduleAdapter
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
+
+        val scheduleShowList : ArrayList<ScheduleShowResponseBody> = ArrayList<ScheduleShowResponseBody>()
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","09:00","2023","5","30","10:00","1","영화관",
+            "현하랑 영화보기","1","1"))
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","20:00","2023","5","30","21:00","1","산책",
+            "현하랑 산책하기","1","1"))
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","21:00","2023","5","30","22:00","1","노래방",
+            "현하랑 노래부르기","1","1"))
+
+
+        DayScheduleAdapter.setList(scheduleShowList)
+
 
         binding.addBtn.setOnClickListener {
             val intent = Intent(applicationContext, AddScheduleActivity::class.java)
@@ -84,15 +114,15 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        binding.sheetText1.setOnClickListener {
-            if (binding.sheetText1.text.toString() == "바뀐 일정") {
-                binding.sheetText1.text = "오늘의 일정이에요"
-            } else {
-                binding.sheetText1.text = "바뀐 일정"
-                Toast.makeText(this, "내용 바뀜", Toast.LENGTH_SHORT).show()
-            }
-            return@setOnClickListener
-        }
+//        binding.sheetText1.setOnClickListener {
+//            if (binding.sheetText1.text.toString() == "바뀐 일정") {
+//                binding.sheetText1.text = "오늘의 일정이에요"
+//            } else {
+//                binding.sheetText1.text = "바뀐 일정"
+//                Toast.makeText(this, "내용 바뀜", Toast.LENGTH_SHORT).show()
+//            }
+//            return@setOnClickListener
+//        }
 
 
         initBottomNavigation()

@@ -93,6 +93,8 @@ class UploadFragment : Fragment() {
 
         data["map"] = "1"
 
+        Toast.makeText(context, "$data", Toast.LENGTH_SHORT).show()
+
         lifecycleScope.launch(Dispatchers.IO) {
             val call = imageUploadService.uploadImage(filePart, data)
             val response = call.execute()

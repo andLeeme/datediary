@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutGridItem"
+    android:layout_width="match_parent"
+    android:layout_height="95dp"
+    android:layout_gravity="center"
+    android:background="@drawable/day_background"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/lottemartd_bold"
+            android:paddingLeft="3dp"
+            android:paddingTop="5dp"
+            android:paddingRight="5dp"
+            android:text="흥미로운 일정"
+            android:textSize="15dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/schedule4"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/ckk_schedule"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4 "
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/start_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="right|bottom"
+                    android:text="09 : 00"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1.4">
+
+                <TextView
+                    android:id="@+id/end_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="right"
+                    android:text="~10 : 00"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/contents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lottemartd_bold"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="일정이 나와요"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/schedule_index"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="scheduleIndex"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
