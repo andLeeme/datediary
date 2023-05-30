@@ -72,8 +72,8 @@ class AddScheduleActivity : AppCompatActivity() {
         var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
         var endAorP = "오전"
         var ADChkBox = "0"
-        var placeCode = "0"
-        var missionCode = "0"
+        var placeCode = ""
+        var missionCode = ""
 
 
         //안내 문구 초기화
@@ -353,9 +353,9 @@ class AddScheduleActivity : AppCompatActivity() {
 
     private fun matchPlaceCode(): String? {
 
-        var Pcode = "0"
+        var Pcode = ""
         when(binding.selectPlace.text.toString()) {
-            "" -> Pcode = "0"
+            "" -> Pcode = ""
             "영화관" -> Pcode = "1"
             "바/주점" -> Pcode = "2"
             "보드게임" -> Pcode = "3"
@@ -423,9 +423,9 @@ class AddScheduleActivity : AppCompatActivity() {
 
     private fun matchMissionCode(): String? {
 
-        var Mcode = "0"
+        var Mcode = ""
         when(binding.selectMission.text.toString()) {
-            "" -> Mcode = "0"
+            "" -> Mcode = ""
             "팝콘 받아 먹은 사람이 사랑한다고 말해주기" -> Mcode = "1"
             "바/영화 보는 동안 팔짱 끼기" -> Mcode = "2"
             "서로 마실 술 골라주기" -> Mcode = "3"
