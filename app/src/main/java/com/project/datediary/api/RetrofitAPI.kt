@@ -1,4 +1,6 @@
+import com.project.datediary.api.ScheduleEditService
 import com.project.datediary.api.ScheduleService
+import com.project.datediary.api.ScheduleShowService
 import com.project.datediary.api.SignUpService
 import com.project.datediary.api.TitleService
 import okhttp3.OkHttpClient
@@ -53,5 +55,15 @@ object RetrofitAPI {
     //달력용
     val emgMedService3: TitleService by lazy {
         retrofit.create(TitleService::class.java)
+    }
+
+    //스케줄 수정 내용 등록용
+    val emgMedService4: ScheduleEditService by lazy {
+        retrofit.create(ScheduleEditService::class.java)
+    }
+
+    //스케줄 불러오기용
+    val emgMedService5: ScheduleShowService by lazy {
+        retrofit.create(ScheduleShowService::class.java)
     }
 }

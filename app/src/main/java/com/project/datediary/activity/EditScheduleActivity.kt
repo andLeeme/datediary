@@ -10,10 +10,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityAddScheduleBinding
+import com.project.datediary.databinding.ActivityEditScheduleBinding
 import com.project.datediary.model.Constants
 import com.project.datediary.model.Place
+import com.project.datediary.model.ScheduleEditRequestBody
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.model.ScheduleResponseBody
+import com.project.datediary.model.ScheduleShowRequestBody
+import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.DialogList
 import retrofit2.Call
 import retrofit2.Response
@@ -23,23 +28,59 @@ import java.util.Calendar
 import java.util.Locale
 
 
-class AddScheduleActivity : AppCompatActivity() {
+class EditScheduleActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityAddScheduleBinding
+    lateinit var binding: ActivityEditScheduleBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_schedule)
 
-        binding = ActivityAddScheduleBinding.inflate(layoutInflater)
-
-//        var titleText = binding.emailEdittext1
-//        var contentText = binding.emailEdittext2
-//        var ADChkBox = binding.allDayCheckBox
+        binding = ActivityEditScheduleBinding.inflate(layoutInflater)
 
 
-/////////////////////////////////기본 기능 설정///////////////////////////////////////
+
+/////////////////////////////////해당 스케줄인덱스 일정 정보 띄워주기///////////////////////////////////////
+
+        val scheduleShowData = ScheduleShowRequestBody(
+            schedule_index = "1"
+        )
+        Log.d("scheduleData", "onCreate: $scheduleShowData")
+
+
+        var ScheduleShowResponseBody = listOf<ScheduleShowResponseBody>()
+
+        RetrofitAPI.emgMedService5.addUserByEnqueue2(scheduleShowData)
+            .enqueue(object : retrofit2.Callback<ArrayList<ScheduleShowResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<ScheduleShowResponseBody>>,
+                    response: Response<ArrayList<ScheduleShowResponseBody>>
+                ) {
+                    Toast.makeText(applicationContext, "Call Success5", Toast.LENGTH_SHORT)
+                        .show()
+
+                    if (response.isSuccessful) {
+
+                        ScheduleShowResponseBody = response.body()?: listOf()
+                        Log.d("리턴123", "${response.body().toString()}")
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<ScheduleShowResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
+
+
+
+
+
+
+
 
         //0. 기본 시간(현재 시간 넣어주기)
         //변수 초기화, 처음 켰을 때는 현재 시간 보여주기
@@ -180,16 +221,6 @@ class AddScheduleActivity : AppCompatActivity() {
                 endTime = "$endAorP ${endHour}:${endMinute}분"
                 binding.timepickerEnd.text = endTime
 
-
-//                if (hourOfDay > 12) {
-//                    endTime = "오후 ${hourOfDay - 12}:${minute}분"
-//                } else {
-//                    endTime = "오전 ${hourOfDay}:${minute}분"
-//                }
-//                binding.timepickerEnd.text = endTime
-//                Log.d("hourOfDay", "onCreate: $hourOfDay")
-
-
             }
             TimePickerDialog(
                 this,
@@ -256,8 +287,9 @@ class AddScheduleActivity : AppCompatActivity() {
                 "onCreate: $endAorP, $endYear, $endMonth, $endDay, $endHour, $endMinute"
             )
 
-            val scheduleData = ScheduleRequestBody(
+            val scheduleEditData = ScheduleEditRequestBody(
                 couple_index = "1",
+                schedule_index = "1",
                 start_year = startYear,
                 start_month = startMonth,
                 start_day = startDay,
@@ -274,10 +306,10 @@ class AddScheduleActivity : AppCompatActivity() {
                 //place_code = binding.selectPlace.text.toString(),
                 //mission_code = binding.selectMission.text.toString()
             )
-            Log.d("scheduleData", "onCreate: $scheduleData")
+            Log.d("scheduleData", "onCreate: $scheduleEditData")
 
 
-            RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
+            RetrofitAPI.emgMedService4.addUserByEnqueue2(scheduleEditData)
                 .enqueue(object : retrofit2.Callback<Int> {
                     override fun onResponse(
                         call: Call<Int>,
