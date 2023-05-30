@@ -104,6 +104,22 @@ class MainActivity : AppCompatActivity() {
             "30","21:00","2023","5","30","22:00","1","노래방",
             "현하랑 노래부르기","1","1"))
 
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","21:00","2023","5","30","22:00","1","노래방",
+            "현하랑 노래부르기","1","1"))
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","21:00","2023","5","30","22:00","1","노래방",
+            "현하랑 노래부르기","1","1"))
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","21:00","2023","5","30","22:00","1","노래방",
+            "현하랑 노래부르기","1","1"))
+
+        scheduleShowList.add(ScheduleShowResponseBody("1","1","2023","5",
+            "30","21:00","2023","5","30","22:00","1","노래방",
+            "현하랑 노래부르기","1","1"))
+
 
         DayScheduleAdapter.setList(scheduleShowList)
 
