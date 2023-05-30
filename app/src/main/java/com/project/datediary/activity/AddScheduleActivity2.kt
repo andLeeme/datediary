@@ -9,7 +9,7 @@ import com.project.datediary.model.SignUpRequestBody
 import retrofit2.Call
 import retrofit2.Response
 
-class AddScheduleActivity2 : AppCompatActivity() {
+class   AddScheduleActivity2 : AppCompatActivity() {
     lateinit var binding: ActivityAddSchedule2Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +34,8 @@ class AddScheduleActivity2 : AppCompatActivity() {
                             .show()
 
                         if (response.isSuccessful) {
+
+
 
                             binding.text1234.text = "${response.body().toString()}"
                         }

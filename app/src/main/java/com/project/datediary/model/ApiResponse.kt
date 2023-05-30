@@ -1,3 +1,4 @@
 package com.project.datediary.model
 
-data class ApiResponse(val success: Boolean, val message: String)
+data class ApiResponse(
+    val message: String)

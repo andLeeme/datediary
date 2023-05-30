@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -87,23 +86,27 @@ class UploadFragment : Fragment() {
     private fun uploadImage(imageUri: Uri) {
         val file = File(getRealPathFromURI(imageUri))
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         val filePart = MultipartBody.Part.createFormData("file", file.name, requestBody)
 
+        val data  = HashMap<String, String>()
+
+        data["map"] = "1"
+
         lifecycleScope.launch(Dispatchers.IO) {
-            val call = imageUploadService.uploadImage(filePart)
+            val call = imageUploadService.uploadImage(filePart, data)
             val response = call.execute()
 
             launch(Dispatchers.Main) {
                 if (response.isSuccessful) {
                     val apiResponse = response.body()
-                    if (apiResponse != null && apiResponse.success) {
-                        showToast("이미지 업로드 성공: ${apiResponse.message}")
+                    if (apiResponse != null) {
+                        showToast("이미지 업로드 성공: $apiResponse")
                     } else {
-                        showToast("이미지 업로드 실패: ${apiResponse?.message}")
+                        showToast("이미지 업로드 실패")
                     }
                 } else {
-                    showToast("이미지 업로드 실패: ${response.message()}")
+                    showToast("이미지 업로드 실패")
                 }
             }
         }
