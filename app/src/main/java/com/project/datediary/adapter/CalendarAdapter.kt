@@ -129,7 +129,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             CalendarUtil.sMonth = iMonth.toString()
             CalendarUtil.sDay = iDay.toString()
             CalendarUtil.logDate()
-            bottomSheetBehavior.bottomSheetUP()
+            //bottomSheetBehavior.bottomSheetUP()
         }
 
 
