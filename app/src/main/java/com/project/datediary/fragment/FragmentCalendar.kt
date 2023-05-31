@@ -1,5 +1,6 @@
 package com.project.datediary.fragment
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,9 +10,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.adapter.CalendarAdapter
+import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.databinding.ActivityMainBinding
+import com.project.datediary.model.ScheduleShowResponseBody
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
@@ -25,6 +31,7 @@ class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
     lateinit var binding2: ActivityMainBinding
+    lateinit var DayScheduleAdapter: DayScheduleAdapter
     var month_view = Int
 
     //lateinit var calendar: Calendar
@@ -32,21 +39,108 @@ class FragmentCalendar : Fragment() {
     //년월 변수
     //lateinit var selectedDate: LocalDate
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
         binding2 = ActivityMainBinding.inflate(inflater, container, false)
-        //현재 날짜
-        //selectedDate  = LocalDate.now()
-        //CalendarUtil.selectedDate  = LocalDate.now() //Util 만들어준 후 이렇게 씀
-
-        //초기화
-        //calendar = Calendar.getInstance()
 
         //화면 설정
         setMonthView()
 
+        binding.addBtn.setOnClickListener {
+            val intent = Intent(context, AddScheduleActivity::class.java)
+            startActivity(intent)
+        }
+
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+        binding.image1.setOnClickListener {
+
+            //BottomSheetBehavior.from(bottomSheetBehavior의 자식 요소 넣어주기)
+            if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+            } else {
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)
+            }
+            Log.d(
+                "DateFromUtil",
+                "onCreate: ${CalendarUtil.sMonth}.${CalendarUtil.sDay}.${CalendarUtil.sYear}"
+            )
+        }
+
+
+
+        DayScheduleAdapter = DayScheduleAdapter()
+
+        binding.recycler10.apply {
+            adapter = DayScheduleAdapter
+            layoutManager = LinearLayoutManager(context)
+            setHasFixedSize(true)
+        }
+
+
+        val scheduleShowList: ArrayList<ScheduleShowResponseBody> =
+            ArrayList<ScheduleShowResponseBody>()
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "09:00", "2023", "5", "30", "10:00", "1", "영화관",
+                "현하랑 영화보기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "20:00", "2023", "5", "30", "21:00", "1", "산책",
+                "현하랑 산책하기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+                "현하랑 노래부르기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+                "현하랑 노래부르기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+                "현하랑 노래부르기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+                "현하랑 노래부르기", "1", "1"
+            )
+        )
+
+        scheduleShowList.add(
+            ScheduleShowResponseBody(
+                "1", "1", "2023", "5",
+                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+                "현하랑 노래부르기", "1", "1"
+            )
+        )
+
+        DayScheduleAdapter.setList(scheduleShowList)
 
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
@@ -60,10 +154,6 @@ class FragmentCalendar : Fragment() {
             CalendarUtil.selectedDate.add(Calendar.MONTH, 1) //현재 달 +1
             setMonthView()
         }
-
-
-
-
 
         return binding.root
     }
@@ -109,7 +199,7 @@ class FragmentCalendar : Fragment() {
                     if (response.isSuccessful) {
                         Log.d("리턴", "onResponse: ${response.body()}")
 
-                        TitleResponseBody = response.body()?: listOf()
+                        TitleResponseBody = response.body() ?: listOf()
 
                         val adapter = CalendarAdapter(dayList, TitleResponseBody)
                         //adapter.setList(TitleResponseBody)
@@ -123,6 +213,12 @@ class FragmentCalendar : Fragment() {
 
                         //어댑터 적용
                         binding.recyclerView.adapter = adapter
+
+                        adapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
+                            override fun onClick(v: View, position: Int) {
+                                binding.image1.performClick()
+                            }
+                        })
                     }
                 }
 
@@ -146,9 +242,8 @@ class FragmentCalendar : Fragment() {
         return "$month 월 $year"
     }
 
-
     //날짜 생성
-    private fun dayInMonthArray(): ArrayList<Date>{
+    private fun dayInMonthArray(): ArrayList<Date> {
 
         var dayList = ArrayList<Date>()
 
@@ -158,13 +253,13 @@ class FragmentCalendar : Fragment() {
         monthCalendar[Calendar.DAY_OF_MONTH] = 1
 
         //해당 달의 1일의 요일[1:일요일, 2: 월요일.... 7일: 토요일]
-        val firstDayOfMonth = monthCalendar[Calendar.DAY_OF_WEEK]-1
+        val firstDayOfMonth = monthCalendar[Calendar.DAY_OF_WEEK] - 1
 
         //요일 숫자만큼 이전 날짜로 설정
         //예: 6월1일이 수요일이면 3만큼 이전날짜 셋팅
         monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
 
-        while(dayList.size < 42){
+        while (dayList.size < 42) {
 
             dayList.add(monthCalendar.time)
 

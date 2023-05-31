@@ -1,6 +1,5 @@
 package com.project.datediary.adapter
 
-import android.content.Context
 import android.graphics.Color
 import android.util.Log
 import android.view.Gravity
@@ -11,15 +10,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.R
-import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
-import com.project.datediary.util.bottomSheetBehavior
-import kotlinx.coroutines.NonDisposableHandle.parent
-import kotlinx.coroutines.currentCoroutineContext
 import java.util.Calendar
 import java.util.Date
-import java.util.zip.Inflater
 
 
 class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData: List<TitleResponseBody>) :
@@ -46,6 +40,16 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
 
         return ItemViewHolder(view)
     }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+    // (4) setItemClickListener로 설정한 함수 실행
+    private lateinit var itemClickListener : OnItemClickListener
 
     //데이터 설정
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
@@ -129,8 +133,10 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             CalendarUtil.sMonth = iMonth.toString()
             CalendarUtil.sDay = iDay.toString()
             CalendarUtil.logDate()
-            //bottomSheetBehavior.bottomSheetUP()
+
+            itemClickListener.onClick(it, position)
         }
+
 
 
 
