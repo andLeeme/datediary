@@ -4,6 +4,7 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -23,9 +24,15 @@ import com.project.datediary.fragment.FragmentHome
 import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
+import com.project.datediary.databinding.FragmentCalendarBinding
 import com.project.datediary.model.Coin
 import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.util.CalendarUtil
+import com.project.datediary.util.CalendarUtil.Companion.sDay
+import com.project.datediary.util.CalendarUtil.Companion.sMonth
+import com.project.datediary.util.CalendarUtil.Companion.sYear
+import com.project.datediary.util.bottomSheetBehavior
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,8 +40,20 @@ import retrofit2.Response
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    lateinit var binding2: FragmentCalendarBinding
 
     lateinit var DayScheduleAdapter: DayScheduleAdapter
+
+
+
+    //bottomSheetBehavior 객체 생성
+//    companion object {
+//        private lateinit var binding: ActivityMainBinding
+//        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+//    }
+
+
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +61,7 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding2 = FragmentCalendarBinding.inflate(layoutInflater)
 
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             // Create your custom animation.
@@ -84,16 +104,24 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
         binding.image1.setOnClickListener {
 
             //BottomSheetBehavior.from(bottomSheetBehavior의 자식 요소 넣어주기)
-            val bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-
             if(bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
             } else {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)}
+                bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED)}
+            Log.d("DateFromUtil", "onCreate: ${CalendarUtil.sMonth}.${CalendarUtil.sDay}.${CalendarUtil.sYear}")
         }
+
+//        if(bottomSheetBehavior.bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+//        Log.d("DateFromUtil", "onCreate: ${CalendarUtil.sMonth}.${CalendarUtil.sDay}.${CalendarUtil.sYear}")
+//        }
+
+
 
         DayScheduleAdapter = DayScheduleAdapter()
 
@@ -211,4 +239,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }

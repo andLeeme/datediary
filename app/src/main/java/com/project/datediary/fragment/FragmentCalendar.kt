@@ -1,7 +1,5 @@
 package com.project.datediary.fragment
 
-import android.animation.ObjectAnimator
-import android.content.Context
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,22 +10,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.gson.JsonObject
 import com.project.datediary.adapter.CalendarAdapter
-import com.project.datediary.adapter.customAdapter
 import com.project.datediary.databinding.ActivityMainBinding
-import com.project.datediary.model.ScheduleRequestBody
-import com.project.datediary.model.ScheduleResponseBody
-import com.project.datediary.model.SignUpRequestBody
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
-import com.project.datediary.model.dataVO
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
 import retrofit2.Response
-import java.time.LocalDate
-import java.time.YearMonth
-import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Date
 
@@ -71,6 +60,10 @@ class FragmentCalendar : Fragment() {
             CalendarUtil.selectedDate.add(Calendar.MONTH, 1) //현재 달 +1
             setMonthView()
         }
+
+
+
+
 
         return binding.root
     }

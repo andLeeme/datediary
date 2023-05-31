@@ -9,17 +9,10 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
-import com.project.datediary.databinding.ActivityAddScheduleBinding
 import com.project.datediary.databinding.ActivityEditScheduleBinding
-import com.project.datediary.model.Constants
-import com.project.datediary.model.Place
 import com.project.datediary.model.ScheduleEditRequestBody
-import com.project.datediary.model.ScheduleRequestBody
-import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.ScheduleShowRequestBody
 import com.project.datediary.model.ScheduleShowResponseBody
-import com.project.datediary.model.TitleResponseBody
-import com.project.datediary.util.DialogList
 import retrofit2.Call
 import retrofit2.Response
 import java.time.LocalDateTime

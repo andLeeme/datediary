@@ -1,9 +1,7 @@
 package com.project.datediary.adapter
 
+import android.content.Context
 import android.graphics.Color
-import android.graphics.Typeface
-import android.icu.text.CaseMap.Title
-import android.text.Layout
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -12,15 +10,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.project.datediary.R
-import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.model.TitleResponseBody
-import com.project.datediary.model.titleTest
 import com.project.datediary.util.CalendarUtil
+import com.project.datediary.util.bottomSheetBehavior
+import kotlinx.coroutines.NonDisposableHandle.parent
+import kotlinx.coroutines.currentCoroutineContext
 import java.util.Calendar
 import java.util.Date
+import java.util.zip.Inflater
 
 
 class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData: List<TitleResponseBody>) :
@@ -50,6 +49,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
 
     //데이터 설정
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+
 
         Log.d("titleResponse", "onBindViewHolder: $titleResponse")
         //날짜 변수에 담기
@@ -125,13 +125,14 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             holder.itemView.setBackgroundColor(Color.LTGRAY)
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+            CalendarUtil.sYear = iYear.toString()
+            CalendarUtil.sMonth = iMonth.toString()
+            CalendarUtil.sDay = iDay.toString()
+            CalendarUtil.logDate()
+            bottomSheetBehavior.bottomSheetUP()
         }
-//
-//        holder.itemView.setOnFocusChangeListener { v, hasFocus ->
-//            if(hasFocus) {
-//                holder.itemView.setBackgroundColor(Color.RED)
-//            }
-//        }
+
+
 
         //날짜 클릭하면 오늘의 일정 나오게 함
 //        holder.itemView.setOnClickListener {
@@ -401,6 +402,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
     override fun getItemCount(): Int {
         return dayList.size
     }
+
 
 }
 
