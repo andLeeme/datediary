@@ -36,6 +36,7 @@ import com.project.datediary.util.bottomSheetBehavior
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -198,6 +199,17 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
                         .commitAllowingStateLoss()
                     binding.bottomSheetDrawer.visibility = View.VISIBLE
+
+                    //홈에서는 오늘 날짜로 초기화
+                    CalendarUtil.sYear = LocalDateTime.now().format(CalendarUtil.formatterYear).toString()
+                    CalendarUtil.sMonth = LocalDateTime.now().format(CalendarUtil.formatterMonth).toString()
+                    CalendarUtil.sDay = LocalDateTime.now().format(CalendarUtil.formatterDay).toString()
+                    CalendarUtil.logDate()
+
+                    //이미지 누르면 bottomsheet clicklistner작동
+                    binding.image1.performClick()
+
+
                     return@setOnItemSelectedListener true
                 }
 
