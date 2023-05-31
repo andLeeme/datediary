@@ -217,6 +217,23 @@ class FragmentCalendar : Fragment() {
                         adapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
                             override fun onClick(v: View, position: Int) {
                                 binding.image1.performClick()
+                                binding.selectedDay.text = CalendarUtil.sDay
+
+                                var DWText = binding.selectedDW
+                                if(position == 0) {
+                                    DWText.text = "일요일"
+                                }
+                                else {
+                                    when (position % 7) {
+                                        0 -> DWText.text = "일요일"
+                                        1 -> DWText.text = "월요일"
+                                        2 -> DWText.text = "화요일"
+                                        3 -> DWText.text = "수요일"
+                                        4 -> DWText.text = "목요일"
+                                        5 -> DWText.text = "금요일"
+                                        6 -> DWText.text = "토요일"
+                                    }
+                                }
                             }
                         })
                     }

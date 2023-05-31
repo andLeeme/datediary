@@ -319,6 +319,7 @@
                                 android:layout_weight="1.2">
 
                                 <TextView
+                                    android:id="@+id/selectedDay"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:fontFamily="@font/lottemartd_bold"
@@ -335,6 +336,7 @@
                                 android:layout_weight="1">
 
                                 <TextView
+                                    android:id="@+id/selectedDW"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:fontFamily="@font/lottemartd_bold"
