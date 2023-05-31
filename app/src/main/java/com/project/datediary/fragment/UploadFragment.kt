@@ -91,7 +91,7 @@ class UploadFragment : Fragment() {
 
         val data  = HashMap<String, String>()
 
-        data["map"] = "1"
+        data["couple_index"] = "1"
 
         Toast.makeText(context, "$data", Toast.LENGTH_SHORT).show()
 
