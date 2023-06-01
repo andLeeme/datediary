@@ -18,7 +18,6 @@ class FragmentHome : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
 
-
         return binding.root
     }
 
