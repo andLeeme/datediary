@@ -3,9 +3,12 @@ package com.project.datediary.activity
 import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
@@ -163,5 +166,48 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+
+    override fun onBackPressed() {
+        Toast.makeText(applicationContext, "뒤로가기 눌러짐", Toast.LENGTH_SHORT).show()
+
+
+        //현재 프래그먼트의 아이디를 가져옴 근데 머라머라 길게 나옴
+        //FragmentGraph{ad92255} (fd9338a8-56a1-4298-93f6-fd00ca33e7b9 id=0x7f0a0115) 이렇게...
+        val fragment  = supportFragmentManager.findFragmentById(R.id.main_frm)
+        Log.d("fragmentTest1", "onBackPressed: $fragment")
+
+        //프래그먼트 아이디의 앞부분만 split()해서 써야됨
+        // 그러면 현재 프래그먼트가 FragmentGraph와 같이 나옴
+        var splitedFragment = fragment.toString().split("{")
+        Log.d("fragmentTest2", "onBackPressed: ${splitedFragment[0]}")
+
+
+        //이제 home이면 앱이 꺼지게 하고
+        //다른 프래그먼트였으면 홈으로 오게 함
+        //홈과 캘린더 프래그먼트에서는 bottomsheet의 상태를 한 번 더 체크함
+
+
+
+        when(splitedFragment[0]) {
+            "FragmentHome" ->
+                if(0 == 0){
+
+                }else {
+
+                }
+            "FragmentStory", "FragmentGraph", "FragmentMyPage" -> {
+
+                //홈이 선택된 상태로 만듦
+                //2131362030 이게 홈 프래그먼트의 ID임
+                binding.mainBnv.selectedItemId = 2131362030.toInt()
+            }
+
+            "FragmentCalendar" -> 0==0
+
+        }
+    }
+
+
 
 }

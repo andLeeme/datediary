@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.DayScheduleAdapter
@@ -30,7 +31,6 @@ import java.util.Date
 class FragmentCalendar : Fragment() {
 
     lateinit var binding: FragmentCalendarBinding
-    lateinit var binding2: ActivityMainBinding
     lateinit var DayScheduleAdapter: DayScheduleAdapter
     var month_view = Int
 
@@ -44,7 +44,6 @@ class FragmentCalendar : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
-        binding2 = ActivityMainBinding.inflate(inflater, container, false)
 
         //화면 설정
         setMonthView()
@@ -155,6 +154,13 @@ class FragmentCalendar : Fragment() {
             setMonthView()
         }
 
+
+
+        //상단 날짜 누르면 bottomsheet 내려감
+        binding.monthYearText.setOnClickListener { bottomDown() }
+
+
+
         return binding.root
     }
 
@@ -213,6 +219,9 @@ class FragmentCalendar : Fragment() {
 
                         //어댑터 적용
                         binding.recyclerView.adapter = adapter
+
+
+
 
                         adapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
                             override fun onClick(v: View, position: Int) {
@@ -285,6 +294,21 @@ class FragmentCalendar : Fragment() {
         }
 
         return dayList
+    }
+
+    fun bottomGetState() : Int {
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        var bottomState = bottomSheetBehavior.getState()
+        Log.d("BTStateGet", "onResponse: $bottomState")
+
+        return bottomState
+    }
+
+    fun bottomDown() {
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.setState(STATE_COLLAPSED)
+        var bottomState = bottomSheetBehavior.getState()
+        Log.d("BTStateSet", "onResponse: $bottomState")
     }
 
 }

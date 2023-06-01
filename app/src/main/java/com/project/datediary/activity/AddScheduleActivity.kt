@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityAddScheduleBinding
 import com.project.datediary.model.ScheduleRequestBody
+import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
 import retrofit2.Response
 import java.time.LocalDateTime
@@ -44,16 +45,28 @@ class AddScheduleActivity : AppCompatActivity() {
         val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
         val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
 
-        var startDate = current.format(formatterDate)
+
+        var startDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
         var startTime = current.format(formatterTime)
-        var endDate = current.format(formatterDate)
+        var endDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
         var endTime = current.format(formatterTime)
-        var alertDate = current.format(formatterAlert)
+        var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
+
+
+//        var startDate = current.format(formatterDate)
+//        var startTime = current.format(formatterTime)
+//        var endDate = current.format(formatterDate)
+//        var endTime = current.format(formatterTime)
+//        var alertDate = current.format(formatterAlert)
 
         binding.datepickerStart.text = startDate
         binding.timepickerStart.text = startTime
         binding.datepickerEnd.text = endDate
         binding.timepickerEnd.text = endTime
+
+
+
+
 
         var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
         var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
@@ -201,14 +214,20 @@ class AddScheduleActivity : AppCompatActivity() {
         //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
         binding.allDayCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+                startHour = ""
+                startMinute = ""
+                endHour = ""
+                endMinute = ""
                 binding.timepickerStart.text = "-"
                 binding.timepickerEnd.text = "-"
                 binding.timepickerStart.isClickable = false
                 binding.timepickerEnd.isClickable = false
                 ADChkBox = "1"
             } else {
-                binding.timepickerStart.text = startTime
-                binding.timepickerEnd.text = endTime
+                binding.timepickerStart.text = "$startAorP ${startHour}:${startMinute}분"
+                binding.timepickerEnd.text = "$endAorP ${endHour}:${endMinute}분"
+                startTime = "$startAorP ${startHour}:${startMinute}분"
+                endTime = "$endAorP ${endHour}:${endMinute}분"
                 binding.timepickerStart.isClickable = true
                 binding.timepickerEnd.isClickable = true
                 ADChkBox = "0"
@@ -252,16 +271,27 @@ class AddScheduleActivity : AppCompatActivity() {
                 "onCreate: $endAorP, $endYear, $endMonth, $endDay, $endHour, $endMinute"
             )
 
+            var startTime1 = ""
+            var endTime1 = ""
+
+            if(ADChkBox =="1") {
+                startTime1 = ""
+                endTime1 = ""
+            } else {
+                startTime1 = "$startHour:$startMinute"
+                endTime1 = "$endHour:$endMinute"
+            }
+
             val scheduleData = ScheduleRequestBody(
                 couple_index = "1",
                 start_year = startYear,
                 start_month = startMonth,
                 start_day = startDay,
-                start_time = "$startHour:$startMinute",
+                start_time = startTime1,
                 end_year = endYear,
                 end_month = endMonth,
                 end_day = endDay,
-                end_time = "$endHour:$endMinute",
+                end_time = endTime1,
                 allDayCheck = ADChkBox,
                 title = title,
                 contents = contents,

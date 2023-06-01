@@ -157,7 +157,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             title.add(titleResponse[i])
         }
 
-        Log.d("title2", "onBindViewHolder: $title")
+        //Log.d("title2", "onBindViewHolder: $title")
 
 
         for (i in 0 until title.size) {
@@ -167,7 +167,8 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
         //없으면 빈 배열 add해주기
         if(title.size<4) {
             for( i in 1..(4-title.size)) {
-                title.add(TitleResponseBody("", "", "", "", "", "", "true", ""))
+                title.add(TitleResponseBody("","", "", "", "", "","",
+                    "","", "", "true", "", "", "", ""))
             }
         }
 

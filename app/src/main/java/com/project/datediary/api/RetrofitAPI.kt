@@ -52,7 +52,7 @@ object RetrofitAPI {
         retrofit.create(ScheduleService::class.java)
     }
 
-    //달력용
+    //달력 + 그날 일정 보여주는 용
     val emgMedService3: TitleService by lazy {
         retrofit.create(TitleService::class.java)
     }
