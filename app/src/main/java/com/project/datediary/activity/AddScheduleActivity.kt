@@ -66,7 +66,6 @@ class AddScheduleActivity : AppCompatActivity() {
         binding.timepickerEnd.text = endTime
 
 
-
         var startYear = CalendarUtil.sYear
         var startMonth = CalendarUtil.sMonth
         var startDay = CalendarUtil.sDay
@@ -82,7 +81,6 @@ class AddScheduleActivity : AppCompatActivity() {
         var ADChkBox = "0"
         var placeCode = ""
         var missionCode = ""
-
 
 
 //        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
@@ -301,10 +299,11 @@ class AddScheduleActivity : AppCompatActivity() {
                 endTime1 = "$endHour:$endMinute"
             }
 
-            if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()) {
-
-                Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT).show()
-
+            if (title == "") {
+                Toast.makeText(applicationContext, "일정 제목을 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()) {
+                Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT)
+                    .show()
             } else {
 
                 val scheduleData = ScheduleRequestBody(
@@ -388,7 +387,7 @@ class AddScheduleActivity : AppCompatActivity() {
     private fun matchPlaceCode(): String? {
 
         var Pcode = ""
-        when(binding.selectPlace.text.toString()) {
+        when (binding.selectPlace.text.toString()) {
             "" -> Pcode = ""
             "영화관" -> Pcode = "1"
             "바/주점" -> Pcode = "2"
@@ -461,7 +460,7 @@ class AddScheduleActivity : AppCompatActivity() {
     private fun matchMissionCode(): String? {
 
         var Mcode = ""
-        when(binding.selectMission.text.toString()) {
+        when (binding.selectMission.text.toString()) {
             "" -> Mcode = ""
             "팝콘 받아 먹은 사람이 사랑한다고 말해주기" -> Mcode = "1"
             "바/영화 보는 동안 팔짱 끼기" -> Mcode = "2"
