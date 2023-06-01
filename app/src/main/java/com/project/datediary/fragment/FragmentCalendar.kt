@@ -179,7 +179,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
 
 
-                        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
+        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
                         //오늘 정보 가공
                         var scheduleList = ArrayList<TitleResponseBody>()
                         Log.d("scheduleList1", "bind: ${TitleResponseBody}")
@@ -238,7 +238,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     }
                                 }
 
-                                //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
+           //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
                                 //선택한 날의 정보 가공
                                 var scheduleList = ArrayList<TitleResponseBody>()
