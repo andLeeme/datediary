@@ -171,8 +171,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun callHome() {
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
-            .commitAllowingStateLoss()
+        binding.mainBnv.selectedItemId = R.id.home
     }
 
 
