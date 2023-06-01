@@ -27,12 +27,12 @@ class FragmentLoginTest : Fragment() {
 
             try {
                 val account = task.getResult(ApiException::class.java)
-                Toast.makeText(context, "혹시..?", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "된건가..?", Toast.LENGTH_SHORT).show()
                 // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
                 val userName = account.givenName
                 val serverAuth = account.serverAuthCode
 
-                Toast.makeText(context, "$userName", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "이름 : $userName 이메일 : $serverAuth", Toast.LENGTH_SHORT).show()
 
                 moveSignUpActivity()
 
