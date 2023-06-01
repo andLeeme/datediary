@@ -214,20 +214,22 @@ class AddScheduleActivity : AppCompatActivity() {
         //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
         binding.allDayCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-                startHour = ""
-                startMinute = ""
-                endHour = ""
-                endMinute = ""
+//                startHour = ""
+//                startMinute = ""
+//                endHour = ""
+//                endMinute = ""
                 binding.timepickerStart.text = "-"
                 binding.timepickerEnd.text = "-"
                 binding.timepickerStart.isClickable = false
                 binding.timepickerEnd.isClickable = false
                 ADChkBox = "1"
             } else {
-                binding.timepickerStart.text = "$startAorP ${startHour}:${startMinute}분"
-                binding.timepickerEnd.text = "$endAorP ${endHour}:${endMinute}분"
-                startTime = "$startAorP ${startHour}:${startMinute}분"
-                endTime = "$endAorP ${endHour}:${endMinute}분"
+
+//                startTime = "$startAorP ${startHour}:${startMinute}분"
+//                endTime = "$endAorP ${endHour}:${endMinute}분"
+                binding.timepickerStart.text = startTime
+                binding.timepickerEnd.text = endTime
+
                 binding.timepickerStart.isClickable = true
                 binding.timepickerEnd.isClickable = true
                 ADChkBox = "0"
@@ -281,6 +283,9 @@ class AddScheduleActivity : AppCompatActivity() {
                 startTime1 = "$startHour:$startMinute"
                 endTime1 = "$endHour:$endMinute"
             }
+
+
+
 
             val scheduleData = ScheduleRequestBody(
                 couple_index = "1",
