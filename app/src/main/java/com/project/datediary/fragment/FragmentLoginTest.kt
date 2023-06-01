@@ -16,6 +16,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentLoginTestBinding
+import kotlin.math.log
 
 
 class FragmentLoginTest : Fragment() {
@@ -30,9 +31,12 @@ class FragmentLoginTest : Fragment() {
                 Toast.makeText(context, "된건가..?", Toast.LENGTH_SHORT).show()
                 // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
                 val userName = account.givenName
-                val serverAuth = account.serverAuthCode
+                val userEmali = account.email
+                val user = account.account
 
-                Toast.makeText(context, "이름 : $userName 이메일 : $serverAuth", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "이름 : $userName 이메일 : $userEmali", Toast.LENGTH_SHORT).show()
+
+                Log.d("user", "$user")
 
                 moveSignUpActivity()
 
