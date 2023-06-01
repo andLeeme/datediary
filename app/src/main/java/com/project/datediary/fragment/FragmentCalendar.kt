@@ -122,6 +122,9 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
         //년월 텍스트뷰 셋팅
         binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
+        binding.selectedDay.text = CalendarUtil.sDay
+        binding.selectedDW.text = CalendarUtil.sDOW
+
 
         //날짜 생성해서 리스트에 담기
         val dayList = dayInMonthArray()
@@ -174,12 +177,47 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         binding.recyclerView.adapter = adapter
 
 
+
+
+                        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
+
+                        //오늘 정보 가공
+                        var scheduleList = ArrayList<TitleResponseBody>()
+                        Log.d("scheduleList1", "bind: ${TitleResponseBody}")
+
+                        for (i in TitleResponseBody.indices) {
+                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+                                scheduleList.add(TitleResponseBody[i])
+                            }
+                        }
+                        Log.d("scheduleList2", "bind: $scheduleList")
+
+
+                        //어댑터에 넣어주기
+                        val adapter2 = DayScheduleAdapter(scheduleList)
+
+                        //레이아웃 설정
+                        var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+
+                        //레이아웃 적용
+                        binding.recycler10.layoutManager = manager2
+
+                        //어댑터 적용
+                        binding.recycler10.adapter = adapter2
+
+
+
+
+
+
+
+
                         adapter.setItemClickListener(object : CalendarAdapter.OnItemClickListener {
                             override fun onClick(v: View, position: Int) {
                                 binding.image1.performClick()
-                                binding.selectedDay.text = CalendarUtil.sDay
 
                                 //선택한 날의 날짜와 요일을 바텀시트에 그려줌
+                                binding.selectedDay.text = CalendarUtil.sDay
                                 var DWText = binding.selectedDW
                                 if (position == 0) {
                                     DWText.text = "일요일"
@@ -212,9 +250,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 //어댑터에 넣어주기
                                 val adapter2 = DayScheduleAdapter(scheduleList)
 
-                                //레이아웃 설정(열 7개)
-                                var manager2: RecyclerView.LayoutManager =
-                                    LinearLayoutManager(context)
+                                //레이아웃 설정
+                                var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
 
                                 //레이아웃 적용
                                 binding.recycler10.layoutManager = manager2
@@ -227,8 +264,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 adapter2.setItemClickListener(object :
                                     DayScheduleAdapter.OnItemClickListener {
                                     override fun onClick(v: View, position: Int) {
-                                        val intent = Intent(context, EditScheduleActivity::class.java)
-                                        startActivity(intent)
+                                        val intent2 = Intent(context, EditScheduleActivity::class.java)
+                                        startActivity(intent2)
                                     }
                                 })
 
@@ -310,6 +347,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
             (activity as MainActivity).callHome()
         }
     }
+
+
 
 }
 
