@@ -1,17 +1,14 @@
 package com.project.datediary.activity
 
-import RetrofitAPI
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
-import com.project.datediary.databinding.ActivityAddScheduleBinding
 import com.project.datediary.databinding.ActivityEditScheduleBinding
-import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
@@ -21,24 +18,14 @@ import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
-
 class EditScheduleActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityEditScheduleBinding
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_schedule)
 
         binding = ActivityEditScheduleBinding.inflate(layoutInflater)
-
-
-
-/////////////////////////////////기본 기능 설정///////////////////////////////////////
-
-        //0. 기본 시간(현재 시간 넣어주기)
-        //변수 초기화, 처음 켰을 때는 현재 시간 보여주기
         val current = LocalDateTime.now()
         val formatterDate = DateTimeFormatter.ofPattern("yyyy년 M월 d일")
         val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
@@ -51,6 +38,12 @@ class EditScheduleActivity : AppCompatActivity() {
         var endTime = current.format(formatterTime)
         var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
 
+
+//        var startDate = current.format(formatterDate)
+//        var startTime = current.format(formatterTime)
+//        var endDate = current.format(formatterDate)
+//        var endTime = current.format(formatterTime)
+//        var alertDate = current.format(formatterAlert)
 
         binding.datepickerStart.text = startDate
         binding.timepickerStart.text = startTime
@@ -73,6 +66,23 @@ class EditScheduleActivity : AppCompatActivity() {
         var ADChkBox = "0"
         var placeCode = ""
         var missionCode = ""
+
+
+//        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
+//        var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
+//        var startDay = current.format(DateTimeFormatter.ofPattern("d"))
+//        var startHour = current.format(DateTimeFormatter.ofPattern("k"))
+//        var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
+//        var startAorP = "오전"
+//        var endYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
+//        var endMonth = current.format(DateTimeFormatter.ofPattern("M"))
+//        var endDay = current.format(DateTimeFormatter.ofPattern("d"))
+//        var endHour = current.format(DateTimeFormatter.ofPattern("k"))
+//        var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
+//        var endAorP = "오전"
+//        var ADChkBox = "0"
+//        var placeCode = ""
+//        var missionCode = ""
 
 
         //안내 문구 초기화
