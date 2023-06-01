@@ -180,7 +180,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
 
                         //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
-
                         //오늘 정보 가공
                         var scheduleList = ArrayList<TitleResponseBody>()
                         Log.d("scheduleList1", "bind: ${TitleResponseBody}")
@@ -196,6 +195,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         //어댑터에 넣어주기
                         val adapter2 = DayScheduleAdapter(scheduleList)
 
+
+
                         //레이아웃 설정
                         var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
 
@@ -205,11 +206,15 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         //어댑터 적용
                         binding.recycler10.adapter = adapter2
 
-
-
-
-
-
+                        //아이템 클릭하면 EditSchedule Activity 소환!
+                        adapter2.dayScheduleSetItemClickListener(object :
+                            DayScheduleAdapter.DayScheduleOnItemClickListener {
+                            override fun dayScheduleOnClick(v: View, position: Int) {
+                                val intent =
+                                    Intent(context, AddScheduleActivity::class.java)
+                                startActivity(intent)
+                            }
+                        })
 
 
                         adapter.setItemClickListener(object : CalendarAdapter.OnItemClickListener {
@@ -260,12 +265,12 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 binding.recycler10.adapter = adapter2
 
                                 //아이템 클릭하면 EditSchedule Activity 소환!
-
-                                adapter2.setItemClickListener(object :
-                                    DayScheduleAdapter.OnItemClickListener {
-                                    override fun onClick(v: View, position: Int) {
-                                        val intent2 = Intent(context, EditScheduleActivity::class.java)
-                                        startActivity(intent2)
+                                adapter2.dayScheduleSetItemClickListener(object :
+                                    DayScheduleAdapter.DayScheduleOnItemClickListener {
+                                    override fun dayScheduleOnClick(v: View, position: Int) {
+                                        val intent =
+                                            Intent(context, AddScheduleActivity::class.java)
+                                        startActivity(intent)
                                     }
                                 })
 

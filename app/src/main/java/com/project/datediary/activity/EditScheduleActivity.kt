@@ -29,7 +29,7 @@ class EditScheduleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_schedule)
+        setContentView(R.layout.activity_edit_schedule)
 
         binding = ActivityEditScheduleBinding.inflate(layoutInflater)
 
