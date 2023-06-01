@@ -21,6 +21,8 @@ class FragmentHome : Fragment() {
 
         return binding.root
     }
+
+
 }
 
 

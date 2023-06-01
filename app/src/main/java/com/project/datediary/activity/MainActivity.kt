@@ -32,13 +32,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding2: FragmentCalendarBinding
 
 
-
     //bottomSheetBehavior 객체 생성
 //    companion object {
 //        private lateinit var binding: ActivityMainBinding
 //        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 //    }
-
 
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -92,9 +90,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
-
-
 //        binding.sheetText1.setOnClickListener {
 //            if (binding.sheetText1.text.toString() == "바뀐 일정") {
 //                binding.sheetText1.text = "오늘의 일정이에요"
@@ -123,9 +118,12 @@ class MainActivity : AppCompatActivity() {
                         .commitAllowingStateLoss()
 
                     //홈에서는 오늘 날짜로 초기화
-                    CalendarUtil.sYear = LocalDateTime.now().format(CalendarUtil.formatterYear).toString()
-                    CalendarUtil.sMonth = LocalDateTime.now().format(CalendarUtil.formatterMonth).toString()
-                    CalendarUtil.sDay = LocalDateTime.now().format(CalendarUtil.formatterDay).toString()
+                    CalendarUtil.sYear =
+                        LocalDateTime.now().format(CalendarUtil.formatterYear).toString()
+                    CalendarUtil.sMonth =
+                        LocalDateTime.now().format(CalendarUtil.formatterMonth).toString()
+                    CalendarUtil.sDay =
+                        LocalDateTime.now().format(CalendarUtil.formatterDay).toString()
                     CalendarUtil.logDate()
 
 
@@ -167,47 +165,55 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    interface onBackPressedListener {
+        fun onBackPressed()
+    }
+
+
+    fun callHome() {
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
+            .commitAllowingStateLoss()
+    }
+
 
     override fun onBackPressed() {
+        //아래와 같은 코드를 추가하도록 한다
+        //해당 엑티비티에서 띄운 프래그먼트에서 뒤로가기를 누르게 되면 프래그먼트에서 구현한 onBackPressed 함수가 실행되게 된다.
+        val fragmentList = supportFragmentManager.fragments
+        for (fragment in fragmentList) {
+            if (fragment is onBackPressedListener) {
+                (fragment as onBackPressedListener).onBackPressed()
+                return
+            }
+        }
+
         Toast.makeText(applicationContext, "뒤로가기 눌러짐", Toast.LENGTH_SHORT).show()
 
 
         //현재 프래그먼트의 아이디를 가져옴 근데 머라머라 길게 나옴
         //FragmentGraph{ad92255} (fd9338a8-56a1-4298-93f6-fd00ca33e7b9 id=0x7f0a0115) 이렇게...
-        val fragment  = supportFragmentManager.findFragmentById(R.id.main_frm)
-        Log.d("fragmentTest1", "onBackPressed: $fragment")
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_frm)
 
-        //프래그먼트 아이디의 앞부분만 split()해서 써야됨
-        // 그러면 현재 프래그먼트가 FragmentGraph와 같이 나옴
         var splitedFragment = fragment.toString().split("{")
-        Log.d("fragmentTest2", "onBackPressed: ${splitedFragment[0]}")
 
+        when (splitedFragment[0]) {
+            "FragmentHome" -> finish()
 
-        //이제 home이면 앱이 꺼지게 하고
-        //다른 프래그먼트였으면 홈으로 오게 함
-        //홈과 캘린더 프래그먼트에서는 bottomsheet의 상태를 한 번 더 체크함
-
-
-
-        when(splitedFragment[0]) {
-            "FragmentHome" ->
-                if(0 == 0){
-
-                }else {
-
-                }
             "FragmentStory", "FragmentGraph", "FragmentMyPage" -> {
+
 
                 //홈이 선택된 상태로 만듦
                 //2131362030 이게 홈 프래그먼트의 ID임
-                binding.mainBnv.selectedItemId = 2131362030.toInt()
+                callHome()
             }
 
-            "FragmentCalendar" -> 0==0
+
+//            "FragmentCalendar" -> {}
 
         }
-    }
 
+
+    }
 
 
 }

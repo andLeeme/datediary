@@ -60,6 +60,15 @@ class FragmentStory : Fragment() {
         }
 
 
+        binding.button6.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainer, FragmentLoginTest())
+                .commit()
+            binding.fragmentStory.visibility = View.INVISIBLE
+
+        }
+
+
         return binding.root
     }
 }

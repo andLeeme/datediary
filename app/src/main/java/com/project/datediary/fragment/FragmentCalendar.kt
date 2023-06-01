@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
+import com.project.datediary.R
 import com.project.datediary.activity.AddScheduleActivity
+import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.databinding.ActivityMainBinding
@@ -28,7 +30,7 @@ import java.util.Calendar
 import java.util.Date
 
 
-class FragmentCalendar : Fragment() {
+class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
     lateinit var binding: FragmentCalendarBinding
     lateinit var DayScheduleAdapter: DayScheduleAdapter
@@ -155,7 +157,6 @@ class FragmentCalendar : Fragment() {
         }
 
 
-
         //상단 날짜 누르면 bottomsheet 내려감
         binding.monthYearText.setOnClickListener { bottomDown() }
 
@@ -223,16 +224,15 @@ class FragmentCalendar : Fragment() {
 
 
 
-                        adapter.setItemClickListener(object: CalendarAdapter.OnItemClickListener{
+                        adapter.setItemClickListener(object : CalendarAdapter.OnItemClickListener {
                             override fun onClick(v: View, position: Int) {
                                 binding.image1.performClick()
                                 binding.selectedDay.text = CalendarUtil.sDay
 
                                 var DWText = binding.selectedDW
-                                if(position == 0) {
+                                if (position == 0) {
                                     DWText.text = "일요일"
-                                }
-                                else {
+                                } else {
                                     when (position % 7) {
                                         0 -> DWText.text = "일요일"
                                         1 -> DWText.text = "월요일"
@@ -296,7 +296,7 @@ class FragmentCalendar : Fragment() {
         return dayList
     }
 
-    fun bottomGetState() : Int {
+    fun bottomGetState(): Int {
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         var bottomState = bottomSheetBehavior.getState()
         Log.d("BTStateGet", "onResponse: $bottomState")
@@ -311,4 +311,18 @@ class FragmentCalendar : Fragment() {
         Log.d("BTStateSet", "onResponse: $bottomState")
     }
 
+    override fun onBackPressed() {
+
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        } else {
+            (activity as MainActivity).callHome()
+        }
+    }
+
 }
+
+
+
