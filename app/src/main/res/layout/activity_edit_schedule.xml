@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_bold"
-                        android:text="일정을 추가해요"
+                        android:text="일정을 수정해요"
                         android:textColor="@color/black"
                         android:textSize="25dp" />
 
@@ -491,12 +491,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1.02"
-                    android:orientation="vertical">
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/deleteBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:backgroundTint="#99F3FF"
+                        android:text="일정 삭제하기"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp"
+                        app:cornerRadius="30dp"
+                        app:rippleColor="#EBEBEB"
+                        android:fontFamily="@font/lottemartd_bold"/>
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/submitBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:backgroundTint="#99F3FF"
                         android:text="일정 등록하기"
                         android:textColor="#FFFFFF"

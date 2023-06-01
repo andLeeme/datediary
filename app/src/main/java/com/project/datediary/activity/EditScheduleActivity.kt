@@ -9,10 +9,11 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
+import com.project.datediary.databinding.ActivityAddScheduleBinding
 import com.project.datediary.databinding.ActivityEditScheduleBinding
-import com.project.datediary.model.ScheduleEditRequestBody
-import com.project.datediary.model.ScheduleShowRequestBody
-import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.fragment.FragmentCalendar
+import com.project.datediary.model.ScheduleRequestBody
+import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
 import retrofit2.Response
 import java.time.LocalDateTime
@@ -34,47 +35,7 @@ class EditScheduleActivity : AppCompatActivity() {
 
 
 
-/////////////////////////////////해당 스케줄인덱스 일정 정보 띄워주기///////////////////////////////////////
-
-        val scheduleShowData = ScheduleShowRequestBody(
-            schedule_index = "1"
-        )
-        Log.d("scheduleData", "onCreate: $scheduleShowData")
-
-
-        var ScheduleShowResponseBody = listOf<ScheduleShowResponseBody>()
-
-        RetrofitAPI.emgMedService5.addUserByEnqueue2(scheduleShowData)
-            .enqueue(object : retrofit2.Callback<ArrayList<ScheduleShowResponseBody>> {
-                override fun onResponse(
-                    call: Call<ArrayList<ScheduleShowResponseBody>>,
-                    response: Response<ArrayList<ScheduleShowResponseBody>>
-                ) {
-                    Toast.makeText(applicationContext, "Call Success5", Toast.LENGTH_SHORT)
-                        .show()
-
-                    if (response.isSuccessful) {
-
-                        ScheduleShowResponseBody = response.body()?: listOf()
-
-                        Log.d("리턴123", "${response.body().toString()}")
-                    }
-                }
-
-                override fun onFailure(
-                    call: Call<ArrayList<ScheduleShowResponseBody>>,
-                    t: Throwable
-                ) {
-
-                }
-            })
-
-
-
-
-
-
-
+/////////////////////////////////기본 기능 설정///////////////////////////////////////
 
         //0. 기본 시간(현재 시간 넣어주기)
         //변수 초기화, 처음 켰을 때는 현재 시간 보여주기
@@ -83,26 +44,29 @@ class EditScheduleActivity : AppCompatActivity() {
         val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
         val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
 
-        var startDate = current.format(formatterDate)
+
+        var startDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
         var startTime = current.format(formatterTime)
-        var endDate = current.format(formatterDate)
+        var endDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
         var endTime = current.format(formatterTime)
-        var alertDate = current.format(formatterAlert)
+        var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
+
 
         binding.datepickerStart.text = startDate
         binding.timepickerStart.text = startTime
         binding.datepickerEnd.text = endDate
         binding.timepickerEnd.text = endTime
 
-        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-        var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
-        var startDay = current.format(DateTimeFormatter.ofPattern("d"))
+
+        var startYear = CalendarUtil.sYear
+        var startMonth = CalendarUtil.sMonth
+        var startDay = CalendarUtil.sDay
         var startHour = current.format(DateTimeFormatter.ofPattern("k"))
         var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
         var startAorP = "오전"
-        var endYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-        var endMonth = current.format(DateTimeFormatter.ofPattern("M"))
-        var endDay = current.format(DateTimeFormatter.ofPattern("d"))
+        var endYear = CalendarUtil.sYear
+        var endMonth = CalendarUtil.sMonth
+        var endDay = CalendarUtil.sDay
         var endHour = current.format(DateTimeFormatter.ofPattern("k"))
         var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
         var endAorP = "오전"
@@ -215,6 +179,16 @@ class EditScheduleActivity : AppCompatActivity() {
                 endTime = "$endAorP ${endHour}:${endMinute}분"
                 binding.timepickerEnd.text = endTime
 
+
+//                if (hourOfDay > 12) {
+//                    endTime = "오후 ${hourOfDay - 12}:${minute}분"
+//                } else {
+//                    endTime = "오전 ${hourOfDay}:${minute}분"
+//                }
+//                binding.timepickerEnd.text = endTime
+//                Log.d("hourOfDay", "onCreate: $hourOfDay")
+
+
             }
             TimePickerDialog(
                 this,
@@ -230,14 +204,22 @@ class EditScheduleActivity : AppCompatActivity() {
         //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
         binding.allDayCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
+//                startHour = ""
+//                startMinute = ""
+//                endHour = ""
+//                endMinute = ""
                 binding.timepickerStart.text = "-"
                 binding.timepickerEnd.text = "-"
                 binding.timepickerStart.isClickable = false
                 binding.timepickerEnd.isClickable = false
                 ADChkBox = "1"
             } else {
+
+//                startTime = "$startAorP ${startHour}:${startMinute}분"
+//                endTime = "$endAorP ${endHour}:${endMinute}분"
                 binding.timepickerStart.text = startTime
                 binding.timepickerEnd.text = endTime
+
                 binding.timepickerStart.isClickable = true
                 binding.timepickerEnd.isClickable = true
                 ADChkBox = "0"
@@ -281,55 +263,71 @@ class EditScheduleActivity : AppCompatActivity() {
                 "onCreate: $endAorP, $endYear, $endMonth, $endDay, $endHour, $endMinute"
             )
 
-            val scheduleEditData = ScheduleEditRequestBody(
-                couple_index = "1",
-                schedule_index = "1",
-                start_year = startYear,
-                start_month = startMonth,
-                start_day = startDay,
-                start_time = "$startHour:$startMinute",
-                end_year = endYear,
-                end_month = endMonth,
-                end_day = endDay,
-                end_time = "$endHour:$endMinute",
-                allDayCheck = ADChkBox,
-                title = title,
-                contents = contents,
-                place_code = matchPlaceCode(),
-                mission_code = matchMissionCode()
-                //place_code = binding.selectPlace.text.toString(),
-                //mission_code = binding.selectMission.text.toString()
-            )
-            Log.d("scheduleData", "onCreate: $scheduleEditData")
+            var startTime1 = ""
+            var endTime1 = ""
+
+            if (ADChkBox == "1") {
+                startTime1 = ""
+                endTime1 = ""
+            } else {
+                startTime1 = "$startHour:$startMinute"
+                endTime1 = "$endHour:$endMinute"
+            }
+
+            if (title == "") {
+                Toast.makeText(applicationContext, "일정 제목을 입력해주세요", Toast.LENGTH_SHORT).show()
+            } else if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()) {
+                Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+
+                val scheduleData = ScheduleRequestBody(
+                    couple_index = "1",
+                    start_year = startYear,
+                    start_month = startMonth,
+                    start_day = startDay,
+                    start_time = startTime1,
+                    end_year = endYear,
+                    end_month = endMonth,
+                    end_day = endDay,
+                    end_time = endTime1,
+                    allDayCheck = ADChkBox,
+                    title = title,
+                    contents = contents,
+                    place_code = matchPlaceCode(),
+                    mission_code = matchMissionCode()
+                )
+                Log.d("scheduleData", "onCreate: $scheduleData")
 
 
-            RetrofitAPI.emgMedService4.addUserByEnqueue2(scheduleEditData)
-                .enqueue(object : retrofit2.Callback<Int> {
-                    override fun onResponse(
-                        call: Call<Int>,
-                        response: Response<Int>
-                    ) {
-                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                            .show()
+                RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
+                    .enqueue(object : retrofit2.Callback<Int> {
+                        override fun onResponse(
+                            call: Call<Int>,
+                            response: Response<Int>
+                        ) {
+                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                                .show()
 
-                        if (response.isSuccessful) {
+                            if (response.isSuccessful) {
 
-                            Log.d("리턴123", "${response.body().toString()}")
+                                Log.d("리턴123", "${response.body().toString()}")
+                            }
                         }
-                    }
 
-                    override fun onFailure(
-                        call: Call<Int>,
-                        t: Throwable
-                    ) {
+                        override fun onFailure(
+                            call: Call<Int>,
+                            t: Throwable
+                        ) {
 
-                    }
-                })
+                        }
+                    })
 
 
-            //5. request 후 액티비티 종료
-            finish()
+                //5. request 후 액티비티 종료
+                finish()
 
+            }
         }
 
 
@@ -364,7 +362,7 @@ class EditScheduleActivity : AppCompatActivity() {
     private fun matchPlaceCode(): String? {
 
         var Pcode = ""
-        when(binding.selectPlace.text.toString()) {
+        when (binding.selectPlace.text.toString()) {
             "" -> Pcode = ""
             "영화관" -> Pcode = "1"
             "바/주점" -> Pcode = "2"
@@ -437,7 +435,7 @@ class EditScheduleActivity : AppCompatActivity() {
     private fun matchMissionCode(): String? {
 
         var Mcode = ""
-        when(binding.selectMission.text.toString()) {
+        when (binding.selectMission.text.toString()) {
             "" -> Mcode = ""
             "팝콘 받아 먹은 사람이 사랑한다고 말해주기" -> Mcode = "1"
             "바/영화 보는 동안 팔짱 끼기" -> Mcode = "2"

@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.project.datediary.activity.AddScheduleActivity
+import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.DayScheduleAdapter
@@ -221,9 +222,15 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 //어댑터 적용
                                 binding.recycler10.adapter = adapter2
 
+                                //아이템 클릭하면 EditSchedule Activity 소환!
 
-//                                DayScheduleAdapter.setList(scheduleList)
-
+                                adapter2.setItemClickListener(object :
+                                    DayScheduleAdapter.OnItemClickListener {
+                                    override fun onClick(v: View, position: Int) {
+                                        val intent = Intent(context, EditScheduleActivity::class.java)
+                                        startActivity(intent)
+                                    }
+                                })
 
                             }
                         })

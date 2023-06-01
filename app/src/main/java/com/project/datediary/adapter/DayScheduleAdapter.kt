@@ -2,6 +2,7 @@ package com.project.datediary.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.databinding.ChkscheduleBinding
@@ -27,6 +28,16 @@ class DayScheduleAdapter(private val scheduleShowList : ArrayList<TitleResponseB
         }
     }
 
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
+    }
+    // (3) 외부에서 클릭 시 이벤트 설정
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+    // (4) setItemClickListener로 설정한 함수 실행
+    private lateinit var itemClickListener : OnItemClickListener
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyView {
         val view = ChkscheduleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyView(view)
@@ -34,14 +45,15 @@ class DayScheduleAdapter(private val scheduleShowList : ArrayList<TitleResponseB
 
     override fun onBindViewHolder(holder: MyView, position: Int) {
         holder.bind(position)
+
+        holder.itemView.setOnClickListener{
+            itemClickListener.onClick(it, position)
+        }
+
     }
 
     override fun getItemCount(): Int {
         return scheduleShowList.size
     }
 
-//    fun setList(list: ArrayList<TitleResponseBody>) {
-//        scheduleShowList = list
-//        Log.d("scheduleShowList", "bind: $scheduleShowList")
-//    }
 }
