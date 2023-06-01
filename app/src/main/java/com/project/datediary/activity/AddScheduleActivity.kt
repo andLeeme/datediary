@@ -276,7 +276,7 @@ class AddScheduleActivity : AppCompatActivity() {
             var startTime1 = ""
             var endTime1 = ""
 
-            if(ADChkBox =="1") {
+            if (ADChkBox == "1") {
                 startTime1 = ""
                 endTime1 = ""
             } else {
@@ -284,57 +284,61 @@ class AddScheduleActivity : AppCompatActivity() {
                 endTime1 = "$endHour:$endMinute"
             }
 
+            if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()) {
+
+                Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT).show()
+
+            } else {
+
+                val scheduleData = ScheduleRequestBody(
+                    couple_index = "1",
+                    start_year = startYear,
+                    start_month = startMonth,
+                    start_day = startDay,
+                    start_time = startTime1,
+                    end_year = endYear,
+                    end_month = endMonth,
+                    end_day = endDay,
+                    end_time = endTime1,
+                    allDayCheck = ADChkBox,
+                    title = title,
+                    contents = contents,
+                    place_code = matchPlaceCode(),
+                    mission_code = matchMissionCode()
+                    //place_code = binding.selectPlace.text.toString(),
+                    //mission_code = binding.selectMission.text.toString()
+                )
+                Log.d("scheduleData", "onCreate: $scheduleData")
 
 
+                RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
+                    .enqueue(object : retrofit2.Callback<Int> {
+                        override fun onResponse(
+                            call: Call<Int>,
+                            response: Response<Int>
+                        ) {
+                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                                .show()
 
-            val scheduleData = ScheduleRequestBody(
-                couple_index = "1",
-                start_year = startYear,
-                start_month = startMonth,
-                start_day = startDay,
-                start_time = startTime1,
-                end_year = endYear,
-                end_month = endMonth,
-                end_day = endDay,
-                end_time = endTime1,
-                allDayCheck = ADChkBox,
-                title = title,
-                contents = contents,
-                place_code = matchPlaceCode(),
-                mission_code = matchMissionCode()
-                //place_code = binding.selectPlace.text.toString(),
-                //mission_code = binding.selectMission.text.toString()
-            )
-            Log.d("scheduleData", "onCreate: $scheduleData")
+                            if (response.isSuccessful) {
 
-
-            RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
-                .enqueue(object : retrofit2.Callback<Int> {
-                    override fun onResponse(
-                        call: Call<Int>,
-                        response: Response<Int>
-                    ) {
-                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                            .show()
-
-                        if (response.isSuccessful) {
-
-                            Log.d("리턴123", "${response.body().toString()}")
+                                Log.d("리턴123", "${response.body().toString()}")
+                            }
                         }
-                    }
 
-                    override fun onFailure(
-                        call: Call<Int>,
-                        t: Throwable
-                    ) {
+                        override fun onFailure(
+                            call: Call<Int>,
+                            t: Throwable
+                        ) {
 
-                    }
-                })
+                        }
+                    })
 
 
-            //5. request 후 액티비티 종료
-            finish()
+                //5. request 후 액티비티 종료
+                finish()
 
+            }
         }
 
 
