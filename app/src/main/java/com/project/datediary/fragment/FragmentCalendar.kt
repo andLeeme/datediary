@@ -245,31 +245,36 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     }
                                 }
 
+             //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
-                                //선택한 날의 정보 그려주기
-                                DayScheduleAdapter = DayScheduleAdapter()
-                                //var adapter2 = DayScheduleAdapter
-
-                                var adapter2 = DayScheduleAdapter()
-
-                                binding.recycler10.apply {
-                                    adapter2 = DayScheduleAdapter
-                                    layoutManager = LinearLayoutManager(context)
-                                    setHasFixedSize(true)
-                                }
-
+                                //선택한 날의 정보 가공
                                 var scheduleList = ArrayList<TitleResponseBody>()
-
-                                Log.d("scheduleList", "bind: ${TitleResponseBody}")
+                                Log.d("scheduleList1", "bind: ${TitleResponseBody}")
 
                                 for (i in TitleResponseBody.indices) {
                                     if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
                                         scheduleList.add(TitleResponseBody[i])
                                     }
                                 }
-                                Log.d("scheduleList", "bind: $scheduleList")
+                                Log.d("scheduleList2", "bind: $scheduleList")
 
-                                DayScheduleAdapter.setList(scheduleList)
+
+                                //어댑터에 넣어주기
+                                val adapter2 = DayScheduleAdapter(scheduleList)
+
+                                //레이아웃 설정(열 7개)
+                                var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+
+                                //레이아웃 적용
+                                binding.recycler10.layoutManager = manager2
+
+                                //어댑터 적용
+                                binding.recycler10.adapter = adapter2
+
+
+
+
+//                                DayScheduleAdapter.setList(scheduleList)
 
 
                             }

@@ -8,20 +8,22 @@ import com.project.datediary.databinding.ChkscheduleBinding
 import com.project.datediary.model.ScheduleShowResponseBody
 import com.project.datediary.model.TitleResponseBody
 
-class DayScheduleAdapter : RecyclerView.Adapter<DayScheduleAdapter.MyView>() {
-
-    private var scheduleShowList = listOf<TitleResponseBody>()
+class DayScheduleAdapter(private val scheduleShowList : ArrayList<TitleResponseBody>) : RecyclerView.Adapter<DayScheduleAdapter.MyView>() {
 
     inner class MyView(private val binding: ChkscheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pos: Int) {
 
-
             binding.scheduleIndex.text = scheduleShowList[pos].scheduleIndex
             binding.title.text = scheduleShowList[pos].title
             binding.startTime.text = scheduleShowList[pos].startTime
             binding.endTime.text = scheduleShowList[pos].endTime
-            binding.contents.text = scheduleShowList[pos].contents
+
+            if(scheduleShowList[pos].contents =="") {
+                binding.contents.text = scheduleShowList[pos].title
+            } else {
+                binding.contents.text = scheduleShowList[pos].contents
+            }
         }
     }
 
@@ -38,8 +40,8 @@ class DayScheduleAdapter : RecyclerView.Adapter<DayScheduleAdapter.MyView>() {
         return scheduleShowList.size
     }
 
-    fun setList(list: ArrayList<TitleResponseBody>) {
-        scheduleShowList = list
-        Log.d("scheduleShowList", "bind: $scheduleShowList")
-    }
+//    fun setList(list: ArrayList<TitleResponseBody>) {
+//        scheduleShowList = list
+//        Log.d("scheduleShowList", "bind: $scheduleShowList")
+//    }
 }
