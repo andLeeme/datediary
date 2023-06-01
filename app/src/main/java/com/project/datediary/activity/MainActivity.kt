@@ -3,6 +3,8 @@ package com.project.datediary.activity
 import android.animation.ObjectAnimator
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +26,10 @@ import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
 import com.project.datediary.model.ScheduleShowResponseBody
 import com.project.datediary.util.CalendarUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
@@ -174,6 +180,7 @@ class MainActivity : AppCompatActivity() {
         binding.mainBnv.selectedItemId = R.id.home
     }
 
+    private var finishCount = false
 
     override fun onBackPressed() {
         //아래와 같은 코드를 추가하도록 한다
@@ -186,8 +193,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        Toast.makeText(applicationContext, "뒤로가기 눌러짐", Toast.LENGTH_SHORT).show()
-
+//        Toast.makeText(applicationContext, "뒤로가기 눌러짐", Toast.LENGTH_SHORT).show()
 
         //현재 프래그먼트의 아이디를 가져옴 근데 머라머라 길게 나옴
         //FragmentGraph{ad92255} (fd9338a8-56a1-4298-93f6-fd00ca33e7b9 id=0x7f0a0115) 이렇게...
@@ -195,12 +201,23 @@ class MainActivity : AppCompatActivity() {
 
         var splitedFragment = fragment.toString().split("{")
 
+        if (finishCount == true) {
+            finish()
+        }
+
         when (splitedFragment[0]) {
-            "FragmentHome" -> finish()
+            "FragmentHome" -> {
+                Toast.makeText(this, "한번 더 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+                finishCount = true
+
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(2000).run {
+                        finishCount = false
+                    }
+                }
+            }
 
             "FragmentStory", "FragmentGraph", "FragmentMyPage" -> {
-
-
                 //홈이 선택된 상태로 만듦
                 //2131362030 이게 홈 프래그먼트의 ID임
                 callHome()
@@ -211,8 +228,6 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
     }
-
 
 }
