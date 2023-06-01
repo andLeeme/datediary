@@ -17,28 +17,30 @@ import com.google.android.gms.common.api.Scope
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentLoginTestBinding
 
+
 class FragmentLoginTest : Fragment() {
     private lateinit var binding: FragmentLoginTestBinding
     private val googleSignInClient: GoogleSignInClient by lazy { getGoogleClient() }
-    private var clientId = "973907992931-e17o6oko55g70jq9pirt5qsmphev9fgd.apps.googleusercontent.com"
-    private val googleAuthLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
+    private val googleAuthLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val task = GoogleSignIn.getSignedInAccountFromIntent(result.data)
 
-        Toast.makeText(context, "이건될듯", Toast.LENGTH_SHORT).show()
+            try {
+                val account = task.getResult(ApiException::class.java)
+                Toast.makeText(context, "혹시..?", Toast.LENGTH_SHORT).show()
+                // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
+                val userName = account.givenName
+                val serverAuth = account.serverAuthCode
 
-        try {
-            val account = task.getResult(ApiException::class.java)
+                Toast.makeText(context, "$userName", Toast.LENGTH_SHORT).show()
 
-            // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
-            val eamil = account.email
-            Toast.makeText(context, "$eamil", Toast.LENGTH_SHORT).show()
+                moveSignUpActivity()
 
-            moveMainActivity()
-
-        } catch (e: ApiException) {
-            Toast.makeText(context, "못받아왔어요", Toast.LENGTH_SHORT).show()
+            } catch (e: ApiException) {
+                Log.e(FragmentLoginTest::class.java.simpleName, e.stackTraceToString())
+                Toast.makeText(context, "안된거같아요", Toast.LENGTH_SHORT).show()
+            }
         }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,14 +67,14 @@ class FragmentLoginTest : Fragment() {
     private fun getGoogleClient(): GoogleSignInClient {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestScopes(Scope("https://www.googleapis.com/auth/pubsub"))
-            .requestServerAuthCode(clientId) // string 파일에 저장해둔 client id 를 이용해 server authcode를 요청한다.
+            .requestServerAuthCode("973907992931-32u4m6qq52gm4qgqahnko61kleskqe7h.apps.googleusercontent.com") // string 파일에 저장해둔 client id 를 이용해 server authcode를 요청한다.
             .requestEmail() // 이메일도 요청할 수 있다.
             .build()
 
         return GoogleSignIn.getClient(requireActivity(), googleSignInOption)
     }
 
-    private fun moveMainActivity() {
+    private fun moveSignUpActivity() {
         requireActivity().run {
             startActivity(Intent(requireContext(), MainActivity::class.java))
             finish()
