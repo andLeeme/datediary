@@ -48,7 +48,7 @@ class FragmentGraph : Fragment() {
         val call = CoinAPI.getRetrofitService.getCoinAll()
         call.enqueue(object : Callback<List<Coin>> {
             override fun onResponse(call: Call<List<Coin>>, response: Response<List<Coin>>) {
-                Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT).show()
                 if (response.isSuccessful) {
                     coinList = response.body() ?: listOf()
                     listAdapter.setList(coinList)
@@ -56,7 +56,7 @@ class FragmentGraph : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Coin>>, t: Throwable) {
-                Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
             }
         })
     }

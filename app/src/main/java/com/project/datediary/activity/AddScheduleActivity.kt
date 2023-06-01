@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityAddScheduleBinding
+import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
@@ -66,23 +67,39 @@ class AddScheduleActivity : AppCompatActivity() {
 
 
 
-
-
-        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-        var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
-        var startDay = current.format(DateTimeFormatter.ofPattern("d"))
+        var startYear = CalendarUtil.sYear
+        var startMonth = CalendarUtil.sMonth
+        var startDay = CalendarUtil.sDay
         var startHour = current.format(DateTimeFormatter.ofPattern("k"))
         var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
         var startAorP = "오전"
-        var endYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-        var endMonth = current.format(DateTimeFormatter.ofPattern("M"))
-        var endDay = current.format(DateTimeFormatter.ofPattern("d"))
+        var endYear = CalendarUtil.sYear
+        var endMonth = CalendarUtil.sMonth
+        var endDay = CalendarUtil.sDay
         var endHour = current.format(DateTimeFormatter.ofPattern("k"))
         var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
         var endAorP = "오전"
         var ADChkBox = "0"
         var placeCode = ""
         var missionCode = ""
+
+
+
+//        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
+//        var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
+//        var startDay = current.format(DateTimeFormatter.ofPattern("d"))
+//        var startHour = current.format(DateTimeFormatter.ofPattern("k"))
+//        var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
+//        var startAorP = "오전"
+//        var endYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
+//        var endMonth = current.format(DateTimeFormatter.ofPattern("M"))
+//        var endDay = current.format(DateTimeFormatter.ofPattern("d"))
+//        var endHour = current.format(DateTimeFormatter.ofPattern("k"))
+//        var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
+//        var endAorP = "오전"
+//        var ADChkBox = "0"
+//        var placeCode = ""
+//        var missionCode = ""
 
 
         //안내 문구 초기화
@@ -305,8 +322,6 @@ class AddScheduleActivity : AppCompatActivity() {
                     contents = contents,
                     place_code = matchPlaceCode(),
                     mission_code = matchMissionCode()
-                    //place_code = binding.selectPlace.text.toString(),
-                    //mission_code = binding.selectMission.text.toString()
                 )
                 Log.d("scheduleData", "onCreate: $scheduleData")
 

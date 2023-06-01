@@ -1,29 +1,31 @@
 package com.project.datediary.fragment
 
+import RetrofitAPI
 import android.content.Intent
-import androidx.fragment.app.Fragment
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.project.datediary.databinding.FragmentCalendarBinding
-import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
-import com.project.datediary.R
 import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.DayScheduleAdapter
-import com.project.datediary.databinding.ActivityMainBinding
-import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.databinding.FragmentCalendarBinding
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 import java.util.Calendar
@@ -53,6 +55,13 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         binding.addBtn.setOnClickListener {
             val intent = Intent(context, AddScheduleActivity::class.java)
             startActivity(intent)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(200).run {
+                    bottomDown()
+                }
+            }
+
         }
 
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
@@ -71,78 +80,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
             )
         }
 
-
-//        DayScheduleAdapter = DayScheduleAdapter()
-//
-//        binding.recycler10.apply {
-//            adapter = DayScheduleAdapter
-//            layoutManager = LinearLayoutManager(context)
-//            setHasFixedSize(true)
-//        }
-
-
-//        val scheduleShowList: ArrayList<TitleResponseBody> =
-//            ArrayList<TitleResponseBody>()
-
-//        scheduleShowList.add(
-//            TitleResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "09:00", "2023", "5", "30", "10:00", "1", "영화관",
-//                "현하랑 영화보기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "20:00", "2023", "5", "30", "21:00", "1", "산책",
-//                "현하랑 산책하기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-//                "현하랑 노래부르기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-//                "현하랑 노래부르기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-//                "현하랑 노래부르기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-//                "현하랑 노래부르기", "1", "1"
-//            )
-//        )
-//
-//        scheduleShowList.add(
-//            ScheduleShowResponseBody(
-//                "1", "1", "2023", "5",
-//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-//                "현하랑 노래부르기", "1", "1"
-//            )
-//        )
-
-//        }
-
-//        DayScheduleAdapter.setList(scheduleShowList)
 
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
@@ -168,8 +105,20 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(200).run {
+                setMonthView()
+            }
+        }
+    }
+
     //날짜 화면에 보여주기
     private fun setMonthView() {
+
+
         //년월 텍스트뷰 셋팅
         binding.monthYearText.text = monthYearFromDate(CalendarUtil.selectedDate)
 
@@ -203,8 +152,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                     call: Call<ArrayList<TitleResponseBody>>,
                     response: Response<ArrayList<TitleResponseBody>>
                 ) {
-                    Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT)
-                        .show()
+//                    Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT)
+//                        .show()
 
                     if (response.isSuccessful) {
                         Log.d("리턴", "onResponse: ${response.body()}")
@@ -245,7 +194,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     }
                                 }
 
-             //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
+                                //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
                                 //선택한 날의 정보 가공
                                 var scheduleList = ArrayList<TitleResponseBody>()
@@ -263,15 +212,14 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 val adapter2 = DayScheduleAdapter(scheduleList)
 
                                 //레이아웃 설정(열 7개)
-                                var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+                                var manager2: RecyclerView.LayoutManager =
+                                    LinearLayoutManager(context)
 
                                 //레이아웃 적용
                                 binding.recycler10.layoutManager = manager2
 
                                 //어댑터 적용
                                 binding.recycler10.adapter = adapter2
-
-
 
 
 //                                DayScheduleAdapter.setList(scheduleList)
