@@ -1,22 +1,26 @@
 package com.project.datediary.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.databinding.ChkscheduleBinding
 import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.model.TitleResponseBody
 
 class DayScheduleAdapter : RecyclerView.Adapter<DayScheduleAdapter.MyView>() {
 
-    private var scheduleShowList = listOf<ScheduleShowResponseBody>()
+    private var scheduleShowList = listOf<TitleResponseBody>()
 
     inner class MyView(private val binding: ChkscheduleBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pos: Int) {
-            binding.scheduleIndex.text = scheduleShowList[pos].schedule_index
+
+
+            binding.scheduleIndex.text = scheduleShowList[pos].scheduleIndex
             binding.title.text = scheduleShowList[pos].title
-            binding.startTime.text = scheduleShowList[pos].start_time
-            binding.endTime.text = scheduleShowList[pos].end_time
+            binding.startTime.text = scheduleShowList[pos].startTime
+            binding.endTime.text = scheduleShowList[pos].endTime
             binding.contents.text = scheduleShowList[pos].contents
         }
     }
@@ -34,7 +38,8 @@ class DayScheduleAdapter : RecyclerView.Adapter<DayScheduleAdapter.MyView>() {
         return scheduleShowList.size
     }
 
-    fun setList(list: ArrayList<ScheduleShowResponseBody>) {
+    fun setList(list: ArrayList<TitleResponseBody>) {
         scheduleShowList = list
+        Log.d("scheduleShowList", "bind: $scheduleShowList")
     }
 }

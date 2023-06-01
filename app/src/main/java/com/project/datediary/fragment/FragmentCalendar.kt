@@ -72,88 +72,91 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         }
 
 
+//        DayScheduleAdapter = DayScheduleAdapter()
+//
+//        binding.recycler10.apply {
+//            adapter = DayScheduleAdapter
+//            layoutManager = LinearLayoutManager(context)
+//            setHasFixedSize(true)
+//        }
 
-        DayScheduleAdapter = DayScheduleAdapter()
 
-        binding.recycler10.apply {
-            adapter = DayScheduleAdapter
-            layoutManager = LinearLayoutManager(context)
-            setHasFixedSize(true)
-        }
+//        val scheduleShowList: ArrayList<TitleResponseBody> =
+//            ArrayList<TitleResponseBody>()
 
+//        scheduleShowList.add(
+//            TitleResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "09:00", "2023", "5", "30", "10:00", "1", "영화관",
+//                "현하랑 영화보기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "20:00", "2023", "5", "30", "21:00", "1", "산책",
+//                "현하랑 산책하기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+//                "현하랑 노래부르기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+//                "현하랑 노래부르기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+//                "현하랑 노래부르기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+//                "현하랑 노래부르기", "1", "1"
+//            )
+//        )
+//
+//        scheduleShowList.add(
+//            ScheduleShowResponseBody(
+//                "1", "1", "2023", "5",
+//                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
+//                "현하랑 노래부르기", "1", "1"
+//            )
+//        )
 
-        val scheduleShowList: ArrayList<ScheduleShowResponseBody> =
-            ArrayList<ScheduleShowResponseBody>()
+//        }
 
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "09:00", "2023", "5", "30", "10:00", "1", "영화관",
-                "현하랑 영화보기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "20:00", "2023", "5", "30", "21:00", "1", "산책",
-                "현하랑 산책하기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-                "현하랑 노래부르기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-                "현하랑 노래부르기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-                "현하랑 노래부르기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-                "현하랑 노래부르기", "1", "1"
-            )
-        )
-
-        scheduleShowList.add(
-            ScheduleShowResponseBody(
-                "1", "1", "2023", "5",
-                "30", "21:00", "2023", "5", "30", "22:00", "1", "노래방",
-                "현하랑 노래부르기", "1", "1"
-            )
-        )
-
-        DayScheduleAdapter.setList(scheduleShowList)
+//        DayScheduleAdapter.setList(scheduleShowList)
 
         //이전달 버튼 이벤트
         binding.preBtn.setOnClickListener {
             //현재 월 -1 변수에 담기
             CalendarUtil.selectedDate.add(Calendar.MONTH, -1)// 현재 달 -1
             setMonthView()
+            bottomDown()
         }
 
         //다음달 버튼 이벤트
         binding.nextBtn.setOnClickListener {
             CalendarUtil.selectedDate.add(Calendar.MONTH, 1) //현재 달 +1
             setMonthView()
+            bottomDown()
         }
 
 
@@ -209,7 +212,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         TitleResponseBody = response.body() ?: listOf()
 
                         val adapter = CalendarAdapter(dayList, TitleResponseBody)
-                        //adapter.setList(TitleResponseBody)
                         Log.d("리턴1", "onResponse: $TitleResponseBody")
 
                         //레이아웃 설정(열 7개)
@@ -222,13 +224,12 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         binding.recyclerView.adapter = adapter
 
 
-
-
                         adapter.setItemClickListener(object : CalendarAdapter.OnItemClickListener {
                             override fun onClick(v: View, position: Int) {
                                 binding.image1.performClick()
                                 binding.selectedDay.text = CalendarUtil.sDay
 
+                                //선택한 날의 날짜와 요일을 바텀시트에 그려줌
                                 var DWText = binding.selectedDW
                                 if (position == 0) {
                                     DWText.text = "일요일"
@@ -243,6 +244,34 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                         6 -> DWText.text = "토요일"
                                     }
                                 }
+
+
+                                //선택한 날의 정보 그려주기
+                                DayScheduleAdapter = DayScheduleAdapter()
+                                //var adapter2 = DayScheduleAdapter
+
+                                var adapter2 = DayScheduleAdapter()
+
+                                binding.recycler10.apply {
+                                    adapter2 = DayScheduleAdapter
+                                    layoutManager = LinearLayoutManager(context)
+                                    setHasFixedSize(true)
+                                }
+
+                                var scheduleList = ArrayList<TitleResponseBody>()
+
+                                Log.d("scheduleList", "bind: ${TitleResponseBody}")
+
+                                for (i in TitleResponseBody.indices) {
+                                    if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+                                        scheduleList.add(TitleResponseBody[i])
+                                    }
+                                }
+                                Log.d("scheduleList", "bind: $scheduleList")
+
+                                DayScheduleAdapter.setList(scheduleList)
+
+
                             }
                         })
                     }
