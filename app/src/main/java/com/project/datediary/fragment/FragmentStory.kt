@@ -74,6 +74,7 @@ class FragmentStory : Fragment() {
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
 
+
         }
 
 

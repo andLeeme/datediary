@@ -87,8 +87,19 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 이름", givenName)
             Log.d("로그인한 유저의 전체이름", displayName)
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
-            Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
+
+
+
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "${account.displayName.toString()}님 반가워요", Toast.LENGTH_SHORT)
+                .show()
+
+            finish()
+
         } catch (e: ApiException) {
+
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
             Log.w("failed", "signInResult:failed code=" + e.statusCode)

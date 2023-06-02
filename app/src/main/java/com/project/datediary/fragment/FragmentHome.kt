@@ -12,10 +12,6 @@ class FragmentHome : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
 
-    fun callRemove(){
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

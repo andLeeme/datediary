@@ -85,6 +85,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
+
         }
 
         //스플래쉬화면을 더 오래 실행하는법.
