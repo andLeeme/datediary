@@ -16,8 +16,6 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.common.api.Scope
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentLoginTestBinding
-import kotlin.math.log
-
 
 class FragmentLoginTest : Fragment() {
     private lateinit var binding: FragmentLoginTestBinding
@@ -28,21 +26,19 @@ class FragmentLoginTest : Fragment() {
 
             try {
                 val account = task.getResult(ApiException::class.java)
-                Toast.makeText(context, "된건가..?", Toast.LENGTH_SHORT).show()
                 // 이름, 이메일 등이 필요하다면 아래와 같이 account를 통해 각 메소드를 불러올 수 있다.
                 val userName = account.givenName
                 val userEmali = account.email
                 val user = account.account
 
-                Toast.makeText(context, "이름 : $userName 이메일 : $userEmali", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "$userName 님 환영합니다", Toast.LENGTH_SHORT).show()
 
-                Log.d("user", "$user")
 
                 moveSignUpActivity()
 
             } catch (e: ApiException) {
                 Log.e(FragmentLoginTest::class.java.simpleName, e.stackTraceToString())
-                Toast.makeText(context, "안된거같아요", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "로그인 실패!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -72,7 +68,7 @@ class FragmentLoginTest : Fragment() {
         val googleSignInOption = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestScopes(Scope("https://www.googleapis.com/auth/pubsub"))
             .requestServerAuthCode("973907992931-32u4m6qq52gm4qgqahnko61kleskqe7h.apps.googleusercontent.com") // string 파일에 저장해둔 client id 를 이용해 server authcode를 요청한다.
-            .requestEmail() // 이메일도 요청할 수 있다.
+            .requestEmail() // 이메일도 요청할 수 있다..
             .build()
 
         return GoogleSignIn.getClient(requireActivity(), googleSignInOption)
