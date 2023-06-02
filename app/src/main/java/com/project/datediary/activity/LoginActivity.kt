@@ -102,10 +102,17 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun signOut() {
-        mGoogleSignInClient.signOut()
-            .addOnCompleteListener(this) {
-                Toast.makeText(this, "로그아웃 완료", Toast.LENGTH_SHORT).show()
-            }
+        val curUser = GoogleSignIn.getLastSignedInAccount(this)
+        curUser?.let {
+            mGoogleSignInClient.signOut()
+                .addOnCompleteListener(this) {
+                    Toast.makeText(this, "로그아웃 완료", Toast.LENGTH_SHORT).show()
+                }
+        }
+        if (curUser == null) {
+            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     private fun revokeAccess() {
@@ -132,7 +139,7 @@ class LoginActivity : AppCompatActivity() {
             Toast.makeText(this, "이메일: $email 이름 : $displayName ", Toast.LENGTH_SHORT).show()
 
         }
-        if (curUser == null){
+        if (curUser == null) {
             Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
         }
 
