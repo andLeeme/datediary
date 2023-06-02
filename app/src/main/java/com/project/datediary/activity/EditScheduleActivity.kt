@@ -356,6 +356,7 @@ class EditScheduleActivity : AppCompatActivity() {
                             if (response.isSuccessful) {
 
                                 Log.d("리턴edit", "${response.body().toString()}")
+                                onResume()
                             }
                         }
 
