@@ -19,10 +19,16 @@ class FragmentHome : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        binding.addMainImage.setOnClickListener {
+            childFragmentManager.beginTransaction()
+                .replace(R.id.editContainerHome, UploadFragment())
+                .commit()
+            binding.fragmentHome.visibility = View.INVISIBLE
+        }
+
 
         return binding.root
     }
-
 
 }
 
