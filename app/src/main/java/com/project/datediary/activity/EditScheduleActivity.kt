@@ -48,27 +48,33 @@ class EditScheduleActivity : AppCompatActivity() {
         var placeCode = intent.getStringExtra("placeCode")
         var missionCode = intent.getStringExtra("missionCode")
 
-        val current = LocalDateTime.now()
+
         var alertDate = "${a_startMonth}월 ${a_startDay}일"
 
-        var startAorP = "오전"
-        var endAorP = "오전"
+
 
 
 ////////////////////////////////초기화 드가자~///////////////////////////////////
 
         //a_startTime이 16:33이런 식으로 찍혀서 가공해줘야됨
+        var startAorP = "오전"
+        var endAorP = "오전"
+        var a_startHour = 0
+        var a_endHour = 0
+
         if (a_startTime != "" && a_endTime != "") {
             var startHourOfDay = a_startTime.toString().split(":")
             var endHourOfDay = a_endTime.toString().split(":")
 
             if (startHourOfDay[0].toInt() > 12) {
                 startAorP = "오후"
+                a_startHour = startHourOfDay[0].toInt() - 12
                 a_startTime = "${(startHourOfDay[0].toInt() - 12)}:${startHourOfDay[1]}"
             }
 
             if (endHourOfDay[0].toInt() > 12) {
                 endAorP = "오후"
+                a_endHour = endHourOfDay[0].toInt() - 12
                 a_endTime = "${(endHourOfDay[0].toInt() - 12)}:${endHourOfDay[1]}"
             }
         }
@@ -80,7 +86,7 @@ class EditScheduleActivity : AppCompatActivity() {
 
 
         //1-1. allDayCheck여부에 따라 다르게 보이게 함
-        if (ADChkBox == "true") {
+        if (a_startTime == "") {
             binding.timepickerStart.text = "-"
             binding.timepickerEnd.text = "-"
             binding.allDayCheckBox.isChecked = true
@@ -90,7 +96,7 @@ class EditScheduleActivity : AppCompatActivity() {
             binding.allDayCheckBox.isChecked = false
         }
 
-
+        val current = LocalDateTime.now()
         var startYear = CalendarUtil.sYear
         var startMonth = CalendarUtil.sMonth
         var startDay = CalendarUtil.sDay
@@ -103,7 +109,6 @@ class EditScheduleActivity : AppCompatActivity() {
         var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
 
 
-        //val current = LocalDateTime.now()
         val formatterDate = DateTimeFormatter.ofPattern("yyyy년 M월 d일")
         val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
         val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
@@ -229,15 +234,6 @@ class EditScheduleActivity : AppCompatActivity() {
                 binding.timepickerEnd.text = endTime
 
 
-//                if (hourOfDay > 12) {
-//                    endTime = "오후 ${hourOfDay - 12}:${minute}분"
-//                } else {
-//                    endTime = "오전 ${hourOfDay}:${minute}분"
-//                }
-//                binding.timepickerEnd.text = endTime
-//                Log.d("hourOfDay", "onCreate: $hourOfDay")
-
-
             }
             TimePickerDialog(
                 this,
@@ -248,21 +244,20 @@ class EditScheduleActivity : AppCompatActivity() {
                 false
             ).show()
         }
-
+        var startAorP12 = 0
 
         //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
+
         binding.allDayCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-
                 binding.timepickerStart.text = "-"
                 binding.timepickerEnd.text = "-"
                 binding.timepickerStart.isClickable = false
                 binding.timepickerEnd.isClickable = false
                 ADChkBox = "1"
             } else {
-
-                binding.timepickerStart.text = startTime
-                binding.timepickerEnd.text = endTime
+                binding.timepickerStart.text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
+                binding.timepickerEnd.text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
 
                 binding.timepickerStart.isClickable = true
                 binding.timepickerEnd.isClickable = true
@@ -292,10 +287,10 @@ class EditScheduleActivity : AppCompatActivity() {
             //alldaycheck는  val ADChkBox = "1" 또는 "0"으로 위의 체크리스트에서 만듦
             //오후 시간 DB에 넣을 때는 다시 오후 2시 -> 14시
             if (startAorP == "오후") {
-                startHour = (startHour.toInt() + 12).toString()
+                //startHour = (startHour.toInt() + 12).toString()
             }
             if (endAorP == "오후") {
-                endHour = (endHour.toInt() + 12).toString()
+                //endHour = (endHour.toInt() + 12).toString()
             }
             Log.d(
                 "Date1231231",
@@ -344,7 +339,7 @@ class EditScheduleActivity : AppCompatActivity() {
                 Log.d("scheduleData", "onCreate: $scheduleData")
 
 
-                RetrofitAPI.emgMedService4.addUserByEnqueue2(scheduleData)
+                RetrofitAPI.emgMedService6.addUserByEnqueue2(scheduleData)
                     .enqueue(object : retrofit2.Callback<Int> {
                         override fun onResponse(
                             call: Call<Int>,

@@ -73,18 +73,18 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
 
-            if (curUser == null) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    binding.mainFrm.visibility = View.INVISIBLE
-                    binding.mainBnv.visibility = View.INVISIBLE
-
-                    delay(600).run {
-                        val intent = Intent(applicationContext, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
-                }
-            }
+//            if (curUser == null) {
+//                CoroutineScope(Dispatchers.Main).launch {
+//                    binding.mainFrm.visibility = View.INVISIBLE
+//                    binding.mainBnv.visibility = View.INVISIBLE
+//
+//                    delay(600).run {
+//                        val intent = Intent(applicationContext, LoginActivity::class.java)
+//                        startActivity(intent)
+//                        finish()
+//                    }
+//                }
+//            }
 
         }
 

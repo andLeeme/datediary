@@ -66,4 +66,9 @@ object RetrofitAPI {
     val emgMedService5: ScheduleShowService by lazy {
         retrofit.create(ScheduleShowService::class.java)
     }
+
+    //스케줄 불러오기용
+    val emgMedService6: ScheduleDeleteService by lazy {
+        retrofit.create(ScheduleDeleteService::class.java)
+    }
 }
