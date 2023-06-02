@@ -339,29 +339,6 @@ class EditScheduleActivity : AppCompatActivity() {
                 Log.d("scheduleData", "onCreate: $scheduleData")
 
 
-                RetrofitAPI.emgMedService6.addUserByEnqueue2(scheduleData)
-                    .enqueue(object : retrofit2.Callback<Int> {
-                        override fun onResponse(
-                            call: Call<Int>,
-                            response: Response<Int>
-                        ) {
-                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                                .show()
-
-                            if (response.isSuccessful) {
-
-                                Log.d("리턴edit", "${response.body().toString()}")
-                                onResume()
-                            }
-                        }
-
-                        override fun onFailure(
-                            call: Call<Int>,
-                            t: Throwable
-                        ) {
-                        }
-                    })
-
 
                 //5. request 후 액티비티 종료
                 finish()
