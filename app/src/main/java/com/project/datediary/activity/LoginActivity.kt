@@ -130,6 +130,11 @@ class LoginActivity : AppCompatActivity() {
             Log.d("현재 로그인 되어있는 유저의 전체이름", displayName)
             Log.d("현재 로그인 되어있는 유저의 프로필 사진의 주소", photoUrl)
             Toast.makeText(this, "이메일: $email 이름 : $displayName ", Toast.LENGTH_SHORT).show()
+
         }
+        if (curUser == null){
+            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }
