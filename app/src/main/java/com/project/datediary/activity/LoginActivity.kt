@@ -78,33 +78,35 @@ class LoginActivity : AppCompatActivity() {
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account = completedTask.getResult(ApiException::class.java)
-            val email = account?.email.toString()
-            val displayName = account?.displayName.toString()
+            val email = account?.email
+
+            Toast.makeText(applicationContext, "$email", Toast.LENGTH_SHORT)
+                .show()
+
 
             RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
                 .enqueue(object : retrofit2.Callback<Int> {
                     override fun onResponse(
                         call: Call<Int>,
                         response: Response<Int>
+
                     ) {
                         Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
                             .show()
 
                         if (response.isSuccessful) {
-                            if (email == "rarara773@gmail.com") {
+                            if (response.body() == 1) {
+                                Toast.makeText(applicationContext, "신규회원입니다", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(applicationContext, SignUpActivity::class.java)
                                 startActivity(intent)
-                            } else {
+                            } else if (response.body() == 0) {
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
-                                Toast.makeText(
-                                    applicationContext,
-                                    "${account.displayName.toString()}님 반가워요",
-                                    Toast.LENGTH_SHORT
-                                )
-                                    .show()
+                                Toast.makeText(applicationContext, "기존회원입니다", Toast.LENGTH_SHORT).show()
+                            } else if (response.body() == 99) {
+                                Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT).show()
                             }
-                            finish()
+//                            finish()
                         }
                     }
 
