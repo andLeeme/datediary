@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -178,7 +179,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
 
 
-                        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
+        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
                         //오늘 정보 가공
                         var scheduleList = ArrayList<TitleResponseBody>()
                         Log.d("scheduleList1", "bind: ${TitleResponseBody}")
@@ -210,7 +211,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                             DayScheduleAdapter.DayScheduleOnItemClickListener {
                             override fun dayScheduleOnClick(v: View, position: Int) {
                                 val intent =
-                                    Intent(context, AddScheduleActivity::class.java)
+                                    Intent(context, EditScheduleActivity::class.java)
                                 startActivity(intent)
                             }
                         })
@@ -237,7 +238,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     }
                                 }
 
-                                //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
+           //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
                                 //선택한 날의 정보 가공
                                 var scheduleList = ArrayList<TitleResponseBody>()

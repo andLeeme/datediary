@@ -32,9 +32,6 @@ class AddScheduleActivity : AppCompatActivity() {
 
         binding = ActivityAddScheduleBinding.inflate(layoutInflater)
 
-//        var titleText = binding.emailEdittext1
-//        var contentText = binding.emailEdittext2
-//        var ADChkBox = binding.allDayCheckBox
 
 
 /////////////////////////////////기본 기능 설정///////////////////////////////////////

@@ -512,7 +512,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:backgroundTint="#99F3FF"
-                        android:text="일정 등록하기"
+                        android:text="일정 수정하기"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp"
                         app:cornerRadius="30dp"
