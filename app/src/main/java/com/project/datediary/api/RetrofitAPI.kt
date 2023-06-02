@@ -1,6 +1,7 @@
 import com.project.datediary.api.ScheduleEditService
 import com.project.datediary.api.ScheduleService
 import com.project.datediary.api.ScheduleShowService
+import com.project.datediary.api.SearchEmailService
 import com.project.datediary.api.SignUpService
 import com.project.datediary.api.TitleService
 import okhttp3.OkHttpClient
@@ -65,5 +66,9 @@ object RetrofitAPI {
     //스케줄 불러오기용
     val emgMedService5: ScheduleShowService by lazy {
         retrofit.create(ScheduleShowService::class.java)
+    }
+
+    val emgMedService7: SearchEmailService by lazy {
+        retrofit.create(SearchEmailService::class.java)
     }
 }

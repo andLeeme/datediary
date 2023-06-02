@@ -81,17 +81,39 @@ class LoginActivity : AppCompatActivity() {
             val email = account?.email.toString()
             val displayName = account?.displayName.toString()
 
+            RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
+                .enqueue(object : retrofit2.Callback<Int> {
+                    override fun onResponse(
+                        call: Call<Int>,
+                        response: Response<Int>
+                    ) {
+                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                            .show()
 
-            if (email == "rarara773@gmail.com") {
-                val intent = Intent(applicationContext, SignUpActivity::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
-                Toast.makeText(this, "${account.displayName.toString()}님 반가워요", Toast.LENGTH_SHORT).show()
-            }
+                        if (response.isSuccessful) {
+                            if (email == "rarara773@gmail.com") {
+                                val intent = Intent(applicationContext, SignUpActivity::class.java)
+                                startActivity(intent)
+                            } else {
+                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                startActivity(intent)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "${account.displayName.toString()}님 반가워요",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
+                            finish()
+                        }
+                    }
 
-            finish()
+                    override fun onFailure(call: Call<Int>, t: Throwable) {
+                        Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
+
 
         } catch (e: ApiException) {
 

@@ -3,8 +3,6 @@ package com.project.datediary.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import com.project.datediary.R
 import com.project.datediary.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
