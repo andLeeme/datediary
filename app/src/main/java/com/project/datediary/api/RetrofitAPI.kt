@@ -1,3 +1,4 @@
+import com.project.datediary.api.ScheduleDeleteService
 import com.project.datediary.api.ScheduleEditService
 import com.project.datediary.api.ScheduleService
 import com.project.datediary.api.ScheduleShowService
@@ -11,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitAPI {
     //학원
-    //private const val BASE_URL = "http://192.168.150.120:8080"
+        //private const val BASE_URL = "http://192.168.150.120:8080"
 
     //학원(현하)
     //private const val BASE_URL = "http://192.168.250.44:8080"
@@ -39,7 +40,7 @@ object RetrofitAPI {
             .build()
     }
 
-    fun getInstance(): Retrofit {
+    fun getInstance(): Retrofit{
         return retrofit
     }
 
@@ -66,6 +67,11 @@ object RetrofitAPI {
     //스케줄 불러오기용
     val emgMedService5: ScheduleShowService by lazy {
         retrofit.create(ScheduleShowService::class.java)
+    }
+
+    //스케줄 삭제
+    val emgMedService6: ScheduleDeleteService by lazy {
+        retrofit.create(ScheduleDeleteService::class.java)
     }
 
     val emgMedService7: SearchEmailService by lazy {

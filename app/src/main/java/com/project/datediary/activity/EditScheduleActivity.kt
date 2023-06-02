@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityEditScheduleBinding
+import com.project.datediary.model.ScheduleDeleteRequestBody
 import com.project.datediary.model.ScheduleEditRequestBody
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.util.CalendarUtil
@@ -50,8 +51,6 @@ class EditScheduleActivity : AppCompatActivity() {
 
 
         var alertDate = "${a_startMonth}월 ${a_startDay}일"
-
-
 
 
 ////////////////////////////////초기화 드가자~///////////////////////////////////
@@ -256,8 +255,10 @@ class EditScheduleActivity : AppCompatActivity() {
                 binding.timepickerEnd.isClickable = false
                 ADChkBox = "1"
             } else {
-                binding.timepickerStart.text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
-                binding.timepickerEnd.text = LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
+                binding.timepickerStart.text =
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
+                binding.timepickerEnd.text =
+                    LocalDateTime.now().format(DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN))
 
                 binding.timepickerStart.isClickable = true
                 binding.timepickerEnd.isClickable = true
@@ -339,12 +340,71 @@ class EditScheduleActivity : AppCompatActivity() {
                 Log.d("scheduleData", "onCreate: $scheduleData")
 
 
+                RetrofitAPI.emgMedService4.addUserByEnqueue2(scheduleData)
+                    .enqueue(object : retrofit2.Callback<Int> {
+                        override fun onResponse(
+                            call: Call<Int>,
+                            response: Response<Int>
+                        ) {
+                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                                .show()
+
+                            if (response.isSuccessful) {
+
+                                Log.d("리턴edit", "${response.body().toString()}")
+                                onResume()
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<Int>,
+                            t: Throwable
+                        ) {
+                        }
+                    })
+
 
                 //5. request 후 액티비티 종료
                 finish()
             }
         }
 
+
+        /////////////일정 삭제하기/////////////////////
+        binding.deleteBtn.setOnClickListener {
+            val scheduleData = ScheduleDeleteRequestBody(
+                couple_index = "1",
+                schedule_index = a_scheduleIndex,
+            )
+            Log.d("scheduleData", "onCreate: $scheduleData")
+
+
+            RetrofitAPI.emgMedService6.addUserByEnqueue2(scheduleData)
+                .enqueue(object : retrofit2.Callback<Int> {
+                    override fun onResponse(
+                        call: Call<Int>,
+                        response: Response<Int>
+                    ) {
+                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                            .show()
+
+                        if (response.isSuccessful) {
+
+                            Log.d("리턴delete", "${response.body().toString()}")
+                            onResume()
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<Int>,
+                        t: Throwable
+                    ) {
+                    }
+                })
+
+            //삭제한 후 액티비티 종료
+            finish()
+        }
 
         setContentView(binding.root)
     }

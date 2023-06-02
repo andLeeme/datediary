@@ -37,13 +37,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
     lateinit var binding: FragmentCalendarBinding
     lateinit var DayScheduleAdapter: DayScheduleAdapter
-    var month_view = Int
-
-    //lateinit var calendar: Calendar
-
-    //년월 변수
-    //lateinit var selectedDate: LocalDate
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
