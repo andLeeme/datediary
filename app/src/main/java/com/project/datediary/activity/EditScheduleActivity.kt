@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
 import com.project.datediary.databinding.ActivityEditScheduleBinding
+import com.project.datediary.model.ScheduleEditRequestBody
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
@@ -252,10 +253,7 @@ class EditScheduleActivity : AppCompatActivity() {
         //1-1. alldaycheck 체크 여부에 따라 텍스트와 clickable 속성 변경
         binding.allDayCheckBox.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
-//                startHour = ""
-//                startMinute = ""
-//                endHour = ""
-//                endMinute = ""
+
                 binding.timepickerStart.text = "-"
                 binding.timepickerEnd.text = "-"
                 binding.timepickerStart.isClickable = false
@@ -263,8 +261,6 @@ class EditScheduleActivity : AppCompatActivity() {
                 ADChkBox = "1"
             } else {
 
-//                startTime = "$startAorP ${startHour}:${startMinute}분"
-//                endTime = "$endAorP ${endHour}:${endMinute}분"
                 binding.timepickerStart.text = startTime
                 binding.timepickerEnd.text = endTime
 
@@ -280,7 +276,6 @@ class EditScheduleActivity : AppCompatActivity() {
         binding.selectPlace.setOnClickListener {
             showPlaceDialog()
             clearMissionDialog()
-            //placeListDialog()
         }
 
         //3. 스피너?리스트뷰?(데이트미션)
@@ -289,8 +284,8 @@ class EditScheduleActivity : AppCompatActivity() {
         }
 
 
-        //4. 일정 등록하기 누르면 정보 주기
-        binding.submitBtn.setOnClickListener {
+        //4. 일정 수정하기 누르면 정보 DB에 넣기
+        binding.editBtn.setOnClickListener {
 
             val title = binding.emailEdittext1.text.toString()
             val contents = binding.emailEdittext2.text.toString()
@@ -329,8 +324,9 @@ class EditScheduleActivity : AppCompatActivity() {
                     .show()
             } else {
 
-                val scheduleData = ScheduleRequestBody(
+                val scheduleData = ScheduleEditRequestBody(
                     couple_index = "1",
+                    schedule_index = a_scheduleIndex,
                     start_year = startYear,
                     start_month = startMonth,
                     start_day = startDay,
@@ -348,7 +344,7 @@ class EditScheduleActivity : AppCompatActivity() {
                 Log.d("scheduleData", "onCreate: $scheduleData")
 
 
-                RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
+                RetrofitAPI.emgMedService4.addUserByEnqueue2(scheduleData)
                     .enqueue(object : retrofit2.Callback<Int> {
                         override fun onResponse(
                             call: Call<Int>,
@@ -359,7 +355,7 @@ class EditScheduleActivity : AppCompatActivity() {
 
                             if (response.isSuccessful) {
 
-                                Log.d("리턴123", "${response.body().toString()}")
+                                Log.d("리턴edit", "${response.body().toString()}")
                             }
                         }
 
@@ -367,14 +363,12 @@ class EditScheduleActivity : AppCompatActivity() {
                             call: Call<Int>,
                             t: Throwable
                         ) {
-
                         }
                     })
 
 
                 //5. request 후 액티비티 종료
                 finish()
-
             }
         }
 
@@ -398,8 +392,6 @@ class EditScheduleActivity : AppCompatActivity() {
         //아이템 선택 이벤트
         builder.setItems(places) { p0, p1 ->
             binding.selectPlace.text = places[p1]
-//            Toast.makeText(this, "선택된 색깔은 ${places[p1]}",
-//                Toast.LENGTH_SHORT).show()
         }
 
         val alertDialog: AlertDialog = builder.create()
@@ -471,8 +463,6 @@ class EditScheduleActivity : AppCompatActivity() {
         //아이템 선택 이벤트
         builder2.setItems(missions) { p0, p1 ->
             binding.selectMission.text = missions[p1]
-//            Toast.makeText(this, "선택된 색깔은 ${missions[p1]}",
-//                Toast.LENGTH_SHORT).show()
         }
 
         val alertDialog2: AlertDialog = builder2.create()
