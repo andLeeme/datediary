@@ -71,4 +71,8 @@ object RetrofitAPI {
     val emgMedService6: ScheduleDeleteService by lazy {
         retrofit.create(ScheduleDeleteService::class.java)
     }
+
+    val emgMedService6: ScheduleShowService by lazy {
+        retrofit.create(ScheduleShowService::class.java)
+    }
 }

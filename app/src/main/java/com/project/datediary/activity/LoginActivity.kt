@@ -15,6 +15,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.project.datediary.databinding.ActivityLoginBinding
+import retrofit2.Call
+import retrofit2.Response
 
 
 class LoginActivity : AppCompatActivity() {
@@ -77,24 +79,17 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val email = account?.email.toString()
-            val familyName = account?.familyName.toString()
-            val givenName = account?.givenName.toString()
             val displayName = account?.displayName.toString()
-            val photoUrl = account?.photoUrl.toString()
-
-            Log.d("로그인한 유저의 이메일", email)
-            Log.d("로그인한 유저의 성", familyName)
-            Log.d("로그인한 유저의 이름", givenName)
-            Log.d("로그인한 유저의 전체이름", displayName)
-            Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
-//            Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
 
 
-
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
-            Toast.makeText(this, "${account.displayName.toString()}님 반가워요", Toast.LENGTH_SHORT)
-                .show()
+            if (email == "rarara773@gmail.com") {
+                val intent = Intent(applicationContext, SignUpActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+                Toast.makeText(this, "${account.displayName.toString()}님 반가워요", Toast.LENGTH_SHORT).show()
+            }
 
             finish()
 
@@ -118,6 +113,7 @@ class LoginActivity : AppCompatActivity() {
             mGoogleSignInClient.signOut()
                 .addOnCompleteListener(this) {
                     Toast.makeText(this, "로그아웃 완료", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
         }
         if (curUser == null) {

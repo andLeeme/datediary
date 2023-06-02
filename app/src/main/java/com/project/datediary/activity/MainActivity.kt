@@ -38,8 +38,7 @@ import java.time.LocalDateTime
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var binding2: FragmentCalendarBinding
-
+    private lateinit var binding2: FragmentCalendarBinding
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             // Create your custom animation.
             val slideUp = ObjectAnimator.ofFloat(
                 splashScreenView,
-                View.TRANSLATION_X,
+                View.TRANSLATION_Y,
                 0f,
                 -splashScreenView.height.toFloat()
             )
