@@ -230,8 +230,11 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 intent.putExtra("endMonth", scheduleList[position].endMonth)
                                 intent.putExtra("endDay", scheduleList[position].endDay)
                                 intent.putExtra("endTime", scheduleList[position].endTime)
-                                intent.putExtra("endTime", scheduleList[position].placeCode)
-                                intent.putExtra("endTime", scheduleList[position].missionCode)
+                                intent.putExtra("title", scheduleList[position].title)
+                                intent.putExtra("contents", scheduleList[position].contents)
+                                intent.putExtra("allDayCheck", scheduleList[position].allDayCheck)
+                                intent.putExtra("placeCode", scheduleList[position].placeCode)
+                                intent.putExtra("missionCode", scheduleList[position].missionCode)
                                 Log.d(
                                     "testIndex2",
                                     "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
@@ -295,6 +298,22 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     override fun dayScheduleOnClick(v: View, position: Int) {
                                         val intent =
                                             Intent(context, EditScheduleActivity::class.java)
+                                        Log.d("testIndex1", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
+                                        intent.putExtra("scheduleIndex", scheduleList[position].scheduleIndex)
+                                        intent.putExtra("startYear", scheduleList[position].startYear)
+                                        intent.putExtra("startMonth", scheduleList[position].startMonth)
+                                        intent.putExtra("startDay", scheduleList[position].startDay)
+                                        intent.putExtra("startTime", scheduleList[position].startTime)
+                                        intent.putExtra("endYear", scheduleList[position].endYear)
+                                        intent.putExtra("endMonth", scheduleList[position].endMonth)
+                                        intent.putExtra("endDay", scheduleList[position].endDay)
+                                        intent.putExtra("endTime", scheduleList[position].endTime)
+                                        intent.putExtra("title", scheduleList[position].title)
+                                        intent.putExtra("contents", scheduleList[position].contents)
+                                        intent.putExtra("allDayCheck", scheduleList[position].allDayCheck)
+                                        intent.putExtra("placeCode", scheduleList[position].placeCode)
+                                        intent.putExtra("missionCode", scheduleList[position].missionCode)
+                                        Log.d("testIndex2", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
                                         startActivity(intent)
                                     }
                                 })

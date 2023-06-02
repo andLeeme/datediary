@@ -41,19 +41,53 @@ class EditScheduleActivity : AppCompatActivity() {
         var a_endMonth = intent.getStringExtra("endMonth")
         var a_endDay = intent.getStringExtra("endDay")
         var a_endTime = intent.getStringExtra("endTime")
+        var a_title = intent.getStringExtra("title")
+        var a_contents = intent.getStringExtra("contents")
+        var ADChkBox = intent.getStringExtra("allDayCheck")
+        var placeCode = intent.getStringExtra("placeCode")
+        var missionCode = intent.getStringExtra("missionCode")
 
         val current = LocalDateTime.now()
         var alertDate = "${a_startMonth}월 ${a_startDay}일"
 
+        var startAorP = "오전"
+        var endAorP = "오전"
 
-/////////////////////////////////기본 기능 설정///////////////////////////////////////
 
-        //0. 데이트 피커 및 타임피커 초기화(넘어온 시간으로 세팅)
+////////////////////////////////초기화 드가자~///////////////////////////////////
 
+        //a_startTime이 16:33이런 식으로 찍혀서 가공해줘야됨
+        if (a_startTime != "" && a_endTime != "") {
+            var startHourOfDay = a_startTime.toString().split(":")
+            var endHourOfDay = a_endTime.toString().split(":")
+
+            if (startHourOfDay[0].toInt() > 12) {
+                startAorP = "오후"
+                a_startTime = "${(startHourOfDay[0].toInt() - 12)}:${startHourOfDay[1]}"
+            }
+
+            if (endHourOfDay[0].toInt() > 12) {
+                endAorP = "오후"
+                a_endTime = "${(endHourOfDay[0].toInt() - 12)}:${endHourOfDay[1]}"
+            }
+        }
+
+
+        //1. 데이트 피커 및 타임피커 초기화(넘어온 시간으로 세팅)
         binding.datepickerStart.text = "${a_startYear}년 ${a_startMonth}월 ${a_startDay}일"
-        binding.timepickerStart.text = "${a_startTime}"
         binding.datepickerEnd.text = "${a_endYear}년 ${a_endMonth}월 ${a_endDay}일"
-        binding.timepickerEnd.text = "${a_endTime}"
+
+
+        //1-1. allDayCheck여부에 따라 다르게 보이게 함
+        if (ADChkBox == "true") {
+            binding.timepickerStart.text = "-"
+            binding.timepickerEnd.text = "-"
+            binding.allDayCheckBox.isChecked = true
+        } else {
+            binding.timepickerStart.text = "${startAorP} ${a_startTime}"
+            binding.timepickerEnd.text = "${endAorP} ${a_endTime}"
+            binding.allDayCheckBox.isChecked = false
+        }
 
 
         var startYear = CalendarUtil.sYear
@@ -61,16 +95,11 @@ class EditScheduleActivity : AppCompatActivity() {
         var startDay = CalendarUtil.sDay
         var startHour = current.format(DateTimeFormatter.ofPattern("k"))
         var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
-        var startAorP = "오전"
         var endYear = CalendarUtil.sYear
         var endMonth = CalendarUtil.sMonth
         var endDay = CalendarUtil.sDay
         var endHour = current.format(DateTimeFormatter.ofPattern("k"))
         var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
-        var endAorP = "오전"
-        var ADChkBox = "0"
-        var placeCode = ""
-        var missionCode = ""
 
 
         //val current = LocalDateTime.now()
@@ -83,12 +112,23 @@ class EditScheduleActivity : AppCompatActivity() {
         var endTime = current.format(formatterTime)
         //var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
 
+
         //안내 문구 초기화
         binding.scheduleAlert.text = "$alertDate 일정이 수정돼요!"
 
 
-        //1. Date&Time Picker
+        //2. title 및 contents 받아온 걸로 세팅
+        binding.emailEdittext1.setText(a_title)
+        binding.emailEdittext2.setText(a_contents)
 
+
+        //3. 방문장소와 데이트 미션 받아온 걸로 세팅
+        binding.selectPlace.text = setPlaceName(placeCode)
+        binding.selectMission.text = setMissionName(missionCode)
+
+
+//////////////////////////////ADD스케쥴과 같은 기능들//////////////////////////////
+        //1. Date&Time Picker
         //datepicker 및 timepicker에서 선택한 날짜/시간 등을 버튼 텍스트에 셋팅
         binding.datepickerStart.setOnClickListener {
             val cal = Calendar.getInstance()    //캘린더뷰 만들기
@@ -99,7 +139,7 @@ class EditScheduleActivity : AppCompatActivity() {
                     startMonth = (month + 1).toString()
                     startDay = dayOfMonth.toString()
                     binding.datepickerStart.text = startDate
-                    binding.scheduleAlert.text = "${month + 1}월 ${dayOfMonth}일 일정에 추가돼요!"
+                    binding.scheduleAlert.text = "${month + 1}월 ${dayOfMonth}일 일정이 수정돼요!"
                 }
             DatePickerDialog(
                 this,
@@ -487,5 +527,83 @@ class EditScheduleActivity : AppCompatActivity() {
         }
         return Mcode
     }
+
+
+    //선택된 장소 이름 찾기
+    private fun setPlaceName(placeCode: String?): String {
+
+        var placeName = ""
+        when (placeCode) {
+            "" -> placeName = "방문 장소"
+            "1" -> placeName = "영화관"
+            "2" -> placeName = "바/주점"
+            "3" -> placeName = "보드게임"
+            "4" -> placeName = "여행"
+            "5" -> placeName = "식당"
+            "6" -> placeName = "도서관"
+            "7" -> placeName = "전시관"
+            "8" -> placeName = "동물원"
+            "9" -> placeName = "놀이공원"
+            "10" -> placeName = "카페"
+            "11" -> placeName = "관람"
+            "12" -> placeName = "스포츠"
+            "13" -> placeName = "공방"
+            "14" -> placeName = "드라이브"
+            "15" -> placeName = "식물원"
+            "16" -> placeName = "기타"
+        }
+        return placeName
+    }
+
+
+    private fun setMissionName(missionCode: String?): String {
+        var missionName = ""
+
+        when (missionCode) {
+            "" -> missionName = "데이트 미션!"
+            "1" -> missionName = "팝콘 받아 먹은 사람이 사랑한다고 말해주기"
+            "2" -> missionName = "바/영화 보는 동안 팔짱 끼기"
+            "3" -> missionName = "서로 마실 술 골라주기"
+            "4" -> missionName = "러브샷"
+            "5" -> missionName = "보드게임 쿼리도 해보기"
+            "6" -> missionName = "보드게임 고스트 해보기"
+            "7" -> missionName = "가위바위보해서 진 사람이 밥 사주기"
+            "8" -> missionName = "여행지를 배경으로 손잡은 사진 찍기"
+            "9" -> missionName = "정성을 다한 한 숟갈 먹여주기"
+            "10" -> missionName = "매운 음식 먹으러 가기~"
+            "11" -> missionName = "옆자리에서 먹기"
+            "12" -> missionName = "서로 공유하고 싶은 책 골라주기"
+            "13" -> missionName = "책장 사이에서 몰래 뽀뽀"
+            "14" -> missionName = "관람 끝난 후 감상 나누기"
+            "15" -> missionName = "다음에 보러갈 전시 고르기"
+            "16" -> missionName = "동물 옆에서 동물 따라하는 사진 찍기(ex. 원숭이 흉내~)"
+            "18" -> missionName = "안 타본 놀이기구 타보기"
+            "19" -> missionName = "놀이기구 타기 전에 같이 사진 찍기"
+            "20" -> missionName = "대관람차 꼭대기에서 사진찍기"
+            "21" -> missionName = "상대방이 좋아하는 메뉴 맞추기"
+            "22" -> missionName = "서로 메뉴 골라주기"
+            "23" -> missionName = "다음에 보러갈 공연 고르기"
+            "24" -> missionName = "공연 후 기념 사진 찍기"
+            "25" -> missionName = "점수 내기!"
+            "26" -> missionName = "멋진 모습 보여주기"
+            "27" -> missionName = "서로를 닮은 물건 만들기"
+            "28" -> missionName = "그날 만든 물건을 서로에게 선물하기"
+            "29" -> missionName = "조수석에 앉은 사람이 좋아하는 노래 틀기"
+            "30" -> missionName = "조수석에서 노래 불러주기"
+            "31" -> missionName = "서로에게 어울리는 식물 고르고 이유 말해주기"
+            "32" -> missionName = "식물 이름 많이 맞추기"
+            "33" -> missionName = "마음에 드는 꽃의 꽃말 찾아보기"
+            "34" -> missionName = "서로 바라보고 웃어주기"
+            "35" -> missionName = "서로에게 편지 써주기"
+            "36" -> missionName = "지역 축제 함께 참가하기"
+            "37" -> missionName = "함께 악기 배우러 가기"
+            "38" -> missionName = "1분 동안 손 잡고 있기"
+            "39" -> missionName = "사랑한다고 다섯 번 말하기"
+            "40" -> missionName = "30초동안 눈 마주치기"
+        }
+
+        return missionName
+    }
+
 
 }

@@ -17,14 +17,28 @@ class DayScheduleAdapter(private val scheduleShowList : ArrayList<TitleResponseB
 
             binding.scheduleIndex.text = scheduleShowList[pos].scheduleIndex
             binding.title.text = scheduleShowList[pos].title
-            binding.startTime.text = scheduleShowList[pos].startTime
-            binding.endTime.text = scheduleShowList[pos].endTime
+
 
             if(scheduleShowList[pos].contents =="") {
                 binding.contents.text = scheduleShowList[pos].title
             } else {
                 binding.contents.text = scheduleShowList[pos].contents
             }
+
+
+            if(scheduleShowList[pos].startTime == "") {
+                binding.startTime.visibility = View.GONE
+                binding.endTime.visibility = View.GONE
+                binding.allDay.visibility = View.VISIBLE
+            } else {
+                binding.startTime.visibility = View.VISIBLE
+                binding.endTime.visibility = View.VISIBLE
+                binding.allDay.visibility = View.GONE
+                binding.startTime.text = scheduleShowList[pos].startTime
+                binding.endTime.text = scheduleShowList[pos].endTime
+            }
+
+
         }
     }
 
