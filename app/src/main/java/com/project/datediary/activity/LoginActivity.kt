@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         account?.let {
-            Toast.makeText(this, "로그인 되어있담", Toast.LENGTH_SHORT).show()
-        } ?: Toast.makeText(this, "로그인 안되어있담", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "로그인 되어있음", Toast.LENGTH_SHORT).show()
+        } ?: Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -87,6 +87,7 @@ class LoginActivity : AppCompatActivity() {
             Log.d("로그인한 유저의 이름", givenName)
             Log.d("로그인한 유저의 전체이름", displayName)
             Log.d("로그인한 유저의 프로필 사진의 주소", photoUrl)
+            Toast.makeText(this, "로그인 완료", Toast.LENGTH_SHORT).show()
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
             // Please refer to the GoogleSignInStatusCodes class reference for more information.
@@ -97,14 +98,13 @@ class LoginActivity : AppCompatActivity() {
     private fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.getSignInIntent()
         resultLauncher.launch(signInIntent)
-        Toast.makeText(this, "로그인 성공했담", Toast.LENGTH_SHORT).show()
 
     }
 
     private fun signOut() {
         mGoogleSignInClient.signOut()
             .addOnCompleteListener(this) {
-                Toast.makeText(this, "로그아웃 했담", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "로그아웃 완료", Toast.LENGTH_SHORT).show()
             }
     }
 
