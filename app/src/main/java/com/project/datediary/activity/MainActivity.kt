@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.project.datediary.R
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.fragment.FragmentCalendar
@@ -50,6 +51,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         installSplashScreen()
+
+        val curUser = GoogleSignIn.getLastSignedInAccount(this)
+        curUser?.let {
+            Toast.makeText(this, "${curUser.familyName.toString()}님 반가워요", Toast.LENGTH_SHORT).show()
+        }
+
+        if (curUser == null) {
+            Toast.makeText(this, "로그인 안되어 있어요", Toast.LENGTH_SHORT).show()
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = FragmentCalendarBinding.inflate(layoutInflater)
