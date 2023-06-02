@@ -1,6 +1,8 @@
 package com.project.datediary.activity
 
 import android.animation.ObjectAnimator
+import android.app.Activity
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -39,27 +41,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var binding2: FragmentCalendarBinding
 
 
-    //bottomSheetBehavior 객체 생성
-//    companion object {
-//        private lateinit var binding: ActivityMainBinding
-//        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-//    }
-
-
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         installSplashScreen()
-
-        val curUser = GoogleSignIn.getLastSignedInAccount(this)
-        curUser?.let {
-            Toast.makeText(this, "${curUser.familyName.toString()}님 반가워요", Toast.LENGTH_SHORT).show()
-        }
-
-        if (curUser == null) {
-            Toast.makeText(this, "로그인 안되어 있어요", Toast.LENGTH_SHORT).show()
-        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = FragmentCalendarBinding.inflate(layoutInflater)
@@ -68,7 +54,7 @@ class MainActivity : AppCompatActivity() {
             // Create your custom animation.
             val slideUp = ObjectAnimator.ofFloat(
                 splashScreenView,
-                View.TRANSLATION_Y,
+                View.TRANSLATION_X,
                 0f,
                 -splashScreenView.height.toFloat()
             )
@@ -80,8 +66,26 @@ class MainActivity : AppCompatActivity() {
 
             // Run your animation.
             slideUp.start()
-        }
 
+            val curUser = GoogleSignIn.getLastSignedInAccount(this)
+            curUser?.let {
+                Toast.makeText(this, "${curUser.displayName.toString()}님 반가워요", Toast.LENGTH_SHORT)
+                    .show()
+            }
+
+            if (curUser == null) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    binding.mainFrm.visibility = View.INVISIBLE
+                    binding.mainBnv.visibility = View.INVISIBLE
+
+                    delay(600).run {
+                        val intent = Intent(applicationContext, LoginActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+                }
+            }
+        }
 
         //스플래쉬화면을 더 오래 실행하는법.
         val content: View = findViewById(android.R.id.content)
@@ -95,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         true
                     } else {
-                        // The content is not ready; suspend.
                         false
                     }
                 }
@@ -106,18 +109,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-//        binding.sheetText1.setOnClickListener {
-//            if (binding.sheetText1.text.toString() == "바뀐 일정") {
-//                binding.sheetText1.text = "오늘의 일정이에요"
-//            } else {
-//                binding.sheetText1.text = "바뀐 일정"
-//                Toast.makeText(this, "내용 바뀜", Toast.LENGTH_SHORT).show()
-//            }
-//            return@setOnClickListener
-//        }
-
 
         initBottomNavigation()
+
     }
 
 

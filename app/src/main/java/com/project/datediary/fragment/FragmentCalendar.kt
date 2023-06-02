@@ -177,9 +177,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         binding.recyclerView.adapter = adapter
 
 
-
-
-        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
+                        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
                         //오늘 정보 가공
                         var scheduleList = ArrayList<TitleResponseBody>()
                         Log.d("scheduleList1", "bind: ${TitleResponseBody}")
@@ -196,7 +194,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         val adapter2 = DayScheduleAdapter(scheduleList)
 
 
-
                         //레이아웃 설정
                         var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
 
@@ -211,11 +208,20 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         adapter2.dayScheduleSetItemClickListener(object :
                             DayScheduleAdapter.DayScheduleOnItemClickListener {
                             override fun dayScheduleOnClick(v: View, position: Int) {
-                                Log.d("testIndex", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
+                                Log.d(
+                                    "testIndex",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
                                 val intent =
                                     Intent(context, EditScheduleActivity::class.java)
-                                Log.d("testIndex1", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
-                                intent.putExtra("scheduleIndex", scheduleList[position].scheduleIndex)
+                                Log.d(
+                                    "testIndex1",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
+                                intent.putExtra(
+                                    "scheduleIndex",
+                                    scheduleList[position].scheduleIndex
+                                )
                                 intent.putExtra("startYear", scheduleList[position].startYear)
                                 intent.putExtra("startMonth", scheduleList[position].startMonth)
                                 intent.putExtra("startDay", scheduleList[position].startDay)
@@ -226,7 +232,10 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 intent.putExtra("endTime", scheduleList[position].endTime)
                                 intent.putExtra("endTime", scheduleList[position].placeCode)
                                 intent.putExtra("endTime", scheduleList[position].missionCode)
-                                Log.d("testIndex2", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
+                                Log.d(
+                                    "testIndex2",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
                                 startActivity(intent)
                             }
                         })
@@ -253,7 +262,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     }
                                 }
 
-           //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
+                                //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
                                 //선택한 날의 정보 가공
                                 var scheduleList = ArrayList<TitleResponseBody>()
@@ -271,7 +280,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                 val adapter2 = DayScheduleAdapter(scheduleList)
 
                                 //레이아웃 설정
-                                var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+                                var manager2: RecyclerView.LayoutManager =
+                                    LinearLayoutManager(context)
 
                                 //레이아웃 적용
                                 binding.recycler10.layoutManager = manager2
@@ -367,7 +377,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
             (activity as MainActivity).callHome()
         }
     }
-
 
 
 }
