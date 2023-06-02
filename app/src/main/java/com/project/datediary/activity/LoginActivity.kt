@@ -26,8 +26,8 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         account?.let {
-            Toast.makeText(this, "Logged In", Toast.LENGTH_SHORT).show()
-        } ?: Toast.makeText(this, "Not Yet", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "로그인 되어있담", Toast.LENGTH_SHORT).show()
+        } ?: Toast.makeText(this, "로그인 안되어있담", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
