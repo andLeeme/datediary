@@ -206,12 +206,27 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         //어댑터 적용
                         binding.recycler10.adapter = adapter2
 
+
                         //아이템 클릭하면 EditSchedule Activity 소환!
                         adapter2.dayScheduleSetItemClickListener(object :
                             DayScheduleAdapter.DayScheduleOnItemClickListener {
                             override fun dayScheduleOnClick(v: View, position: Int) {
+                                Log.d("testIndex", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
                                 val intent =
                                     Intent(context, EditScheduleActivity::class.java)
+                                Log.d("testIndex1", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
+                                intent.putExtra("scheduleIndex", scheduleList[position].scheduleIndex)
+                                intent.putExtra("startYear", scheduleList[position].startYear)
+                                intent.putExtra("startMonth", scheduleList[position].startMonth)
+                                intent.putExtra("startDay", scheduleList[position].startDay)
+                                intent.putExtra("startTime", scheduleList[position].startTime)
+                                intent.putExtra("endYear", scheduleList[position].endYear)
+                                intent.putExtra("endMonth", scheduleList[position].endMonth)
+                                intent.putExtra("endDay", scheduleList[position].endDay)
+                                intent.putExtra("endTime", scheduleList[position].endTime)
+                                intent.putExtra("endTime", scheduleList[position].placeCode)
+                                intent.putExtra("endTime", scheduleList[position].missionCode)
+                                Log.d("testIndex2", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
                                 startActivity(intent)
                             }
                         })

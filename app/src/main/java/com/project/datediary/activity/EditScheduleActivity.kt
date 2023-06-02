@@ -9,9 +9,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.project.datediary.R
-import com.project.datediary.databinding.ActivityAddScheduleBinding
 import com.project.datediary.databinding.ActivityEditScheduleBinding
-import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.model.ScheduleRequestBody
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
@@ -33,29 +31,29 @@ class EditScheduleActivity : AppCompatActivity() {
 
         binding = ActivityEditScheduleBinding.inflate(layoutInflater)
 
+        //intent로 받아온 정보 변수에 저장
+        var a_scheduleIndex = intent.getStringExtra("scheduleIndex")
+        var a_startYear = intent.getStringExtra("startYear")
+        var a_startMonth = intent.getStringExtra("startMonth")
+        var a_startDay = intent.getStringExtra("startDay")
+        var a_startTime = intent.getStringExtra("startTime")
+        var a_endYear = intent.getStringExtra("endYear")
+        var a_endMonth = intent.getStringExtra("endMonth")
+        var a_endDay = intent.getStringExtra("endDay")
+        var a_endTime = intent.getStringExtra("endTime")
+
+        val current = LocalDateTime.now()
+        var alertDate = "${a_startMonth}월 ${a_startDay}일"
 
 
 /////////////////////////////////기본 기능 설정///////////////////////////////////////
 
-        //0. 기본 시간(현재 시간 넣어주기)
-        //변수 초기화, 처음 켰을 때는 현재 시간 보여주기
-        val current = LocalDateTime.now()
-        val formatterDate = DateTimeFormatter.ofPattern("yyyy년 M월 d일")
-        val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
-        val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
+        //0. 데이트 피커 및 타임피커 초기화(넘어온 시간으로 세팅)
 
-
-        var startDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
-        var startTime = current.format(formatterTime)
-        var endDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
-        var endTime = current.format(formatterTime)
-        var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
-
-
-        binding.datepickerStart.text = startDate
-        binding.timepickerStart.text = startTime
-        binding.datepickerEnd.text = endDate
-        binding.timepickerEnd.text = endTime
+        binding.datepickerStart.text = "${a_startYear}년 ${a_startMonth}월 ${a_startDay}일"
+        binding.timepickerStart.text = "${a_startTime}"
+        binding.datepickerEnd.text = "${a_endYear}년 ${a_endMonth}월 ${a_endDay}일"
+        binding.timepickerEnd.text = "${a_endTime}"
 
 
         var startYear = CalendarUtil.sYear
@@ -75,8 +73,18 @@ class EditScheduleActivity : AppCompatActivity() {
         var missionCode = ""
 
 
+        //val current = LocalDateTime.now()
+        val formatterDate = DateTimeFormatter.ofPattern("yyyy년 M월 d일")
+        val formatterTime = DateTimeFormatter.ofPattern("a h:mm", Locale.KOREAN)
+        val formatterAlert = DateTimeFormatter.ofPattern("M월 d일")
+        var startDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
+        var startTime = current.format(formatterTime)
+        var endDate = "${CalendarUtil.sYear}년 ${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
+        var endTime = current.format(formatterTime)
+        //var alertDate = "${CalendarUtil.sMonth}월 ${CalendarUtil.sDay}일"
+
         //안내 문구 초기화
-        binding.scheduleAlert.text = "$alertDate 일정에 추가돼요!"
+        binding.scheduleAlert.text = "$alertDate 일정이 수정돼요!"
 
 
         //1. Date&Time Picker
