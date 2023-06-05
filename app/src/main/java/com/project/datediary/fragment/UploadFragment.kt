@@ -5,13 +5,16 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.project.datediary.R
 import com.project.datediary.api.ImageUploadService
@@ -33,6 +36,7 @@ class UploadFragment : Fragment() {
     private lateinit var selectedImageUri: Uri
     private lateinit var imageUploadService: ImageUploadService
     private lateinit var rootView: View
+    private val coupleIndex = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,14 +64,30 @@ class UploadFragment : Fragment() {
         rootView.findViewById<Button>(R.id.uploadImageButton).setOnClickListener {
             if (::selectedImageUri.isInitialized) {
                 uploadImage(selectedImageUri)
+
+                //이미지 정보 넘겨주기
+                val coupleIndex = coupleIndex
+                val bundle_imageUrl = "$selectedImageUri"
+                parentFragmentManager.setFragmentResult("requestKey", bundleOf("coupleIndex" to coupleIndex,"imageUrl" to bundle_imageUrl))
+                parentFragmentManager.beginTransaction().remove(this@UploadFragment).commit()//현재 프레그먼트 닫기
+
+                Log.d("result_imageUrl", "onCreateViewC: $bundle_imageUrl")
+
+
             } else {
                 showToast("이미지를 선택하세요.")
             }
         }
+
+
+
+
+
     }
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        //intent.putExtra( "crop", "true" )
         startActivityForResult(intent, PICK_IMAGE_REQUEST)
     }
 
@@ -104,6 +124,8 @@ class UploadFragment : Fragment() {
                     val apiResponse = response.body()
                     if (apiResponse != null) {
                         showToast("이미지 업로드 성공: $apiResponse")
+
+
                     } else {
                         showToast("이미지 업로드 실패")
                     }
