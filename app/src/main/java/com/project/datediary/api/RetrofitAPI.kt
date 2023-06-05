@@ -1,3 +1,4 @@
+import com.project.datediary.api.AddCoupleEmailService
 import com.project.datediary.api.ScheduleDeleteService
 import com.project.datediary.api.ScheduleEditService
 import com.project.datediary.api.ScheduleService
@@ -76,5 +77,9 @@ object RetrofitAPI {
 
     val emgMedService7: SearchEmailService by lazy {
         retrofit.create(SearchEmailService::class.java)
+    }
+
+    val emgMedService8: AddCoupleEmailService by lazy {
+        retrofit.create(AddCoupleEmailService::class.java)
     }
 }

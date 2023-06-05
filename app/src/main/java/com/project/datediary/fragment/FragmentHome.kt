@@ -26,7 +26,6 @@ class FragmentHome : Fragment() {
             binding.fragmentHome.visibility = View.INVISIBLE
         }
 
-
         return binding.root
     }
 

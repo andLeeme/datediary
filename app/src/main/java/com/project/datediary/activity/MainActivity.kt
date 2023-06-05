@@ -1,14 +1,10 @@
 package com.project.datediary.activity
 
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -18,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 import com.project.datediary.R
-import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.fragment.FragmentGraph
 import com.project.datediary.fragment.FragmentHome
@@ -27,12 +23,13 @@ import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
-import com.project.datediary.model.ScheduleShowResponseBody
 import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
@@ -73,19 +70,78 @@ class MainActivity : AppCompatActivity() {
             }
 
             if (curUser == null) {
+
                 CoroutineScope(Dispatchers.Main).launch {
                     binding.mainFrm.visibility = View.INVISIBLE
                     binding.mainBnv.visibility = View.INVISIBLE
 
-                    delay(600).run {
+                    delay(650).run {
                         val intent = Intent(applicationContext, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     }
                 }
+            } else {
+                RetrofitAPI.emgMedService7.addUserByEnqueue2(curUser?.email)
+                    .enqueue(object : retrofit2.Callback<Int> {
+                        override fun onResponse(
+                            call: Call<Int>,
+                            response: Response<Int>
+
+                        ) {
+                            Log.d("ChkUserData", "Call Success")
+
+                            if (response.isSuccessful) {
+                                if (response.body() == 1) {
+                                    val intent =
+                                        Intent(applicationContext, MainActivity::class.java)
+                                    startActivity(intent)
+                                    Toast.makeText(
+                                        applicationContext,
+                                        "기존회원입니다",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                } else if (response.body() == 2) {
+                                    val intent =
+                                        Intent(applicationContext, SignUpActivity::class.java)
+
+                                    CoroutineScope(Dispatchers.Main).launch {
+                                        binding.mainFrm.visibility = View.INVISIBLE
+                                        binding.mainBnv.visibility = View.INVISIBLE
+                                        delay(600).run {
+                                            startActivity(intent)
+                                            finish()
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "커플 미연동 회원입니다",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
+                                } else if (response.body() == 99) {
+                                    Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
+                                        .show()
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Int>, t: Throwable) {
+                            Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                    })
+
             }
 
         }
+
+        var count = 0
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000).run {
+                count = 1
+            }
+        }
+
 
         //스플래쉬화면을 더 오래 실행하는법.
         val content: View = findViewById(android.R.id.content)
@@ -94,7 +150,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onPreDraw(): Boolean {
 
                     //조건이 true일때 화면 전환
-                    return if (true) {
+                    return if (count == 1) {
                         // The content is ready; start drawing.
                         content.viewTreeObserver.removeOnPreDrawListener(this)
                         true
@@ -187,7 +243,7 @@ class MainActivity : AppCompatActivity() {
     private var finishCount = false
 
     override fun onBackPressed() {
-        //아래와 같은 코드를 추가하도록 한다
+
         //해당 엑티비티에서 띄운 프래그먼트에서 뒤로가기를 누르게 되면 프래그먼트에서 구현한 onBackPressed 함수가 실행되게 된다.
         val fragmentList = supportFragmentManager.fragments
         for (fragment in fragmentList) {

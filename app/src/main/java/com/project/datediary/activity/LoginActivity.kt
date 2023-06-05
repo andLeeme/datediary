@@ -15,6 +15,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.project.datediary.databinding.ActivityLoginBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
@@ -91,20 +95,32 @@ class LoginActivity : AppCompatActivity() {
                         response: Response<Int>
 
                     ) {
-                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                            .show()
+                        Log.d("ChkUserData", "Call Success")
 
                         if (response.isSuccessful) {
                             if (response.body() == 1) {
-                                Toast.makeText(applicationContext, "신규회원입니다", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "신규회원입니다", Toast.LENGTH_SHORT)
+                                    .show()
                                 val intent = Intent(applicationContext, SignUpActivity::class.java)
                                 startActivity(intent)
+                                finish()
                             } else if (response.body() == 0) {
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
-                                Toast.makeText(applicationContext, "기존회원입니다", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "기존회원입니다", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else if (response.body() == 2) {
+                                val intent = Intent(applicationContext, SignUpActivity::class.java)
+                                startActivity(intent)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "커플 미연동 회원입니다",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                finish()
                             } else if (response.body() == 99) {
-                                Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
+                                    .show()
                             }
 //                            finish()
                         }
@@ -145,6 +161,24 @@ class LoginActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onBackPressed() {
+
+        var finishCount = false
+
+        CoroutineScope(Dispatchers.Main).launch {
+            Toast.makeText(applicationContext, "한번 더 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            finishCount = true
+            delay(2000).run {
+                finishCount = false
+            }
+        }
+
+        if (finishCount) {
+            finish()
+        }
+    }
+
 
     private fun revokeAccess() {
         mGoogleSignInClient.revokeAccess()

@@ -112,7 +112,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_bold"
-                        android:text="상대방과 연결해 주세요 !"
+                        android:text="상대방과 연결해요 !"
                         android:textColor="@color/black"
                         android:textSize="25dp" />
 
@@ -134,7 +134,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text='"상대방을 기다리고 있어요 ! "\n완료되면 시작하기를 눌러주세요'
+                        android:text='"상대방을 기다리고 있어요 ! "\n이메일 입력이 완료되면 연결하기를 눌러주세요'
                         android:textColor="#04A3F8" />
 
 
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:backgroundTint="#56E8FB"
-                        android:text="시작하기!"
+                        android:text="연결하기!"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp"
                         app:cornerRadius="30dp"
