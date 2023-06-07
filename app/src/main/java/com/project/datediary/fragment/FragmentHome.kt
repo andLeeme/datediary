@@ -62,7 +62,7 @@ class FragmentHome : Fragment() {
         return binding.root
     }
 
-    fun setBackground() {
+    private fun setBackground() {
 
         Glide
             .with(binding.root)

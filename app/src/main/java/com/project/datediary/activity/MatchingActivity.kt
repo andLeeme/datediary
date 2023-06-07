@@ -40,6 +40,29 @@ class MatchingActivity : AppCompatActivity() {
                                 Toast.makeText(applicationContext, "${curUser?.displayName}님 안녕하세요  ", Toast.LENGTH_SHORT).show()
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
+
+                                RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
+                                    .enqueue(object : retrofit2.Callback<Int> {
+                                        override fun onResponse(
+                                            call: Call<Int>,
+                                            response: Response<Int>
+
+                                        ) {
+                                            Log.d("coupleIndex", "Call Success")
+
+                                            if (response.isSuccessful) {
+                                                MainActivity.coupleIndex = response.body().toString()
+                                                Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
+                                                    .show()
+                                            }
+                                        }
+
+                                        override fun onFailure(call: Call<Int>, t: Throwable) {
+                                            Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                                .show()
+                                        }
+                                    })
+
                                 finish()
 
                             } else if (response.body() == 99) {

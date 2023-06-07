@@ -304,7 +304,7 @@ class AddScheduleActivity : AppCompatActivity() {
             } else {
 
                 val scheduleData = ScheduleRequestBody(
-                    couple_index = "1",
+                    couple_index = MainActivity.coupleIndex,
                     start_year = startYear,
                     start_month = startMonth,
                     start_day = startDay,
@@ -320,7 +320,6 @@ class AddScheduleActivity : AppCompatActivity() {
                     mission_code = matchMissionCode()
                 )
                 Log.d("scheduleData", "onCreate: $scheduleData")
-
 
                 RetrofitAPI.emgMedService2.addUserByEnqueue2(scheduleData)
                     .enqueue(object : retrofit2.Callback<Int> {
