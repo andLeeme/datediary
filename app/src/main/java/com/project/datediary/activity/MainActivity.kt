@@ -17,6 +17,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.animation.doOnEnd
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.bumptech.glide.load.engine.Resource
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.project.datediary.R
 import com.project.datediary.adapter.DayScheduleAdapter
@@ -27,7 +28,10 @@ import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
+import com.project.datediary.model.MainPhotoRequestBody
 import com.project.datediary.model.ScheduleShowResponseBody
+import com.project.datediary.model.TitleRequestBody
+import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -110,6 +114,7 @@ class MainActivity : AppCompatActivity() {
                                             finish()
                                         }
                                     }
+                                    //완전 성공
                                 } else if (response.body() == 0) {
 
                                     RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
@@ -142,7 +147,28 @@ class MainActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
 
-                                } else if (response.body() == 2) {
+                                    //이미지 가져와서 Util에 넣어주기
+
+                                    val couple_index = MainPhotoRequestBody(
+                                        couple_index = "1",
+                                    )
+
+                                    RetrofitAPI.emgMedService10.addUserByEnqueue2(couple_index)
+                                        .enqueue(object : retrofit2.Callback<ResponseEntity<ByteArrayResource>> {
+                                            override fun onResponse(
+                                                call: Call<ResponseEntity<ByteArrayResource>>,
+                                                response: Response<ResponseEntity<ByteArrayResource>>
+                                            ) {
+                                                if (response.isSuccessful) {
+                                                    Log.d("리턴", "onResponse: ${response.body()}")
+
+                                                }
+                                            }
+                                        })
+
+
+
+                                                } else if (response.body() == 2) {
                                     CoroutineScope(Dispatchers.Main).launch {
                                         delay(650).run {
                                             val intent = Intent(

@@ -1,6 +1,7 @@
 import com.project.datediary.api.CoupleMatchService
 import com.project.datediary.api.AddCoupleEmailService
 import com.project.datediary.api.CoupleIndexService
+import com.project.datediary.api.MainPhotoService
 import com.project.datediary.api.ScheduleDeleteService
 import com.project.datediary.api.ScheduleEditService
 import com.project.datediary.api.ScheduleService
@@ -87,6 +88,10 @@ object RetrofitAPI {
 
     val emgMedService9: CoupleMatchService by lazy {
         retrofit.create(CoupleMatchService::class.java)
+    }
+
+    val emgMedService10: MainPhotoService by lazy {
+        retrofit.create(MainPhotoService::class.java)
     }
 
     val emgMedService11: CoupleIndexService by lazy {

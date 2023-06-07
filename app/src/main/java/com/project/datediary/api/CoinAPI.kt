@@ -50,5 +50,7 @@ object CoinAPI {
     val emgMedService3: TitleService by lazy {
         retrofit.create(TitleService::class.java)
     }
-    val getRetrofitService : UpbitAPI by lazy { retrofit.create(UpbitAPI::class.java) }
+    val getRetrofitService : UpbitAPI by lazy {
+        retrofit.create(UpbitAPI::class.java)
+    }
 }

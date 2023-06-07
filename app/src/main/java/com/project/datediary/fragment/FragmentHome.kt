@@ -1,11 +1,8 @@
 package com.project.datediary.fragment
 
-import android.R.attr.height
-import android.R.attr.width
-import android.graphics.Point
+
 import android.os.Bundle
 import android.util.Log
-import android.view.Display
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
