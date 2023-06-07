@@ -17,6 +17,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPS
 import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
+import com.project.datediary.activity.MainActivity.Companion.coupleIndex
 import com.project.datediary.adapter.CalendarAdapter
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.databinding.FragmentCalendarBinding
@@ -136,7 +137,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
         //보내보자 리퀘스트 받아보자 리스폰스
         val userDataCal = TitleRequestBody(
-            couple_index = "1",
+            couple_index = coupleIndex,
             selected_month = monthData
         )
         Log.d("유저데이터", "userDataCal: $userDataCal")

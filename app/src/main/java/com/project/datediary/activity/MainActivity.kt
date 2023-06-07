@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding2: FragmentCalendarBinding
 
     companion object {
-        var coupleIndex: Int = 0;
+        var coupleIndex: String = "";
     }
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -127,7 +127,7 @@ class MainActivity : AppCompatActivity() {
                                                 Log.d("coupleIndex", "Call Success")
 
                                                 if (response.isSuccessful) {
-                                                    coupleIndex = response.body()!!
+                                                    coupleIndex = response.body().toString()
                                                     Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT)
                                                         .show()
                                                 }
