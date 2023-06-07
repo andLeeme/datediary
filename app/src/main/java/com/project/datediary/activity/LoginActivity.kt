@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         account?.let {
-            Toast.makeText(this, "로그인 되어있음", Toast.LENGTH_SHORT).show()
-        } ?: Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "로그인 되어있음", Toast.LENGTH_SHORT).show()
+        } ?: Toast.makeText(this, "dateDiary", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -84,8 +84,8 @@ class LoginActivity : AppCompatActivity() {
             val account = completedTask.getResult(ApiException::class.java)
             val email = account?.email
 
-            Toast.makeText(applicationContext, "$email", Toast.LENGTH_SHORT)
-                .show()
+//            Toast.makeText(applicationContext, "$email", Toast.LENGTH_SHORT)
+//                .show()
 
 
             RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
@@ -99,7 +99,7 @@ class LoginActivity : AppCompatActivity() {
 
                         if (response.isSuccessful) {
                             if (response.body() == 1) {
-                                Toast.makeText(applicationContext, "신규회원입니다", Toast.LENGTH_SHORT)
+                                Toast.makeText(applicationContext, "$email\n신규회원입니다", Toast.LENGTH_SHORT)
                                     .show()
                                 val intent = Intent(applicationContext, SignUpActivity::class.java)
                                 startActivity(intent)
@@ -107,14 +107,14 @@ class LoginActivity : AppCompatActivity() {
                             } else if (response.body() == 0) {
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
-                                Toast.makeText(applicationContext, "기존회원입니다", Toast.LENGTH_SHORT)
+                                Toast.makeText(applicationContext, "$email\n기존회원입니다", Toast.LENGTH_SHORT)
                                     .show()
                             } else if (response.body() == 2) {
                                 val intent = Intent(applicationContext, SignUpActivity::class.java)
                                 startActivity(intent)
                                 Toast.makeText(
                                     applicationContext,
-                                    "커플 미연동 회원입니다",
+                                    "$email\n커플 미연동 회원입니다",
                                     Toast.LENGTH_SHORT
                                 ).show()
                                 finish()
@@ -122,7 +122,6 @@ class LoginActivity : AppCompatActivity() {
                                 Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
                                     .show()
                             }
-//                            finish()
                         }
                     }
 
@@ -156,15 +155,15 @@ class LoginActivity : AppCompatActivity() {
                     finish()
                 }
         }
-        if (curUser == null) {
-            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
-        }
+//        if (curUser == null) {
+//            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
+//        }
 
     }
 
-    override fun onBackPressed() {
+    var finishCount = false
 
-        var finishCount = false
+    override fun onBackPressed() {
 
         CoroutineScope(Dispatchers.Main).launch {
             Toast.makeText(applicationContext, "한번 더 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()

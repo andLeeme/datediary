@@ -56,7 +56,7 @@ class SignUpActivity : AppCompatActivity() {
                         if (response.isSuccessful) {
                             val intent = Intent(applicationContext, MatchingActivity::class.java)
                             startActivity(intent)
-//                            finish()
+                            finish()
                         }
                     }
 
@@ -69,9 +69,10 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    var finishCount = false
+
     override fun onBackPressed() {
 
-        var finishCount = false
 
         CoroutineScope(Dispatchers.Main).launch {
             finishCount = true
