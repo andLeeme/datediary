@@ -42,6 +42,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var binding2: FragmentCalendarBinding
 
+    companion object {
+        var coupleIndex: Int = 0;
+    }
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -107,6 +111,29 @@ class MainActivity : AppCompatActivity() {
                                         }
                                     }
                                 } else if (response.body() == 0) {
+
+                                    RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
+                                        .enqueue(object : retrofit2.Callback<Int> {
+                                            override fun onResponse(
+                                                call: Call<Int>,
+                                                response: Response<Int>
+
+                                            ) {
+                                                Log.d("coupleIndex", "Call Success")
+
+                                                if (response.isSuccessful) {
+                                                    coupleIndex = response.body()!!
+                                                    Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT)
+                                                        .show()
+                                                }
+                                            }
+
+                                            override fun onFailure(call: Call<Int>, t: Throwable) {
+                                                Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                                    .show()
+                                            }
+                                        })
+
                                     binding.mainFrm.visibility = View.VISIBLE
                                     binding.mainBnv.visibility = View.VISIBLE
                                     Toast.makeText(

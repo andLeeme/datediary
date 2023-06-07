@@ -37,8 +37,8 @@ class MatchingActivity : AppCompatActivity() {
                         response: Response<Int>) {
                         if (response.isSuccessful) {
                             if (response.body() == 0) {
-                                Toast.makeText(applicationContext, "커플인덱스 발급완료", Toast.LENGTH_SHORT).show()
-                                val intent = Intent(applicationContext, SignUpActivity::class.java)
+                                Toast.makeText(applicationContext, "${curUser?.displayName}님 안녕하세요  ", Toast.LENGTH_SHORT).show()
+                                val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
 
@@ -66,7 +66,7 @@ class MatchingActivity : AppCompatActivity() {
 
         CoroutineScope(Dispatchers.Main).launch {
             finishCount = true
-            Toast.makeText(applicationContext, "한번 더 버튼을 누르면 이메일 입력화면으로 돌아갑니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "한번 더 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
             delay(2000).run {
                 finishCount = false
             }
