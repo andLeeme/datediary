@@ -136,6 +136,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
 
         //보내보자 리퀘스트 받아보자 리스폰스
+        //main에 선언된 오브젝트 coupleIndex
         val userDataCal = TitleRequestBody(
             couple_index = coupleIndex,
             selected_month = monthData

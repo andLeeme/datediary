@@ -147,26 +147,6 @@ class MainActivity : AppCompatActivity() {
                                         Toast.LENGTH_SHORT
                                     ).show()
 
-                                    //이미지 가져와서 Util에 넣어주기
-
-                                    val couple_index = MainPhotoRequestBody(
-                                        couple_index = "1",
-                                    )
-
-                                    RetrofitAPI.emgMedService10.addUserByEnqueue2(couple_index)
-                                        .enqueue(object : retrofit2.Callback<ResponseEntity<ByteArrayResource>> {
-                                            override fun onResponse(
-                                                call: Call<ResponseEntity<ByteArrayResource>>,
-                                                response: Response<ResponseEntity<ByteArrayResource>>
-                                            ) {
-                                                if (response.isSuccessful) {
-                                                    Log.d("리턴", "onResponse: ${response.body()}")
-
-                                                }
-                                            }
-                                        })
-
-
 
                                                 } else if (response.body() == 2) {
                                     CoroutineScope(Dispatchers.Main).launch {
