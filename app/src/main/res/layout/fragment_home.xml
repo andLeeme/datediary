@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/FragHomeBackground"
-    android:background="@drawable/test4">
+ >
 
     <RelativeLayout
         android:id="@+id/fragmentHome"
@@ -15,8 +15,9 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/backgroundHome"/>
-<!--            android:src="@color/black"/>-->
+            android:id="@+id/backgroundHome"
+            android:adjustViewBounds="true"/>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -33,7 +34,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.2"
+                    android:layout_weight="1.1"
                     android:orientation="horizontal">
 
                     <LinearLayout

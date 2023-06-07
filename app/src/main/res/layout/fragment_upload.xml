@@ -5,12 +5,6 @@
     android:orientation="vertical"
     android:background="@android:color/white">
 
-    <Button
-        android:id="@+id/selectImageButton"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="5"
-        android:text="이미지선택" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -19,11 +13,27 @@
         android:layout_gravity="center"
         android:layout_weight="1"/>
 
-    <Button
-        android:id="@+id/uploadImageButton"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="이미지 업로드"
-        android:layout_weight="5"/>
+        android:orientation="horizontal"
+        android:layout_weight="9">
+        <Button
+            android:id="@+id/selectImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="이미지선택"
+            android:layout_margin="5dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/uploadImageButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="이미지 업로드"
+            android:layout_margin="5dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
 
 </LinearLayout>

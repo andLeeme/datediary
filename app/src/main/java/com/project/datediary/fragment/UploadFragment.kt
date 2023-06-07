@@ -1,8 +1,14 @@
 package com.project.datediary.fragment
 
+import android.Manifest
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -12,9 +18,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.project.datediary.R
 import com.project.datediary.api.ImageUploadService
@@ -23,13 +29,10 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Multipart
-import retrofit2.http.POST
-import retrofit2.http.Part
 import java.io.File
+
 
 class UploadFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 1
@@ -37,6 +40,7 @@ class UploadFragment : Fragment() {
     private lateinit var imageUploadService: ImageUploadService
     private lateinit var rootView: View
     private val coupleIndex = "1"
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,9 +63,11 @@ class UploadFragment : Fragment() {
 
         rootView.findViewById<Button>(R.id.selectImageButton).setOnClickListener {
             openGallery()
+
         }
 
         rootView.findViewById<Button>(R.id.uploadImageButton).setOnClickListener {
+
             if (::selectedImageUri.isInitialized) {
                 uploadImage(selectedImageUri)
 
@@ -79,11 +85,10 @@ class UploadFragment : Fragment() {
             }
         }
 
-
-
-
-
     }
+
+
+
 
     private fun openGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -149,4 +154,52 @@ class UploadFragment : Fragment() {
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
+
+
+    fun makeAlarmNotification(context: Context, messageBody: String) {
+        //Timber.d("make notification")
+        // notification 클릭 시 MainActivity를 열게 한다
+        val intent = Intent(context, UploadFragment::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        val pendingIntent = PendingIntent.getActivity(
+            context, 0, intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
+        // notification의 channel id를 정의한다
+        val channelId = "channel1"
+        val channelName = "channel name"
+
+        // notification를 정의한다
+        val notificationBuilder = NotificationCompat.Builder(context, channelId)
+            .setSmallIcon(R.drawable.icon_home)
+            .setContentTitle("notification title")
+            .setContentText(messageBody)
+            .setAutoCancel(false)   // 전체 삭제해도 안되게하기
+            .setSound(null)
+            .setContentIntent(pendingIntent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setOngoing(true)   // 알람이 계속 뜬 상태로 있게하기
+
+        // 정의한 내용과 channel을 사용하여 notification을 생성한다
+        val notificationManager =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+        // Android SDK 26 이상에서는 notification을 만들 때 channel을 지정해줘야 한다
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                channelId,
+                channelName,
+                NotificationManager.IMPORTANCE_DEFAULT
+            )
+            notificationManager.createNotificationChannel(channel)
+        }
+
+        // notification 띄우기
+        notificationManager.notify(100, notificationBuilder.build())
+    }
+
+
+
+
 }
