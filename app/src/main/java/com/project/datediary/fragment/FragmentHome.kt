@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.project.datediary.R
 import com.project.datediary.databinding.FragmentHomeBinding
 import com.project.datediary.util.SetBackground
@@ -65,10 +66,15 @@ class FragmentHome : Fragment() {
     private fun setBackground() {
 
         Glide
+
             .with(binding.root)
             .load(SetBackground.backgroundURI)
             .centerCrop()
+            .skipMemoryCache(true)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(binding.backgroundHome)
+
+
 
         binding.fragmentHome.visibility = View.VISIBLE
     }

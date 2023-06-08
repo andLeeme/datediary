@@ -139,8 +139,12 @@
                             android:clickable="true"
                             android:text="구글 로그인 테스트2" />
 
-
-
+                        <Button
+                            android:id="@+id/button8"
+                            android:layout_width="200dp"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:text="뷰페이저" />
 
                     </LinearLayout>
 

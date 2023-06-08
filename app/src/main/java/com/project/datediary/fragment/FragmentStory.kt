@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import com.project.datediary.R
 import com.project.datediary.activity.AddScheduleActivity2
-import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.LoginActivity
+import com.project.datediary.activity.ViewActivity2
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentStoryBinding
 
@@ -73,10 +73,12 @@ class FragmentStory : Fragment() {
         binding.button7.setOnClickListener {
             val intent = Intent(requireActivity(), LoginActivity::class.java)
             startActivity(intent)
-
-
         }
 
+        binding.button8.setOnClickListener {
+            val intent = Intent(requireActivity(), ViewActivity2::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
     }
