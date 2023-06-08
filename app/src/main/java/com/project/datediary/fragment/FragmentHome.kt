@@ -1,17 +1,21 @@
 package com.project.datediary.fragment
 
 
+import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.project.datediary.R
+import com.project.datediary.api.ImageUploadService
 import com.project.datediary.databinding.FragmentHomeBinding
 import com.project.datediary.util.SetBackground
 
@@ -24,6 +28,15 @@ class FragmentHome : Fragment() {
     private var result_imageUrl: String? = ""
 
 
+    //이미지 처리
+    private val PICK_IMAGE_REQUEST = 1
+    private lateinit var selectedImageUri: Uri
+    private lateinit var imageUploadService: ImageUploadService
+    private lateinit var rootView: View
+    private val coupleIndex = "1"
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,6 +44,18 @@ class FragmentHome : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setBackground()
+
+        val activity = requireActivity()
+        val window = activity.window
+
+        // 상태 표시줄 영역을 투명하게 만듦
+        window.statusBarColor = Color.TRANSPARENT
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
+
+
+
 
         binding.addMainImage.setOnClickListener {
             childFragmentManager.beginTransaction()
@@ -42,7 +67,7 @@ class FragmentHome : Fragment() {
 
 
         childFragmentManager.setFragmentResultListener("requestKey", viewLifecycleOwner,
-            FragmentResultListener { key, bundle ->
+            FragmentResultListener { _, bundle ->
 
                 result_coupleIndex = bundle.getString("coupleIndex")
                 result_imageUrl = bundle.getString("imageUrl")
@@ -52,7 +77,7 @@ class FragmentHome : Fragment() {
                 Log.d("result_imageUrl", "onCreateViewPC: $result_coupleIndex")
                 Log.d("result_imageUrl", "onCreateViewP: $result_imageUrl")
 
-                SetBackground.backgroundURI  = result_imageUrl
+                SetBackground.backgroundURI = result_imageUrl
 
                 if (result_imageUrl != "") {
                     setBackground()

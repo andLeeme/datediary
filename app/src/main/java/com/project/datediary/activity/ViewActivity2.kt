@@ -48,11 +48,6 @@ class ViewActivity2 : AppCompatActivity() {
         //ViewPager, TabLayout 연결
         TabLayoutMediator(binding.tlNavigationView, binding.vpViewpagerMain) { tab, position ->
             Log.e("YMC", "ViewPager position: $position")
-            when (position) {
-                0 -> tab.text = ""
-                1 -> tab.text = ""
-                2 -> tab.text = ""
-            }
         }.attach()
     }
 }

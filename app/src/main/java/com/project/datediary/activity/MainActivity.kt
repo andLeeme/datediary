@@ -211,8 +211,6 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-
-
         initBottomNavigation()
 
     }
@@ -328,7 +326,6 @@ class MainActivity : AppCompatActivity() {
                 //2131362030 이게 홈 프래그먼트의 ID임
                 callHome()
             }
-
 
 //            "FragmentCalendar" -> {}
 

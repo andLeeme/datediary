@@ -2,8 +2,9 @@
     <!-- Base application theme. -->
     <style name="Theme.DateDiary" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#D0E8F6</item>
-        <item name="colorPrimaryVariant">#D0D0E8F6</item>
+        <item name="colorPrimary">#03A9F4</item>
+        <item name="colorPrimaryVariant">#00000000</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -15,6 +16,7 @@
 <!--        캘린더 상단탭 색상-->
         <item name="colorAccent">#D0E8F6</item>
     </style>
+
 
     <style name="Theme.MySplashScreen.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">#ffffff</item>

@@ -19,34 +19,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:textColor="@color/white">
-
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.1">
+                    android:layout_weight="0.8">
 
                     <TextView
                         android:id="@+id/contain1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_medium"
-                        android:text="가장 많이 방문한 장소는?"
+                        android:text="가장 많이 다녀간 장소"
                         android:textColor="@color/black"
                         android:textSize="30dp"
-                        android:gravity="left"
-                        android:textFontWeight="600"/>
+                        android:gravity="left|center"
+                        android:textFontWeight="600" />
 
 
                 </LinearLayout>
@@ -57,32 +47,37 @@
                     android:layout_weight="0.7"
                     android:orientation="vertical">
 
+
+
                     <LinearLayout
+                        android:background="@drawable/graph_background"
                         android:id="@+id/contain2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:gravity="center|left">
+                        android:gravity="center|left"
+                        android:layout_marginBottom="40dp">
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="동물원 " />
+                            android:text="동물원 "
+                            android:paddingLeft="10dp"/>
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="에서" />
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -90,7 +85,7 @@
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="데이트 했어요" />
@@ -98,32 +93,37 @@
 
                     </LinearLayout>
 
+
+
                     <LinearLayout
+                        android:background="@drawable/graph_background"
                         android:id="@+id/contain3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:gravity="center|left">
+                        android:gravity="center|left"
+                        android:layout_marginBottom="40dp">
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="카페 " />
+                            android:text="카페 "
+                            android:paddingLeft="10dp"/>
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="에서" />
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="데이트 했어요" />
@@ -139,32 +139,36 @@
 
                     </LinearLayout>
 
+
                     <LinearLayout
+                        android:background="@drawable/graph_background"
                         android:id="@+id/contain4"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:orientation="horizontal"
-                        android:gravity="center|left">
+                        android:gravity="center|left"
+                        android:layout_marginBottom="40dp">
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="식당 " />
+                            android:text="식당 "
+                            android:paddingLeft="10dp"/>
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="에서" />
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -172,7 +176,7 @@
 
                         <TextView
                             android:fontFamily="@font/lottemartd_medium"
-                            android:textSize="18dp"
+                            android:textSize="16dp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="데이트 했어요" />
@@ -195,7 +199,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center|bottom"
-                        android:text='" 동물원에서 "4회" 데이트 했어요 "'
+                        android:text='" 동물원에서 가장 많은 추억을 담았어요 "'
                         android:textColor="#04A3F8" />
 
                     <TextView

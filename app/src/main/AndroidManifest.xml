@@ -12,17 +12,14 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:icon="@drawable/logo"
+        android:label="dateDiary"
         android:supportsRtl="true"
         android:theme="@style/Theme.DateDiary"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
             android:name=".activity.ViewActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".activity.viewActivity"
             android:exported="false" />
         <activity
             android:name=".activity.SignUpActivity"

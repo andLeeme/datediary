@@ -1,6 +1,5 @@
 package com.project.datediary.fragment
 
-import android.Manifest
 import android.app.Activity
 import android.app.NotificationChannel
 import android.app.NotificationManager
