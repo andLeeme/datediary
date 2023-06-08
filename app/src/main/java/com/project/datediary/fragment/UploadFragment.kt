@@ -154,49 +154,6 @@ class UploadFragment : Fragment() {
     }
 
 
-    fun makeAlarmNotification(context: Context, messageBody: String) {
-        //Timber.d("make notification")
-        // notification 클릭 시 MainActivity를 열게 한다
-        val intent = Intent(context, UploadFragment::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-        val pendingIntent = PendingIntent.getActivity(
-            context, 0, intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
-
-        // notification의 channel id를 정의한다
-        val channelId = "channel1"
-        val channelName = "channel name"
-
-        // notification를 정의한다
-        val notificationBuilder = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.icon_home)
-            .setContentTitle("notification title")
-            .setContentText(messageBody)
-            .setAutoCancel(false)   // 전체 삭제해도 안되게하기
-            .setSound(null)
-            .setContentIntent(pendingIntent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-            .setOngoing(true)   // 알람이 계속 뜬 상태로 있게하기
-
-        // 정의한 내용과 channel을 사용하여 notification을 생성한다
-        val notificationManager =
-            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-
-        // Android SDK 26 이상에서는 notification을 만들 때 channel을 지정해줘야 한다
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                channelName,
-                NotificationManager.IMPORTANCE_DEFAULT
-            )
-            notificationManager.createNotificationChannel(channel)
-        }
-
-        // notification 띄우기
-        notificationManager.notify(100, notificationBuilder.build())
-    }
-
 
 
 

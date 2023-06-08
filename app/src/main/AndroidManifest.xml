@@ -18,6 +18,7 @@
         android:theme="@style/Theme.DateDiary"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
         <activity
             android:name=".activity.ViewActivity2"
             android:exported="false" />
