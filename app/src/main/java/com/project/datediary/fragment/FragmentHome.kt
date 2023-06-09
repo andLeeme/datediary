@@ -10,9 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -20,7 +17,6 @@ import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.project.datediary.R
 import com.project.datediary.api.ImageUploadService
 import com.project.datediary.databinding.FragmentHomeBinding
 import com.project.datediary.util.SetBackground
@@ -88,14 +84,10 @@ class FragmentHome : Fragment() {
 
     private fun setBackground() {
 
-
-        Glide.get(requireContext()).clearMemory()
-
-
         Glide.with(binding.root)
             .load(SetBackground.backgroundURI)
             .centerCrop()
-            .skipMemoryCache(false)
+//            .skipMemoryCache(true)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(binding.backgroundHome)
 
@@ -115,8 +107,7 @@ class FragmentHome : Fragment() {
             val imageUri = data.data
             imageUri?.let {
                 selectedImageUri = it
-
-
+                Glide.get(requireContext()).clearMemory()
                 Glide.with(requireContext())
                     .load(selectedImageUri)
                     .skipMemoryCache(true)
@@ -124,6 +115,7 @@ class FragmentHome : Fragment() {
                     .centerCrop()
                     .into(binding.backgroundHome)
                 uploadImage(selectedImageUri)
+                Glide.get(requireContext()).clearMemory()
 
             }
         }

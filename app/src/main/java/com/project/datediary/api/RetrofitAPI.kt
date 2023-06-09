@@ -1,5 +1,6 @@
 import com.project.datediary.api.CoupleMatchService
 import com.project.datediary.api.AddCoupleEmailService
+import com.project.datediary.api.ChatService
 import com.project.datediary.api.CoupleIndexService
 import com.project.datediary.api.ScheduleDeleteService
 import com.project.datediary.api.ScheduleEditService
@@ -15,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitAPI {
     //학원
-        //private const val BASE_URL = "http://192.168.150.120:8080"
+    //private const val BASE_URL = "http://192.168.150.120:8080"
 
     //학원(현하)
     //private const val BASE_URL = "http://192.168.250.44:8080"
@@ -43,7 +44,7 @@ object RetrofitAPI {
             .build()
     }
 
-    fun getInstance(): Retrofit{
+    fun getInstance(): Retrofit {
         return retrofit
     }
 
@@ -96,4 +97,8 @@ object RetrofitAPI {
     val emgMedService11: CoupleIndexService by lazy {
         retrofit.create(CoupleIndexService::class.java)
     }
+    val emgMedService12: ChatService by lazy {
+        retrofit.create(ChatService::class.java)
+    }
+
 }

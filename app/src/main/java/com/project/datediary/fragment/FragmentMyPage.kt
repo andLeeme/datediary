@@ -18,7 +18,6 @@ class FragmentMyPage : Fragment() {
     lateinit var binding: FragmentMyBinding
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,8 +38,6 @@ class FragmentMyPage : Fragment() {
                 touchHelper.startDrag(viewHolder)
             }
         })
-
-
 
         return binding.root
     }
