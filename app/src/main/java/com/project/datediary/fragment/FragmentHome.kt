@@ -15,16 +15,25 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentResultListener
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.project.datediary.activity.MainActivity
+import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.api.ImageUploadService
 import com.project.datediary.databinding.FragmentHomeBinding
+import com.project.datediary.model.TitleRequestBody
+import com.project.datediary.model.TitleResponseBody
+import com.project.datediary.util.CalendarUtil
 import com.project.datediary.util.SetBackground
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
@@ -78,6 +87,71 @@ class FragmentHome : Fragment() {
                     setBackground()
                 }
             })
+
+
+        //바텀시트에 그려주기
+        binding.selectedDay.text = CalendarUtil.sDay
+        binding.selectedDW.text = CalendarUtil.sDOW
+
+
+
+        //바텀시트 리사이클러뷰 채워주기
+        val userDataCal = TitleRequestBody(
+            couple_index = MainActivity.coupleIndex,
+            selected_month = CalendarUtil.sMonth
+        )
+        Log.d("유저데이터", "userDataCal: $userDataCal")
+
+        var TitleResponseBody = listOf<TitleResponseBody>()
+
+        RetrofitAPI.emgMedService3.addUserByEnqueue(userDataCal)
+            .enqueue(object : retrofit2.Callback<ArrayList<TitleResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<TitleResponseBody>>,
+                    response: Response<ArrayList<TitleResponseBody>>
+                ) {
+
+                    if (response.isSuccessful) {
+                        Log.d("리턴", "onResponse: ${response.body()}")
+
+                        TitleResponseBody = response.body() ?: listOf()
+
+
+                        //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
+                        //오늘 정보 가공
+                        var scheduleList = ArrayList<TitleResponseBody>()
+                        Log.d("scheduleList1", "bind: ${TitleResponseBody}")
+
+                        for (i in TitleResponseBody.indices) {
+                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+                                scheduleList.add(TitleResponseBody[i])
+                            }
+                        }
+                        Log.d("scheduleList2", "bind: $scheduleList")
+
+                        //어댑터에 넣어주기
+                        val adapter2 = DayScheduleAdapter(scheduleList)
+
+                        //레이아웃 설정
+                        var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+
+                        //레이아웃 적용
+                        binding.recycler10.layoutManager = manager2
+
+                        //어댑터 적용
+                        binding.recycler10.adapter = adapter2
+                    }
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<TitleResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
+
+
 
         return binding.root
     }
