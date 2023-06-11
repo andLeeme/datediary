@@ -1,36 +1,16 @@
 package com.project.datediary.fragment
 
-import RetrofitAPI
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
-import com.project.datediary.api.MyApi
 import com.project.datediary.databinding.FragmentPhotoBinding
-import okhttp3.MediaType
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import java.io.File
 
 class FragmentPhoto : Fragment() {
 
@@ -68,6 +48,7 @@ class FragmentPhoto : Fragment() {
             Glide.with(this)
                 .load(uri) //이미지
                 .into(binding.imageView) //보여줄 위치
+
         }
     }
 }

@@ -10,9 +10,9 @@
         />
 
     <item
-        android:id="@+id/story"
+        android:id="@+id/memory"
         android:enabled="true"
-        android:title="스토리"
+        android:title="Memory"
         android:icon="@drawable/icon_story"
         />
 
@@ -24,9 +24,9 @@
 
         />
     <item
-        android:id="@+id/graph"
+        android:id="@+id/notice"
         android:enabled="true"
-        android:title="그래프"
+        android:title="알림"
         android:icon="@drawable/icon_graph"
         />
     <item

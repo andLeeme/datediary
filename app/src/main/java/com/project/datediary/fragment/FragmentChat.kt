@@ -10,7 +10,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.ChatAdapter
@@ -55,18 +54,21 @@ class FragmentChat : Fragment() {
             val message = binding.editTextMessage.text.toString().trim()
             if (message.isNotEmpty()) {
                 val chatMessage = ChatMessage(MainActivity.coupleIndex, message, Date())
-                chatAdapter.addMessage(chatMessage)
                 scrollToBottom()
                 binding.editTextMessage.setText("")
-
 
 
                 val curUser = GoogleSignIn.getLastSignedInAccount(requireContext())
 
                 val email = curUser?.email.toString()
 
-
-                var chatRequestBody = ChatRequestBody(couple_index = MainActivity.coupleIndex, email = email, message = message, sender = "지현이", timestamp = Date().toString())
+                var chatRequestBody = ChatRequestBody(
+                    couple_index = MainActivity.coupleIndex,
+                    email = email,
+                    message = message,
+                    sender = "지현이",
+                    timestamp = Date().toString()
+                )
 
 
                 RetrofitAPI.emgMedService12.addUserByEnqueue(chatRequestBody)
@@ -78,13 +80,18 @@ class FragmentChat : Fragment() {
                             Log.d("coupleIndex", "Call Success")
 
                             if (response.isSuccessful) {
-                                Toast.makeText(context, "${response.body()}", Toast.LENGTH_SHORT).show()
+
+
+
+                                chatAdapter.addMessage(chatMessage)
                             }
                         }
 
-                        override fun onFailure(call: Call<ArrayList<ChatResponseBody>>, t: Throwable) {
-                            Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT)
-                                .show()
+                        override fun onFailure(
+                            call: Call<ArrayList<ChatResponseBody>>,
+                            t: Throwable
+                        ) {
+                            Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
                         }
                     })
 
@@ -93,7 +100,8 @@ class FragmentChat : Fragment() {
     }
 
     private fun hideKeyboard() {
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val imm =
+            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(binding.editTextMessage.windowToken, 0)
     }
 
@@ -115,7 +123,8 @@ class FragmentChat : Fragment() {
                     binding.layoutMessage.translationY = (-keypadHeight + 340).toFloat()
 
                     // 리사이클러뷰 높이 조정
-                    val layoutParams = binding.recyclerViewChat.layoutParams as ViewGroup.MarginLayoutParams
+                    val layoutParams =
+                        binding.recyclerViewChat.layoutParams as ViewGroup.MarginLayoutParams
                     layoutParams.bottomMargin = keypadHeight
                     binding.recyclerViewChat.layoutParams = layoutParams
                     scrollToBottom()
@@ -123,7 +132,8 @@ class FragmentChat : Fragment() {
                     binding.layoutMessage.translationY = 0f
 
                     // 리사이클러뷰 높이 원래대로
-                    val layoutParams = binding.recyclerViewChat.layoutParams as ViewGroup.MarginLayoutParams
+                    val layoutParams =
+                        binding.recyclerViewChat.layoutParams as ViewGroup.MarginLayoutParams
                     layoutParams.bottomMargin = 0
                     binding.recyclerViewChat.layoutParams = layoutParams
                 }

@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.api.ImageUploadService
@@ -27,7 +29,9 @@ import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
 import com.project.datediary.util.SetBackground
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -44,7 +48,6 @@ class FragmentHome : Fragment() {
     private lateinit var selectedImageUri: Uri
     private lateinit var imageUploadService: ImageUploadService
     private val PICK_IMAGE_REQUEST = 1
-    private val coupleIndex = "1"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,6 +56,22 @@ class FragmentHome : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         setBackground()
+
+        binding.addBtn.setOnClickListener {
+            val intent = Intent(context, AddScheduleActivity::class.java)
+            startActivity(intent)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(200).run {
+                    bottomDown()
+                }
+            }
+
+        }
+
+        binding.name1.text = MainActivity.nickname1
+        binding.name2.text = MainActivity.nickname2
+        binding.dday.text = MainActivity.d_day+"일째"
 
         val activity = requireActivity()
         val window = activity.window
@@ -88,12 +107,32 @@ class FragmentHome : Fragment() {
                 }
             })
 
+        var behavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                // 상태가 변경될 때 호출
+                // newState 변수로 상태확인
+                when (newState) {
+                    BottomSheetBehavior.STATE_COLLAPSED -> {
+                        // 바텀 시트가 축소
+                        Log.d("바텀시트", "줄였나?")
+                    }
+                    BottomSheetBehavior.STATE_EXPANDED -> {
+                        // 바텀 시트가 확장
+                    }
+                    // 추가 코드
+                }
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+        })
+
 
         //바텀시트에 그려주기
         binding.selectedDay.text = CalendarUtil.sDay
         binding.selectedDW.text = CalendarUtil.sDOW
-
-
 
         //바텀시트 리사이클러뷰 채워주기
         val userDataCal = TitleRequestBody(
@@ -103,6 +142,8 @@ class FragmentHome : Fragment() {
         Log.d("유저데이터", "userDataCal: $userDataCal")
 
         var TitleResponseBody = listOf<TitleResponseBody>()
+
+
 
         RetrofitAPI.emgMedService3.addUserByEnqueue(userDataCal)
             .enqueue(object : retrofit2.Callback<ArrayList<TitleResponseBody>> {
@@ -150,8 +191,6 @@ class FragmentHome : Fragment() {
 
                 }
             })
-
-
 
         return binding.root
     }
@@ -202,7 +241,7 @@ class FragmentHome : Fragment() {
         val filePart = MultipartBody.Part.createFormData("file", file.name, requestBody)
 
         val data = HashMap<String, String>()
-        data["couple_index"] = coupleIndex
+        data["couple_index"] = MainActivity.coupleIndex
 
 //        Toast.makeText(context, "$data", Toast.LENGTH_SHORT).show()
 
@@ -215,7 +254,7 @@ class FragmentHome : Fragment() {
                     val apiResponse = response.body()
                     if (apiResponse != null) {
                         showToast("이미지 업로드 성공")
-                        val coupleIndex = coupleIndex
+                        val coupleIndex = MainActivity.coupleIndex
                         val bundle_imageUrl = "$selectedImageUri"
                         parentFragmentManager.setFragmentResult(
                             "requestKey",
@@ -243,5 +282,12 @@ class FragmentHome : Fragment() {
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun bottomDown() {
+        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        var bottomState = bottomSheetBehavior.getState()
+        Log.d("BTStateSet", "onResponse: $bottomState")
     }
 }

@@ -87,6 +87,7 @@
 
 
                             <com.project.datediary.util.OutlineTextView
+                                android:id="@+id/dday"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -112,6 +113,7 @@
 
 
                             <com.project.datediary.util.OutlineTextView
+                                android:id="@+id/name1"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -135,6 +137,7 @@
                                 android:background="@drawable/home_heart"/>
 
                             <com.project.datediary.util.OutlineTextView
+                                android:id="@+id/name2"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"

@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +31,6 @@ import retrofit2.Call
 import retrofit2.Response
 import java.util.Calendar
 import java.util.Date
-
 
 class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 
@@ -374,7 +372,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         return bottomState
     }
 
-    fun bottomDown() {
+    private fun bottomDown() {
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.setState(STATE_COLLAPSED)
         var bottomState = bottomSheetBehavior.getState()

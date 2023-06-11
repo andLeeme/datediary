@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutGridItem"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:layout_gravity="center"
+    android:layout_marginBottom="30dp"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:id="@+id/schedule4"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@drawable/ckk_schedule"
+        android:orientation="horizontal">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/contents"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lottemartd_bold"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="30dp"
+                android:text="일정이 나와요"
+                android:textSize="14dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/lottemartd_bold"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:paddingLeft="30dp"
+                android:text="일정이 나와요"
+                android:textSize="10dp"
+                android:layout_weight="1"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -26,6 +26,10 @@ import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
 import com.project.datediary.fragment.FragmentChat
+import com.project.datediary.fragment.FragmentCountMission
+import com.project.datediary.fragment.FragmentMyPage
+import com.project.datediary.fragment.FragmentNotice
+import com.project.datediary.fragment.FragmentPage
 import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -33,7 +37,10 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
+import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+import kotlin.math.abs
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,14 +48,44 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding2: FragmentCalendarBinding
 
     companion object {
-        var coupleIndex: String = "";
+        var coupleIndex: String = "default";
+        var nickname1: String = "이수영"
+        var nickname2: String = "김인호"
+        var d_day: String = "default"
+        var googleEmail: String = ""
+        var googleName: String = ""
     }
+
 
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         installSplashScreen()
+
+
+
+        //디데이 카운트
+        val today = LocalDate.now()
+        val targetDate = LocalDate.of(2023, 3, 28)  // 대상 날짜 설정 동적으로 변경예정
+
+        val daysUntilTarget = ChronoUnit.DAYS.between(today, targetDate)
+
+        if (daysUntilTarget > 0) {
+            Log.d("d-day", "$daysUntilTarget")
+
+            d_day = daysUntilTarget.toString()
+
+        } else if (daysUntilTarget == 0L) {
+
+        } else {
+            Log.d("d-day", "${abs(daysUntilTarget)}")
+
+            d_day = abs(daysUntilTarget-1).toString()
+        }
+
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = FragmentCalendarBinding.inflate(layoutInflater)
@@ -72,7 +109,18 @@ class MainActivity : AppCompatActivity() {
 
             val curUser = GoogleSignIn.getLastSignedInAccount(this)
 
-            val email = curUser?.email
+            val email = curUser?.email.toString()
+
+            googleEmail = email
+
+            googleName = curUser?.displayName.toString()
+
+
+
+
+
+
+
 
             binding.mainFrm.visibility = View.INVISIBLE
             binding.mainBnv.visibility = View.INVISIBLE
@@ -122,13 +170,26 @@ class MainActivity : AppCompatActivity() {
 
                                                 if (response.isSuccessful) {
                                                     coupleIndex = response.body().toString()
-                                                    Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT)
-                                                        .show()
+
+
+
+
+//                                                    Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT).show()
+
+
+                                                    //홈 프래그먼트 호출
+                                                    supportFragmentManager.beginTransaction()
+                                                        .replace(R.id.main_frm, FragmentHome())
+                                                        .commitAllowingStateLoss()
                                                 }
                                             }
 
                                             override fun onFailure(call: Call<Int>, t: Throwable) {
-                                                Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                                Toast.makeText(
+                                                    applicationContext,
+                                                    "Call Failed",
+                                                    Toast.LENGTH_SHORT
+                                                )
                                                     .show()
                                             }
                                         })
@@ -142,7 +203,7 @@ class MainActivity : AppCompatActivity() {
                                     ).show()
 
 
-                                                } else if (response.body() == 2) {
+                                } else if (response.body() == 2) {
                                     CoroutineScope(Dispatchers.Main).launch {
                                         delay(650).run {
                                             val intent = Intent(
@@ -202,17 +263,17 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+        supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
+            .commitAllowingStateLoss()
 
         setContentView(binding.root)
+
 
         initBottomNavigation()
 
     }
 
     private fun initBottomNavigation() {
-
-        supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
-            .commitAllowingStateLoss()
 
         binding.mainBnv.setOnItemSelectedListener { item ->
             when (item.itemId) {
@@ -234,10 +295,10 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.story -> {
+                R.id.memory -> {
 
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, FragmentStory()).commitAllowingStateLoss()
+                        .replace(R.id.main_frm, FragmentGraph()).commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
 
@@ -248,17 +309,17 @@ class MainActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
 
-                R.id.graph -> {
+                R.id.notice -> {
 
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, FragmentGraph()).commitAllowingStateLoss()
+                        .replace(R.id.main_frm, FragmentStory()).commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
 
                 R.id.myPage -> {
 
                     supportFragmentManager.beginTransaction()
-                        .replace(R.id.main_frm, FragmentChat()).commitAllowingStateLoss()
+                        .replace(R.id.main_frm, FragmentPage()).commitAllowingStateLoss()
                     return@setOnItemSelectedListener true
                 }
 
@@ -276,6 +337,10 @@ class MainActivity : AppCompatActivity() {
 
     fun callHome() {
         binding.mainBnv.selectedItemId = R.id.home
+    }
+
+    fun callFinish() {
+        finish()
     }
 
     private var finishCount = false
@@ -315,7 +380,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-            "FragmentStory", "FragmentGraph", "FragmentMyPage" -> {
+            "FragmentStory", "FragmentGraph", "FragmentPage" -> {
                 //홈이 선택된 상태로 만듦
                 //2131362030 이게 홈 프래그먼트의 ID임
                 callHome()

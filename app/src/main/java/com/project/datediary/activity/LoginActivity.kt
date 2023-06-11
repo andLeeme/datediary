@@ -53,14 +53,15 @@ class LoginActivity : AppCompatActivity() {
         with(binding) {
             btnSignIn.setOnClickListener {
                 signIn()
+
             }
 
-            btnSignOut.setOnClickListener {
-                signOut()
-            }
-            btnGetProfile.setOnClickListener {
-                GetCurrentUserProfile()
-            }
+//            btnSignOut.setOnClickListener {
+//                signOut()
+//            }
+//            btnGetProfile.setOnClickListener {
+//                GetCurrentUserProfile()
+//            }
         }
 
         setContentView(binding.root)
@@ -74,6 +75,7 @@ class LoginActivity : AppCompatActivity() {
                     val task: Task<GoogleSignInAccount> =
                         GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     handleSignInResult(task)
+
 
                 }
             }
@@ -123,6 +125,8 @@ class LoginActivity : AppCompatActivity() {
                                                 MainActivity.coupleIndex = response.body().toString()
                                                 Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
                                                     .show()
+
+                                                finish()
                                             }
                                         }
 
@@ -168,20 +172,6 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
-    private fun signOut() {
-        val curUser = GoogleSignIn.getLastSignedInAccount(this)
-        curUser?.let {
-            mGoogleSignInClient.signOut()
-                .addOnCompleteListener(this) {
-                    Toast.makeText(this, "로그아웃 완료", Toast.LENGTH_SHORT).show()
-                    finish()
-                }
-        }
-//        if (curUser == null) {
-//            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
-//        }
-
-    }
 
     var finishCount = false
 

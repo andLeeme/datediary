@@ -1,22 +1,28 @@
 package com.project.datediary.fragment
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.project.datediary.R
-import com.project.datediary.activity.AddScheduleActivity2
-import com.project.datediary.activity.LoginActivity
-import com.project.datediary.activity.ViewActivity2
-import com.project.datediary.databinding.ActivityMainBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.project.datediary.activity.MainActivity
+import com.project.datediary.adapter.DayScheduleAdapter
+import com.project.datediary.adapter.NoticeAdapter
 import com.project.datediary.databinding.FragmentStoryBinding
+import com.project.datediary.model.NoticeResponseBody
+import com.project.datediary.model.TitleRequestBody
+import com.project.datediary.model.TitleResponseBody
+import com.project.datediary.util.CalendarUtil
+import retrofit2.Call
+import retrofit2.Response
+import java.util.Date
 
 class FragmentStory : Fragment() {
 
     lateinit var binding: FragmentStoryBinding
-    lateinit var bindingMain: ActivityMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -24,61 +30,29 @@ class FragmentStory : Fragment() {
 
         binding = FragmentStoryBinding.inflate(inflater, container, false)
 
-        bindingMain = ActivityMainBinding.inflate(inflater, container, false)
+        binding.recyclerViewNotice.layoutManager = LinearLayoutManager(requireContext())
+
+        var NoticeResponseBody = ArrayList<NoticeResponseBody>()
 
 
-        binding.button1.setOnClickListener {
-            val intent = Intent(requireActivity(), AddScheduleActivity2::class.java)
-            startActivity(intent)
-        }
-        binding.button2.setOnClickListener {
-            childFragmentManager.beginTransaction().replace(R.id.editContainer, FragmentWz())
-                .commit()
-            binding.fragmentStory.visibility = View.INVISIBLE
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","0"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"김인호","1"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"김인호","0"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","1"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","1"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","0"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"김인호","1"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"김인호","0"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","1"))
+        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","1"))
 
-        }
-        binding.button3.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, FragmentStaggeredGrid())
-                .commit()
-            binding.fragmentStory.visibility = View.INVISIBLE
-
-        }
-
-        binding.button4.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, FragmentPhoto())
-                .commit()
-            binding.fragmentStory.visibility = View.INVISIBLE
-
-        }
-
-        binding.button5.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, UploadFragment())
-                .commit()
-            binding.fragmentStory.visibility = View.INVISIBLE
-
-        }
+        //어댑터에 넣어주기
+        val adapter = NoticeAdapter(NoticeResponseBody)
 
 
-        binding.button6.setOnClickListener {
-            childFragmentManager.beginTransaction()
-                .replace(R.id.editContainer, FragmentLoginTest())
-                .commit()
-            binding.fragmentStory.visibility = View.INVISIBLE
+        //어댑터 적용
+        binding.recyclerViewNotice.adapter = adapter
 
-        }
-
-        binding.button7.setOnClickListener {
-            val intent = Intent(requireActivity(), LoginActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding.button8.setOnClickListener {
-            val intent = Intent(requireActivity(), ViewActivity2::class.java)
-            startActivity(intent)
-        }
 
         return binding.root
     }
