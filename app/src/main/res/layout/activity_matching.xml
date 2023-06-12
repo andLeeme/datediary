@@ -131,7 +131,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lottemartd_medium"
-                        android:hint="연결할 이메일"
+                        android:hint="이름을 입력해요"
                         app:boxBackgroundColor="#FAFAFA"
                         app:boxCornerRadiusBottomEnd="5dp"
                         app:boxCornerRadiusBottomStart="5dp"
@@ -140,10 +140,11 @@
                         app:boxStrokeColor="@color/white"
                         app:boxStrokeWidth="0dp"
                         app:counterTextColor="@color/black"
-                        app:hintTextColor="#BCBCBC">
+                        app:hintTextColor="#BCBCBC"
+                        android:layout_marginBottom="30dp">
 
                         <EditText
-                            android:id="@+id/email_edittext2"
+                            android:id="@+id/name_edittext1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:maxLines="2"
@@ -188,7 +189,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.15"
+                    android:layout_weight="1.17"
                     android:orientation="vertical">
 
 

@@ -8,5 +8,5 @@ import retrofit2.http.POST
 interface CoupleMatchService {
     @Headers("Content-Type: application/json")
     @POST("/api/matchCouple")
-    fun addUserByEnqueue2(@Body coupleEmail : String): Call<Int>
+    fun addUserByEnqueue2(@Body data : HashMap<String, String>): Call<Int>
 }

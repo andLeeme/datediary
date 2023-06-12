@@ -109,29 +109,27 @@ class LoginActivity : AppCompatActivity() {
                             } else if (response.body() == 0) {
 
                                 RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
-                                    .enqueue(object : retrofit2.Callback<Int> {
+                                    .enqueue(object : retrofit2.Callback<HashMap<String,String>> {
                                         override fun onResponse(
-                                            call: Call<Int>,
-                                            response: Response<Int>
+                                            call: Call<HashMap<String,String>>,
+                                            response: Response<HashMap<String,String>>
 
                                         ) {
-                                            Log.d("coupleIndex", "Call Success")
-
                                             if (response.isSuccessful) {
                                                 MainActivity.coupleIndex = response.body().toString()
-//                                                Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
-//                                                    .show()
+                                                Toast.makeText(applicationContext, "${MainActivity.coupleIndex}", Toast.LENGTH_SHORT).show()
 
+
+//
                                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                                 startActivity(intent)
-                                                Toast.makeText(applicationContext, "$email\n Login", Toast.LENGTH_SHORT)
-                                                    .show()
+                                                Toast.makeText(applicationContext, "$email\n Login", Toast.LENGTH_SHORT).show()
 
                                                 finish()
                                             }
                                         }
 
-                                        override fun onFailure(call: Call<Int>, t: Throwable) {
+                                        override fun onFailure(call: Call<HashMap<String,String>>, t: Throwable) {
                                             Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
                                                 .show()
                                         }

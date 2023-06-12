@@ -38,7 +38,7 @@ class FragmentPage : Fragment() {
 
         binding.name.text = MainActivity.googleName
 
-        binding.nickname.text = MainActivity.nickname2
+        binding.nickname.text = MainActivity.nickname1
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)

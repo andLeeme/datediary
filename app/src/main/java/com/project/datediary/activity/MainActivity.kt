@@ -116,12 +116,6 @@ class MainActivity : AppCompatActivity() {
             googleName = curUser?.displayName.toString()
 
 
-
-
-
-
-
-
             binding.mainFrm.visibility = View.INVISIBLE
             binding.mainBnv.visibility = View.INVISIBLE
 
@@ -160,21 +154,20 @@ class MainActivity : AppCompatActivity() {
                                 } else if (response.body() == 0) {
 
                                     RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
-                                        .enqueue(object : retrofit2.Callback<Int> {
+                                        .enqueue(object : retrofit2.Callback<HashMap<String,String>> {
                                             override fun onResponse(
-                                                call: Call<Int>,
-                                                response: Response<Int>
+                                                call: Call<HashMap<String,String>>,
+                                                response: Response<HashMap<String,String>>
 
                                             ) {
                                                 Log.d("coupleIndex", "Call Success")
 
                                                 if (response.isSuccessful) {
-                                                    coupleIndex = response.body().toString()
 
+                                                    coupleIndex = response.body()?.get("couple_index").toString()
 
+                                                    nickname1 = response.body()?.get("nickname").toString()
 
-
-//                                                    Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT).show()
 
                                                     //홈 프래그먼트 호출
                                                     supportFragmentManager.beginTransaction()
@@ -183,7 +176,7 @@ class MainActivity : AppCompatActivity() {
                                                 }
                                             }
 
-                                            override fun onFailure(call: Call<Int>, t: Throwable) {
+                                            override fun onFailure(call: Call<HashMap<String,String>>, t: Throwable) {
                                                 Toast.makeText(
                                                     applicationContext,
                                                     "Call Failed",
@@ -223,7 +216,6 @@ class MainActivity : AppCompatActivity() {
                                     Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
                                         .show()
                                 }
-//                            finish()
                             }
                         }
 
