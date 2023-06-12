@@ -108,8 +108,7 @@ class FragmentHome : Fragment() {
                 }
             })
 
-        var behavior = BottomSheetBehavior.from(binding.bottomSheet)
-
+//        var behavior = BottomSheetBehavior.from(binding.bottomSheet)
 //        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
 //            override fun onStateChanged(bottomSheet: View, newState: Int) {
 //                // 상태가 변경될 때 호출
@@ -131,6 +130,28 @@ class FragmentHome : Fragment() {
 //        })
 
 
+
+
+        //바텀시트 내용 그려주기
+        setBottomSheet()
+
+
+        return binding.root
+    }
+
+    //에딧하고 돌아오면 재시작해주기
+    override fun onResume() {
+        super.onResume()
+
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(200).run {
+                setBottomSheet()
+            }
+        }
+    }
+
+
+    private fun setBottomSheet() {
         //바텀시트에 그려주기
         binding.selectedDay.text = CalendarUtil.sDay
         binding.selectedDW.text = CalendarUtil.sDOW
@@ -234,20 +255,13 @@ class FragmentHome : Fragment() {
 
                 }
             })
-
-
-
-
-
-
-
-
-
-
-
-
-        return binding.root
     }
+
+
+
+
+
+
 
     private fun setBackground() {
 
