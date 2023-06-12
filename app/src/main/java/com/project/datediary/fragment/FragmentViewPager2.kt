@@ -145,11 +145,11 @@ class FragmentViewPager2 : Fragment() {
                             binding.contain33.text = "\"${countList2[1].count}회\" "
                             binding.contain34.text = "데이트 했어요"
                         } else {
-                            binding.contain3.visibility = View.INVISIBLE
+                            binding.contain3.setBackgroundResource(0)
                             binding.contain31.text = ""
                             binding.contain32.text = ""
                             binding.contain33.text = ""
-                            binding.contain34.text = "아직 데이트 일정이 없어요"
+                            binding.contain34.text = ""
                         }
 
                         ////세 번째 문구
