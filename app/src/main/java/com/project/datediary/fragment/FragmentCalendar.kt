@@ -2,6 +2,7 @@ package com.project.datediary.fragment
 
 import RetrofitAPI
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -37,10 +38,19 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
     lateinit var binding: FragmentCalendarBinding
     lateinit var DayScheduleAdapter: DayScheduleAdapter
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCalendarBinding.inflate(inflater, container, false)
+
+        val activity = requireActivity()
+        val window = activity.window
+        window.statusBarColor = Color.TRANSPARENT
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+
 
         //화면 설정
         setMonthView()
