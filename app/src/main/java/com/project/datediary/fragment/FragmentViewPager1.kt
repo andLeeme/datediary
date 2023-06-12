@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager1Binding
+import com.project.datediary.model.StaticRequestBody
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
@@ -80,9 +81,10 @@ class FragmentViewPager1 : Fragment() {
 
 
         binding.btn1.setOnClickListener {
-            val userDataCal = TitleRequestBody(
+            val userDataCal = StaticRequestBody(
                 couple_index = MainActivity.coupleIndex,
-                selected_month = CalendarUtil.sMonth
+                start_year = CalendarUtil.sYear,
+                start_month = CalendarUtil.sMonth
             )
 
             RetrofitAPI.emgMedService10.addUserByEnqueue(userDataCal)
