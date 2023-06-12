@@ -79,15 +79,15 @@ class FragmentViewPager2 : Fragment() {
 
 
 
-        val userDataCal = Static2RequestBody(
-            couple_index = MainActivity.coupleIndex,
-        )
+//        val userDataCal = Static2RequestBody(
+//            couple_index = MainActivity.coupleIndex,
+//        )
 
         var static2ResponseBody = listOf<Static2ResponseBody>()
         var countList2 = ArrayList<Static2ResponseBody>()
 
 
-        RetrofitAPI.emgMedService13.addUserByEnqueue(userDataCal)
+        RetrofitAPI.emgMedService13.addUserByEnqueue(MainActivity.coupleIndex)
             .enqueue(object : retrofit2.Callback<ArrayList<Static2ResponseBody>> {
                 override fun onResponse(
                     call: Call<ArrayList<Static2ResponseBody>>,
