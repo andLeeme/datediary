@@ -160,6 +160,7 @@ class FragmentViewPager1 : Fragment() {
                         Arrays.sort(arr)
                         var mostDated = arr[2]
 
+                        //제일 많이 데이트한 달 찾기
                         for (i in 0..2) {
                             if (countList[i].count!!.toInt() == arr[2]) {
                                 binding.contain5.text = "${countList[i].startMonth}월에 ${mostDated}번으로 가장 많이 만났어요"
