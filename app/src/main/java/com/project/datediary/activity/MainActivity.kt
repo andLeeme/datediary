@@ -170,7 +170,10 @@ class MainActivity : AppCompatActivity() {
                                                         .toString()
 
                                                 nickname1 =
-                                                    response.body()?.get("nickname").toString()
+                                                    response.body()?.get("nickname1").toString()
+
+                                                nickname2 =
+                                                    response.body()?.get("nickname2").toString()
 
 
                                                 //홈 프래그먼트 호출
