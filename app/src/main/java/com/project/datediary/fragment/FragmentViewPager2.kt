@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager2Binding
 import com.project.datediary.model.Static2RequestBody
@@ -94,19 +95,80 @@ class FragmentViewPager2 : Fragment() {
                     response: Response<ArrayList<Static2ResponseBody>>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("countList", "onResponse: ${response.body()}")
+                        Log.d("countList2", "onResponse: ${response.body()}")
 
                         static2ResponseBody = response.body() ?: listOf()
 
                         for (i in static2ResponseBody.indices) {
+
+                            //방문 장소 안 넣으면 ""로 카운트됨
+                            //""면 예외처리
+                            if(static2ResponseBody[i].placeCode !="") {
                             countList2.add(static2ResponseBody[i])
+                            }
                         }
-                        Log.d("countList", "onResponse2: $countList2")
+
+                        Log.d("countList2", "onResponse2: $countList2")
                         Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
 
+                        if(countList2.size<3) {
+                            countList2.add(Static2ResponseBody("", ""))
+                        }
+
+                        Log.d("countList2", "후처리: $countList2")
+
+
+                        //장소코드로 방문장소 이름 알아내기
+                        //setPlaceName(countList2[0].placeCode)
+
+
+                        //문구 넣어주기
+                        ////첫 번째 문구
+                        if(countList2[0].placeCode != "") {
+                            binding.contain21.text = "${setPlaceName(countList2[0].placeCode)}"
+                            binding.contain22.text = "에서 "
+                            binding.contain23.text = "\"${countList2[0].count}회\" "
+                            binding.contain24.text = "데이트 했어요"
+                        } else {
+                            binding.contain21.text = ""
+                            binding.contain22.text = ""
+                            binding.contain23.text = ""
+                            binding.contain24.text = "아직 데이트 일정이 없어요"
+                        }
+
+                        ////두 번째 문구
+                        if(countList2[0].placeCode != "") {
+                            binding.contain31.text = "${setPlaceName(countList2[1].placeCode)}"
+                            binding.contain32.text = "에서 "
+                            binding.contain33.text = "\"${countList2[1].count}회\" "
+                            binding.contain34.text = "데이트 했어요"
+                        } else {
+                            binding.contain3.visibility = View.INVISIBLE
+                            binding.contain31.text = ""
+                            binding.contain32.text = ""
+                            binding.contain33.text = ""
+                            binding.contain34.text = "아직 데이트 일정이 없어요"
+                        }
+
+                        ////세 번째 문구
+                        if(countList2[0].placeCode != "") {
+                            binding.contain41.text = "${setPlaceName(countList2[1].placeCode)}"
+                            binding.contain42.text = "에서 "
+                            binding.contain43.text = "\"${countList2[1].count}회\" "
+                            binding.contain44.text = "데이트 했어요"
+                        } else {
+                            binding.contain4.visibility = View.INVISIBLE
+                            binding.contain41.text = ""
+                            binding.contain42.text = ""
+                            binding.contain43.text = ""
+                            binding.contain44.text = "아직 데이트 일정이 없어요"
+                        }
+
+                        var mostDatedPlace = setPlaceName(countList2[0].placeCode)
+                        binding.contain5.text = "\" ${mostDatedPlace}에서 가장 많은 추억을 담았어요 \""
 
                     } else {
-                        Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "리스폰스2 없음", Toast.LENGTH_SHORT).show()
                     }
 
 
@@ -123,5 +185,30 @@ class FragmentViewPager2 : Fragment() {
 
 
         return binding.root
+    }
+
+    private fun setPlaceName(placeCode: String?): String {
+
+        var placeName = ""
+        when (placeCode) {
+            "" -> placeName = "방문 장소"
+            "1" -> placeName = "영화관"
+            "2" -> placeName = "바/주점"
+            "3" -> placeName = "보드게임"
+            "4" -> placeName = "여행"
+            "5" -> placeName = "식당"
+            "6" -> placeName = "도서관"
+            "7" -> placeName = "전시관"
+            "8" -> placeName = "동물원"
+            "9" -> placeName = "놀이공원"
+            "10" -> placeName = "카페"
+            "11" -> placeName = "관람"
+            "12" -> placeName = "스포츠"
+            "13" -> placeName = "공방"
+            "14" -> placeName = "드라이브"
+            "15" -> placeName = "식물원"
+            "16" -> placeName = "기타"
+        }
+        return placeName
     }
 }

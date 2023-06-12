@@ -25,19 +25,19 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.8">
+                    android:layout_weight="0.8"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/contain1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_medium"
-                        android:text="가장 많이 다녀간 장소"
-                        android:textColor="@color/black"
-                        android:textSize="30dp"
                         android:gravity="left|center"
-                        android:textFontWeight="600" />
-
+                        android:text="최근 3달 이만큼 만났어요"
+                        android:textColor="@color/black"
+                        android:textFontWeight="600"
+                        android:textSize="30dp" />
 
                 </LinearLayout>
 
@@ -60,15 +60,17 @@
                         android:layout_marginBottom="40dp">
 
                         <TextView
+                            android:id="@+id/contain2_1"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="동물원 "
-                            android:paddingLeft="20dp"/>
+                            android:paddingLeft="10dp"/>
 
                         <TextView
+                            android:id="@+id/contain2_2"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
@@ -76,6 +78,7 @@
                             android:text="에서" />
 
                         <TextView
+                            android:id="@+id/contain2_3"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
@@ -84,6 +87,7 @@
                             android:text=' "5회" ' />
 
                         <TextView
+                            android:id="@+id/contain2_4"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
@@ -106,15 +110,17 @@
                         android:layout_marginBottom="40dp">
 
                         <TextView
+                            android:id="@+id/contain3_1"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="카페 "
-                            android:paddingLeft="20dp"/>
+                            android:paddingLeft="10dp"/>
 
                         <TextView
+                            android:id="@+id/contain3_2"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
@@ -122,6 +128,7 @@
                             android:text="에서" />
 
                         <TextView
+                            android:id="@+id/contain3_3"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
@@ -130,6 +137,7 @@
                             android:text=' "4회" ' />
 
                         <TextView
+                            android:id="@+id/contain3_4"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
@@ -151,15 +159,17 @@
                         android:layout_marginBottom="40dp">
 
                         <TextView
+                            android:id="@+id/contain4_1"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="식당 "
-                            android:paddingLeft="20dp"/>
+                            android:paddingLeft="10dp"/>
 
                         <TextView
+                            android:id="@+id/contain4_2"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
@@ -167,6 +177,7 @@
                             android:text="에서" />
 
                         <TextView
+                            android:id="@+id/contain4_3"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:textColor="#2196F3"
@@ -175,6 +186,7 @@
                             android:text=' "1회" ' />
 
                         <TextView
+                            android:id="@+id/contain4_4"
                             android:fontFamily="@font/lottemartd_medium"
                             android:textSize="16dp"
                             android:layout_width="wrap_content"
