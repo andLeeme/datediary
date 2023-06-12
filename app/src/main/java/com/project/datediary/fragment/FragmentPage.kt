@@ -27,6 +27,8 @@ class FragmentPage : Fragment() {
     ): View? {
         binding = FragmentPageBinding.inflate(inflater, container, false)
 
+
+
         val activity = requireActivity()
         val window = activity.window
         window.statusBarColor = Color.TRANSPARENT

@@ -64,7 +64,6 @@ class MainActivity : AppCompatActivity() {
         installSplashScreen()
 
 
-
         //디데이 카운트
         val today = LocalDate.now()
         val targetDate = LocalDate.of(2023, 3, 28)  // 대상 날짜 설정 동적으로 변경예정
@@ -81,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             Log.d("d-day", "${abs(daysUntilTarget)}")
 
-            d_day = abs(daysUntilTarget-1).toString()
+            d_day = abs(daysUntilTarget - 1).toString()
         }
 
 
@@ -106,127 +105,134 @@ class MainActivity : AppCompatActivity() {
 
             // Run your animation.
             slideUp.start()
+        }
 
-            val curUser = GoogleSignIn.getLastSignedInAccount(this)
+        val curUser = GoogleSignIn.getLastSignedInAccount(this)
 
-            val email = curUser?.email.toString()
+        val email = curUser?.email.toString()
 
-            googleEmail = email
+        googleEmail = email
 
-            googleName = curUser?.displayName.toString()
+        googleName = curUser?.displayName.toString()
 
 
-            binding.mainFrm.visibility = View.INVISIBLE
-            binding.mainBnv.visibility = View.INVISIBLE
+        binding.mainFrm.visibility = View.INVISIBLE
+        binding.mainBnv.visibility = View.INVISIBLE
 
-            if (curUser == null) {
-                CoroutineScope(Dispatchers.Main).launch {
+        if (curUser == null) {
+            CoroutineScope(Dispatchers.Main).launch {
 
-                    delay(650).run {
-                        val intent = Intent(applicationContext, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish()
-                    }
+                delay(650).run {
+                    val intent = Intent(applicationContext, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 }
-            } else if (curUser != null) {
-                RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
-                    .enqueue(object : retrofit2.Callback<Int> {
-                        override fun onResponse(
-                            call: Call<Int>,
-                            response: Response<Int>
+            }
+        } else if (curUser != null) {
+            RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
+                .enqueue(object : retrofit2.Callback<Int> {
+                    override fun onResponse(
+                        call: Call<Int>,
+                        response: Response<Int>
 
-                        ) {
-                            Log.d("ChkUserData", "Call Success")
+                    ) {
+                        Log.d("ChkUserData", "Call Success")
 
-                            if (response.isSuccessful) {
-                                if (response.body() == 1) {
-                                    CoroutineScope(Dispatchers.Main).launch {
-                                        delay(650).run {
-                                            val intent = Intent(
-                                                applicationContext,
-                                                SignUpActivity::class.java
-                                            )
-                                            startActivity(intent)
-                                            finish()
-                                        }
+                        if (response.isSuccessful) {
+                            if (response.body() == 1) {
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    delay(650).run {
+                                        val intent = Intent(
+                                            applicationContext,
+                                            SignUpActivity::class.java
+                                        )
+                                        startActivity(intent)
+                                        finish()
                                     }
-                                    //완전 성공
-                                } else if (response.body() == 0) {
+                                }
+                                //완전 성공
+                            } else if (response.body() == 0) {
 
-                                    RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
-                                        .enqueue(object : retrofit2.Callback<HashMap<String,String>> {
-                                            override fun onResponse(
-                                                call: Call<HashMap<String,String>>,
-                                                response: Response<HashMap<String,String>>
+                                RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
+                                    .enqueue(object :
+                                        retrofit2.Callback<HashMap<String, String>> {
+                                        override fun onResponse(
+                                            call: Call<HashMap<String, String>>,
+                                            response: Response<HashMap<String, String>>
 
-                                            ) {
-                                                Log.d("coupleIndex", "Call Success")
+                                        ) {
+                                            Log.d("coupleIndex", "Call Success")
 
-                                                if (response.isSuccessful) {
+                                            if (response.isSuccessful) {
 
-                                                    coupleIndex = response.body()?.get("couple_index").toString()
+                                                coupleIndex =
+                                                    response.body()?.get("couple_index")
+                                                        .toString()
 
-                                                    nickname1 = response.body()?.get("nickname").toString()
+                                                nickname1 =
+                                                    response.body()?.get("nickname").toString()
 
 
-                                                    //홈 프래그먼트 호출
-                                                    supportFragmentManager.beginTransaction()
-                                                        .replace(R.id.main_frm, FragmentHome())
-                                                        .commitAllowingStateLoss()
-                                                }
+                                                //홈 프래그먼트 호출
+                                                supportFragmentManager.beginTransaction()
+                                                    .replace(R.id.main_frm, FragmentHome())
+                                                    .commitAllowingStateLoss()
                                             }
+                                        }
 
-                                            override fun onFailure(call: Call<HashMap<String,String>>, t: Throwable) {
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "Call Failed",
-                                                    Toast.LENGTH_SHORT
-                                                )
-                                                    .show()
-                                            }
-                                        })
-
-                                    binding.mainFrm.visibility = View.VISIBLE
-                                    binding.mainBnv.visibility = View.VISIBLE
-                                    Toast.makeText(
-                                        applicationContext,
-                                        "${curUser.displayName} Login",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
-
-
-                                } else if (response.body() == 2) {
-                                    CoroutineScope(Dispatchers.Main).launch {
-                                        delay(650).run {
-                                            val intent = Intent(
-                                                applicationContext,
-                                                SignUpActivity::class.java
-                                            )
-                                            startActivity(intent)
+                                        override fun onFailure(
+                                            call: Call<HashMap<String, String>>,
+                                            t: Throwable
+                                        ) {
                                             Toast.makeText(
                                                 applicationContext,
-                                                "$email\n커플 미연동 회원입니다",
+                                                "Call Failed",
                                                 Toast.LENGTH_SHORT
-                                            ).show()
-                                            finish()
+                                            )
+                                                .show()
                                         }
-                                    }
+                                    })
 
-                                } else if (response.body() == 99) {
-                                    Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
-                                        .show()
+                                binding.mainFrm.visibility = View.VISIBLE
+                                binding.mainBnv.visibility = View.VISIBLE
+                                Toast.makeText(
+                                    applicationContext,
+                                    "${curUser.displayName} Login",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+
+
+                            } else if (response.body() == 2) {
+                                CoroutineScope(Dispatchers.Main).launch {
+                                    delay(650).run {
+                                        val intent = Intent(
+                                            applicationContext,
+                                            SignUpActivity::class.java
+                                        )
+                                        startActivity(intent)
+                                        Toast.makeText(
+                                            applicationContext,
+                                            "$email\n커플 미연동 회원입니다",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        finish()
+                                    }
                                 }
+
+                            } else if (response.body() == 99) {
+                                Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
+                    }
 
-                        override fun onFailure(call: Call<Int>, t: Throwable) {
-                            Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    })
-            }
-
+                    override fun onFailure(call: Call<Int>, t: Throwable) {
+                        Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
         }
+
 
         var loading = false
         //스플래쉬화면을 더 오래 실행하는법.
