@@ -161,7 +161,7 @@ class FragmentViewPager2 : Fragment() {
                             binding.contain43.text = "\"${countList2[2].count}회\" "
                             binding.contain44.text = "데이트 했어요"
                         } else {
-                            binding.contain3.setBackgroundResource(0)
+                            binding.contain4.setBackgroundResource(0)
                             binding.contain41.text = ""
                             binding.contain42.text = ""
                             binding.contain43.text = ""
