@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         var d_day: String = "default"
         var googleEmail: String = ""
         var googleName: String = ""
+        var cYear = ""
+        var cMonth = ""
+        var cDay = ""
     }
 
 
@@ -62,28 +65,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         installSplashScreen()
-
-
-        //디데이 카운트
-        val today = LocalDate.now()
-        val targetDate = LocalDate.of(2023, 3, 28)  // 대상 날짜 설정 동적으로 변경예정
-
-        val daysUntilTarget = ChronoUnit.DAYS.between(today, targetDate)
-
-        if (daysUntilTarget > 0) {
-            Log.d("d-day", "$daysUntilTarget")
-
-            d_day = daysUntilTarget.toString()
-
-        } else if (daysUntilTarget == 0L) {
-
-        } else {
-            Log.d("d-day", "${abs(daysUntilTarget)}")
-
-            d_day = abs(daysUntilTarget - 1).toString()
-        }
-
-
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -174,6 +155,35 @@ class MainActivity : AppCompatActivity() {
 
                                                 nickname2 =
                                                     response.body()?.get("nickname2").toString()
+
+                                                cYear =
+                                                    response.body()?.get("year").toString()
+
+                                                cMonth =
+                                                    response.body()?.get("month").toString()
+
+                                                cDay =
+                                                    response.body()?.get("day").toString()
+
+                                                //디데이 카운트
+                                                val today = LocalDate.now()
+                                                val targetDate = LocalDate.of(cYear.toInt(), cMonth.toInt(), cDay.toInt())  // 대상 날짜 설정 동적으로 변경예정
+
+                                                val daysUntilTarget = ChronoUnit.DAYS.between(today, targetDate)
+
+                                                if (daysUntilTarget > 0) {
+                                                    Log.d("d-day", "$daysUntilTarget")
+
+                                                    d_day = daysUntilTarget.toString()
+
+                                                } else if (daysUntilTarget == 0L) {
+
+                                                } else {
+                                                    Log.d("d-day", "${abs(daysUntilTarget)}")
+
+                                                    d_day = abs(daysUntilTarget - 1).toString()
+                                                }
+
 
 
                                                 //홈 프래그먼트 호출

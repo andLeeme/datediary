@@ -1,5 +1,6 @@
 package com.project.datediary.activity
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -14,6 +15,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
+import java.util.Calendar
 
 class MatchingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMatchingBinding
@@ -22,6 +24,26 @@ class MatchingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMatchingBinding.inflate(layoutInflater)
+
+
+        binding.dateBtn.setOnClickListener {
+            val cal = Calendar.getInstance()    //캘린더뷰 만들기
+            val dateSetListener =
+                DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                    var startDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
+                    MainActivity.cYear = year.toString()
+                    MainActivity.cMonth = (month + 1).toString()
+                    MainActivity.cDay = dayOfMonth.toString()
+                    binding.dateBtn.text = startDate
+                }
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
+        }
 
 
         binding.submitBtn.setOnClickListener {
@@ -35,10 +57,13 @@ class MatchingActivity : AppCompatActivity() {
 
             data["email"] = email
 
-
             data["name"] = name
 
+            data["Year"] = MainActivity.cYear.toString()
 
+            data["Month"] = MainActivity.cMonth.toString()
+
+            data["day"] = MainActivity.cDay.toString()
 
 
             RetrofitAPI.emgMedService9.addUserByEnqueue2(data)

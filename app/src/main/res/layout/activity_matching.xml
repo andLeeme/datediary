@@ -130,6 +130,7 @@
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
                         android:fontFamily="@font/lottemartd_medium"
                         android:hint="이름을 입력해요"
                         app:boxBackgroundColor="#FAFAFA"
@@ -140,24 +141,34 @@
                         app:boxStrokeColor="@color/white"
                         app:boxStrokeWidth="0dp"
                         app:counterTextColor="@color/black"
-                        app:hintTextColor="#BCBCBC"
-                        android:layout_marginBottom="30dp">
+                        app:hintTextColor="#BCBCBC">
 
                         <EditText
                             android:id="@+id/name_edittext1"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:maxLines="2"
-                            android:maxLength="100"
                             android:fontFamily="@font/lottemartd_medium"
+                            android:maxLength="100"
+                            android:maxLines="2"
                             android:textColor="@android:color/black"
-                            android:textCursorDrawable="@null"/>
+                            android:textCursorDrawable="@null" />
                     </com.google.android.material.textfield.TextInputLayout>
 
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/dateBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="30dp"
+                        android:backgroundTint="#FAFAFA"
+                        android:fontFamily="@font/lottemartd_medium"
+                        android:text="처음 만난 날을 선택해요"
+                        android:textColor="#6E6E6E"
+                        android:textSize="16dp"
+                        android:paddingRight="190dp"/>
+
+
                 </LinearLayout>
-
-
-
 
 
                 <LinearLayout
