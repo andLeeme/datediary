@@ -1,19 +1,18 @@
 package com.project.datediary.fragment
 
+import RetrofitAPI
 import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager1Binding
 import com.project.datediary.model.StaticRequestBody
 import com.project.datediary.model.StaticResponseBody
-import com.project.datediary.model.TitleRequestBody
-import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,8 +20,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.Arrays
 
 
 // Tab1Fragment.kt
@@ -116,14 +114,14 @@ class FragmentViewPager1 : Fragment() {
                             ////이번달
                             if(countList[0].startMonth != "13") {
                                 binding.contain21.text = "${countList[0].startMonth}월"
-                                binding.contain22.text = "에 "
+                                binding.contain22.text = "번 "
                                 binding.contain23.text = "\"${countList[0].count}번\" "
-                                binding.contain24.text = "데이트 했어요"
+                                binding.contain24.text = "일정이 있어요"
                             } else {
                                 binding.contain21.text = "${CalendarUtil.sMonth}월"
                                 binding.contain22.text = "에"
                                 binding.contain23.text = ""
-                                binding.contain24.text = "데이트 일정이 없어요"
+                                binding.contain24.text = "아직 데이트 일정이 없어요"
                             }
 
                             ////지난달
@@ -151,6 +149,21 @@ class FragmentViewPager1 : Fragment() {
                                 binding.contain43.text = ""
                                 binding.contain44.text = "데이트 일정이 없어요"
                             }
+
+
+
+                            var firstCount = countList[0].count!!.toInt()
+                            var secondCount = countList[1].count!!.toInt()
+                            var thirdCount  = countList[2].count!!.toInt()
+                            val arr = intArrayOf(firstCount, secondCount, thirdCount)
+
+                            Arrays.sort(arr)
+                            var mostDated = arr[0]
+
+                            //마지막 문구
+                            binding.contain5.text = "{$mostDated}월에 가장 많이 만났어요"
+
+
 
                         } else {
                             Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
