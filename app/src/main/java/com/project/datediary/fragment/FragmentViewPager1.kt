@@ -159,7 +159,7 @@ class FragmentViewPager1 : Fragment() {
                             val arr = intArrayOf(firstCount, secondCount, thirdCount)
 
                             Arrays.sort(arr)
-                            var mostDated = arr[0]
+                            var mostDated = arr[2]
 
                             //마지막 문구
                             binding.contain5.text = "${mostDated}월에 가장 많이 만났어요"
