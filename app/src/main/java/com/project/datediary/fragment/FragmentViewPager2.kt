@@ -119,7 +119,7 @@ class FragmentViewPager2 : Fragment() {
 
 
                         //장소코드로 방문장소 이름 알아내기
-                        //setPlaceName(countList2[0].placeCode)
+                        //setPlaceName(countList2[0].placeCode) 이런 식으로 밑에 함수에서 처리함
 
 
                         //문구 넣어주기
@@ -137,7 +137,7 @@ class FragmentViewPager2 : Fragment() {
                         }
 
                         ////두 번째 문구
-                        if(countList2[0].placeCode != "") {
+                        if(countList2[1].placeCode != "") {
                             binding.contain31.text = "${setPlaceName(countList2[1].placeCode)}"
                             binding.contain32.text = "에서 "
                             binding.contain33.text = "\"${countList2[1].count}회\" "
@@ -151,10 +151,10 @@ class FragmentViewPager2 : Fragment() {
                         }
 
                         ////세 번째 문구
-                        if(countList2[0].placeCode != "") {
-                            binding.contain41.text = "${setPlaceName(countList2[1].placeCode)}"
+                        if(countList2[2].placeCode != "") {
+                            binding.contain41.text = "${setPlaceName(countList2[2].placeCode)}"
                             binding.contain42.text = "에서 "
-                            binding.contain43.text = "\"${countList2[1].count}회\" "
+                            binding.contain43.text = "\"${countList2[2].count}회\" "
                             binding.contain44.text = "데이트 했어요"
                         } else {
                             binding.contain4.visibility = View.INVISIBLE
@@ -168,7 +168,10 @@ class FragmentViewPager2 : Fragment() {
                         binding.contain5.text = "\" ${mostDatedPlace}에서 가장 많은 추억을 담았어요 \""
 
                     } else {
+
                         Toast.makeText(context, "리스폰스2 없음", Toast.LENGTH_SHORT).show()
+
+
                     }
 
 
