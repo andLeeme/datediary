@@ -27,7 +27,7 @@
         android:id="@+id/notice"
         android:enabled="true"
         android:title="알림"
-        android:icon="@drawable/icon_graph"
+        android:icon="@drawable/notice"
         />
     <item
         android:id="@+id/myPage"

@@ -94,19 +94,19 @@ class FragmentViewPager2 : Fragment() {
                     response: Response<ArrayList<Static2ResponseBody>>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("countList", "onResponse: ${response.body()}")
+                        Log.d("countList2", "onResponse: ${response.body()}")
 
                         static2ResponseBody = response.body() ?: listOf()
 
                         for (i in static2ResponseBody.indices) {
                             countList2.add(static2ResponseBody[i])
                         }
-                        Log.d("countList", "onResponse2: $countList2")
+                        Log.d("countList2", "onResponse2: $countList2")
                         Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
 
 
                     } else {
-                        Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "2리스폰스 없음", Toast.LENGTH_SHORT).show()
                     }
 
 

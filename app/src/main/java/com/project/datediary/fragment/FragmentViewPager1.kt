@@ -82,106 +82,105 @@ class FragmentViewPager1 : Fragment() {
         }
 
 
-            val userDataCal = StaticRequestBody(
-                couple_index = MainActivity.coupleIndex,
-                start_year = CalendarUtil.sYear,
-                start_month = CalendarUtil.sMonth
-            )
+        val userDataCal = StaticRequestBody(
+            couple_index = MainActivity.coupleIndex,
+            start_year = CalendarUtil.sYear,
+            start_month = CalendarUtil.sMonth
+        )
 
-            var staticResponseBody = listOf<StaticResponseBody>()
-            var countList = ArrayList<StaticResponseBody>()
-
-
-            RetrofitAPI.emgMedService10.addUserByEnqueue(userDataCal)
-                .enqueue(object : retrofit2.Callback<ArrayList<StaticResponseBody>> {
-                    override fun onResponse(
-                        call: Call<ArrayList<StaticResponseBody>>,
-                        response: Response<ArrayList<StaticResponseBody>>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.d("countList", "onResponse: ${response.body()}")
-
-                            staticResponseBody = response.body() ?: listOf()
+        var staticResponseBody = listOf<StaticResponseBody>()
+        var countList = ArrayList<StaticResponseBody>()
 
 
-                            for (i in staticResponseBody.indices) {
-                                countList.add(staticResponseBody[i])
-                            }
-                            Log.d("countList", "onResponse2: $countList")
-                            Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
+        RetrofitAPI.emgMedService10.addUserByEnqueue(userDataCal)
+            .enqueue(object : retrofit2.Callback<ArrayList<StaticResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<StaticResponseBody>>,
+                    response: Response<ArrayList<StaticResponseBody>>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("countList", "onResponse: ${response.body()}")
 
-                            //그달 일정 내역이 없으면 startMonth로 13을 반환함
-                            ////이번달
-                            if(countList[0].startMonth != "13") {
-                                binding.contain21.text = "${countList[0].startMonth}월"
-                                binding.contain22.text = "번 "
-                                binding.contain23.text = "\"${countList[0].count}번\" "
-                                binding.contain24.text = "일정이 있어요"
-                            } else {
-                                binding.contain21.text = "${CalendarUtil.sMonth}월"
-                                binding.contain22.text = "에"
-                                binding.contain23.text = ""
-                                binding.contain24.text = "아직 데이트 일정이 없어요"
-                            }
-
-                            ////지난달
-                            if(countList[1].startMonth != "13") {
-                                binding.contain31.text = "${countList[1].startMonth}월"
-                                binding.contain32.text = "에 "
-                                binding.contain33.text = "\"${countList[1].count}번\" "
-                                binding.contain34.text = "데이트 했어요"
-                            } else {
-                                binding.contain31.text = "${CalendarUtil.sMonth.toInt() -1}월"
-                                binding.contain32.text = "에"
-                                binding.contain33.text = ""
-                                binding.contain34.text = "데이트 일정이 없어요"
-                            }
-
-                            ////지지난달
-                            if(countList[2].startMonth != "13") {
-                                binding.contain41.text = "${countList[2].startMonth}월"
-                                binding.contain42.text = "에 "
-                                binding.contain43.text = "\"${countList[2].count}번\" "
-                                binding.contain44.text = "데이트 했어요"
-                            } else {
-                                binding.contain41.text = "${CalendarUtil.sMonth.toInt() -2}월"
-                                binding.contain42.text = "에 "
-                                binding.contain43.text = ""
-                                binding.contain44.text = "데이트 일정이 없어요"
-                            }
+                        staticResponseBody = response.body() ?: listOf()
 
 
+                        for (i in staticResponseBody.indices) {
+                            countList.add(staticResponseBody[i])
+                        }
+                        Log.d("countList", "onResponse2: $countList")
+                        Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
 
-                            //제일 많이 데이트한 달, 데이트 안 했으면 0으로 들어옴
-                            var firstCount = countList[0].count!!.toInt()
-                            var secondCount = countList[1].count!!.toInt()
-                            var thirdCount  = countList[2].count!!.toInt()
-                            val arr = intArrayOf(firstCount, secondCount, thirdCount)
-
-                            Arrays.sort(arr)
-                            var mostDated = arr[2]
-
-                            //제일 많이 데이트한 달 찾기2
-                            for (i in 0..2) {
-                                if (countList[i].count!!.toInt() == arr[2]) {
-                                    binding.contain5.text = "${countList[i].startMonth}월에 ${mostDated}번으로 가장 많이 만났어요"
-                                }
-                            }
+                        //그달 일정 내역이 없으면 startMonth로 13을 반환함
+                        ////이번달
+                        if (countList[0].startMonth != "13") {
+                            binding.contain21.text = "${countList[0].startMonth}월"
+                            binding.contain22.text = "번 "
+                            binding.contain23.text = "\"${countList[0].count}번\" "
+                            binding.contain24.text = "일정이 있어요"
                         } else {
-                            Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+                            binding.contain21.text = "${CalendarUtil.sMonth}월"
+                            binding.contain22.text = "에"
+                            binding.contain23.text = ""
+                            binding.contain24.text = "아직 데이트 일정이 없어요"
+                        }
+
+                        ////지난달
+                        if (countList[1].startMonth != "13") {
+                            binding.contain31.text = "${countList[1].startMonth}월"
+                            binding.contain32.text = "에 "
+                            binding.contain33.text = "\"${countList[1].count}번\" "
+                            binding.contain34.text = "데이트 했어요"
+                        } else {
+                            binding.contain31.text = "${CalendarUtil.sMonth.toInt() - 1}월"
+                            binding.contain32.text = "에"
+                            binding.contain33.text = ""
+                            binding.contain34.text = "데이트 일정이 없어요"
+                        }
+
+                        ////지지난달
+                        if (countList[2].startMonth != "13") {
+                            binding.contain41.text = "${countList[2].startMonth}월"
+                            binding.contain42.text = "에 "
+                            binding.contain43.text = "\"${countList[2].count}번\" "
+                            binding.contain44.text = "데이트 했어요"
+                        } else {
+                            binding.contain41.text = "${CalendarUtil.sMonth.toInt() - 2}월"
+                            binding.contain42.text = "에 "
+                            binding.contain43.text = ""
+                            binding.contain44.text = "데이트 일정이 없어요"
                         }
 
 
+                        //제일 많이 데이트한 달, 데이트 안 했으면 0으로 들어옴
+                        var firstCount = countList[0].count!!.toInt()
+                        var secondCount = countList[1].count!!.toInt()
+                        var thirdCount = countList[2].count!!.toInt()
+                        val arr = intArrayOf(firstCount, secondCount, thirdCount)
 
+                        Arrays.sort(arr)
+                        var mostDated = arr[2]
+
+                        //제일 많이 데이트한 달 찾기2
+                        for (i in 0..2) {
+                            if (countList[i].count!!.toInt() == arr[2]) {
+                                binding.contain5.text =
+                                    "${countList[i].startMonth}월에 ${mostDated}번으로 가장 많이 만났어요"
+                            }
+                        }
+                    } else {
+                        Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
                     }
 
-                    override fun onFailure(
-                        call: Call<ArrayList<StaticResponseBody>>,
-                        t: Throwable
-                    ) {
 
-                    }
-                })
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<StaticResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
 
 
         return binding.root
