@@ -8,8 +8,8 @@ import com.project.datediary.api.ScheduleService
 import com.project.datediary.api.ScheduleShowService
 import com.project.datediary.api.SearchEmailService
 import com.project.datediary.api.SignUpService
+import com.project.datediary.api.StaticService
 import com.project.datediary.api.TitleService
-import com.project.datediary.model.StaticService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
