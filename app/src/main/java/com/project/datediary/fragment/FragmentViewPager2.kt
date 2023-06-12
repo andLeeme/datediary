@@ -111,8 +111,10 @@ class FragmentViewPager2 : Fragment() {
                         Log.d("countList2", "onResponse2: $countList2")
                         Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
 
-                        if(countList2.size<3) {
-                            countList2.add(Static2ResponseBody("", ""))
+                        if(countList2.size<4) {
+                            for( i in 1..(4-countList2.size)) {
+                                countList2.add(Static2ResponseBody("", ""))
+                            }
                         }
 
                         Log.d("countList2", "후처리: $countList2")
@@ -121,6 +123,8 @@ class FragmentViewPager2 : Fragment() {
                         //장소코드로 방문장소 이름 알아내기
                         //setPlaceName(countList2[0].placeCode) 이런 식으로 밑에 함수에서 처리함
 
+                        var mostDatedPlace = setPlaceName(countList2[0].placeCode)
+                        binding.contain5.text = "\" ${mostDatedPlace}에서 가장 많은 추억을 담았어요 \""
 
                         //문구 넣어주기
                         ////첫 번째 문구
@@ -134,6 +138,7 @@ class FragmentViewPager2 : Fragment() {
                             binding.contain22.text = ""
                             binding.contain23.text = ""
                             binding.contain24.text = "아직 데이트 일정이 없어요"
+                            binding.contain5.text = "\" 새로운 곳으로 가볼까요? \""
                         }
 
                         ////두 번째 문구
@@ -163,9 +168,6 @@ class FragmentViewPager2 : Fragment() {
                             binding.contain43.text = ""
                             binding.contain44.text = "아직 데이트 일정이 없어요"
                         }
-
-                        var mostDatedPlace = setPlaceName(countList2[0].placeCode)
-                        binding.contain5.text = "\" ${mostDatedPlace}에서 가장 많은 추억을 담았어요 \""
 
                     } else {
 
