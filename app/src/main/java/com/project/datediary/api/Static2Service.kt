@@ -15,5 +15,5 @@ import java.util.HashMap
 interface Static2Service {
     @Headers("Content-Type: application/json")
     @POST("/api/static2")
-    fun addUserByEnqueue(@Body coupleIndex : String): Call<ArrayList<Static2ResponseBody>>
+    fun addUserByEnqueue(@Body coupleIndex : String?): Call<ArrayList<Static2ResponseBody>>
 }
