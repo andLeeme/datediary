@@ -165,7 +165,6 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/lottemartd_medium"
                         android:hint="내용"
-
                         app:boxBackgroundColor="#FAFAFA"
                         app:boxCornerRadiusBottomEnd="5dp"
                         app:boxCornerRadiusBottomStart="5dp"
@@ -391,8 +390,8 @@
                             android:layout_weight="1">
 
                             <com.google.android.material.button.MaterialButton
-                                style="?android:attr/borderlessButtonStyle"
                                 android:id="@+id/timepickerEnd"
+                                style="?android:attr/borderlessButtonStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:backgroundTint="#ffffff"
@@ -415,7 +414,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.07"
+                    android:layout_weight="1.05"
                     android:orientation="vertical">
 
                 </LinearLayout>
@@ -424,7 +423,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.02"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
@@ -435,18 +434,20 @@
                         android:text="방문 장소"
                         android:textColor="#595959"
                         android:textSize="16dp"
-                        android:fontFamily="@font/lottemartd_medium"
-                        app:cornerRadius="20dp"
+                        android:fontFamily="@font/lottemartd_bold"
+                        app:cornerRadius="15dp"
                         app:rippleColor="#EBEBEB"
-                        app:strokeWidth="0.5dp"
-                        app:strokeColor="#03A9F4"/>
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#8DC0E8"/>
+
+
 
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.02"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
@@ -457,11 +458,11 @@
                         android:text="데이트 미션!"
                         android:textColor="#595959"
                         android:textSize="16dp"
-                        app:cornerRadius="20dp"
-                        android:fontFamily="@font/lottemartd_medium"
+                        app:cornerRadius="15dp"
+                        android:fontFamily="@font/lottemartd_bold"
                         app:rippleColor="#EBEBEB"
-                        app:strokeWidth="0.5dp"
-                        app:strokeColor="#03A9F4"/>
+                        app:strokeWidth="1dp"
+                        app:strokeColor="#8DC0E8"/>
 
 
                 </LinearLayout>
@@ -469,7 +470,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.9"
                     android:orientation="vertical">
 
                     <TextView
@@ -495,18 +496,18 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.02"
+                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/submitBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:backgroundTint="#99F3FF"
+                        android:backgroundTint="#8DC0E8"
                         android:text="일정 등록하기"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp"
-                        app:cornerRadius="30dp"
+                        app:cornerRadius="20dp"
                         app:rippleColor="#EBEBEB"
                         android:fontFamily="@font/lottemartd_bold"/>
 

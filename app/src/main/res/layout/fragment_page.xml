@@ -144,14 +144,20 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.15"
                 android:orientation="vertical">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSignOut"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="로그아웃" />
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="70dp"
+                    android:backgroundTint="#8DC0E8"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:text="로그아웃"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    app:cornerRadius="15dp" />
 
             </LinearLayout>
 
