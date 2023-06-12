@@ -184,8 +184,6 @@ class FragmentViewPager1 : Fragment() {
                 })
 
 
-
-
         return binding.root
     }
 }

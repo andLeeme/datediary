@@ -8,6 +8,8 @@ import com.project.datediary.api.ScheduleService
 import com.project.datediary.api.ScheduleShowService
 import com.project.datediary.api.SearchEmailService
 import com.project.datediary.api.SignUpService
+import com.project.datediary.api.Static2Service
+import com.project.datediary.api.Static3Service
 import com.project.datediary.api.StaticService
 import com.project.datediary.api.TitleService
 import okhttp3.OkHttpClient
@@ -91,7 +93,7 @@ object RetrofitAPI {
         retrofit.create(CoupleMatchService::class.java)
     }
 
-    //그래프용
+    //그래프1용
     val emgMedService10: StaticService by lazy {
         retrofit.create(StaticService::class.java)
     }
@@ -101,6 +103,16 @@ object RetrofitAPI {
     }
     val emgMedService12: ChatService by lazy {
         retrofit.create(ChatService::class.java)
+    }
+
+    //그래프2용
+    val emgMedService13: Static2Service by lazy {
+        retrofit.create(Static2Service::class.java)
+    }
+
+    //그래프3용
+    val emgMedService14: Static3Service by lazy {
+        retrofit.create(Static3Service::class.java)
     }
 
 }

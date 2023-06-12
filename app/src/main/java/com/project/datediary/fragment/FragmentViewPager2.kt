@@ -2,15 +2,26 @@ package com.project.datediary.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager2Binding
+import com.project.datediary.model.Static2RequestBody
+import com.project.datediary.model.Static2ResponseBody
+import com.project.datediary.model.StaticRequestBody
+import com.project.datediary.model.StaticResponseBody
+import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import java.util.Arrays
 
 
 // Tab1Fragment.kt
@@ -67,6 +78,48 @@ class FragmentViewPager2 : Fragment() {
         }
 
 
+
+        val userDataCal = Static2RequestBody(
+            couple_index = MainActivity.coupleIndex,
+        )
+
+        var static2ResponseBody = listOf<Static2ResponseBody>()
+        var countList2 = ArrayList<Static2ResponseBody>()
+
+
+        RetrofitAPI.emgMedService13.addUserByEnqueue(userDataCal)
+            .enqueue(object : retrofit2.Callback<ArrayList<Static2ResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<Static2ResponseBody>>,
+                    response: Response<ArrayList<Static2ResponseBody>>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("countList", "onResponse: ${response.body()}")
+
+                        static2ResponseBody = response.body() ?: listOf()
+
+                        for (i in static2ResponseBody.indices) {
+                            countList2.add(static2ResponseBody[i])
+                        }
+                        Log.d("countList", "onResponse2: $countList2")
+                        Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
+
+
+                    } else {
+                        Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+                    }
+
+
+
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<Static2ResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
 
 
         return binding.root
