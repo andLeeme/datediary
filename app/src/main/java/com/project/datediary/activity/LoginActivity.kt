@@ -107,10 +107,6 @@ class LoginActivity : AppCompatActivity() {
                                 startActivity(intent)
                                 finish()
                             } else if (response.body() == 0) {
-                                val intent = Intent(applicationContext, MainActivity::class.java)
-                                startActivity(intent)
-                                Toast.makeText(applicationContext, "$email\n기존회원입니다", Toast.LENGTH_SHORT)
-                                    .show()
 
                                 RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
                                     .enqueue(object : retrofit2.Callback<Int> {
@@ -123,7 +119,12 @@ class LoginActivity : AppCompatActivity() {
 
                                             if (response.isSuccessful) {
                                                 MainActivity.coupleIndex = response.body().toString()
-                                                Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
+//                                                Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
+//                                                    .show()
+
+                                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                                startActivity(intent)
+                                                Toast.makeText(applicationContext, "$email\n Login", Toast.LENGTH_SHORT)
                                                     .show()
 
                                                 finish()

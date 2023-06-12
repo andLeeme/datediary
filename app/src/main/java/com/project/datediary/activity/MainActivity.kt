@@ -49,8 +49,8 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var coupleIndex: String = "default";
-        var nickname1: String = "이수영"
-        var nickname2: String = "김인호"
+        var nickname1: String = "김인호"
+        var nickname2: String = "이수영"
         var d_day: String = "default"
         var googleEmail: String = ""
         var googleName: String = ""
@@ -175,7 +175,6 @@ class MainActivity : AppCompatActivity() {
 
 
 //                                                    Toast.makeText(applicationContext, "coupleIndex : $coupleIndex", Toast.LENGTH_SHORT).show()
-
 
                                                     //홈 프래그먼트 호출
                                                     supportFragmentManager.beginTransaction()

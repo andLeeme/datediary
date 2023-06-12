@@ -221,7 +221,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:gravity="center|top">
 
                     </LinearLayout>
 
@@ -235,7 +236,8 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:gravity="center|top">
 
                     </LinearLayout>
 
@@ -286,7 +288,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="10.1">
+                android:layout_weight="10.1"
+                android:gravity="right">
+
+                <ImageButton
+                    android:id="@+id/changeStColor"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/change"
+                    android:backgroundTint="#FFFFFF"
+                    android:layout_marginTop="20dp"/>
 
             </LinearLayout>
 
