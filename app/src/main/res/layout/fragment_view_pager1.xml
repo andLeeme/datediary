@@ -46,7 +46,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_medium"
                         android:gravity="left|center"
-                        android:text="최근 3달 몇 번 만났을까"
+                        android:text="최근 3달 이만큼 만났어요"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
                         android:textSize="30dp" />

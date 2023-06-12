@@ -116,12 +116,12 @@ class FragmentViewPager1 : Fragment() {
                             ////이번달
                             if(countList[0].startMonth != "13") {
                                 binding.contain21.text = "${countList[0].startMonth}월"
-                                binding.contain22.text = "(이번달)에 "
+                                binding.contain22.text = "에 "
                                 binding.contain23.text = "\"${countList[0].count}번\" "
                                 binding.contain24.text = "데이트 했어요"
                             } else {
                                 binding.contain21.text = "${CalendarUtil.sMonth}월"
-                                binding.contain22.text = "(이번달)에"
+                                binding.contain22.text = "에"
                                 binding.contain23.text = ""
                                 binding.contain24.text = "데이트 일정이 없어요"
                             }
@@ -129,12 +129,12 @@ class FragmentViewPager1 : Fragment() {
                             ////지난달
                             if(countList[1].startMonth != "13") {
                                 binding.contain31.text = "${countList[1].startMonth}월"
-                                binding.contain32.text = "(지난달)에 "
+                                binding.contain32.text = "에 "
                                 binding.contain33.text = "\"${countList[1].count}번\" "
                                 binding.contain34.text = "데이트 했어요"
                             } else {
                                 binding.contain31.text = "${CalendarUtil.sMonth.toInt() -1}월"
-                                binding.contain32.text = "(지난달)에"
+                                binding.contain32.text = "에"
                                 binding.contain33.text = ""
                                 binding.contain34.text = "데이트 일정이 없어요"
                             }
@@ -142,12 +142,12 @@ class FragmentViewPager1 : Fragment() {
                             ////지지난달
                             if(countList[2].startMonth != "13") {
                                 binding.contain41.text = "${countList[2].startMonth}월"
-                                binding.contain42.text = "(지지난달)에 "
+                                binding.contain42.text = "에 "
                                 binding.contain43.text = "\"${countList[2].count}번\" "
                                 binding.contain44.text = "데이트 했어요"
                             } else {
                                 binding.contain41.text = "${CalendarUtil.sMonth.toInt() -2}월"
-                                binding.contain42.text = "(지지난달)에 "
+                                binding.contain42.text = "에 "
                                 binding.contain43.text = ""
                                 binding.contain44.text = "데이트 일정이 없어요"
                             }
