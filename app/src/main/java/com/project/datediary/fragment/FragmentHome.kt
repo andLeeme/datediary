@@ -21,6 +21,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.project.datediary.activity.AddScheduleActivity
+import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.api.ImageUploadService
@@ -109,25 +110,25 @@ class FragmentHome : Fragment() {
 
         var behavior = BottomSheetBehavior.from(binding.bottomSheet)
 
-        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
-                // 상태가 변경될 때 호출
-                // newState 변수로 상태확인
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        // 바텀 시트가 축소
-                        Log.d("바텀시트", "줄였나?")
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        // 바텀 시트가 확장
-                    }
-                    // 추가 코드
-                }
-            }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-            }
-        })
+//        behavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+//            override fun onStateChanged(bottomSheet: View, newState: Int) {
+//                // 상태가 변경될 때 호출
+//                // newState 변수로 상태확인
+//                when (newState) {
+//                    BottomSheetBehavior.STATE_COLLAPSED -> {
+//                        // 바텀 시트가 축소
+//                        Log.d("바텀시트", "줄였나?")
+//                    }
+//                    BottomSheetBehavior.STATE_EXPANDED -> {
+//                        // 바텀 시트가 확장
+//                    }
+//                    // 추가 코드
+//                }
+//            }
+//
+//            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+//            }
+//        })
 
 
         //바텀시트에 그려주기
@@ -181,6 +182,48 @@ class FragmentHome : Fragment() {
 
                         //어댑터 적용
                         binding.recycler10.adapter = adapter2
+
+                        //아이템 클릭하면 EditSchedule Activity 소환!
+                        adapter2.dayScheduleSetItemClickListener(object :
+                            DayScheduleAdapter.DayScheduleOnItemClickListener {
+                            override fun dayScheduleOnClick(v: View, position: Int) {
+                                Log.d(
+                                    "testIndex",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
+                                val intent =
+                                    Intent(context, EditScheduleActivity::class.java)
+                                Log.d(
+                                    "testIndex1",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
+                                intent.putExtra(
+                                    "scheduleIndex",
+                                    scheduleList[position].scheduleIndex
+                                )
+                                intent.putExtra("startYear", scheduleList[position].startYear)
+                                intent.putExtra("startMonth", scheduleList[position].startMonth)
+                                intent.putExtra("startDay", scheduleList[position].startDay)
+                                intent.putExtra("startTime", scheduleList[position].startTime)
+                                intent.putExtra("endYear", scheduleList[position].endYear)
+                                intent.putExtra("endMonth", scheduleList[position].endMonth)
+                                intent.putExtra("endDay", scheduleList[position].endDay)
+                                intent.putExtra("endTime", scheduleList[position].endTime)
+                                intent.putExtra("title", scheduleList[position].title)
+                                intent.putExtra("contents", scheduleList[position].contents)
+                                intent.putExtra("allDayCheck", scheduleList[position].allDayCheck)
+                                intent.putExtra("placeCode", scheduleList[position].placeCode)
+                                intent.putExtra("missionCode", scheduleList[position].missionCode)
+                                Log.d(
+                                    "testIndex2",
+                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                )
+                                startActivity(intent)
+                            }
+                        })
+
+
+
                     }
                 }
 
@@ -191,6 +234,17 @@ class FragmentHome : Fragment() {
 
                 }
             })
+
+
+
+
+
+
+
+
+
+
+
 
         return binding.root
     }
