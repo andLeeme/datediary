@@ -2,13 +2,16 @@ package com.project.datediary.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager1Binding
 import com.project.datediary.model.StaticRequestBody
+import com.project.datediary.model.StaticResponseBody
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
@@ -18,6 +21,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
+import java.util.ArrayList
 import java.util.HashMap
 
 
@@ -87,16 +91,38 @@ class FragmentViewPager1 : Fragment() {
                 start_month = CalendarUtil.sMonth
             )
 
+
             RetrofitAPI.emgMedService10.addUserByEnqueue(userDataCal)
-                .enqueue(object : retrofit2.Callback<HashMap<Integer, String>> {
+                .enqueue(object : retrofit2.Callback<ArrayList<StaticResponseBody>> {
                     override fun onResponse(
-                        call: Call<HashMap<Integer, String>>,
-                        response: Response<HashMap<Integer, String>>
+                        call: Call<ArrayList<StaticResponseBody>>,
+                        response: Response<ArrayList<StaticResponseBody>>
                     ) {
+                        if (response.isSuccessful) {
+                            Log.d("countList", "onResponse: ${response.body()}")
+
+
+                            var staticResponseBody = listOf<StaticResponseBody>()
+                            staticResponseBody = response.body() ?: listOf()
+
+                            var countList = ArrayList<StaticResponseBody>()
+
+                            for (i in staticResponseBody.indices) {
+                                countList.add(staticResponseBody[i])
+                            }
+                            Log.d("countList", "onResponse2: $countList")
+
+
+                        } else {
+                            Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+                        }
+
+                        //binding.contain21.text =
+
                     }
 
                     override fun onFailure(
-                        call: Call<HashMap<Integer, String>>,
+                        call: Call<ArrayList<StaticResponseBody>>,
                         t: Throwable
                     ) {
 
