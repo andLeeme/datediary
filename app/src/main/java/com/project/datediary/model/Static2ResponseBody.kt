@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class Static2ResponseBody(
 
     @SerializedName("placeCode")
-    val startYear: String?,
+    val placeCode: String?,
     @SerializedName("count")
     val count: String?,
 
