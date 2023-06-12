@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager1Binding
+import com.project.datediary.model.TitleRequestBody
+import com.project.datediary.model.TitleResponseBody
+import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import java.util.HashMap
 
 
 // Tab1Fragment.kt
@@ -18,7 +25,11 @@ class FragmentViewPager1 : Fragment() {
     lateinit var binding: FragmentViewPager1Binding
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = FragmentViewPager1Binding.inflate(inflater, container, false)
 
 
@@ -67,7 +78,35 @@ class FragmentViewPager1 : Fragment() {
             }
         }
 
+
+        binding.btn1.setOnClickListener {
+            val userDataCal = TitleRequestBody(
+                couple_index = MainActivity.coupleIndex,
+                selected_month = CalendarUtil.sMonth
+            )
+
+            RetrofitAPI.emgMedService10.addUserByEnqueue(userDataCal)
+                .enqueue(object : retrofit2.Callback<HashMap<Integer, String>> {
+                    override fun onResponse(
+                        call: Call<HashMap<Integer, String>>,
+                        response: Response<HashMap<Integer, String>>
+                    ) {
+                    }
+
+                    override fun onFailure(
+                        call: Call<HashMap<Integer, String>>,
+                        t: Throwable
+                    ) {
+
+                    }
+                })
+        }
+
+
+
+
+
         return binding.root
     }
-
 }
+

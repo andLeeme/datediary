@@ -9,6 +9,7 @@ import com.project.datediary.api.ScheduleShowService
 import com.project.datediary.api.SearchEmailService
 import com.project.datediary.api.SignUpService
 import com.project.datediary.api.TitleService
+import com.project.datediary.model.StaticService
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -90,9 +91,10 @@ object RetrofitAPI {
         retrofit.create(CoupleMatchService::class.java)
     }
 
-//    val emgMedService10: MainPhotoService by lazy {
-//        retrofit.create(MainPhotoService::class.java)
-//    }
+    //그래프용
+    val emgMedService10: StaticService by lazy {
+        retrofit.create(StaticService::class.java)
+    }
 
     val emgMedService11: CoupleIndexService by lazy {
         retrofit.create(CoupleIndexService::class.java)
