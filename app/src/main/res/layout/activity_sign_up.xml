@@ -196,11 +196,11 @@
                         android:id="@+id/submitBtn"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:backgroundTint="#56E8FB"
+                        android:backgroundTint="#8DC0E8"
                         android:text="연결하러가기!"
                         android:textColor="#FFFFFF"
                         android:textSize="20dp"
-                        app:cornerRadius="30dp"
+                        app:cornerRadius="20dp"
                         app:rippleColor="#EBEBEB"
                         android:fontFamily="@font/lottemartd_bold"/>
 
