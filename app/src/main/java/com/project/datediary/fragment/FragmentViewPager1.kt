@@ -152,6 +152,7 @@ class FragmentViewPager1 : Fragment() {
 
 
 
+                            //제일 많이 데이트한 달
                             var firstCount = countList[0].count!!.toInt()
                             var secondCount = countList[1].count!!.toInt()
                             var thirdCount  = countList[2].count!!.toInt()
