@@ -113,24 +113,26 @@ class FragmentViewPager1 : Fragment() {
                             Log.d("countList", "onResponse2: $countList")
                             Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
 
+                            binding.contain21.text = "${countList[0].startMonth}"
+                            binding.contain22.text = "월(이번달)에"
+                            binding.contain23.text = "${countList[0].count}"
+                            binding.contain24.text = "데이트 했어요"
+
+                            binding.contain31.text = "${countList[1].startMonth}"
+                            binding.contain32.text = "월(지난달)에"
+                            binding.contain33.text = "${countList[1].count}"
+                            binding.contain34.text = "데이트 했어요"
+
+                            binding.contain41.text = "${countList[2].startMonth}"
+                            binding.contain42.text = "월(지지난달)에"
+                            binding.contain43.text = "${countList[2].count}"
+                            binding.contain44.text = "데이트 했어요"
+
                         } else {
                             Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
                         }
 
-                        binding.contain21.text = "${countList[0].startMonth}"
-                        binding.contain22.text = "월(이번달)에"
-                        binding.contain23.text = "${countList[0].count}"
-                        binding.contain24.text = "데이트 했어요"
 
-                        binding.contain31.text = "${countList[1].startMonth}"
-                        binding.contain32.text = "월(지난달)에"
-                        binding.contain33.text = "${countList[1].count}"
-                        binding.contain34.text = "데이트 했어요"
-
-                        binding.contain41.text = "${countList[2].startMonth}"
-                        binding.contain42.text = "월(지지난달)에"
-                        binding.contain43.text = "${countList[2].count}"
-                        binding.contain44.text = "데이트 했어요"
 
                     }
 
