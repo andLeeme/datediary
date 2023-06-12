@@ -84,7 +84,6 @@ class FragmentViewPager1 : Fragment() {
         }
 
 
-        binding.btn1.setOnClickListener {
             val userDataCal = StaticRequestBody(
                 couple_index = MainActivity.coupleIndex,
                 start_year = CalendarUtil.sYear,
@@ -168,8 +167,6 @@ class FragmentViewPager1 : Fragment() {
 
                     }
                 })
-        }
-
 
 
 
