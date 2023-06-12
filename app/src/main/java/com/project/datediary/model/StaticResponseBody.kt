@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class StaticResponseBody(
 
-    @SerializedName("coupleIndex")
-    val coupleIndex: String?,
     @SerializedName("startYear")
     val startYear: String?,
     @SerializedName("startMonth")

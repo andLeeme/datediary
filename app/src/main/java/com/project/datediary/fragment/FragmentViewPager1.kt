@@ -113,20 +113,45 @@ class FragmentViewPager1 : Fragment() {
                             Log.d("countList", "onResponse2: $countList")
                             Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
 
-                            binding.contain21.text = "${countList[0].startMonth}"
-                            binding.contain22.text = "월(이번달)에"
-                            binding.contain23.text = "${countList[0].count}"
-                            binding.contain24.text = "데이트 했어요"
+                            //그달 일정 내역이 없으면 startMonth로 13을 반환함
+                            ////이번달
+                            if(countList[0].startMonth != "13") {
+                                binding.contain21.text = "${countList[0].startMonth}월"
+                                binding.contain22.text = "(이번달)에"
+                                binding.contain23.text = "${countList[0].count}"
+                                binding.contain24.text = "데이트 했어요"
+                            } else {
+                                binding.contain21.text = "${CalendarUtil.sMonth}월"
+                                binding.contain22.text = "(이번달)에"
+                                binding.contain23.text = ""
+                                binding.contain24.text = "데이트 일정이 없어요"
+                            }
 
-                            binding.contain31.text = "${countList[1].startMonth}"
-                            binding.contain32.text = "월(지난달)에"
-                            binding.contain33.text = "${countList[1].count}"
-                            binding.contain34.text = "데이트 했어요"
+                            ////지난달
+                            if(countList[1].startMonth != "13") {
+                                binding.contain31.text = "${countList[1].startMonth}월"
+                                binding.contain32.text = "(이번달)에"
+                                binding.contain33.text = "${countList[1].count}"
+                                binding.contain34.text = "데이트 했어요"
+                            } else {
+                                binding.contain31.text = "${CalendarUtil.sMonth.toInt() -1}월"
+                                binding.contain32.text = "(지난달)에"
+                                binding.contain33.text = ""
+                                binding.contain34.text = "데이트 일정이 없어요"
+                            }
 
-                            binding.contain41.text = "${countList[2].startMonth}"
-                            binding.contain42.text = "월(지지난달)에"
-                            binding.contain43.text = "${countList[2].count}"
-                            binding.contain44.text = "데이트 했어요"
+                            ////지지난달
+                            if(countList[2].startMonth != "13") {
+                                binding.contain41.text = "${countList[2].startMonth}월"
+                                binding.contain42.text = "(이번달)에"
+                                binding.contain43.text = "${countList[2].count}"
+                                binding.contain44.text = "데이트 했어요"
+                            } else {
+                                binding.contain41.text = "${CalendarUtil.sMonth.toInt() -2}월"
+                                binding.contain42.text = "(지지난달)에"
+                                binding.contain43.text = ""
+                                binding.contain44.text = "데이트 일정이 없어요"
+                            }
 
                         } else {
                             Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
