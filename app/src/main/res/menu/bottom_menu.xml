@@ -6,7 +6,7 @@
         android:id="@+id/home"
         android:enabled="true"
         android:title="홈"
-        android:icon="@drawable/icon_home"
+        android:icon="@drawable/icon_home3"
         />
 
     <item
