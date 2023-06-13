@@ -54,9 +54,27 @@ class SignUpActivity : AppCompatActivity() {
                         Log.d("ChkUserData", "Call Success")
 
                         if (response.isSuccessful) {
-                            val intent = Intent(applicationContext, MatchingActivity::class.java)
-                            startActivity(intent)
-                            finish()
+
+                            if (response.body() == -1) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "이미 등록된 이메일 입니다",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            } else if(response.body() == 0) {
+                                val intent =
+                                    Intent(applicationContext, MatchingActivity::class.java)
+                                startActivity(intent)
+                                finish()
+                            }else if(response.body() == 99) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "서버 오류!",
+                                    Toast.LENGTH_SHORT
+                                )
+                                    .show()
+                            }
                         }
                     }
 

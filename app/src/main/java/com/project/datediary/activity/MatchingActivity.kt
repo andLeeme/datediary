@@ -70,18 +70,23 @@ class MatchingActivity : AppCompatActivity() {
                 .enqueue(object : retrofit2.Callback<Int> {
                     override fun onResponse(
                         call: Call<Int>,
-                        response: Response<Int>) {
+                        response: Response<Int>
+                    ) {
                         if (response.isSuccessful) {
                             if (response.body() == 0) {
-                                Toast.makeText(applicationContext, "${curUser?.displayName}님 안녕하세요  ", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    applicationContext,
+                                    "${curUser?.displayName}님 안녕하세요  ",
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 val intent = Intent(applicationContext, MainActivity::class.java)
                                 startActivity(intent)
 
                                 RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
-                                    .enqueue(object : retrofit2.Callback<HashMap<String,String>> {
+                                    .enqueue(object : retrofit2.Callback<HashMap<String, String>> {
                                         override fun onResponse(
-                                            call: Call<HashMap<String,String>>,
-                                            response: Response<HashMap<String,String>>
+                                            call: Call<HashMap<String, String>>,
+                                            response: Response<HashMap<String, String>>
 
                                         ) {
                                             Log.d("coupleIndex", "Call Success")
@@ -89,15 +94,27 @@ class MatchingActivity : AppCompatActivity() {
                                             if (response.isSuccessful) {
 //                                                MainActivity.coupleIndex = response.body()?.get("nickname").toString()
 
-                                                MainActivity.coupleIndex = "1"
+                                                MainActivity.coupleIndex =
+                                                    response.body()?.get("couple_index").toString()
 
-                                                Toast.makeText(applicationContext, "coupleIndex : ${MainActivity.coupleIndex}", Toast.LENGTH_SHORT)
+                                                Toast.makeText(
+                                                    applicationContext,
+                                                    "coupleIndex : ${MainActivity.coupleIndex}",
+                                                    Toast.LENGTH_SHORT
+                                                )
                                                     .show()
                                             }
                                         }
 
-                                        override fun onFailure(call: Call<HashMap<String,String>>, t: Throwable) {
-                                            Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                        override fun onFailure(
+                                            call: Call<HashMap<String, String>>,
+                                            t: Throwable
+                                        ) {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "Call Failed",
+                                                Toast.LENGTH_SHORT
+                                            )
                                                 .show()
                                         }
                                     })
@@ -105,7 +122,8 @@ class MatchingActivity : AppCompatActivity() {
                                 finish()
 
                             } else if (response.body() == 99) {
-                                Toast.makeText(applicationContext, "서버 오류!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(applicationContext, "상대방과 연결되지 않았어요", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
                     }
