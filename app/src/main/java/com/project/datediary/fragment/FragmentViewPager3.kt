@@ -2,15 +2,26 @@ package com.project.datediary.fragment
 
 import android.animation.ObjectAnimator
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager3Binding
+import com.project.datediary.model.Static3RequestBody
+import com.project.datediary.model.Static3ResponseBody
+import com.project.datediary.model.StaticRequestBody
+import com.project.datediary.model.StaticResponseBody
+import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Response
+import java.util.Arrays
 
 
 // Tab1Fragment.kt
@@ -18,7 +29,11 @@ class FragmentViewPager3 : Fragment() {
     lateinit var binding: FragmentViewPager3Binding
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?, ): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
         binding = FragmentViewPager3Binding.inflate(inflater, container, false)
 
         binding.contain1.visibility = View.INVISIBLE
@@ -65,6 +80,57 @@ class FragmentViewPager3 : Fragment() {
                 binding.contain5.visibility = View.VISIBLE
             }
         }
+
+
+        val userDataCal = Static3RequestBody(
+            couple_index = MainActivity.coupleIndex,
+            start_month = CalendarUtil.sMonth
+        )
+
+        var static3ResponseBody = listOf<Static3ResponseBody>()
+        var countList3 = ArrayList<Static3ResponseBody>()
+
+
+        RetrofitAPI.emgMedService14.addUserByEnqueue(userDataCal)
+            .enqueue(object : retrofit2.Callback<ArrayList<Static3ResponseBody>> {
+                override fun onResponse(
+                    call: Call<ArrayList<Static3ResponseBody>>,
+                    response: Response<ArrayList<Static3ResponseBody>>
+                ) {
+                    if (response.isSuccessful) {
+                        Log.d("countList3", "onResponse: ${response.body()}")
+
+                        static3ResponseBody = response.body() ?: listOf()
+
+
+                        for (i in static3ResponseBody.indices) {
+                            countList3.add(static3ResponseBody[i])
+                        }
+                        Log.d("countList3", "onResponse2: $countList3")
+                        Toast.makeText(context, "$countList3", Toast.LENGTH_SHORT).show()
+
+
+
+
+
+
+
+                    } else {
+                        Toast.makeText(context, "리스폰스3 없음", Toast.LENGTH_SHORT).show()
+                    }
+
+
+                }
+
+                override fun onFailure(
+                    call: Call<ArrayList<Static3ResponseBody>>,
+                    t: Throwable
+                ) {
+
+                }
+            })
+
+
 
 
 
