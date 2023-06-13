@@ -62,38 +62,38 @@ class FragmentChat : Fragment() {
 
                 val email = curUser?.email.toString()
 
-                var chatRequestBody = ChatRequestBody(
-                    couple_index = MainActivity.coupleIndex,
-                    email = email,
-                    message = message,
-                    sender = "지현이",
-                    timestamp = Date().toString()
-                )
+//                var chatRequestBody = ChatRequestBody(
+//                    couple_index = MainActivity.coupleIndex,
+//                    email = email,
+//                    message = message,
+//                    sender = "지현이",
+//                    timestamp = Date().toString()
+//                )
 
-
-                RetrofitAPI.emgMedService12.addUserByEnqueue(chatRequestBody)
-                    .enqueue(object : retrofit2.Callback<ArrayList<ChatResponseBody>> {
-                        override fun onResponse(
-                            call: Call<ArrayList<ChatResponseBody>>,
-                            response: Response<ArrayList<ChatResponseBody>>
-                        ) {
-                            Log.d("coupleIndex", "Call Success")
-
-                            if (response.isSuccessful) {
-
-
-
-                                chatAdapter.addMessage(chatMessage)
-                            }
-                        }
-
-                        override fun onFailure(
-                            call: Call<ArrayList<ChatResponseBody>>,
-                            t: Throwable
-                        ) {
-                            Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
-                        }
-                    })
+//
+//                RetrofitAPI.emgMedService12.addUserByEnqueue(chatRequestBody)
+//                    .enqueue(object : retrofit2.Callback<ArrayList<ChatResponseBody>> {
+//                        override fun onResponse(
+//                            call: Call<ArrayList<ChatResponseBody>>,
+//                            response: Response<ArrayList<ChatResponseBody>>
+//                        ) {
+//                            Log.d("coupleIndex", "Call Success")
+//
+//                            if (response.isSuccessful) {
+//
+//
+//
+//                                chatAdapter.addMessage(chatMessage)
+//                            }
+//                        }
+//
+//                        override fun onFailure(
+//                            call: Call<ArrayList<ChatResponseBody>>,
+//                            t: Throwable
+//                        ) {
+//                            Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
+//                        }
+//                    })
 
             }
         }
