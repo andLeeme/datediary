@@ -4,6 +4,7 @@ import RetrofitAPI
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -395,31 +396,43 @@ class EditScheduleActivity : AppCompatActivity() {
             Log.d("scheduleData", "onCreate: $scheduleData")
 
 
-            RetrofitAPI.emgMedService6.addUserByEnqueue2(scheduleData)
-                .enqueue(object : retrofit2.Callback<Int> {
-                    override fun onResponse(
-                        call: Call<Int>,
-                        response: Response<Int>
-                    ) {
-                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                            .show()
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle("일정 삭제")
+                    .setMessage("\n일정을 삭제할까요?")
+                    .setPositiveButton("확인",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            RetrofitAPI.emgMedService6.addUserByEnqueue2(scheduleData)
+                                .enqueue(object : retrofit2.Callback<Int> {
+                                    override fun onResponse(
+                                        call: Call<Int>,
+                                        response: Response<Int>
+                                    ) {
+                                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+                                            .show()
 
-                        if (response.isSuccessful) {
+                                        if (response.isSuccessful) {
 
-                            Log.d("리턴delete", "${response.body().toString()}")
-                            onResume()
-                        }
-                    }
+                                            Log.d("리턴delete", "${response.body().toString()}")
+                                            onResume()
+                                        }
+                                    }
 
-                    override fun onFailure(
-                        call: Call<Int>,
-                        t: Throwable
-                    ) {
-                    }
-                })
+                                    override fun onFailure(
+                                        call: Call<Int>,
+                                        t: Throwable
+                                    ) {
+                                    }
+                                })
 
-            //삭제한 후 액티비티 종료
-            finish()
+                            finish()
+                        })
+                    .setNegativeButton("취소",
+                        DialogInterface.OnClickListener { dialog, id ->
+                            return@OnClickListener
+                        })
+                // 다이얼로그를 띄워주기
+                builder.show()
+
         }
 
         setContentView(binding.root)
