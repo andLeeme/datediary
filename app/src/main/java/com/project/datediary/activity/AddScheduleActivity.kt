@@ -300,7 +300,8 @@ class AddScheduleActivity : AppCompatActivity() {
 
             if (title == "") {
                 Toast.makeText(applicationContext, "일정 제목을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()) {
+            } else if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()
+                || startHour.toInt() > endHour.toInt() ||  startMinute.toInt() > endMinute.toInt()) {
                 Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT)
                     .show()
             } else {
