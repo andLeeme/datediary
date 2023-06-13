@@ -22,30 +22,71 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-
-            <TextView
-                android:id="@+id/contents"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:fontFamily="@font/lottemartd_bold"
-                android:gravity="center_vertical"
-                android:maxLines="2"
-                android:paddingLeft="30dp"
-                android:text="일정이 나와요"
-                android:textSize="14dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:paddingLeft="30dp"
+                    android:text="이름"
+                    android:textColor="#2196F3"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text=" 님이 "
+                    android:textColor="#4A4A4A"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text=" 0월00일"
+                    android:textColor="#2196F3"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:id="@+id/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/lottemartd_bold"
+                    android:gravity="center_vertical"
+                    android:maxLines="2"
+                    android:text=" 일정을 00했어요"
+                    android:textColor="#4A4A4A"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/time"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="2"
                 android:fontFamily="@font/lottemartd_bold"
                 android:gravity="center_vertical"
                 android:maxLines="2"
                 android:paddingLeft="30dp"
-                android:text="일정이 나와요"
-                android:textSize="10dp"
-                android:layout_weight="1"/>
+                android:text="등록한 시간이 나와요"
+                android:textSize="10dp" />
 
 
         </LinearLayout>

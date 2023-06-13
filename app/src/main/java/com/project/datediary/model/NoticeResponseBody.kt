@@ -9,7 +9,6 @@ data class NoticeResponseBody(
     @SerializedName("timestamp2")
     val timestamp: String,
 
-
     @SerializedName("name2")
     val name: String,
 

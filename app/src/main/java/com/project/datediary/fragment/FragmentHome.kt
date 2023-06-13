@@ -382,7 +382,7 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    fun bottomDown() {
+    private fun bottomDown() {
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
         var bottomState = bottomSheetBehavior.getState()

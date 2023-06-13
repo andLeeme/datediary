@@ -19,13 +19,20 @@ class NoticeAdapter(private val noticeList: ArrayList<NoticeResponseBody>) :
 
             when (noticeList[pos].type) {
                 "0" -> {
-                    binding.contents.text = noticeList[pos].name + " 님이 " + noticeList[pos].month+"월"+noticeList[pos].day+"일 일정을 등록했습니다"
+                    binding.name.text = noticeList[pos].name
+                    binding.date.text = noticeList[pos].month+"월"+noticeList[pos].day+"일"
+                    binding.text.text = " 일정을 등록했습니다"
                 }
                 "1" -> {
-                    binding.contents.text = noticeList[pos].name + " 님이 " + noticeList[pos].month+"월"+noticeList[pos].day+"일 일정을 수정했습니다"
+                    binding.name.text = noticeList[pos].name
+                    binding.date.text = noticeList[pos].month+"월"+noticeList[pos].day+"일"
+                    binding.text.text = " 일정을 수정했습니다"
                 }
                 "2" -> {
-                    binding.contents.text = noticeList[pos].name + "님이 배경화면을 변경했습니다"
+                    binding.name.text = noticeList[pos].name
+                    binding.date.text = "배경화면"
+                    binding.text.text = "을 변경했습니다"
+
                 }
             }
 
