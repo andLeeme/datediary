@@ -66,12 +66,13 @@ class FragmentViewPager3 : Fragment() {
                 binding.contain3.visibility = View.VISIBLE
             }
 
-            delay(400).run {
-                val fadeOut4 = ObjectAnimator.ofFloat(binding.contain4, "alpha", 0f, 1f)
-                fadeOut4.duration = 500
-                fadeOut4.start()
-                binding.contain4.visibility = View.VISIBLE
-            }
+            //세 번째 칸 안 씀
+//            delay(400).run {
+//                val fadeOut4 = ObjectAnimator.ofFloat(binding.contain4, "alpha", 0f, 1f)
+//                fadeOut4.duration = 500
+//                fadeOut4.start()
+//                binding.contain4.visibility = View.VISIBLE
+//            }
 
             delay(500).run {
                 val fadeOut5 = ObjectAnimator.ofFloat(binding.contain5, "alpha", 0f, 1f)
@@ -111,6 +112,65 @@ class FragmentViewPager3 : Fragment() {
                         Toast.makeText(context, "$countList3", Toast.LENGTH_SHORT).show()
 
 
+                        var countSum = 0  //미션 수 총합
+                        for(i in 0 until countList3.size) {
+                            countSum += countList3[i].count!!.toInt()
+                        }
+
+
+                        //미션을 한 번도 수행하지 않았을 경우
+                        if(countSum == 0) {
+                            binding.contain21.text = ""
+                            binding.contain22.text = "아직 받은 미션이 없어요"
+                            binding.contain23.text = ""
+                            binding.contain24.text = ""
+
+                            binding.contain3.setBackgroundResource(0)  // 안 보이게
+                            binding.contain31.text = ""
+                            binding.contain32.text = ""
+                            binding.contain33.text = ""
+                            binding.contain34.text = ""
+
+                            binding.contain4.setBackgroundResource(0)  // 안 보이게
+                            binding.contain31.text = ""
+                            binding.contain32.text = ""
+                            binding.contain33.text = ""
+                            binding.contain34.text = ""
+                        }
+                        //미션 수행 횟수가 있을 경우
+                        else {
+
+                            //첫 번째 줄 "총 ~번 미션을 받았어요"
+                            binding.contain21.text = ""
+                            binding.contain22.text = "총 "
+                            binding.contain23.text = "\"${countSum}번\" "
+                            binding.contain24.text = "미션을 받았어요"
+
+                            //두 번째 줄 "이번달에는 ~번 미션을 받았어요"
+                            ////이번달 찾기
+                            var thisMonthCount = 0
+                            for(i in 0 until countList3.size) {
+                                if(countList3[i].year == CalendarUtil.sYear
+                                    && countList3[i].month == CalendarUtil.sMonth) {
+                                    thisMonthCount = countList3[i].count!!.toInt()
+                                }
+                            }
+
+                            //이번달 미션 수행 횟수가 없으면
+                            if(thisMonthCount == 0) {
+                                binding.contain31.text = ""
+                                binding.contain32.text = "이번달에는 "
+                                binding.contain33.text = ""
+                                binding.contain34.text = "받은 미션이 없어요"
+                            }
+                            //이번달 미션 수행 횟수가 있으면
+                            else {
+                                binding.contain31.text = ""
+                                binding.contain32.text = "이번달에는 "
+                                binding.contain33.text = "\"${thisMonthCount}번\" "
+                                binding.contain34.text = "미션을 받았어요"
+                            }
+                        }
 
 
 
