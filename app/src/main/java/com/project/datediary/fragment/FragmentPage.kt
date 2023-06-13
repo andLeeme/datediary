@@ -71,23 +71,6 @@ class FragmentPage : Fragment() {
         }
 
 
-
-
-
-
-//        editText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
-//            if (hasFocus) {
-//                editText.setText("ananan")
-//            } else {
-//                editText.setText("asdfasdfasdf")
-//                editText.isClickable = false
-//                editText.isFocusable = false
-//            }
-//        }
-
-
-
-
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
