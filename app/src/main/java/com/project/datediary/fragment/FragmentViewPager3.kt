@@ -84,7 +84,8 @@ class FragmentViewPager3 : Fragment() {
 
         val userDataCal = Static3RequestBody(
             couple_index = MainActivity.coupleIndex,
-            start_month = CalendarUtil.sMonth
+            start_month = CalendarUtil.sMonth,
+            start_year = CalendarUtil.sMonth
         )
 
         var static3ResponseBody = listOf<Static3ResponseBody>()
@@ -98,7 +99,7 @@ class FragmentViewPager3 : Fragment() {
                     response: Response<ArrayList<Static3ResponseBody>>
                 ) {
                     if (response.isSuccessful) {
-                        Log.d("countList3", "onResponse: ${response.body()}")
+                        Log.d("countList3", "onResponse3: ${response.body()}")
 
                         static3ResponseBody = response.body() ?: listOf()
 
@@ -106,7 +107,7 @@ class FragmentViewPager3 : Fragment() {
                         for (i in static3ResponseBody.indices) {
                             countList3.add(static3ResponseBody[i])
                         }
-                        Log.d("countList3", "onResponse2: $countList3")
+                        Log.d("countList3", "onResponse3: $countList3")
                         Toast.makeText(context, "$countList3", Toast.LENGTH_SHORT).show()
 
 
