@@ -34,7 +34,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="@font/lottemartd_medium"
                         android:gravity="left|center"
-                        android:text="지금까지 받은 미션 개수는?"
+                        android:text="지금까지 미션을?"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
                         android:textSize="30dp" />
@@ -211,7 +211,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center|bottom"
-                        android:text='" 지난달보다 미션을 3번 더 많이 받았어요 "'
+                        android:text='" 데이트 일정에서 미션을 추가해보세요 "'
                         android:textColor="#04A3F8" />
 
                     <TextView

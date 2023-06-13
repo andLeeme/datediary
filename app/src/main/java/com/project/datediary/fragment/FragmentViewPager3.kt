@@ -136,6 +136,7 @@ class FragmentViewPager3 : Fragment() {
                             binding.contain32.text = ""
                             binding.contain33.text = ""
                             binding.contain34.text = ""
+
                         }
                         //미션 수행 횟수가 있을 경우
                         else {
@@ -170,6 +171,43 @@ class FragmentViewPager3 : Fragment() {
                                 binding.contain33.text = "\"${thisMonthCount}번\" "
                                 binding.contain34.text = "미션을 받았어요"
                             }
+
+
+                            //이번달 미션 횟수와 지난달 미션 횟수 비교해서 contain5에 넣기
+                            //"지난달보다 ~번 더 많이/적게 미션을 수행했어요"
+                            ////지난달 미션 횟수 null체크
+                            var lastMonthCount = 0
+
+                            //////이번달이 1월인지 아닌지 체크
+                            when(CalendarUtil.sMonth.toInt()) {
+                                1 -> {
+                                    for(i in 0 until countList3.size) {
+                                        if(countList3[i].year == (CalendarUtil.sYear.toInt()-1).toString()
+                                            && countList3[i].month == "12") {
+                                            lastMonthCount = countList3[i].count!!.toInt()
+                                        }
+                                    }
+                                }
+
+                                else -> {
+                                    for(i in 0 until countList3.size) {
+                                        if(countList3[i].year == CalendarUtil.sYear
+                                            && countList3[i].month == (CalendarUtil.sMonth.toInt()-1).toString()) {
+                                            lastMonthCount = countList3[i].count!!.toInt()
+                                        }
+                                    }
+                                }
+
+                            }
+
+                            //////////비교
+                            if(thisMonthCount >= lastMonthCount) {
+                                binding.contain5.text = "\" 지난달보다 ${thisMonthCount - lastMonthCount}회 더 많이 미션을 수행했어요 \""
+                            } else {
+                                binding.contain5.text = "\" 지난달보다 ${lastMonthCount - thisMonthCount}회 더 적게 미션을 수행했어요 \""
+                            }
+
+
                         }
 
 
