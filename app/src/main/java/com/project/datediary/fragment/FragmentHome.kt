@@ -285,7 +285,7 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         Glide.with(binding.root)
             .load(SetBackground.backgroundURI)
             .centerCrop()
-//            .skipMemoryCache(true)
+            .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(binding.backgroundHome)
 
@@ -308,7 +308,7 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
                 Glide.get(requireContext()).clearMemory()
                 Glide.with(requireContext())
                     .load(selectedImageUri)
-                    .skipMemoryCache(true)
+//                    .skipMemoryCache(true)
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .centerCrop()
                     .into(binding.backgroundHome)
