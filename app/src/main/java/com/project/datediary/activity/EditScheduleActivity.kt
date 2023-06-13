@@ -329,6 +329,11 @@ class EditScheduleActivity : AppCompatActivity() {
                     .show()
             } else {
 
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
+                val formatted = current.format(formatter)
+
+
                 val scheduleData = ScheduleEditRequestBody(
                     couple_index = "1",
                     schedule_index = a_scheduleIndex,
@@ -344,7 +349,9 @@ class EditScheduleActivity : AppCompatActivity() {
                     title = title,
                     contents = contents,
                     place_code = matchPlaceCode(),
-                    mission_code = matchMissionCode()
+                    mission_code = matchMissionCode(),
+                    name = MainActivity.nickname1,
+                    timestamp2 = formatted
                 )
                 Log.d("scheduleData", "onCreate: $scheduleData")
 

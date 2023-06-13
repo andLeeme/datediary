@@ -16,5 +16,6 @@ data class ScheduleRequestBody(
     val contents: String?,
     val place_code: String?,
     val mission_code: String?,
-    //val story_reg: String?
+    val name: String?,
+    val timestamp2: String?
 )

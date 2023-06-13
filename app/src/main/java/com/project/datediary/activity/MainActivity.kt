@@ -374,7 +374,7 @@ class MainActivity : AppCompatActivity() {
 
         var splitedFragment = fragment.toString().split("{")
 
-        if (finishCount == true) {
+        if (finishCount) {
             finish()
         }
 

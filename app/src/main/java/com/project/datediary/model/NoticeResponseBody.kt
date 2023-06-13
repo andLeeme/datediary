@@ -6,13 +6,21 @@ data class NoticeResponseBody(
     @SerializedName("couple_index")
     val couple_index: String,
 
-    @SerializedName("time_stamp")
-    val time_stamp: String,
+    @SerializedName("timestamp2")
+    val timestamp: String,
 
-    @SerializedName("nickname")
-    val nickname: String,
 
-    @SerializedName("type")
+    @SerializedName("name2")
+    val name: String,
+
+    @SerializedName("type2")
     val type: String,
+
+    @SerializedName("month")
+    val month: String,
+
+    @SerializedName("day")
+    val day: String,
+
 
 )

@@ -9,20 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.adapter.NoticeAdapter
 import com.project.datediary.databinding.FragmentStoryBinding
 import com.project.datediary.model.ChatRequestBody
-import com.project.datediary.model.ChatResponseBody
 import com.project.datediary.model.NoticeResponseBody
-import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
 import retrofit2.Call
 import retrofit2.Response
-import java.util.Date
 
 class FragmentStory : Fragment() {
 
@@ -50,33 +46,41 @@ class FragmentStory : Fragment() {
             couple_index = MainActivity.coupleIndex,
             email = MainActivity.googleEmail,
             sender = MainActivity.nickname1,
-            type = "1",
-            timestamp = Date().toString()
         )
 
+        var noticeResponseBodyList = listOf<NoticeResponseBody>()
+
         RetrofitAPI.emgMedService12.addUserByEnqueue(chatRequestBody)
-            .enqueue(object : retrofit2.Callback<ArrayList<ChatResponseBody>> {
+            .enqueue(object : retrofit2.Callback<ArrayList<NoticeResponseBody>> {
                 override fun onResponse(
-                    call: Call<ArrayList<ChatResponseBody>>,
-                    response: Response<ArrayList<ChatResponseBody>>
+                    call: Call<ArrayList<NoticeResponseBody>>,
+                    response: Response<ArrayList<NoticeResponseBody>>
                 ) {
-                    Log.d("coupleIndex", "Call Success")
 
                     if (response.isSuccessful) {
 
-//                        val adapter = NoticeAdapter(response.body())
+                        noticeResponseBodyList = response.body() ?: listOf()
+
+                        var noticeList = noticeResponseBodyList
+
+                        var noticeList2 = noticeList.reversed()
+
+                        val adapter2 = NoticeAdapter(noticeList2 as ArrayList<NoticeResponseBody>)
+
+                        binding.recyclerViewNotice.adapter = adapter2
+
                     }
+
+
                 }
 
                 override fun onFailure(
-                    call: Call<ArrayList<ChatResponseBody>>,
+                    call: Call<ArrayList<NoticeResponseBody>>,
                     t: Throwable
                 ) {
                     Toast.makeText(context, "Call Failed", Toast.LENGTH_SHORT).show()
                 }
             })
-
-
 
 
 //        NoticeResponseBody.add(NoticeResponseBody("1",Date().toString(),"이수영","0"))

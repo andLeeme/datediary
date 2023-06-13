@@ -3,11 +3,9 @@ package com.project.datediary.fragment
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -15,12 +13,7 @@ import com.project.datediary.activity.MainActivity
 import com.project.datediary.adapter.ChatAdapter
 import com.project.datediary.databinding.FragmentChatBinding
 import com.project.datediary.model.ChatMessage
-import com.project.datediary.model.ChatRequestBody
-import com.project.datediary.model.ChatResponseBody
-import retrofit2.Call
-import retrofit2.Response
 import java.util.*
-import kotlin.collections.ArrayList
 
 class FragmentChat : Fragment() {
 

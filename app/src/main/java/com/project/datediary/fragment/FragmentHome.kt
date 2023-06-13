@@ -42,6 +42,8 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
 
@@ -324,8 +326,17 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         val requestBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
         val filePart = MultipartBody.Part.createFormData("file", file.name, requestBody)
 
+        val current = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("yyyy년 MM월 dd일 HH시 mm분")
+        val formatted = current.format(formatter)
+
+
         val data = HashMap<String, String>()
         data["couple_index"] = MainActivity.coupleIndex
+        data["timestamp2"] = formatted
+        data["name2"] = MainActivity.nickname1
+        data["type2"] = "2"
+
 
 //        Toast.makeText(context, "$data", Toast.LENGTH_SHORT).show()
 
@@ -371,20 +382,40 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun bottomDown() {
+    fun bottomDown() {
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
         var bottomState = bottomSheetBehavior.getState()
         Log.d("BTStateSet", "onResponse: $bottomState")
     }
 
+    private var finishCount = false
     override fun onBackPressed() {
 
         var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
 
         if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+        } else {
+
+            if (finishCount == true) {
+                (activity as MainActivity).finish()
+            }
+
+            Toast.makeText(context, "한번 더 버튼을 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+            finishCount = true
+
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(2000).run {
+                    finishCount = false
+                }
+
+
+            }
+
         }
     }
 
 }
+
+
