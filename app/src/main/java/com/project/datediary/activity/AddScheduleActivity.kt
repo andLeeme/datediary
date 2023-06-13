@@ -145,7 +145,7 @@ class AddScheduleActivity : AppCompatActivity() {
                     startMinute = "0${minute}"
                 }
 
-                startTime = "$startAorP ${startHour}:${startMinute}분"
+                startTime = "$startAorP ${startHour}:${startMinute}"
                 binding.timepickerStart.text = startTime
             }
             TimePickerDialog(
@@ -198,7 +198,7 @@ class AddScheduleActivity : AppCompatActivity() {
                     endMinute = "0${minute}"
                 }
 
-                endTime = "$endAorP ${endHour}:${endMinute}분"
+                endTime = "$endAorP ${endHour}:${endMinute}"
                 binding.timepickerEnd.text = endTime
 
 

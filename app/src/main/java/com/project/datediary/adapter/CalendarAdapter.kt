@@ -129,7 +129,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             var yearMonDay = "$iYear 년 $iMonth 월 $iDay 일"
 
             //클릭 풀리면 배경 돌리기
-            holder.itemView.setBackgroundColor(Color.LTGRAY)
+            //holder.itemView.setBackgroundColor(Color.LTGRAY)
 
             Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
             CalendarUtil.sYear = iYear.toString()
@@ -142,14 +142,6 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
 
 
 
-
-        //날짜 클릭하면 오늘의 일정 나오게 함
-//        holder.itemView.setOnClickListener {
-//
-//        }
-
-
-
         //날짜별 일정 추가
         //가져온 날짜랑 비교하기, 맞으면 텍스트 가져온 텍스트로 바꾸기, visible 처리
 
@@ -159,8 +151,6 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
         for(i in titleResponse.indices) {
             title.add(titleResponse[i])
         }
-
-        //Log.d("title2", "onBindViewHolder: $title")
 
 
         for (i in 0 until title.size) {

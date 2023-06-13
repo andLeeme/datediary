@@ -176,7 +176,7 @@ class EditScheduleActivity : AppCompatActivity() {
                     startMinute = "0${minute}"
                 }
 
-                startTime = "$startAorP ${startHour}:${startMinute}분"
+                startTime = "$startAorP ${startHour}:${startMinute}"
                 binding.timepickerStart.text = startTime
             }
             TimePickerDialog(
@@ -229,7 +229,7 @@ class EditScheduleActivity : AppCompatActivity() {
                     endMinute = "0${minute}"
                 }
 
-                endTime = "$endAorP ${endHour}:${endMinute}분"
+                endTime = "$endAorP ${endHour}:${endMinute}"
                 binding.timepickerEnd.text = endTime
 
 
@@ -287,11 +287,20 @@ class EditScheduleActivity : AppCompatActivity() {
             val contents = binding.emailEdittext2.text.toString()
             //alldaycheck는  val ADChkBox = "1" 또는 "0"으로 위의 체크리스트에서 만듦
             //오후 시간 DB에 넣을 때는 다시 오후 2시 -> 14시
-            if (startAorP == "오후") {
-                //startHour = (startHour.toInt() + 12).toString()
+
+            var AorPStart = binding.timepickerStart.text.split(" ")
+            var AorPEnd = binding.timepickerEnd.text.split(" ")
+            Log.d("AorP123", "onCreate: $AorPStart, $AorPEnd")
+
+            startAorP = AorPStart[0]
+            endAorP = AorPEnd[0]
+
+            if (startAorP == "오후" && startHour.toInt() < 13) {
+                startHour = (startHour.toInt() + 12).toString()
+
             }
-            if (endAorP == "오후") {
-                //endHour = (endHour.toInt() + 12).toString()
+            if (endAorP == "오후" && endHour.toInt() < 13) {
+                endHour = (endHour.toInt() + 12).toString()
             }
             Log.d(
                 "Date1231231",

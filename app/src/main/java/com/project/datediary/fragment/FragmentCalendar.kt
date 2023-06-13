@@ -131,16 +131,11 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         //날짜 생성해서 리스트에 담기
         val dayList = dayInMonthArray()
 
-        //어댑터 초기화
-
-
+        //리퀘스트에 넣을 정보 가공
         var monthText = monthYearFromDate(CalendarUtil.selectedDate).split(" 월")
         Log.d("monthText", "monthText: $monthText")
         var monthData: String = monthText[0]
 
-//        if(monthText[0].toInt()<10){
-//            monthData = "0" + monthText[0]
-//        } else {monthData = monthText[0]}
 
 
         //보내보자 리퀘스트 받아보자 리스폰스
