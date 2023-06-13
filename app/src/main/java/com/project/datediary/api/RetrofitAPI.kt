@@ -12,6 +12,7 @@ import com.project.datediary.api.Static2Service
 import com.project.datediary.api.Static3Service
 import com.project.datediary.api.StaticService
 import com.project.datediary.api.TitleService
+import com.project.datediary.api.NicknameChange
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -113,6 +114,11 @@ object RetrofitAPI {
     //그래프3용
     val emgMedService14: Static3Service by lazy {
         retrofit.create(Static3Service::class.java)
+    }
+
+    //닉네임 변경용
+    val emgMedService15: NicknameChange by lazy {
+        retrofit.create(NicknameChange::class.java)
     }
 
 }

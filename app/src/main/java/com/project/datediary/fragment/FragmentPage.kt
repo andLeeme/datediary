@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -14,6 +15,9 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.project.datediary.activity.LoginActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentPageBinding
+import com.project.datediary.model.NicknameChangeRequestBody
+import retrofit2.Call
+import retrofit2.Response
 
 
 class FragmentPage : Fragment() {
@@ -60,6 +64,34 @@ class FragmentPage : Fragment() {
                 editText.isClickable = false
                 editText.isFocusable = false
                 MainActivity.nickname1 = editText.text.toString()
+
+                //서버로 보내서 바꿔주기
+                val userData = NicknameChangeRequestBody(
+                    user_email = MainActivity.googleEmail,
+                    edited_nickname = editText.text.toString(),
+                )
+                Log.d("nicknameChangeData", "onCreate: $userData")
+
+                RetrofitAPI.emgMedService15.addUserByEnqueue2(userData)
+                    .enqueue(object : retrofit2.Callback<Int> {
+                        override fun onResponse(
+                            call: Call<Int>,
+                            response: Response<Int>
+                        ) {
+                            if (response.isSuccessful) {
+                                Toast.makeText(context, "닉네임이 변경되었습니다", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
+                        }
+
+                        override fun onFailure(
+                            call: Call<Int>,
+                            t: Throwable
+                        ) {
+                        }
+                    })
+
+
             } else {
                 //수정할 때
                 editText.isClickable = true
@@ -67,6 +99,10 @@ class FragmentPage : Fragment() {
                 editText.isFocusableInTouchMode = true
                 MainActivity.nickname1 = editText.text.toString()
                 Log.d("nickname123", "onCreateView: ${MainActivity.nickname1}")
+
+
+
+
             }
         }
 

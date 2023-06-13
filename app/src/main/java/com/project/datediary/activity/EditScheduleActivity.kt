@@ -389,7 +389,7 @@ class EditScheduleActivity : AppCompatActivity() {
         /////////////일정 삭제하기/////////////////////
         binding.deleteBtn.setOnClickListener {
             val scheduleData = ScheduleDeleteRequestBody(
-                couple_index = "1",
+                couple_index = MainActivity.coupleIndex,
                 schedule_index = a_scheduleIndex,
             )
             Log.d("scheduleData", "onCreate: $scheduleData")
