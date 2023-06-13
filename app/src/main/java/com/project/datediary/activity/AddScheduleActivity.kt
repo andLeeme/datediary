@@ -33,7 +33,6 @@ class AddScheduleActivity : AppCompatActivity() {
         binding = ActivityAddScheduleBinding.inflate(layoutInflater)
 
 
-
 /////////////////////////////////기본 기능 설정///////////////////////////////////////
 
         //0. 기본 시간(현재 시간 넣어주기)
@@ -80,23 +79,6 @@ class AddScheduleActivity : AppCompatActivity() {
         var missionCode = ""
 
 
-//        var startYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-//        var startMonth = current.format(DateTimeFormatter.ofPattern("M"))
-//        var startDay = current.format(DateTimeFormatter.ofPattern("d"))
-//        var startHour = current.format(DateTimeFormatter.ofPattern("k"))
-//        var startMinute = current.format(DateTimeFormatter.ofPattern("mm"))
-//        var startAorP = "오전"
-//        var endYear = current.format(DateTimeFormatter.ofPattern("yyyy"))
-//        var endMonth = current.format(DateTimeFormatter.ofPattern("M"))
-//        var endDay = current.format(DateTimeFormatter.ofPattern("d"))
-//        var endHour = current.format(DateTimeFormatter.ofPattern("k"))
-//        var endMinute = current.format(DateTimeFormatter.ofPattern("mm"))
-//        var endAorP = "오전"
-//        var ADChkBox = "0"
-//        var placeCode = ""
-//        var missionCode = ""
-
-
         //안내 문구 초기화
         binding.scheduleAlert.text = "$alertDate 일정에 추가돼요!"
 
@@ -114,6 +96,13 @@ class AddScheduleActivity : AppCompatActivity() {
                     startDay = dayOfMonth.toString()
                     binding.datepickerStart.text = startDate
                     binding.scheduleAlert.text = "${month + 1}월 ${dayOfMonth}일 일정에 추가돼요!"
+
+                    if (endYear.toInt() < startYear.toInt() || endMonth.toInt() < startMonth.toInt() || endDay.toInt() < startDay.toInt()) {
+//                        endYear = startYear
+//                        endMonth = startMonth
+//                        endDay = startDay
+                        binding.datepickerEnd.text = "${startYear}년 ${startMonth}월 ${startDay}일"
+                    }
                 }
             DatePickerDialog(
                 this,
@@ -147,6 +136,19 @@ class AddScheduleActivity : AppCompatActivity() {
 
                 startTime = "$startAorP ${startHour}:${startMinute}"
                 binding.timepickerStart.text = startTime
+
+                if (endHour.toInt() < hourOfDay || endMinute.toInt() < minute) {
+//                        endHour = hourOfDay.toString()
+//                        endMinute = minute.toString()
+                    if (hourOfDay > 12) {
+                        endAorP = "오후"
+                        endHour = (hourOfDay - 12).toString()
+                    }
+                    binding.timepickerEnd.text = "${endAorP} ${endHour}:${minute}"
+                }
+
+
+
             }
             TimePickerDialog(
                 this,
@@ -161,7 +163,7 @@ class AddScheduleActivity : AppCompatActivity() {
 
         binding.datepickerEnd.setOnClickListener {
             val cal = Calendar.getInstance()    //캘린더뷰 만들기
-            val dateSetListener =
+            var dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     endDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
                     endYear = year.toString()

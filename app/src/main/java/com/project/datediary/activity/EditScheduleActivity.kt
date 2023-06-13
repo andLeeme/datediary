@@ -146,6 +146,15 @@ class EditScheduleActivity : AppCompatActivity() {
                     startDay = dayOfMonth.toString()
                     binding.datepickerStart.text = startDate
                     binding.scheduleAlert.text = "${month + 1}월 ${dayOfMonth}일 일정이 수정돼요!"
+
+                    if (endYear.toInt() < startYear.toInt() || endMonth.toInt() < startMonth.toInt() || endDay.toInt() < startDay.toInt()) {
+//                        endYear = startYear
+//                        endMonth = startMonth
+//                        endDay = startDay
+                        binding.datepickerEnd.text = "${startYear}년 ${startMonth}월 ${startDay}일"
+                    }
+
+
                 }
             DatePickerDialog(
                 this,
@@ -179,6 +188,21 @@ class EditScheduleActivity : AppCompatActivity() {
 
                 startTime = "$startAorP ${startHour}:${startMinute}"
                 binding.timepickerStart.text = startTime
+
+                if (endHour.toInt() < hourOfDay || endMinute.toInt() < minute) {
+//                        endHour = hourOfDay.toString()
+//                        endMinute = minute.toString()
+                    if (hourOfDay > 12) {
+                        endAorP = "오후"
+                        endHour = (hourOfDay - 12).toString()
+                    }
+                    binding.timepickerEnd.text = "${endAorP} ${endHour}:${minute}"
+                }
+
+
+
+
+
             }
             TimePickerDialog(
                 this,
