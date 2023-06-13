@@ -202,9 +202,9 @@ class FragmentViewPager3 : Fragment() {
 
                             //////////비교
                             if(thisMonthCount >= lastMonthCount) {
-                                binding.contain5.text = "\" 지난달보다 ${thisMonthCount - lastMonthCount}회 더 많이 미션을 수행했어요 \""
+                                binding.contain5.text = "\" 지난달보다 ${thisMonthCount - lastMonthCount}번 더 많은 미션을 수행했어요 \""
                             } else {
-                                binding.contain5.text = "\" 지난달보다 ${lastMonthCount - thisMonthCount}회 더 적게 미션을 수행했어요 \""
+                                binding.contain5.text = "\" 지난달보다 ${lastMonthCount - thisMonthCount}번 더 적은 미션을 수행했어요 \""
                             }
 
 
