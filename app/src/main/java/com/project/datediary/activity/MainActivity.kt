@@ -27,7 +27,6 @@ import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
 import com.project.datediary.fragment.FragmentChat
 import com.project.datediary.fragment.FragmentCountMission
-import com.project.datediary.fragment.FragmentMyPage
 import com.project.datediary.fragment.FragmentNotice
 import com.project.datediary.fragment.FragmentPage
 import com.project.datediary.util.CalendarUtil

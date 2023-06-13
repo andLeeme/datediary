@@ -3,6 +3,7 @@ package com.project.datediary.fragment
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,51 @@ class FragmentPage : Fragment() {
 
         binding.name.text = MainActivity.googleName
 
-        binding.nickname.text = MainActivity.nickname1
+        binding.nickname.setText( MainActivity.nickname1)
+
+
+
+
+        //닉네임 바꿔주기
+        var editText = binding.nickname
+        var editButton = binding.nameEdit
+
+        editText.isClickable = false
+        editText.isFocusable = false
+
+        editButton.setOnClickListener{
+
+            //수정한 거 집어넣을 때
+            if(editText.hasFocus()) {
+                editText.isClickable = false
+                editText.isFocusable = false
+                MainActivity.nickname1 = editText.text.toString()
+            } else {
+                //수정할 때
+                editText.isClickable = true
+                editText.isFocusable = true
+                editText.isFocusableInTouchMode = true
+                MainActivity.nickname1 = editText.text.toString()
+                Log.d("nickname123", "onCreateView: ${MainActivity.nickname1}")
+            }
+        }
+
+
+
+
+
+
+//        editText.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
+//            if (hasFocus) {
+//                editText.setText("ananan")
+//            } else {
+//                editText.setText("asdfasdfasdf")
+//                editText.isClickable = false
+//                editText.isFocusable = false
+//            }
+//        }
+
+
 
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
