@@ -158,14 +158,15 @@
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/dateBtn"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="60dp"
                         android:layout_marginBottom="30dp"
                         android:backgroundTint="#FAFAFA"
                         android:fontFamily="@font/lottemartd_medium"
                         android:text="처음 만난 날을 선택해요"
                         android:textColor="#6E6E6E"
                         android:textSize="16dp"
-                        android:paddingRight="190dp"/>
+                        android:gravity="left|center_vertical"
+/>
 
 
                 </LinearLayout>
