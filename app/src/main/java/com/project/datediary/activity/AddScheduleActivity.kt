@@ -103,6 +103,7 @@ class AddScheduleActivity : AppCompatActivity() {
 //                        endDay = startDay
                         binding.datepickerEnd.text = "${startYear}년 ${startMonth}월 ${startDay}일"
                     }
+
                 }
             DatePickerDialog(
                 this,
@@ -170,6 +171,11 @@ class AddScheduleActivity : AppCompatActivity() {
                     endMonth = (month + 1).toString()
                     endDay = dayOfMonth.toString()
                     binding.datepickerEnd.text = endDate
+
+                    //연일 일정이면 올데이 체크되게 함
+                    binding.allDayCheckBox.isChecked = startDay != endDay
+
+
                 }
             DatePickerDialog(
                 this,

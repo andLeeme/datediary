@@ -1,14 +1,10 @@
 package com.project.datediary.activity
 
 import android.animation.ObjectAnimator
-import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewTreeObserver
 import android.view.animation.AnticipateInterpolator
@@ -22,15 +18,11 @@ import com.project.datediary.R
 import com.project.datediary.fragment.FragmentCalendar
 import com.project.datediary.fragment.FragmentGraph
 import com.project.datediary.fragment.FragmentHome
-import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.databinding.ActivityMainBinding
 import com.project.datediary.databinding.FragmentCalendarBinding
-import com.project.datediary.fragment.FragmentChat
-import com.project.datediary.fragment.FragmentCountMission
-import com.project.datediary.fragment.FragmentNotice
 import com.project.datediary.fragment.FragmentPage
+import com.project.datediary.fragment.FragmentStory
 import com.project.datediary.util.CalendarUtil
-import com.project.datediary.util.SetBackground
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
