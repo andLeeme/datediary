@@ -349,8 +349,8 @@ class EditScheduleActivity : AppCompatActivity() {
 
             if (title == "") {
                 Toast.makeText(applicationContext, "일정 제목을 입력해주세요", Toast.LENGTH_SHORT).show()
-            } else if (startYear.toInt() > endYear.toInt() || startMonth.toInt() > endMonth.toInt() || startDay.toInt() > endDay.toInt()
-                || startHour.toInt() > endHour.toInt() ||  startMinute.toInt() > endMinute.toInt()) {
+            } else if (startEndCompare(startYear, endYear, startMonth, endMonth, startDay, endDay
+                    , startHour, endHour, startMinute, endMinute ) != 1) {
                 Toast.makeText(applicationContext, "시작 날짜와 종료 날짜를 확인해주세요", Toast.LENGTH_SHORT)
                     .show()
             } else {
@@ -680,6 +680,51 @@ class EditScheduleActivity : AppCompatActivity() {
         }
 
         return missionName
+    }
+
+
+    //시작시점보다 종료시점이 빠를 경우 result = 0, 정상적일 경우 result = 1
+    private fun startEndCompare (startYear: String , endYear : String , startMonth : String , endMonth : String ,
+                                 startDay: String , endDay: String , startHour: String ,
+                                 endHour: String , startMinute: String , endMinute: String ) : Int {
+        var result = 0
+        val SYear = startYear.toInt()
+        val SMonth = startMonth.toInt()
+        val SDay = startDay.toInt()
+        val SHour = startHour.toInt()
+        val SMinute = startMinute.toInt()
+        val EYear = endYear.toInt()
+        val EMonth = endMonth.toInt()
+        val EDay = endDay.toInt()
+        val EHour = endHour.toInt()
+        val EMinute = endMinute.toInt()
+
+
+        if(SYear < EYear) {
+            result = 1
+        }
+
+        if(SYear <= EYear && SMonth < EMonth) {
+            result = 1
+        }
+
+        if(SYear <= EYear && SMonth <= EMonth && SDay < EDay) {
+            result = 1
+        }
+
+        if(SYear <= EYear && SMonth <= EMonth && SDay <= EDay && SHour <EHour) {
+            result = 1
+        }
+
+        if(SYear <= EYear && SMonth <= EMonth && SDay <= EDay && SHour <= EHour && SMinute < EMinute) {
+            result = 1
+        }
+
+        if(SYear == EYear && SMonth == EMonth && SDay == EDay && SHour == EHour && SMinute == EMinute) {
+            result = 1
+        }
+
+        return result
     }
 
 
