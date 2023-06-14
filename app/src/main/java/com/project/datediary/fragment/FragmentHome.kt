@@ -183,7 +183,6 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         var TitleResponseBody = listOf<TitleResponseBody>()
 
 
-
         RetrofitAPI.emgMedService3.addUserByEnqueue(userDataCal)
             .enqueue(object : retrofit2.Callback<ArrayList<TitleResponseBody>> {
                 override fun onResponse(
@@ -202,12 +201,42 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
                         var scheduleList = ArrayList<TitleResponseBody>()
                         Log.d("scheduleList1", "bind: ${TitleResponseBody}")
 
+
+                        var List = ArrayList<TitleResponseBody>()
                         for (i in TitleResponseBody.indices) {
-                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
-                                scheduleList.add(TitleResponseBody[i])
+                            for (j in 0..TitleResponseBody[i].endDay!!.toInt() - TitleResponseBody[i].startDay!!.toInt()) {
+                                List.add(TitleResponseBody(
+                                    "${TitleResponseBody[i].coupleIndex}",
+                                    "${TitleResponseBody[i].scheduleIndex}",
+                                    "${TitleResponseBody[i].startYear}",
+                                    "${TitleResponseBody[i].startMonth}",
+                                    "${TitleResponseBody[i].startDay!!.toInt() + j}",
+                                    "${TitleResponseBody[i].startTime}",
+                                    "${TitleResponseBody[i].endYear}",
+                                    "${TitleResponseBody[i].endMonth}",
+                                    "${TitleResponseBody[i].endDay}",
+                                    "${TitleResponseBody[i].endTime}",
+                                    "${TitleResponseBody[i].allDayCheck}",
+                                    "${TitleResponseBody[i].title}",
+                                    "${TitleResponseBody[i].contents}",
+                                    "${TitleResponseBody[i].placeCode}",
+                                    "${TitleResponseBody[i].missionCode}"))
                             }
                         }
-                        Log.d("scheduleList2", "bind: $scheduleList")
+
+                        for (i in List.indices) {
+                            if (List[i].startDay == CalendarUtil.sDay) {
+                                scheduleList.add(List[i])
+                            }
+                        }
+
+
+//                        for (i in TitleResponseBody.indices) {
+//                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+//                                scheduleList.add(TitleResponseBody[i])
+//                            }
+//                        }
+//                        Log.d("scheduleList2", "bind: $scheduleList")
 
                         //어댑터에 넣어주기
                         val adapter2 = DayScheduleAdapter(scheduleList)

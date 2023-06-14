@@ -152,8 +152,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                     call: Call<ArrayList<TitleResponseBody>>,
                     response: Response<ArrayList<TitleResponseBody>>
                 ) {
-//                    Toast.makeText(context, "Call Success", Toast.LENGTH_SHORT)
-//                        .show()
 
                     if (response.isSuccessful) {
                         Log.d("리턴", "onResponse: ${response.body()}")
@@ -179,42 +177,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         Log.d("scheduleList12", "bind: ${scheduleList}")
 
 
-
-
-//                        for(j in 0..)
-//                        var startDayL = scheduleList[0].startDay!!.toInt()
-//                        var endDayL = scheduleList[0].endDay!!.toInt()
-//                        for (i in 1..endDayL - startDayL) {
-//                            Log.d("scheduleList2", "넣어보자 여러개: $startDayL+i")
-//
-//                        }
-
-
-
-                            //연일일정
-//                        if(scheduleList[0].startDay!!.toInt() < scheduleList[0].endDay!!.toInt()) {
-//                            var startDayL = scheduleList[0].startDay!!.toInt()
-//                            var endDayL = scheduleList[0].endDay!!.toInt()
-//                            for(i in 1.. endDayL-startDayL) {
-//                                scheduleList.add(TitleResponseBody(
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "${(startDayL+i)}",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    "",
-//                                    ""
-//                                ))
-//                            }
-//                        }
 
                         var List = ArrayList<TitleResponseBody>()
                         for (i in TitleResponseBody.indices) {
