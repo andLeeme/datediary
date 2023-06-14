@@ -23,6 +23,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.project.datediary.activity.AddScheduleActivity
 import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
+import com.project.datediary.activity.MainActivity.Companion.coupleIndex
 import com.project.datediary.adapter.DayScheduleAdapter
 import com.project.datediary.api.ImageUploadService
 import com.project.datediary.databinding.FragmentHomeBinding
@@ -58,7 +59,10 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        setBackground()
+
+        setBackground(coupleIndex)
+
+
 
         binding.addBtn.setOnClickListener {
             val intent = Intent(context, AddScheduleActivity::class.java)
@@ -120,10 +124,10 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
                 Log.d("result_imageUrl", "onCreateViewPC: $result_coupleIndex")
                 Log.d("result_imageUrl", "onCreateViewP: $result_imageUrl")
 
-                SetBackground.backgroundURI = result_imageUrl
+                //result_imageUrl = "http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}"
 
                 if (result_imageUrl != "") {
-                    setBackground()
+                    setBackground(coupleIndex)
                 }
             })
 
@@ -309,10 +313,10 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
     }
 
 
-    private fun setBackground() {
+    private fun setBackground(coupleIndex : String) {
 
         Glide.with(binding.root)
-            .load(SetBackground.backgroundURI)
+            .load("http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}")
             .centerCrop()
             .skipMemoryCache(false)
             .diskCacheStrategy(DiskCacheStrategy.NONE)

@@ -1,9 +1,13 @@
 package com.project.datediary.util
 
+import com.project.datediary.activity.MainActivity
+import com.project.datediary.activity.MainActivity.Companion.coupleIndex
+
 interface SetBackground {
 
     companion object {
-        //기본 제공 홈 배경 이미지 URI 넣어주기
-        var backgroundURI : String? = "http://andLeeme.iptime.org:60722/getTest"
+
+//        var backgroundURI : String? = "http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}"
+//        var backgroundURI : String? = "http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}"
     }
 }

@@ -30,6 +30,7 @@ import com.project.datediary.fragment.FragmentCountMission
 import com.project.datediary.fragment.FragmentNotice
 import com.project.datediary.fragment.FragmentPage
 import com.project.datediary.util.CalendarUtil
+import com.project.datediary.util.SetBackground
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -148,6 +149,7 @@ class MainActivity : AppCompatActivity() {
                                                 coupleIndex =
                                                     response.body()?.get("couple_index")
                                                         .toString()
+
 
                                                 nickname1 =
                                                     response.body()?.get("nickname1").toString()
