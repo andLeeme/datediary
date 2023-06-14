@@ -15,6 +15,8 @@ class DayScheduleAdapter(private val scheduleShowList : ArrayList<TitleResponseB
         RecyclerView.ViewHolder(binding.root) {
         fun bind(pos: Int) {
 
+            Log.d("List12345", "bind: $scheduleShowList")
+
             binding.scheduleIndex.text = scheduleShowList[pos].scheduleIndex
             binding.title.text = scheduleShowList[pos].title
 

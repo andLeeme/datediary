@@ -39,7 +39,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
     lateinit var DayScheduleAdapter: DayScheduleAdapter
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -137,7 +136,6 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
         var monthData: String = monthText[0]
 
 
-
         //보내보자 리퀘스트 받아보자 리스폰스
         //main에 선언된 오브젝트 coupleIndex
         val userDataCal = TitleRequestBody(
@@ -178,225 +176,385 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                         //////////// ///////오늘 정보 일정 바텀시트에 그려주기////////////////////////
                         //오늘 정보 가공
                         var scheduleList = ArrayList<TitleResponseBody>()
-                        Log.d("scheduleList1", "bind: ${TitleResponseBody}")
+                        Log.d("scheduleList12", "bind: ${scheduleList}")
 
+
+
+
+//                        for(j in 0..)
+//                        var startDayL = scheduleList[0].startDay!!.toInt()
+//                        var endDayL = scheduleList[0].endDay!!.toInt()
+//                        for (i in 1..endDayL - startDayL) {
+//                            Log.d("scheduleList2", "넣어보자 여러개: $startDayL+i")
+//
+//                        }
+
+
+
+                            //연일일정
+//                        if(scheduleList[0].startDay!!.toInt() < scheduleList[0].endDay!!.toInt()) {
+//                            var startDayL = scheduleList[0].startDay!!.toInt()
+//                            var endDayL = scheduleList[0].endDay!!.toInt()
+//                            for(i in 1.. endDayL-startDayL) {
+//                                scheduleList.add(TitleResponseBody(
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "${(startDayL+i)}",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    "",
+//                                    ""
+//                                ))
+//                            }
+//                        }
+
+                        var List = ArrayList<TitleResponseBody>()
                         for (i in TitleResponseBody.indices) {
-                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
-                                scheduleList.add(TitleResponseBody[i])
+                            for (j in 0..TitleResponseBody[i].endDay!!.toInt() - TitleResponseBody[i].startDay!!.toInt()) {
+                                List.add(TitleResponseBody(
+                                    "${TitleResponseBody[i].coupleIndex}",
+                                    "${TitleResponseBody[i].scheduleIndex}",
+                                    "${TitleResponseBody[i].startYear}",
+                                    "${TitleResponseBody[i].startMonth}",
+                                    "${TitleResponseBody[i].startDay!!.toInt() + j}",
+                                    "${TitleResponseBody[i].startTime}",
+                                    "${TitleResponseBody[i].endYear}",
+                                    "${TitleResponseBody[i].endMonth}",
+                                    "${TitleResponseBody[i].endDay}",
+                                    "${TitleResponseBody[i].endTime}",
+                                    "${TitleResponseBody[i].allDayCheck}",
+                                    "${TitleResponseBody[i].title}",
+                                    "${TitleResponseBody[i].contents}",
+                                    "${TitleResponseBody[i].placeCode}",
+                                    "${TitleResponseBody[i].missionCode}"))
                             }
                         }
                         Log.d("scheduleList2", "bind: $scheduleList")
 
-
-                        //어댑터에 넣어주기
-                        val adapter2 = DayScheduleAdapter(scheduleList)
-
-
-                        //레이아웃 설정
-                        var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
-
-                        //레이아웃 적용
-                        binding.recycler10.layoutManager = manager2
-
-                        //어댑터 적용
-                        binding.recycler10.adapter = adapter2
-
-
-                        //아이템 클릭하면 EditSchedule Activity 소환!
-                        adapter2.dayScheduleSetItemClickListener(object :
-                            DayScheduleAdapter.DayScheduleOnItemClickListener {
-                            override fun dayScheduleOnClick(v: View, position: Int) {
-                                Log.d(
-                                    "testIndex",
-                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
-                                )
-                                val intent =
-                                    Intent(context, EditScheduleActivity::class.java)
-                                Log.d(
-                                    "testIndex1",
-                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
-                                )
-                                intent.putExtra(
-                                    "scheduleIndex",
-                                    scheduleList[position].scheduleIndex
-                                )
-                                intent.putExtra("startYear", scheduleList[position].startYear)
-                                intent.putExtra("startMonth", scheduleList[position].startMonth)
-                                intent.putExtra("startDay", scheduleList[position].startDay)
-                                intent.putExtra("startTime", scheduleList[position].startTime)
-                                intent.putExtra("endYear", scheduleList[position].endYear)
-                                intent.putExtra("endMonth", scheduleList[position].endMonth)
-                                intent.putExtra("endDay", scheduleList[position].endDay)
-                                intent.putExtra("endTime", scheduleList[position].endTime)
-                                intent.putExtra("title", scheduleList[position].title)
-                                intent.putExtra("contents", scheduleList[position].contents)
-                                intent.putExtra("allDayCheck", scheduleList[position].allDayCheck)
-                                intent.putExtra("placeCode", scheduleList[position].placeCode)
-                                intent.putExtra("missionCode", scheduleList[position].missionCode)
-                                Log.d(
-                                    "testIndex2",
-                                    "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
-                                )
-                                startActivity(intent)
+                        for (i in List.indices) {
+                            if (List[i].startDay == CalendarUtil.sDay) {
+                                scheduleList.add(List[i])
                             }
-                        })
+                        }
+
+                        Log.d("ㅁㄴㅇㄹ", "bind: ${List[2].startDay}")
+                        //얘가문제임
+                        Log.d("ㅁㄴㅇㄹ", "bind: ${CalendarUtil.sDay}")
 
 
-                        adapter.setItemClickListener(object : CalendarAdapter.OnItemClickListener {
-                            override fun onClick(v: View, position: Int) {
-                                binding.image1.performClick()
+//                        for (i in TitleResponseBody.indices) {
+//                            if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+//                                scheduleList.add(TitleResponseBody[i])
+//                            }
+//                        }
+                        Log.d("List123", "bind: $List")
+                        Log.d("List1234", "bind: $scheduleList")
 
-                                //선택한 날의 날짜와 요일을 바텀시트에 그려줌
-                                binding.selectedDay.text = CalendarUtil.sDay
-                                var DWText = binding.selectedDW
-                                if (position == 0) {
-                                    DWText.text = "일요일"
-                                } else {
-                                    when (position % 7) {
-                                        0 -> DWText.text = "일요일"
-                                        1 -> DWText.text = "월요일"
-                                        2 -> DWText.text = "화요일"
-                                        3 -> DWText.text = "수요일"
-                                        4 -> DWText.text = "목요일"
-                                        5 -> DWText.text = "금요일"
-                                        6 -> DWText.text = "토요일"
-                                    }
+
+                            //어댑터에 넣어주기
+                            val adapter2 = DayScheduleAdapter(scheduleList)
+
+
+                            //레이아웃 설정
+                            var manager2: RecyclerView.LayoutManager = LinearLayoutManager(context)
+
+                            //레이아웃 적용
+                            binding.recycler10.layoutManager = manager2
+
+                            //어댑터 적용
+                            binding.recycler10.adapter = adapter2
+
+
+                            //아이템 클릭하면 EditSchedule Activity 소환!
+                            adapter2.dayScheduleSetItemClickListener(object :
+                                DayScheduleAdapter.DayScheduleOnItemClickListener {
+                                override fun dayScheduleOnClick(v: View, position: Int) {
+                                    Log.d(
+                                        "testIndex",
+                                        "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                    )
+                                    val intent =
+                                        Intent(context, EditScheduleActivity::class.java)
+                                    Log.d(
+                                        "testIndex1",
+                                        "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                    )
+                                    intent.putExtra(
+                                        "scheduleIndex",
+                                        scheduleList[position].scheduleIndex
+                                    )
+                                    intent.putExtra("startYear", scheduleList[position].startYear)
+                                    intent.putExtra("startMonth", scheduleList[position].startMonth)
+                                    intent.putExtra("startDay", scheduleList[position].startDay)
+                                    intent.putExtra("startTime", scheduleList[position].startTime)
+                                    intent.putExtra("endYear", scheduleList[position].endYear)
+                                    intent.putExtra("endMonth", scheduleList[position].endMonth)
+                                    intent.putExtra("endDay", scheduleList[position].endDay)
+                                    intent.putExtra("endTime", scheduleList[position].endTime)
+                                    intent.putExtra("title", scheduleList[position].title)
+                                    intent.putExtra("contents", scheduleList[position].contents)
+                                    intent.putExtra(
+                                        "allDayCheck",
+                                        scheduleList[position].allDayCheck
+                                    )
+                                    intent.putExtra("placeCode", scheduleList[position].placeCode)
+                                    intent.putExtra(
+                                        "missionCode",
+                                        scheduleList[position].missionCode
+                                    )
+                                    Log.d(
+                                        "testIndex2",
+                                        "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                    )
+                                    startActivity(intent)
                                 }
+                            })
 
-                                //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
 
-                                //선택한 날의 정보 가공
-                                var scheduleList = ArrayList<TitleResponseBody>()
-                                Log.d("scheduleList1", "bind: ${TitleResponseBody}")
+                            adapter.setItemClickListener(object :
+                                CalendarAdapter.OnItemClickListener {
+                                override fun onClick(v: View, position: Int) {
+                                    binding.image1.performClick()
 
-                                for (i in TitleResponseBody.indices) {
-                                    if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
-                                        scheduleList.add(TitleResponseBody[i])
+                                    //선택한 날의 날짜와 요일을 바텀시트에 그려줌
+                                    binding.selectedDay.text = CalendarUtil.sDay
+                                    var DWText = binding.selectedDW
+                                    if (position == 0) {
+                                        DWText.text = "일요일"
+                                    } else {
+                                        when (position % 7) {
+                                            0 -> DWText.text = "일요일"
+                                            1 -> DWText.text = "월요일"
+                                            2 -> DWText.text = "화요일"
+                                            3 -> DWText.text = "수요일"
+                                            4 -> DWText.text = "목요일"
+                                            5 -> DWText.text = "금요일"
+                                            6 -> DWText.text = "토요일"
+                                        }
                                     }
+
+                                    //////////// ///////선택한 날의 정보 일정 바텀시트에 그려주기////////////////////////
+
+                                    //선택한 날의 정보 가공
+                                    var scheduleList = ArrayList<TitleResponseBody>()
+                                    Log.d("scheduleList1", "bind: ${TitleResponseBody}")
+
+
+                                    var List = ArrayList<TitleResponseBody>()
+                                    for (i in TitleResponseBody.indices) {
+                                        for (j in 0..TitleResponseBody[i].endDay!!.toInt() - TitleResponseBody[i].startDay!!.toInt()) {
+                                            List.add(TitleResponseBody(
+                                                "${TitleResponseBody[i].coupleIndex}",
+                                                "${TitleResponseBody[i].scheduleIndex}",
+                                                "${TitleResponseBody[i].startYear}",
+                                                "${TitleResponseBody[i].startMonth}",
+                                                "${TitleResponseBody[i].startDay!!.toInt() + j}",
+                                                "${TitleResponseBody[i].startTime}",
+                                                "${TitleResponseBody[i].endYear}",
+                                                "${TitleResponseBody[i].endMonth}",
+                                                "${TitleResponseBody[i].endDay}",
+                                                "${TitleResponseBody[i].endTime}",
+                                                "${TitleResponseBody[i].allDayCheck}",
+                                                "${TitleResponseBody[i].title}",
+                                                "${TitleResponseBody[i].contents}",
+                                                "${TitleResponseBody[i].placeCode}",
+                                                "${TitleResponseBody[i].missionCode}"))
+                                        }
+                                    }
+                                    Log.d("scheduleList2", "bind: $scheduleList")
+
+                                    for (i in List.indices) {
+                                        if (List[i].startDay == CalendarUtil.sDay) {
+                                            scheduleList.add(List[i])
+                                        }
+                                    }
+
+                                    Log.d("aaaa", "bind: ${List[2].startDay}")
+                                    //얘가문제임
+                                    Log.d("aaaa", "bind: ${CalendarUtil.sDay}")
+
+
+
+
+
+//                                    for (i in TitleResponseBody.indices) {
+//                                        if (TitleResponseBody[i].startDay == CalendarUtil.sDay) {
+//                                            scheduleList.add(TitleResponseBody[i])
+//                                        }
+//                                    }
+//                                    Log.d("scheduleList2", "bind: $scheduleList")
+
+
+                                    //어댑터에 넣어주기
+                                    val adapter2 = DayScheduleAdapter(scheduleList)
+
+                                    //레이아웃 설정
+                                    var manager2: RecyclerView.LayoutManager =
+                                        LinearLayoutManager(context)
+
+                                    //레이아웃 적용
+                                    binding.recycler10.layoutManager = manager2
+
+                                    //어댑터 적용
+                                    binding.recycler10.adapter = adapter2
+
+                                    //아이템 클릭하면 EditSchedule Activity 소환!
+                                    adapter2.dayScheduleSetItemClickListener(object :
+                                        DayScheduleAdapter.DayScheduleOnItemClickListener {
+                                        override fun dayScheduleOnClick(v: View, position: Int) {
+                                            val intent =
+                                                Intent(context, EditScheduleActivity::class.java)
+                                            Log.d(
+                                                "testIndex1",
+                                                "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                            )
+                                            intent.putExtra(
+                                                "scheduleIndex",
+                                                scheduleList[position].scheduleIndex
+                                            )
+                                            intent.putExtra(
+                                                "startYear",
+                                                scheduleList[position].startYear
+                                            )
+                                            intent.putExtra(
+                                                "startMonth",
+                                                scheduleList[position].startMonth
+                                            )
+                                            intent.putExtra(
+                                                "startDay",
+                                                scheduleList[position].startDay
+                                            )
+                                            intent.putExtra(
+                                                "startTime",
+                                                scheduleList[position].startTime
+                                            )
+                                            intent.putExtra(
+                                                "endYear",
+                                                scheduleList[position].endYear
+                                            )
+                                            intent.putExtra(
+                                                "endMonth",
+                                                scheduleList[position].endMonth
+                                            )
+                                            intent.putExtra("endDay", scheduleList[position].endDay)
+                                            intent.putExtra(
+                                                "endTime",
+                                                scheduleList[position].endTime
+                                            )
+                                            intent.putExtra("title", scheduleList[position].title)
+                                            intent.putExtra(
+                                                "contents",
+                                                scheduleList[position].contents
+                                            )
+                                            intent.putExtra(
+                                                "allDayCheck",
+                                                scheduleList[position].allDayCheck
+                                            )
+                                            intent.putExtra(
+                                                "placeCode",
+                                                scheduleList[position].placeCode
+                                            )
+                                            intent.putExtra(
+                                                "missionCode",
+                                                scheduleList[position].missionCode
+                                            )
+                                            Log.d(
+                                                "testIndex2",
+                                                "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}"
+                                            )
+                                            startActivity(intent)
+                                        }
+                                    })
+
                                 }
-                                Log.d("scheduleList2", "bind: $scheduleList")
+                            })
+                        }
+                    }
+
+                    override fun onFailure(
+                        call: Call<ArrayList<TitleResponseBody>>,
+                        t: Throwable
+                    ) {
+
+                    }
+                })
+
+            }
 
 
-                                //어댑터에 넣어주기
-                                val adapter2 = DayScheduleAdapter(scheduleList)
+                    //날짜 타입 설정(00월 0000년)
+                    private fun monthYearFromDate(calendar: Calendar): String {
 
-                                //레이아웃 설정
-                                var manager2: RecyclerView.LayoutManager =
-                                    LinearLayoutManager(context)
+                var year = calendar.get(Calendar.YEAR)
+                var month = calendar.get(Calendar.MONTH) + 1
 
-                                //레이아웃 적용
-                                binding.recycler10.layoutManager = manager2
+                return "$month 월 $year"
+            }
 
-                                //어댑터 적용
-                                binding.recycler10.adapter = adapter2
+                    //날짜 생성
+                    private fun dayInMonthArray(): ArrayList<Date> {
 
-                                //아이템 클릭하면 EditSchedule Activity 소환!
-                                adapter2.dayScheduleSetItemClickListener(object :
-                                    DayScheduleAdapter.DayScheduleOnItemClickListener {
-                                    override fun dayScheduleOnClick(v: View, position: Int) {
-                                        val intent =
-                                            Intent(context, EditScheduleActivity::class.java)
-                                        Log.d("testIndex1", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
-                                        intent.putExtra("scheduleIndex", scheduleList[position].scheduleIndex)
-                                        intent.putExtra("startYear", scheduleList[position].startYear)
-                                        intent.putExtra("startMonth", scheduleList[position].startMonth)
-                                        intent.putExtra("startDay", scheduleList[position].startDay)
-                                        intent.putExtra("startTime", scheduleList[position].startTime)
-                                        intent.putExtra("endYear", scheduleList[position].endYear)
-                                        intent.putExtra("endMonth", scheduleList[position].endMonth)
-                                        intent.putExtra("endDay", scheduleList[position].endDay)
-                                        intent.putExtra("endTime", scheduleList[position].endTime)
-                                        intent.putExtra("title", scheduleList[position].title)
-                                        intent.putExtra("contents", scheduleList[position].contents)
-                                        intent.putExtra("allDayCheck", scheduleList[position].allDayCheck)
-                                        intent.putExtra("placeCode", scheduleList[position].placeCode)
-                                        intent.putExtra("missionCode", scheduleList[position].missionCode)
-                                        Log.d("testIndex2", "dayScheduleOnClick: ${scheduleList[position].scheduleIndex}")
-                                        startActivity(intent)
-                                    }
-                                })
+                var dayList = ArrayList<Date>()
 
-                            }
-                        })
+                var monthCalendar = CalendarUtil.selectedDate.clone() as Calendar
+
+                //1일로 셋팅
+                monthCalendar[Calendar.DAY_OF_MONTH] = 1
+
+                //해당 달의 1일의 요일[1:일요일, 2: 월요일.... 7일: 토요일]
+                val firstDayOfMonth = monthCalendar[Calendar.DAY_OF_WEEK] - 1
+
+                //요일 숫자만큼 이전 날짜로 설정
+                //예: 6월1일이 수요일이면 3만큼 이전날짜 셋팅
+                monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
+
+                while (dayList.size < 42) {
+
+                    dayList.add(monthCalendar.time)
+
+                    //1일씩 늘린다. 1일 -> 2일 -> 3일
+                    monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
+                }
+
+                return dayList
+            }
+
+                fun bottomGetState(): Int {
+                    var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+                    var bottomState = bottomSheetBehavior.getState()
+                    Log.d("BTStateGet", "onResponse: $bottomState")
+
+                    return bottomState
+                }
+
+                        private fun bottomDown() {
+                    var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+                    bottomSheetBehavior.setState(STATE_COLLAPSED)
+                    var bottomState = bottomSheetBehavior.getState()
+                    Log.d("BTStateSet", "onResponse: $bottomState")
+                }
+
+                        override fun onBackPressed() {
+
+                    var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
+
+                    if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
+                    } else {
+                        (activity as MainActivity).callHome()
                     }
                 }
 
-                override fun onFailure(
-                    call: Call<ArrayList<TitleResponseBody>>,
-                    t: Throwable
-                ) {
-
-                }
-            })
 
     }
-
-
-    //날짜 타입 설정(00월 0000년)
-    private fun monthYearFromDate(calendar: Calendar): String {
-
-        var year = calendar.get(Calendar.YEAR)
-        var month = calendar.get(Calendar.MONTH) + 1
-
-        return "$month 월 $year"
-    }
-
-    //날짜 생성
-    private fun dayInMonthArray(): ArrayList<Date> {
-
-        var dayList = ArrayList<Date>()
-
-        var monthCalendar = CalendarUtil.selectedDate.clone() as Calendar
-
-        //1일로 셋팅
-        monthCalendar[Calendar.DAY_OF_MONTH] = 1
-
-        //해당 달의 1일의 요일[1:일요일, 2: 월요일.... 7일: 토요일]
-        val firstDayOfMonth = monthCalendar[Calendar.DAY_OF_WEEK] - 1
-
-        //요일 숫자만큼 이전 날짜로 설정
-        //예: 6월1일이 수요일이면 3만큼 이전날짜 셋팅
-        monthCalendar.add(Calendar.DAY_OF_MONTH, -firstDayOfMonth)
-
-        while (dayList.size < 42) {
-
-            dayList.add(monthCalendar.time)
-
-            //1일씩 늘린다. 1일 -> 2일 -> 3일
-            monthCalendar.add(Calendar.DAY_OF_MONTH, 1)
-        }
-
-        return dayList
-    }
-
-    fun bottomGetState(): Int {
-        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-        var bottomState = bottomSheetBehavior.getState()
-        Log.d("BTStateGet", "onResponse: $bottomState")
-
-        return bottomState
-    }
-
-    private fun bottomDown() {
-        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-        bottomSheetBehavior.setState(STATE_COLLAPSED)
-        var bottomState = bottomSheetBehavior.getState()
-        Log.d("BTStateSet", "onResponse: $bottomState")
-    }
-
-    override fun onBackPressed() {
-
-        var bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
-
-        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
-            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED)
-        } else {
-            (activity as MainActivity).callHome()
-        }
-    }
-
-
-}
 
 
 
