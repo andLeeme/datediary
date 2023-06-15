@@ -1,11 +1,7 @@
 package com.project.datediary.api
 
-import com.project.datediary.model.ScheduleEditRequestBody
-import com.project.datediary.model.ScheduleRequestBody
-import com.project.datediary.model.ScheduleResponseBody
 import com.project.datediary.model.ScheduleShowRequestBody
 import com.project.datediary.model.ScheduleShowResponseBody
-import com.project.datediary.model.SignUpRequestBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers

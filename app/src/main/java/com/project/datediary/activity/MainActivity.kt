@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var binding2: FragmentCalendarBinding
 
+
+    //static
     companion object {
         var coupleIndex: String = "default";
         var nickname1: String = "김인호"
@@ -56,12 +58,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //SplashScreen 실행
         installSplashScreen()
 
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         binding2 = FragmentCalendarBinding.inflate(layoutInflater)
 
+
+        //SplashScreen 설정
         splashScreen.setOnExitAnimationListener { splashScreenView ->
             // Create your custom animation.
             val slideUp = ObjectAnimator.ofFloat(
@@ -80,6 +85,8 @@ class MainActivity : AppCompatActivity() {
             slideUp.start()
         }
 
+
+        //로그인 정보 받아오기
         val curUser = GoogleSignIn.getLastSignedInAccount(this)
 
         val email = curUser?.email.toString()
@@ -92,6 +99,8 @@ class MainActivity : AppCompatActivity() {
         binding.mainFrm.visibility = View.INVISIBLE
         binding.mainBnv.visibility = View.INVISIBLE
 
+
+        //로그인 정보가 없으면 로그인 액티비티 실행
         if (curUser == null) {
             CoroutineScope(Dispatchers.Main).launch {
 
@@ -101,6 +110,7 @@ class MainActivity : AppCompatActivity() {
                     finish()
                 }
             }
+            //로그인 정보가 있으면 커플연동이 되어있는지 확인
         } else if (curUser != null) {
             RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
                 .enqueue(object : retrofit2.Callback<Int> {
@@ -123,7 +133,8 @@ class MainActivity : AppCompatActivity() {
                                         finish()
                                     }
                                 }
-                                //완전 성공
+
+                                //커플연동까지 되어있다면 유저 정보를 받아옴
                             } else if (response.body() == 0) {
 
                                 RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
@@ -141,7 +152,6 @@ class MainActivity : AppCompatActivity() {
                                                 coupleIndex =
                                                     response.body()?.get("couple_index")
                                                         .toString()
-
 
                                                 nickname1 =
                                                     response.body()?.get("nickname1").toString()
@@ -178,8 +188,7 @@ class MainActivity : AppCompatActivity() {
                                                 }
 
 
-
-                                                //홈 프래그먼트 호출
+                                                //모든 정보를 다 받아오고나면 홈프래그먼트를 재실행한다.
                                                 supportFragmentManager.beginTransaction()
                                                     .replace(R.id.main_frm, FragmentHome())
                                                     .commitAllowingStateLoss()
@@ -199,6 +208,7 @@ class MainActivity : AppCompatActivity() {
                                         }
                                     })
 
+                                //로그인 완료
                                 binding.mainFrm.visibility = View.VISIBLE
                                 binding.mainBnv.visibility = View.VISIBLE
                                 Toast.makeText(
@@ -208,6 +218,8 @@ class MainActivity : AppCompatActivity() {
                                 ).show()
 
 
+
+                                //커플연동이 되어있지 않다면 SignUpActivity 호출
                             } else if (response.body() == 2) {
                                 CoroutineScope(Dispatchers.Main).launch {
                                     delay(650).run {
@@ -240,8 +252,12 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
+        //스플래쉬화면 실행 시간 조정
+
         var loading = false
-        //스플래쉬화면을 더 오래 실행하는법.
+
         val content: View = findViewById(android.R.id.content)
         content.viewTreeObserver.addOnPreDrawListener(
             object : ViewTreeObserver.OnPreDrawListener {
@@ -266,12 +282,15 @@ class MainActivity : AppCompatActivity() {
             }
         )
 
+
+        //홈 프래그먼트 호출
         supportFragmentManager.beginTransaction().replace(R.id.main_frm, FragmentHome())
             .commitAllowingStateLoss()
 
         setContentView(binding.root)
 
 
+        //BottomNavigation init
         initBottomNavigation()
 
     }
@@ -333,24 +352,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    // onBackPress를 인터페이스로 설정
     interface onBackPressedListener {
         fun onBackPressed()
     }
 
 
+    //홈 호출
     fun callHome() {
         binding.mainBnv.selectedItemId = R.id.home
     }
 
-    fun callFinish() {
-        finish()
-    }
 
     private var finishCount = false
 
     override fun onBackPressed() {
-        //아래와 같은 코드를 추가하도록 한다
-        //해당 엑티비티에서 띄운 프래그먼트에서 뒤로가기를 누르게 되면 프래그먼트에서 구현한 onBackPressed 함수가 실행되게 된다.
+        //엑티비티에서 띄운 프래그먼트에서 뒤로가기를 누르게 되면 프래그먼트에서 구현한 onBackPressed 함수가 실행됨
         val fragmentList = supportFragmentManager.fragments
         for (fragment in fragmentList) {
             if (fragment is onBackPressedListener) {
@@ -358,8 +376,6 @@ class MainActivity : AppCompatActivity() {
                 return
             }
         }
-
-//        Toast.makeText(applicationContext, "뒤로가기 눌러짐", Toast.LENGTH_SHORT).show()
 
         //현재 프래그먼트의 아이디를 가져옴 근데 머라머라 길게 나옴
         //FragmentGraph{ad92255} (fd9338a8-56a1-4298-93f6-fd00ca33e7b9 id=0x7f0a0115) 이렇게...

@@ -31,6 +31,7 @@ class FragmentGraph : Fragment() {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
 
+        //ViewPager init
         initViewPager()
 
         return binding.root

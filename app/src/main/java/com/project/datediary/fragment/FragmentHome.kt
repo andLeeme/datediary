@@ -30,7 +30,6 @@ import com.project.datediary.databinding.FragmentHomeBinding
 import com.project.datediary.model.TitleRequestBody
 import com.project.datediary.model.TitleResponseBody
 import com.project.datediary.util.CalendarUtil
-import com.project.datediary.util.SetBackground
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -63,11 +62,13 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
         setBackground(coupleIndex)
 
 
-
+        //바텀시트에서 일정을 추가함
         binding.addBtn.setOnClickListener {
             val intent = Intent(context, AddScheduleActivity::class.java)
             startActivity(intent)
 
+
+            //0.2초후에 바텀시트가 내려감
             CoroutineScope(Dispatchers.Main).launch {
                 delay(200).run {
                     bottomDown()
@@ -76,16 +77,20 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
 
         }
 
+
+        //MainActivity staticField
         binding.name1.text = MainActivity.nickname1
         binding.name2.text = MainActivity.nickname2
         binding.dday.text = MainActivity.d_day + "일째"
 
+
+        //스테이터스 바 색상 변경
         val activity = requireActivity()
         val window = activity.window
         window.statusBarColor = Color.TRANSPARENT
 
-                        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
 //
 //        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
@@ -107,6 +112,7 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
 //            }
 //        }
 
+        //메인 배경화면 변경
         binding.addMainImage.setOnClickListener {
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://andLeeme.iptime.org:60722")
@@ -115,6 +121,8 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
 
             imageUploadService = retrofit.create(ImageUploadService::class.java)
 
+
+            //갤러리 호출
             openGallery()
         }
 
@@ -214,22 +222,25 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
                         var List = ArrayList<TitleResponseBody>()
                         for (i in TitleResponseBody.indices) {
                             for (j in 0..TitleResponseBody[i].endDay!!.toInt() - TitleResponseBody[i].startDay!!.toInt()) {
-                                List.add(TitleResponseBody(
-                                    "${TitleResponseBody[i].coupleIndex}",
-                                    "${TitleResponseBody[i].scheduleIndex}",
-                                    "${TitleResponseBody[i].startYear}",
-                                    "${TitleResponseBody[i].startMonth}",
-                                    "${TitleResponseBody[i].startDay!!.toInt() + j}",
-                                    "${TitleResponseBody[i].startTime}",
-                                    "${TitleResponseBody[i].endYear}",
-                                    "${TitleResponseBody[i].endMonth}",
-                                    "${TitleResponseBody[i].endDay}",
-                                    "${TitleResponseBody[i].endTime}",
-                                    "${TitleResponseBody[i].allDayCheck}",
-                                    "${TitleResponseBody[i].title}",
-                                    "${TitleResponseBody[i].contents}",
-                                    "${TitleResponseBody[i].placeCode}",
-                                    "${TitleResponseBody[i].missionCode}"))
+                                List.add(
+                                    TitleResponseBody(
+                                        "${TitleResponseBody[i].coupleIndex}",
+                                        "${TitleResponseBody[i].scheduleIndex}",
+                                        "${TitleResponseBody[i].startYear}",
+                                        "${TitleResponseBody[i].startMonth}",
+                                        "${TitleResponseBody[i].startDay!!.toInt() + j}",
+                                        "${TitleResponseBody[i].startTime}",
+                                        "${TitleResponseBody[i].endYear}",
+                                        "${TitleResponseBody[i].endMonth}",
+                                        "${TitleResponseBody[i].endDay}",
+                                        "${TitleResponseBody[i].endTime}",
+                                        "${TitleResponseBody[i].allDayCheck}",
+                                        "${TitleResponseBody[i].title}",
+                                        "${TitleResponseBody[i].contents}",
+                                        "${TitleResponseBody[i].placeCode}",
+                                        "${TitleResponseBody[i].missionCode}"
+                                    )
+                                )
                             }
                         }
 
@@ -318,7 +329,7 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
     }
 
 
-    private fun setBackground(coupleIndex : String) {
+    private fun setBackground(coupleIndex: String) {
 
         Glide.with(binding.root)
             .load("http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}")

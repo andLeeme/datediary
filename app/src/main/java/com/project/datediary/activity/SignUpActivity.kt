@@ -23,6 +23,8 @@ class SignUpActivity : AppCompatActivity() {
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
 
+
+        //내 이메일 확인
         val curUser = GoogleSignIn.getLastSignedInAccount(this)
 
         binding.scheduleAlert.text = "내 이메일 확인하기!"
@@ -31,6 +33,8 @@ class SignUpActivity : AppCompatActivity() {
             binding.scheduleAlert.text = "\"나의 이메일은 ${curUser?.email} 이예요!\""
         }
 
+
+        //커플이메일 등록
         binding.submitBtn.setOnClickListener {
 
             var coupleEmail = binding.emailEdittext2.text.toString()
@@ -55,6 +59,7 @@ class SignUpActivity : AppCompatActivity() {
 
                         if (response.isSuccessful) {
 
+                            //이미 등록된 이메일
                             if (response.body() == -1) {
                                 Toast.makeText(
                                     applicationContext,

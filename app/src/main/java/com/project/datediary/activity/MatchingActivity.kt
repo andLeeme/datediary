@@ -26,8 +26,9 @@ class MatchingActivity : AppCompatActivity() {
         binding = ActivityMatchingBinding.inflate(layoutInflater)
 
 
+        //캘린더뷰 만들기
         binding.dateBtn.setOnClickListener {
-            val cal = Calendar.getInstance()    //캘린더뷰 만들기
+            val cal = Calendar.getInstance()
             val dateSetListener =
                 DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                     var startDate = "${year}년 ${month + 1}월 ${dayOfMonth}일"
@@ -46,6 +47,7 @@ class MatchingActivity : AppCompatActivity() {
         }
 
 
+        //입력받은 데이터를 서버에 저장
         binding.submitBtn.setOnClickListener {
 
             val curUser = GoogleSignIn.getLastSignedInAccount(this)

@@ -17,6 +17,7 @@ class NoticeAdapter(private val noticeList: ArrayList<NoticeResponseBody>) :
             Log.d("NoticeAdapter2", "$noticeList")
 
 
+            //타입에 따라 아이템에 추가
             when (noticeList[pos].type) {
                 "0" -> {
                     binding.name.text = noticeList[pos].name

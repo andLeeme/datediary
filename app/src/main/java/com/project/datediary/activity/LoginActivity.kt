@@ -28,11 +28,12 @@ class LoginActivity : AppCompatActivity() {
     lateinit var mGoogleSignInClient: GoogleSignInClient
     lateinit var resultLauncher: ActivityResultLauncher<Intent>
 
+
+    //액티비티가 실행되면 toast를 띄운다
     override fun onStart() {
         super.onStart()
         val account = GoogleSignIn.getLastSignedInAccount(this)
         account?.let {
-//            Toast.makeText(this, "로그인 되어있음", Toast.LENGTH_SHORT).show()
         } ?: Toast.makeText(this, "dateDiary", Toast.LENGTH_SHORT).show()
     }
 
@@ -40,9 +41,12 @@ class LoginActivity : AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
 
+
         // ActivityResultLauncher
         setResultSignUp()
 
+
+        //구글로그인
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
@@ -50,18 +54,13 @@ class LoginActivity : AppCompatActivity() {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
         with(binding) {
             btnSignIn.setOnClickListener {
                 signIn()
 
             }
 
-//            btnSignOut.setOnClickListener {
-//                signOut()
-//            }
-//            btnGetProfile.setOnClickListener {
-//                GetCurrentUserProfile()
-//            }
         }
 
         setContentView(binding.root)
@@ -76,7 +75,6 @@ class LoginActivity : AppCompatActivity() {
                         GoogleSignIn.getSignedInAccountFromIntent(result.data)
                     handleSignInResult(task)
 
-
                 }
             }
     }
@@ -85,9 +83,6 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val email = account?.email
-
-//            Toast.makeText(applicationContext, "$email", Toast.LENGTH_SHORT)
-//                .show()
 
 
             RetrofitAPI.emgMedService7.addUserByEnqueue2(email)
@@ -101,7 +96,11 @@ class LoginActivity : AppCompatActivity() {
 
                         if (response.isSuccessful) {
                             if (response.body() == 1) {
-                                Toast.makeText(applicationContext, "$email\n신규회원입니다", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "$email\n신규회원입니다",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
                                 val intent = Intent(applicationContext, SignUpActivity::class.java)
                                 startActivity(intent)
@@ -109,28 +108,47 @@ class LoginActivity : AppCompatActivity() {
                             } else if (response.body() == 0) {
 
                                 RetrofitAPI.emgMedService11.addUserByEnqueue2(email)
-                                    .enqueue(object : retrofit2.Callback<HashMap<String,String>> {
+                                    .enqueue(object : retrofit2.Callback<HashMap<String, String>> {
                                         override fun onResponse(
-                                            call: Call<HashMap<String,String>>,
-                                            response: Response<HashMap<String,String>>
+                                            call: Call<HashMap<String, String>>,
+                                            response: Response<HashMap<String, String>>
 
                                         ) {
                                             if (response.isSuccessful) {
-                                                MainActivity.coupleIndex = response.body().toString()
-                                                Toast.makeText(applicationContext, "${MainActivity.coupleIndex}", Toast.LENGTH_SHORT).show()
+                                                MainActivity.coupleIndex =
+                                                    response.body().toString()
+                                                Toast.makeText(
+                                                    applicationContext,
+                                                    "${MainActivity.coupleIndex}",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
 
 
 //
-                                                val intent = Intent(applicationContext, MainActivity::class.java)
+                                                val intent = Intent(
+                                                    applicationContext,
+                                                    MainActivity::class.java
+                                                )
                                                 startActivity(intent)
-                                                Toast.makeText(applicationContext, "$email\n Login", Toast.LENGTH_SHORT).show()
+                                                Toast.makeText(
+                                                    applicationContext,
+                                                    "$email\n Login",
+                                                    Toast.LENGTH_SHORT
+                                                ).show()
 
                                                 finish()
                                             }
                                         }
 
-                                        override fun onFailure(call: Call<HashMap<String,String>>, t: Throwable) {
-                                            Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+                                        override fun onFailure(
+                                            call: Call<HashMap<String, String>>,
+                                            t: Throwable
+                                        ) {
+                                            Toast.makeText(
+                                                applicationContext,
+                                                "Call Failed",
+                                                Toast.LENGTH_SHORT
+                                            )
                                                 .show()
                                         }
                                     })
@@ -165,6 +183,8 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    //로그인 실행
     private fun signIn() {
         val signInIntent: Intent = mGoogleSignInClient.getSignInIntent()
         resultLauncher.launch(signInIntent)
@@ -172,6 +192,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
+    //종료 카운트
     var finishCount = false
 
     override fun onBackPressed() {
@@ -190,33 +211,4 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    private fun revokeAccess() {
-        mGoogleSignInClient.revokeAccess()
-            .addOnCompleteListener(this) {
-                // ...
-            }
-    }
-
-    private fun GetCurrentUserProfile() {
-        val curUser = GoogleSignIn.getLastSignedInAccount(this)
-        curUser?.let {
-            val email = curUser.email.toString()
-            val familyName = curUser.familyName.toString()
-            val givenName = curUser.givenName.toString()
-            val displayName = curUser.displayName.toString()
-            val photoUrl = curUser.photoUrl.toString()
-
-            Log.d("현재 로그인 되어있는 유저의 이메일", email)
-            Log.d("현재 로그인 되어있는 유저의 성", familyName)
-            Log.d("현재 로그인 되어있는 유저의 이름", givenName)
-            Log.d("현재 로그인 되어있는 유저의 전체이름", displayName)
-            Log.d("현재 로그인 되어있는 유저의 프로필 사진의 주소", photoUrl)
-            Toast.makeText(this, "이메일: $email 이름 : $displayName ", Toast.LENGTH_SHORT).show()
-
-        }
-        if (curUser == null) {
-            Toast.makeText(this, "로그인 안되어있음", Toast.LENGTH_SHORT).show()
-        }
-
-    }
 }

@@ -28,6 +28,7 @@ class FragmentNotice : Fragment() {
         binding.contain4.visibility = View.INVISIBLE
         binding.contain5.visibility = View.INVISIBLE
 
+        //CoroutineScope로 나타나는 효과 구현
         CoroutineScope(Dispatchers.Main).launch {
 
             delay(100).run {

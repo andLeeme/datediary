@@ -30,6 +30,8 @@ class FragmentStory : Fragment() {
 
         binding = FragmentStoryBinding.inflate(inflater, container, false)
 
+
+        //스테이터스 바 색상 변경
         val activity = requireActivity()
         val window = activity.window
         window.statusBarColor = Color.TRANSPARENT
@@ -48,6 +50,8 @@ class FragmentStory : Fragment() {
             sender = MainActivity.nickname1,
         )
 
+
+        //알림기능
         var noticeResponseBodyList = listOf<NoticeResponseBody>()
 
         RetrofitAPI.emgMedService12.addUserByEnqueue(chatRequestBody)

@@ -8,21 +8,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.project.datediary.activity.EditScheduleActivity
 import com.project.datediary.activity.MainActivity
 import com.project.datediary.databinding.FragmentViewPager2Binding
-import com.project.datediary.model.Static2RequestBody
 import com.project.datediary.model.Static2ResponseBody
-import com.project.datediary.model.StaticRequestBody
-import com.project.datediary.model.StaticResponseBody
-import com.project.datediary.util.CalendarUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
-import java.util.Arrays
 
 
 // Tab1Fragment.kt

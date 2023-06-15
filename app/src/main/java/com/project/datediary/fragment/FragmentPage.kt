@@ -34,6 +34,7 @@ class FragmentPage : Fragment() {
 
 
 
+        //스테이터스 바 색상 변경
         val activity = requireActivity()
         val window = activity.window
         window.statusBarColor = Color.TRANSPARENT
@@ -41,6 +42,7 @@ class FragmentPage : Fragment() {
                 View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 
 
+        //MainActivity static field
         binding.eamil.text = MainActivity.googleEmail
 
         binding.name.text = MainActivity.googleName
@@ -107,14 +109,18 @@ class FragmentPage : Fragment() {
         }
 
 
+
+
+        //구글 로그인 정보
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .requestProfile()
             .build()
 
-
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
+
+        //로그아웃
         with(binding) {
 
             btnSignOut.setOnClickListener {
