@@ -199,7 +199,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                     "${TitleResponseBody[i].missionCode}"))
                             }
                         }
-                        Log.d("scheduleList2", "bind: $scheduleList")
+//                        Log.d("scheduleList2", "bind: $scheduleList")
 
                         for (i in List.indices) {
                             if (List[i].startDay == CalendarUtil.sDay) {
@@ -207,9 +207,9 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                             }
                         }
 
-                        Log.d("ㅁㄴㅇㄹ", "bind: ${List[2].startDay}")
-                        //얘가문제임
-                        Log.d("ㅁㄴㅇㄹ", "bind: ${CalendarUtil.sDay}")
+//                        Log.d("ㅁㄴㅇㄹ", "bind: ${List[2].startDay}")
+//                        //얘가문제임
+//                        Log.d("ㅁㄴㅇㄹ", "bind: ${CalendarUtil.sDay}")
 
 
 //                        for (i in TitleResponseBody.indices) {
@@ -217,8 +217,8 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
 //                                scheduleList.add(TitleResponseBody[i])
 //                            }
 //                        }
-                        Log.d("List123", "bind: $List")
-                        Log.d("List1234", "bind: $scheduleList")
+//                        Log.d("List123", "bind: $List")
+//                        Log.d("List1234", "bind: $scheduleList")
 
 
                             //어댑터에 넣어주기
@@ -331,7 +331,7 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                                 "${TitleResponseBody[i].missionCode}"))
                                         }
                                     }
-                                    Log.d("scheduleList2", "bind: $scheduleList")
+//                                    Log.d("scheduleList2", "bind: $scheduleList")
 
                                     for (i in List.indices) {
                                         if (List[i].startDay == CalendarUtil.sDay) {
@@ -339,9 +339,9 @@ class FragmentCalendar : Fragment(), MainActivity.onBackPressedListener {
                                         }
                                     }
 
-                                    Log.d("aaaa", "bind: ${List[2].startDay}")
-                                    //얘가문제임
-                                    Log.d("aaaa", "bind: ${CalendarUtil.sDay}")
+//                                    Log.d("aaaa", "bind: ${List[2].startDay}")
+//                                    //얘가문제임
+//                                    Log.d("aaaa", "bind: ${CalendarUtil.sDay}")
 
 
 
