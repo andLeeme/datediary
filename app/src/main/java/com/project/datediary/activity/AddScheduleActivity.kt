@@ -479,7 +479,7 @@ class AddScheduleActivity : AppCompatActivity() {
         when (binding.selectMission.text.toString()) {
             "" -> Mcode = ""
             "팝콘 받아 먹은 사람이 사랑한다고 말해주기" -> Mcode = "1"
-            "바/영화 보는 동안 팔짱 끼기" -> Mcode = "2"
+            "영화 보는 동안 팔짱 끼기" -> Mcode = "2"
             "서로 마실 술 골라주기" -> Mcode = "3"
             "러브샷" -> Mcode = "4"
             "보드게임 쿼리도 해보기" -> Mcode = "5"

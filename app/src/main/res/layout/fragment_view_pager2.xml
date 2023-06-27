@@ -37,7 +37,7 @@
                         android:text="가장 많이 다녀간 장소는?"
                         android:textColor="@color/black"
                         android:textFontWeight="600"
-                        android:textSize="30dp" />
+                        android:textSize="27dp" />
 
                 </LinearLayout>
 
