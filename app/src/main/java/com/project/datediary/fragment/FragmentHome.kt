@@ -131,11 +131,11 @@ class FragmentHome : Fragment(), MainActivity.onBackPressedListener {
                 val result_coupleIndex = bundle.getString("coupleIndex")
                 val result_imageUrl = bundle.getString("imageUrl")
 
-                Toast.makeText(requireContext(), "$result_coupleIndex", Toast.LENGTH_SHORT)
-                    .show()
-                Toast.makeText(requireContext(), "$result_imageUrl", Toast.LENGTH_SHORT).show()
-                Log.d("result_imageUrl", "onCreateViewPC: $result_coupleIndex")
-                Log.d("result_imageUrl", "onCreateViewP: $result_imageUrl")
+//                Toast.makeText(requireContext(), "$result_coupleIndex", Toast.LENGTH_SHORT)
+//                    .show()
+//                Toast.makeText(requireContext(), "$result_imageUrl", Toast.LENGTH_SHORT).show()
+//                Log.d("result_imageUrl", "onCreateViewPC: $result_coupleIndex")
+//                Log.d("result_imageUrl", "onCreateViewP: $result_imageUrl")
 
                 //result_imageUrl = "http://andLeeme.iptime.org:60722/getImageFrom/${coupleIndex}"
 

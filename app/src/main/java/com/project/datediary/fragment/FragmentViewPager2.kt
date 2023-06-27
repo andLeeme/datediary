@@ -102,8 +102,8 @@ class FragmentViewPager2 : Fragment() {
                             }
                         }
 
-                        Log.d("countList2", "onResponse2: $countList2")
-                        Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
+//                        Log.d("countList2", "onResponse2: $countList2")
+//                        Toast.makeText(context, "$countList2", Toast.LENGTH_SHORT).show()
 
                         if(countList2.size<4) {
                             for( i in 1..(4-countList2.size)) {
@@ -167,7 +167,7 @@ class FragmentViewPager2 : Fragment() {
 
                     } else {
 
-                        Toast.makeText(context, "리스폰스2 없음", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "리스폰스2 없음", Toast.LENGTH_SHORT).show()
 
 
                     }

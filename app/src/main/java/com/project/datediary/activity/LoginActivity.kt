@@ -35,6 +35,7 @@ class LoginActivity : AppCompatActivity() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
         account?.let {
         } ?: Toast.makeText(this, "dateDiary", Toast.LENGTH_SHORT).show()
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -117,11 +118,11 @@ class LoginActivity : AppCompatActivity() {
                                             if (response.isSuccessful) {
                                                 MainActivity.coupleIndex =
                                                     response.body().toString()
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "${MainActivity.coupleIndex}",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+//                                                Toast.makeText(
+//                                                    applicationContext,
+//                                                    "${MainActivity.coupleIndex}",
+//                                                    Toast.LENGTH_SHORT
+//                                                ).show()
 
 
 //
@@ -130,11 +131,11 @@ class LoginActivity : AppCompatActivity() {
                                                     MainActivity::class.java
                                                 )
                                                 startActivity(intent)
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "$email\n Login",
-                                                    Toast.LENGTH_SHORT
-                                                ).show()
+//                                                Toast.makeText(
+//                                                    applicationContext,
+//                                                    "$email\n Login",
+//                                                    Toast.LENGTH_SHORT
+//                                                ).show()
 
                                                 finish()
                                             }
@@ -144,12 +145,12 @@ class LoginActivity : AppCompatActivity() {
                                             call: Call<HashMap<String, String>>,
                                             t: Throwable
                                         ) {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "Call Failed",
-                                                Toast.LENGTH_SHORT
-                                            )
-                                                .show()
+//                                            Toast.makeText(
+//                                                applicationContext,
+//                                                "Call Failed",
+//                                                Toast.LENGTH_SHORT
+//                                            )
+//                                                .show()
                                         }
                                     })
                             } else if (response.body() == 2) {
@@ -169,8 +170,8 @@ class LoginActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<Int>, t: Throwable) {
-                        Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
-                            .show()
+//                        Toast.makeText(applicationContext, "Call Failed", Toast.LENGTH_SHORT)
+//                            .show()
                     }
                 })
 

@@ -107,8 +107,8 @@ class FragmentViewPager1 : Fragment() {
                             for (i in staticResponseBody.indices) {
                                 countList.add(staticResponseBody[i])
                             }
-                            Log.d("countList", "onResponse2: $countList")
-                            Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
+//                            Log.d("countList", "onResponse2: $countList")
+//                            Toast.makeText(context, "$countList", Toast.LENGTH_SHORT).show()
 
                             //그달 일정 내역이 없으면 startMonth로 13을 반환함
                             ////이번달
@@ -168,7 +168,7 @@ class FragmentViewPager1 : Fragment() {
                                 }
                             }
                         } else {
-                            Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
+//                            Toast.makeText(context, "리스폰스 없음", Toast.LENGTH_SHORT).show()
                         }
 
 

@@ -199,12 +199,12 @@ class MainActivity : AppCompatActivity() {
                                             call: Call<HashMap<String, String>>,
                                             t: Throwable
                                         ) {
-                                            Toast.makeText(
-                                                applicationContext,
-                                                "Call Failed",
-                                                Toast.LENGTH_SHORT
-                                            )
-                                                .show()
+//                                            Toast.makeText(
+//                                                applicationContext,
+//                                                "Call Failed",
+//                                                Toast.LENGTH_SHORT
+//                                            )
+//                                                .show()
                                         }
                                     })
 

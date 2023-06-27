@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
 import com.project.datediary.databinding.ActivityMatchingBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -99,12 +98,12 @@ class MatchingActivity : AppCompatActivity() {
                                                 MainActivity.coupleIndex =
                                                     response.body()?.get("couple_index").toString()
 
-                                                Toast.makeText(
-                                                    applicationContext,
-                                                    "coupleIndex : ${MainActivity.coupleIndex}",
-                                                    Toast.LENGTH_SHORT
-                                                )
-                                                    .show()
+//                                                Toast.makeText(
+//                                                    applicationContext,
+//                                                    "coupleIndex : ${MainActivity.coupleIndex}",
+//                                                    Toast.LENGTH_SHORT
+//                                                )
+//                                                    .show()
                                             }
                                         }
 

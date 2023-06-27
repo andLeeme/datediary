@@ -391,8 +391,8 @@ class EditScheduleActivity : AppCompatActivity() {
                             call: Call<Int>,
                             response: Response<Int>
                         ) {
-                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                                .show()
+//                            Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+//                                .show()
 
                             if (response.isSuccessful) {
 
@@ -435,8 +435,8 @@ class EditScheduleActivity : AppCompatActivity() {
                                         call: Call<Int>,
                                         response: Response<Int>
                                     ) {
-                                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
-                                            .show()
+//                                        Toast.makeText(applicationContext, "Call Success", Toast.LENGTH_SHORT)
+//                                            .show()
 
                                         if (response.isSuccessful) {
 

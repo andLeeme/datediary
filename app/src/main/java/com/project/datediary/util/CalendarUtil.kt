@@ -25,7 +25,7 @@ interface CalendarUtil {
         var sDOW: String = current.format(formatterDOW).toString()
 
         fun logDate() {
-            Log.d("DateFromAdapter", "toastDate: $sYear. $sMonth. $sDay")
+//            Log.d("DateFromAdapter", "toastDate: $sYear. $sMonth. $sDay")
         }
 
     }

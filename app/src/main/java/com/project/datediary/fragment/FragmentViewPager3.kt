@@ -108,8 +108,8 @@ class FragmentViewPager3 : Fragment() {
                         for (i in static3ResponseBody.indices) {
                             countList3.add(static3ResponseBody[i])
                         }
-                        Log.d("countList3", "onResponse3: $countList3")
-                        Toast.makeText(context, "$countList3", Toast.LENGTH_SHORT).show()
+//                        Log.d("countList3", "onResponse3: $countList3")
+//                        Toast.makeText(context, "$countList3", Toast.LENGTH_SHORT).show()
 
 
                         var countSum = 0  //미션 수 총합
@@ -215,7 +215,7 @@ class FragmentViewPager3 : Fragment() {
 
 
                     } else {
-                        Toast.makeText(context, "리스폰스3 없음", Toast.LENGTH_SHORT).show()
+//                        Toast.makeText(context, "리스폰스3 없음", Toast.LENGTH_SHORT).show()
                     }
 
 

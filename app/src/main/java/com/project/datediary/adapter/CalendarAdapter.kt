@@ -131,7 +131,7 @@ class CalendarAdapter(private val dayList: ArrayList<Date>, private val TmpData:
             //클릭 풀리면 배경 돌리기
             //holder.itemView.setBackgroundColor(Color.LTGRAY)
 
-            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(holder.itemView.context, yearMonDay, Toast.LENGTH_SHORT).show()
             CalendarUtil.sYear = iYear.toString()
             CalendarUtil.sMonth = iMonth.toString()
             CalendarUtil.sDay = iDay.toString()
